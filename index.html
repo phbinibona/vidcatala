@@ -1,0 +1,2381 @@
+
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidCatalà · Emparella i completa frases</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffcc00;
+            --primary-light: #ffe066;
+            --primary-dark: #e6b800;
+            --secondary: #c8102e;
+            --secondary-light: #e63946;
+            --accent: #ffcc00;
+            --accent-light: #ffe680;
+            --difficult: #c8102e;
+            --difficult-light: #e63946;
+            --text-primary: #222222;
+            --text-secondary: #555555;
+            --text-light: #777777;
+            --background: #f4f4f4;
+            --surface: #ffffff;
+            --surface-light: #fafafa;
+            --border: #dddddd;
+            --border-light: #cccccc;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.14);
+            --radius: 14px;
+            --radius-sm: 8px;
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(1, 33, 105, 0.3);
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home-btn {
+            background: var(--surface-light);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+        }
+
+        .home-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(1, 33, 105, 0.3);
+            border-color: var(--primary);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 24px;
+            background-color: var(--surface-light);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(1, 33, 105, 0.3);
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .input-hint {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            resize: vertical;
+            background-color: var(--surface);
+            color: var(--text-primary);
+        }
+
+        textarea {
+            min-height: 80px;
+        }
+
+        input {
+            min-height: 44px;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(1, 33, 105, 0.2);
+        }
+        
+        /* Level Selection */
+        .level-selection {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .level-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background-color: var(--surface);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .level-btn:hover {
+            border-color: var(--primary);
+            background-color: rgba(1, 33, 105, 0.1);
+        }
+
+        .level-btn.selected {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Theme Examples Section */
+        .theme-examples-section {
+            margin-top: 10px;
+        }
+
+        .theme-examples-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .theme-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .theme-example {
+            cursor: pointer;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            background-color: var(--surface);
+            text-align: center;
+        }
+
+        .theme-example:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .theme-example.selected {
+            border-color: var(--primary);
+            background-color: rgba(1, 33, 105, 0.2);
+        }
+
+        .theme-label {
+            font-size: 0.7rem;
+            text-align: center;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .question-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: flex-start;
+        }
+
+        #generateBtn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        #generateBtn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(1, 33, 105, 0.4);
+        }
+
+        #generateBtn:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .question-container {
+            flex: 1;
+            background-color: var(--surface);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        #questionResult {
+            white-space: pre-wrap;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .question-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .question-actions button {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-actions button:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        /* Matching Exercise Styles */
+        .matching-container {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .matching-instructions {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .beginnings-column, .endings-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .column-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .matching-item {
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--surface);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .matching-item:hover {
+            background: var(--surface-light);
+            border-color: var(--primary);
+        }
+
+        .matching-item.selected {
+            border-color: var(--primary);
+            background: rgba(1, 33, 105, 0.15);
+        }
+        
+        /* Color-coded matched pairs */
+        .matching-item.matched-blue {
+            border-color: var(--primary);
+            background: rgba(1, 33, 105, 0.2);
+            cursor: default;
+        }
+
+        .matching-item.matched-green {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.2);
+            cursor: default;
+        }
+
+        .matching-item.matched-red {
+            border-color: var(--secondary);
+            background: rgba(200, 16, 46, 0.2);
+            cursor: default;
+        }
+        
+        .matches-container {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .matches-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .match-item {
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            margin-bottom: 8px;
+            border-left: 4px solid var(--primary);
+            color: var(--text-primary);
+        }
+        
+        /* Correct Sentences Display */
+        .correct-sentences-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(46, 204, 113, 0.15);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid #2ecc71;
+            display: none;
+        }
+
+        .correct-sentences-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .correct-sentences-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .correct-sentence {
+            padding: 8px 12px;
+            background-color: var(--surface);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sentence-text {
+            flex: 1;
+            color: var(--text-primary);
+        }
+
+        .sentence-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tts-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tts-btn:hover {
+            background-color: rgba(1, 33, 105, 0.1);
+        }
+        
+        /* Writing Section */
+        .writing-section {
+            margin-top: 15px;
+            display: none;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .writing-instruction {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .writing-area {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .writing-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .response-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        #tryAgainBtn {
+            background-color: var(--surface);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: none;
+        }
+
+        #tryAgainBtn:hover {
+            background-color: rgba(1, 33, 105, 0.1);
+            border-color: var(--primary);
+        }
+
+        #nextExerciseBtn {
+            background-color: #2ecc71;
+            color: white;
+            display: none;
+        }
+
+        #nextExerciseBtn:hover {
+            background-color: #27ae60;
+        }
+
+        #checkWritingBtn {
+            padding: 14px 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--background);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: none;
+        }
+
+        #checkWritingBtn:hover {
+            background: linear-gradient(135deg, #EAB308 0%, var(--accent) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        #checkWritingBtn:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            color: var(--text-light);
+        }
+        
+        /* Gap-fill Exercise Styles */
+        .gap-fill-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gap-fill-instruction {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .gap-fill-exercise {
+            padding: 20px;
+            background-color: var(--surface);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .gap-fill-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .gap-sentence {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--surface-light);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .gap-sentence-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .gap-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .gap-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background-color: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .gap-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(1, 33, 105, 0.2);
+        }
+
+        .hint-btn {
+            background: var(--surface);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .hint-btn:hover {
+            background-color: rgba(1, 33, 105, 0.1);
+            border-color: var(--primary);
+        }
+
+        .hint-btn:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            color: var(--text-light);
+        }
+
+        .gap-fill-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .feedback-success {
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+        }
+
+        .feedback-error {
+            background: rgba(200, 16, 46, 0.15);
+            border: 1px solid var(--difficult);
+            color: var(--difficult-light);
+        }
+        
+        /* Evaluation Section */
+        .evaluation-section {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .evaluation-result {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--surface-light) 100%);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent);
+        }
+
+        .evaluation-result h3 {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        #evaluationResult {
+            white-space: pre-wrap;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Score Display */
+        .score-display {
+            text-align: center;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .score-breakdown {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            flex: 1;
+            margin: 0 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Feedback Messages */
+        .feedback-message {
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .feedback-success {
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+        }
+
+        .feedback-error {
+            background: rgba(200, 16, 46, 0.15);
+            border: 1px solid var(--difficult);
+            color: var(--difficult-light);
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 18px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        #clearBtn {
+            background-color: var(--surface);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border);
+        }
+
+        #clearBtn:hover {
+            background-color: rgba(1, 33, 105, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary);
+            width: 28px;
+            height: 28px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(150%);
+            transition: var(--transition);
+            z-index: 1000;
+            font-size: 0.9rem;
+            max-width: 350px;
+            border-left: 4px solid;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: rgba(46, 204, 113, 0.9);
+            border-left-color: #2ecc71;
+        }
+
+        .notification.error {
+            background: rgba(200, 16, 46, 0.9);
+            border-left-color: var(--difficult);
+        }
+
+        .notification.info {
+            background: rgba(1, 33, 105, 0.9);
+            border-left-color: var(--primary);
+        }
+        
+
+        /* VidCatalà banner and two-column layout */
+        .vidcat-banner {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffcc00;
+            color: #222;
+            min-height: 76px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,.16);
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .banner-left img {
+            width: 54px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,.18);
+        }
+
+        .banner-brand {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .banner-topic {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .home-btn {
+            background: #fff3b0;
+            color: #222;
+            border: 1px solid rgba(0,0,0,.18);
+        }
+
+        .home-btn:hover {
+            background: #fff;
+            color: #222;
+            border-color: rgba(0,0,0,.28);
+            box-shadow: 0 4px 10px rgba(0,0,0,.16);
+        }
+
+        .page-layout {
+            width: min(1440px, calc(100% - 32px));
+            margin: 24px auto;
+            display: grid;
+            grid-template-columns: minmax(320px, 440px) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .video-column {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .video-card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .video-caption {
+            padding: 16px 18px 18px;
+        }
+
+        .video-caption h2 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .video-caption p {
+            color: var(--text-secondary);
+            font-size: .92rem;
+        }
+
+        .header {
+            display: none;
+        }
+
+        .title-container {
+            justify-content: flex-start;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            text-align: left;
+            color: #222;
+        }
+
+        .subtitle {
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .section-number {
+            background: #ffcc00;
+            color: #222;
+            box-shadow: none;
+        }
+
+        #generateBtn {
+            background: #ffcc00;
+            color: #222;
+        }
+
+        #generateBtn:hover {
+            background: #e6b800;
+            color: #111;
+            box-shadow: 0 4px 12px rgba(230,184,0,.35);
+        }
+
+        .level-btn.selected {
+            border-color: #d2a900;
+            background-color: #ffcc00;
+            color: #222;
+        }
+
+        .matching-item.selected {
+            border-color: #d2a900;
+            background: rgba(255,204,0,.20);
+        }
+
+        textarea:focus, input:focus, .gap-input:focus {
+            border-color: #d2a900;
+            box-shadow: 0 0 0 2px rgba(255,204,0,.25);
+        }
+
+
+        /* Full-width exercise area in the right column */
+        .question-section {
+            display: block;
+            width: 100%;
+            margin-top: 18px;
+        }
+
+        #generateBtn {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .question-container {
+            width: 100%;
+            max-width: none;
+            padding: 20px;
+        }
+
+        .matching-container {
+            width: 100%;
+        }
+
+        .matching-grid {
+            width: 100%;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .beginnings-column,
+        .endings-column {
+            width: 100%;
+            min-width: 0;
+        }
+
+        #beginningsList,
+        #endingsList {
+            width: 100%;
+        }
+
+        .matching-item {
+            width: 100%;
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            line-height: 1.45;
+        }
+
+        .matches-container,
+        .correct-sentences-section,
+        .writing-section,
+        .gap-fill-container,
+        .gap-fill-exercise {
+            width: 100%;
+        }
+
+        .question-actions {
+            width: 100%;
+        }
+
+        /* Introducció i crida a escriure un tema propi */
+        .intro-panel {
+            padding: 20px 22px;
+            background: #fff9d9;
+            border: 1px solid #efd263;
+            border-left: 6px solid #ffcc00;
+            border-radius: var(--radius);
+        }
+
+        .intro-panel .subtitle {
+            margin-bottom: 10px;
+            max-width: none;
+        }
+
+        .own-theme-message {
+            color: #3f3a20;
+            font-size: .95rem;
+            line-height: 1.55;
+        }
+
+        .theme-input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .recommended-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: #c8102e;
+            color: #fff;
+            font-size: .68rem;
+            letter-spacing: .06em;
+            font-weight: 700;
+        }
+
+        #themeInput.theme-attention {
+            border: 3px solid #ffcc00;
+            background: #fffdf0;
+            box-shadow: 0 0 0 0 rgba(255, 204, 0, .65);
+            animation: themePulse 1.25s ease-in-out infinite;
+        }
+
+        #themeInput.theme-attention::placeholder {
+            color: #5e5528;
+            font-weight: 600;
+        }
+
+        @keyframes themePulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 204, 0, .55);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(255, 204, 0, 0);
+                transform: translateY(-1px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #themeInput.theme-attention {
+                animation: none;
+                box-shadow: 0 0 0 4px rgba(255, 204, 0, .25);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .matching-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .matching-item {
+                min-height: 56px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .vidcat-banner {
+                padding: 10px 14px;
+            }
+
+            .banner-topic {
+                display: none;
+            }
+
+            .page-layout {
+                width: min(100% - 20px, 900px);
+                grid-template-columns: 1fr;
+                margin-top: 14px;
+            }
+
+            .video-column {
+                position: sticky;
+                top: 74px;
+                z-index: 90;
+            }
+
+            .video-card {
+                border-radius: 10px;
+            }
+
+            .video-card video {
+                aspect-ratio: 16 / 9;
+                max-height: 42vh;
+                object-fit: contain;
+            }
+
+            .video-caption {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .theme-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .writing-area {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .response-actions {
+                flex-direction: column;
+            }
+            
+            .score-breakdown {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .level-selection {
+                flex-direction: column;
+            }
+            
+            .matching-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-section {
+                flex-direction: column;
+            }
+            
+            .gap-input-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .hint-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="vidcat-banner">
+        <div class="banner-left">
+            <img src="bandera.jpg" alt="Bandera catalana">
+            <div>
+                <div class="banner-brand">VIDCATALÀ</div>
+                <div class="banner-topic">Emparella i completa frases</div>
+            </div>
+        </div>
+        <a href="index.html" class="home-btn" title="Inici" aria-label="Inici">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+        </a>
+    </header>
+
+    <div class="page-layout">
+        <aside class="video-column">
+            <div class="video-card">
+                <video controls playsinline preload="metadata">
+                    <source src="pair.mp4" type="video/mp4">
+                    El teu navegador no admet la reproducció de vídeo.
+                </video>
+
+            </div>
+        </aside>
+
+        <main class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">LT</div>
+                <span>LingoTotal</span>
+            </div>
+            <a href="hometotal.html" class="home-btn" title="Inici">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </a>
+        </div>
+
+        <div class="title-container intro-panel">
+            <div>
+                <h1>Emparella i completa frases</h1>
+                <p class="subtitle">Tria el nivell, escriu un tema que t’interessi i genera l’activitat. Primer emparellaràs els inicis i els finals; després completaràs les paraules que falten.</p>
+                <p class="own-theme-message"><strong>La millor opció és crear el teu propi exercici:</strong> escriu qualsevol tema a la casella destacada. Els exemples només serveixen d’inspiració.</p>
+            </div>
+        </div>
+
+        <!-- Sección 1: Tema y Nivel -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div class="section-title">Tria el nivell i el tema</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="themeInput" class="theme-input-label"><span class="recommended-badge">RECOMANAT</span> Escriu el teu propi tema</label>
+                <input type="text" id="themeInput" placeholder="Per exemple: viure en un poble, música dels anys vuitanta, cuidar un jardí...">
+                
+                <!-- Selección de Nivel -->
+                <div class="level-selection">
+                    <button class="level-btn" data-level="beginner">Inicial (A1-A2)</button>
+                    <button class="level-btn" data-level="intermediate">Intermedi (B1-B2)</button>
+                </div>
+                
+                <!-- Ejemplos de Temas -->
+                <div class="theme-examples-section">
+                    <div class="theme-examples-title">
+                        <span>💡</span>
+                        <span>Necessites inspiració? Pots partir d’un exemple:</span>
+                    </div>
+                    <div class="theme-examples">
+                        <div class="theme-example" data-theme="Viatges">
+                            <div class="theme-label">Viatges</div>
+                        </div>
+                        <div class="theme-example" data-theme="Tecnologia">
+                            <div class="theme-label">Tecnologia</div>
+                        </div>
+                        <div class="theme-example" data-theme="Natura">
+                            <div class="theme-label">Natura</div>
+                        </div>
+                        <div class="theme-example" data-theme="Menjar">
+                            <div class="theme-label">Menjar</div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+
+        <!-- Sección 2: Genera l’exercici -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div class="section-title">Genera l’exercici</div>
+            </div>
+            <p>Fes clic al botó per generar un exercici nou segons el nivell i el tema seleccionats:</p>
+            
+            <div class="question-section">
+                <button id="generateBtn">Genera l’exercici d’emparellament</button>
+                <div class="question-container">
+                    <div id="questionResult">L’exercici d’emparellament apareixerà aquí</div>
+                    
+                    <!-- Contenedor del Ejercicio de Emparellament -->
+                    <div class="matching-container" id="matchingContainer">
+                        <div class="matching-instructions">Fes clic en un inici i després en un final per emparellar-los</div>
+                        <div class="matching-grid">
+                            <div class="beginnings-column">
+                                <div class="column-title">Inicis de frase</div>
+                                <div id="beginningsList"></div>
+                            </div>
+                            <div class="endings-column">
+                                <div class="column-title">Finals de frase</div>
+                                <div id="endingsList"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mostrar Frases Correctas -->
+                        <div class="correct-sentences-section" id="correctSentencesSection">
+                            <div class="correct-sentences-title">
+                                <span>✅</span>
+                                <span>Frases correctes per practicar:</span>
+                            </div>
+                            <div class="correct-sentences-list" id="correctSentencesList"></div>
+                        </div>
+                        
+                        <!-- Mensajes de Retroalimentación -->
+                        <div class="feedback-message feedback-error" id="incorrectFeedback">
+                            No és correcte. Torna-ho a provar!
+                        </div>
+                        
+                        <!-- Sección de Escriptura -->
+                        <div class="writing-section" id="writingSection">
+                            <div class="feedback-message feedback-success" id="correctFeedback">
+                                Enhorabona! Has completat correctament l’exercici d’emparellament.
+                            </div>
+                            
+                            <div class="writing-instruction">
+                                <strong>Molt bona feina! Has format frases correctes.</strong> Ara practica l’escriptura completant els espais en blanc.
+                            </div>
+                            
+                            <div class="writing-area">
+                                <div class="writing-controls">
+                                    <div class="gap-fill-container">
+                                        <div class="gap-fill-instruction">
+                                            Completa els espais en blanc de les frases següents. Si necessites ajuda, fes clic a "Pista" per veure la primera lletra de la paraula que falta.
+                                        </div>
+                                        <div class="gap-fill-exercise" id="gapFillExercise">
+                                            <!-- Aquí se generará el ejercicio de completar espacios -->
+                                        </div>
+                                        
+                                        <div class="gap-fill-feedback feedback-success" id="gapFillSuccess">
+                                            Excel·lent! Has completat correctament tots els espais.
+                                        </div>
+                                        
+                                        <div class="gap-fill-feedback feedback-error" id="gapFillError">
+                                            Algunes respostes no són correctes. Revisa-les i torna-ho a provar.
+                                        </div>
+                                        
+                                        <button id="checkWritingBtn">Comprova les respostes</button>
+                                    </div>
+                                    
+                                    <div class="response-actions">
+                                        <button id="tryAgainBtn">Torna-ho a provar</button>
+                                        <button id="nextExerciseBtn">Exercici següent</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="matches-container" id="matchesContainer">
+                            <div class="matches-title">Les frases que has emparellat:</div>
+                            <div id="matchesList"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-actions">
+                        <button id="copyBtn" title="Copia l’exercici">📋</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading">
+                <div class="spinner"></div>
+                <p id="loadingMessage">Generant l’exercici...</p>
+            </div>
+        </div>
+
+        <!-- Sección 3: Avaluació -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div class="section-title">Avaluació</div>
+            </div>
+            <p>Després de completar l’exercici d’escriptura, revisa les respostes:</p>
+            
+            <div class="evaluation-section" id="evaluationSection">
+                <div class="evaluation-result">
+                    <h3>Resultats</h3>
+                    <div id="evaluationResult">Haz clic en "Comprova les respostes" para ver tus resultados.</div>
+                </div>
+            </div>
+
+            <div class="score-display" id="scoreDisplay">
+                <div class="score-breakdown">
+                    <div class="score-item">
+                        <div class="score-value" id="matchingScore">0/3</div>
+                        <div class="score-label">Emparellament</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-value" id="writingScore">0/3</div>
+                        <div class="score-label">Escriptura</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-value" id="totalScore">0/6</div>
+                        <div class="score-label">Puntuació total</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: Esborra-ho tot -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div class="section-title">Reinicia</div>
+            </div>
+            <p>Esborra tot el contingut i torna a començar:</p>
+            <button id="clearBtn">Esborra-ho tot</button>
+        </div>
+        </main>
+    </div>
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const themeInput = document.getElementById('themeInput');
+            const themeExamples = document.querySelectorAll('.theme-example');
+            const levelBtns = document.querySelectorAll('.level-btn');
+            const generateBtn = document.getElementById('generateBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const questionResult = document.getElementById('questionResult');
+            const matchingContainer = document.getElementById('matchingContainer');
+            const beginningsList = document.getElementById('beginningsList');
+            const endingsList = document.getElementById('endingsList');
+            const matchesContainer = document.getElementById('matchesContainer');
+            const matchesList = document.getElementById('matchesList');
+            const copyBtn = document.getElementById('copyBtn');
+            const writingSection = document.getElementById('writingSection');
+            const correctFeedback = document.getElementById('correctFeedback');
+            const incorrectFeedback = document.getElementById('incorrectFeedback');
+            const tryAgainBtn = document.getElementById('tryAgainBtn');
+            const nextExerciseBtn = document.getElementById('nextExerciseBtn');
+            const checkWritingBtn = document.getElementById('checkWritingBtn');
+            const evaluationSection = document.getElementById('evaluationSection');
+            const evaluationResultDiv = document.getElementById('evaluationResult');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const matchingScore = document.getElementById('matchingScore');
+            const writingScore = document.getElementById('writingScore');
+            const totalScore = document.getElementById('totalScore');
+            const loadingElement = document.querySelector('.loading');
+            const loadingMessage = document.getElementById('loadingMessage');
+            const notificationElement = document.getElementById('notification');
+            const correctSentencesSection = document.getElementById('correctSentencesSection');
+            const correctSentencesList = document.getElementById('correctSentencesList');
+            const gapFillExercise = document.getElementById('gapFillExercise');
+            const gapFillSuccess = document.getElementById('gapFillSuccess');
+            const gapFillError = document.getElementById('gapFillError');
+
+            // Variables de estado
+            let currentExercise = null;
+            let writingScoreValue = { correct: 0, total: 0 };
+            let currentTheme = null;
+            let selectedLevel = null;
+
+            // Destaca la casella del tema propi fins que l’usuari hi interactua.
+            function stopThemeAttention() {
+                themeInput.classList.remove('theme-attention');
+            }
+
+            themeInput.classList.add('theme-attention');
+            themeInput.addEventListener('focus', stopThemeAttention, { once: true });
+            themeInput.addEventListener('pointerdown', stopThemeAttention, { once: true });
+            themeInput.addEventListener('input', stopThemeAttention, { once: true });
+            
+            // Estado de emparejamiento
+            let selectedBeginning = null;
+            let selectedEnding = null;
+            let matches = [];
+            let correctPairs = [];
+            let colorIndex = 0;
+            const matchColors = ['blue', 'green', 'red'];
+            
+            // Estado de ejercicio de escritura
+            let gapFillData = [];
+            // --- Funciones de Utilidad ---
+            function showNotification(message, type = 'info', duration = 3000) {
+                notificationElement.textContent = message;
+                notificationElement.className = `notification show ${type}`;
+                setTimeout(() => {
+                    notificationElement.classList.remove('show');
+                }, duration);
+            }
+
+            function setUIState(isLoading, message = 'Generant l’exercici...') {
+                generateBtn.disabled = isLoading;
+                themeInput.disabled = isLoading;
+                loadingElement.style.display = isLoading ? 'block' : 'none';
+                loadingMessage.textContent = message;
+            }
+
+            // --- Selección de Nivel ---
+            levelBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    levelBtns.forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedLevel = btn.getAttribute('data-level');
+                    showNotification(`Nivell seleccionat: ${btn.textContent}`, 'info');
+                });
+            });
+
+            // --- Selección de Ejemplos de Temas ---
+            function selectThemeExample(theme) {
+                stopThemeAttention();
+                themeExamples.forEach(example => example.classList.remove('selected'));
+                
+                const selectedExample = Array.from(themeExamples).find(example => example.dataset.theme === theme);
+                if (selectedExample) {
+                    selectedExample.classList.add('selected');
+                }
+                
+                themeInput.value = theme;
+                showNotification(`Tema seleccionat: ${theme}`, 'info');
+            }
+
+            themeExamples.forEach(example => {
+                example.addEventListener('click', function() {
+                    selectThemeExample(this.dataset.theme);
+                });
+            });
+
+            // Limpiar selección de ejemplo de tema cuando el usuario escribe en el input
+            themeInput.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    themeExamples.forEach(example => example.classList.remove('selected'));
+                } else {
+                    const matchedTheme = Array.from(themeExamples).find(example => 
+                        example.dataset.theme.toLowerCase() === this.value.toLowerCase().trim()
+                    );
+                    
+                    if (matchedTheme) {
+                        themeExamples.forEach(example => example.classList.remove('selected'));
+                        matchedTheme.classList.add('selected');
+                    } else {
+                        themeExamples.forEach(example => example.classList.remove('selected'));
+                    }
+                }
+            });
+
+            // --- Crida segura a la funció de Netlify ---
+            async function callGeminiAPI(prompt, model = 'gemini-2.5-flash', temperature = 0.8) {
+                const response = await fetch('/.netlify/functions/gemini', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt,
+                        model,
+                        temperature
+                    })
+                });
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch (_) {
+                    throw new Error(`Resposta no vàlida del servidor (${response.status})`);
+                }
+
+                if (!response.ok) {
+                    throw new Error(data?.error || `Error del servidor (${response.status})`);
+                }
+
+                if (!data.candidates || data.candidates.length === 0) {
+                    throw new Error('L’API no ha retornat cap resposta');
+                }
+
+                return data.candidates[0].content.parts[0].text;
+            }
+
+            // --- Funciones de Texto a Voz ---
+            function speakSentence(text) {
+                const synth = window.speechSynthesis;
+                if (synth.speaking) {
+                    synth.cancel();
+                }
+                
+                const preparedText = text.trim();
+                
+                const speechUtterance = new SpeechSynthesisUtterance(preparedText);
+                speechUtterance.lang = 'ca-ES';
+                speechUtterance.rate = 0.9;
+                speechUtterance.pitch = 1;
+                
+                speechUtterance.onstart = () => {
+                    showNotification('Llegint la frase...', 'info');
+                };
+                
+                speechUtterance.onend = () => {
+                    showNotification('Lectura de la frase completada.', 'info');
+                };
+
+                speechUtterance.onerror = (event) => {
+                    console.error('SpeechSynthesisUtterance.onerror', event);
+                    showNotification('S’ha produït un error durant la lectura.', 'error');
+                };
+                
+                synth.speak(speechUtterance);
+            }
+
+            function updateCorrectSentencesDisplay() {
+                correctSentencesList.innerHTML = '';
+                
+                // Obtener las frases correctas de los emparejamientos
+                const correctSentences = [];
+                correctPairs.forEach(pair => {
+                    const beginning = currentExercise.beginnings[pair.beginningIndex];
+                    const ending = currentExercise.endings[pair.endingIndex];
+                    correctSentences.push(`${beginning} ${ending}`);
+                });
+                
+                // Crear elementos de visualización para cada frase correcta
+                correctSentences.forEach((sentence, index) => {
+                    const sentenceElement = document.createElement('div');
+                    sentenceElement.className = 'correct-sentence';
+                    
+                    const textElement = document.createElement('div');
+                    textElement.className = 'sentence-text';
+                    textElement.textContent = `${index + 1}. ${sentence}`;
+                    
+                    const actionsElement = document.createElement('div');
+                    actionsElement.className = 'sentence-actions';
+                    
+                    const ttsButton = document.createElement('button');
+                    ttsButton.className = 'tts-btn';
+                    ttsButton.title = 'Escolta aquesta frase';
+                    ttsButton.innerHTML = '🔊';
+                    ttsButton.onclick = () => speakSentence(sentence);
+                    
+                    actionsElement.appendChild(ttsButton);
+                    sentenceElement.appendChild(textElement);
+                    sentenceElement.appendChild(actionsElement);
+                    
+                    correctSentencesList.appendChild(sentenceElement);
+                });
+                
+                // Mostrar la sección de frases correctas
+                correctSentencesSection.style.display = 'block';
+            }
+
+            // --- Funciones de Ejercicio de Emparellament ---
+            function handleMatchingItemClick(item, type) {
+                // Limpiar selecciones anteriores si no están emparejadas
+                document.querySelectorAll('.matching-item').forEach(el => {
+                    if (!el.classList.contains('matched-blue') && 
+                        !el.classList.contains('matched-green') && 
+                        !el.classList.contains('matched-red')) {
+                        el.classList.remove('selected');
+                    }
+                });
+
+                if (type === 'beginning') {
+                    selectedBeginning = item;
+                    item.classList.add('selected');
+                    selectedEnding = null;
+                } else if (type === 'ending') {
+                    selectedEnding = item;
+                    item.classList.add('selected');
+                    
+                    // Si tenemos tanto un comienzo como un final, verificar si es un emparejamiento correcto
+                    if (selectedBeginning && selectedEnding) {
+                        checkMatch(selectedBeginning, selectedEnding);
+                    }
+                }
+            }
+
+            function checkMatch(beginning, ending) {
+                // Obtener los índices originales
+                const beginningIndex = parseInt(beginning.dataset.originalIndex);
+                const endingIndex = parseInt(ending.dataset.originalIndex);
+                
+                // Verificar si este es un par correcto
+                const isCorrect = correctPairs.some(pair => 
+                    pair.beginningIndex === beginningIndex && pair.endingIndex === endingIndex
+                );
+                
+                if (isCorrect) {
+                    // Asignar color al par emparejado
+                    const color = matchColors[colorIndex % matchColors.length];
+                    colorIndex++;
+                    
+                    // Marcar elementos como emparejados con el color asignado
+                    beginning.classList.add(`matched-${color}`);
+                    ending.classList.add(`matched-${color}`);
+                    beginning.classList.remove('selected');
+                    ending.classList.remove('selected');
+                    
+                    // Agregar el emparejamiento
+                    matches.push({
+                        beginning: beginning,
+                        ending: ending,
+                        text: beginning.textContent + ' ' + ending.textContent,
+                        color: color
+                    });
+                    
+                    // Actualizar la visualización de emparejamientos
+                    updateMatchesDisplay();
+                    
+                    // Mostrar mensaje de éxito solo cuando los tres emparejamientos estén completos
+                    if (matches.length === 3) {
+                        correctFeedback.style.display = 'block';
+                        writingSection.style.display = 'block';
+                        checkWritingBtn.style.display = 'block';
+                        showNotification('¡Todas las frases emparejadas correctamente! Ahora completa los espacios en blanco.', 'success');
+                        
+                        // Actualizar visualización de frases correctas
+                        updateCorrectSentencesDisplay();
+                        
+                        // Generar ejercicio de completar espacios
+                        generateGapFillExercise();
+                        
+                        // Actualizar puntuación de emparejamiento
+                        matchingScore.textContent = '3/3';
+                        scoreDisplay.style.display = 'block';
+                    }
+                    
+                    // Restablecer retroalimentación incorrecta
+                    incorrectFeedback.style.display = 'none';
+                } else {
+                    // Mostrar mensaje de error y restablecer selección
+                    incorrectFeedback.style.display = 'block';
+                    correctFeedback.style.display = 'none';
+                    
+                    // Restablecer selecciones después de un breve retraso
+                    setTimeout(() => {
+                        beginning.classList.remove('selected');
+                        ending.classList.remove('selected');
+                        selectedBeginning = null;
+                        selectedEnding = null;
+                        incorrectFeedback.style.display = 'none';
+                    }, 1500);
+                }
+            }
+
+            function updateMatchesDisplay() {
+                matchesList.innerHTML = '';
+                
+                matches.forEach((match, index) => {
+                    const matchElement = document.createElement('div');
+                    matchElement.className = 'match-item';
+                    matchElement.textContent = `${index + 1}. ${match.text}`;
+                    matchElement.style.borderLeftColor = getColorValue(match.color);
+                    matchesList.appendChild(matchElement);
+                });
+                
+                matchesContainer.style.display = matches.length > 0 ? 'block' : 'none';
+            }
+
+            function getColorValue(color) {
+                switch(color) {
+                    case 'blue': return '#3498db';
+                    case 'green': return '#2ecc71';
+                    case 'red': return '#e74c3c';
+                    default: return '#3498db';
+                }
+            }
+
+            // --- Ejercicio de Completar Espacios ---
+            function generateGapFillExercise() {
+                gapFillExercise.innerHTML = '';
+                gapFillData = [];
+                
+                // Obtener las frases correctas
+                const correctSentences = [];
+                correctPairs.forEach(pair => {
+                    const beginning = currentExercise.beginnings[pair.beginningIndex];
+                    const ending = currentExercise.endings[pair.endingIndex];
+                    correctSentences.push(`${beginning} ${ending}`);
+                });
+                
+                // Crear ejercicio para cada frase
+                correctSentences.forEach((sentence, sentenceIndex) => {
+                    // Crear elemento de frase
+                    const sentenceElement = document.createElement('div');
+                    sentenceElement.className = 'gap-sentence';
+                    
+                    const titleElement = document.createElement('div');
+                    titleElement.className = 'gap-fill-title';
+                    titleElement.textContent = `Frase ${sentenceIndex + 1}:`;
+                    sentenceElement.appendChild(titleElement);
+                    
+                    // Dividir la frase en palabras
+                    const words = sentence.split(' ');
+                    
+                    // Seleccionar 2-3 palabras para omitir (evitando palabras muy cortas)
+                    const wordsToOmit = [];
+                    const wordLengths = words.map(word => word.length);
+                    const avgLength = wordLengths.reduce((a, b) => a + b, 0) / wordLengths.length;
+                    
+                    // Seleccionar palabras que sean más largas que el promedio
+                    const candidateWords = words.map((word, index) => ({ word, index }))
+                        .filter(item => item.word.length >= avgLength && 
+                                       !item.word.match(/^[.,!?;:]+$/) && // Evitar signos de puntuación
+                                       item.word.length > 3); // Evitar palabras muy cortas
+                    
+                    // Seleccionar 2-3 palabras al azar
+                    const numGaps = Math.min(3, candidateWords.length);
+                    for (let i = 0; i < numGaps; i++) {
+                        if (candidateWords.length > 0) {
+                            const randomIndex = Math.floor(Math.random() * candidateWords.length);
+                            wordsToOmit.push(candidateWords[randomIndex]);
+                            candidateWords.splice(randomIndex, 1);
+                        }
+                    }
+                    
+                    // Ordenar por índice para mantener el orden de la frase
+                    wordsToOmit.sort((a, b) => a.index - b.index);
+                    
+                    // Crear texto con espacios en blanco
+                    const textElement = document.createElement('div');
+                    textElement.className = 'gap-sentence-text';
+                    
+                    let displayText = '';
+                    let currentIndex = 0;
+                    
+                    wordsToOmit.forEach((omittedWord, gapIndex) => {
+                        // Agregar texto antes de la palabra omitida
+                        for (let i = currentIndex; i < omittedWord.index; i++) {
+                            displayText += words[i] + ' ';
+                        }
+                        
+                        // Agregar espacio en blanco
+                        displayText += `__________ `;
+                        
+                        // Actualizar índice actual
+                        currentIndex = omittedWord.index + 1;
+                        
+                        // Almacenar datos del espacio en blanco
+                        gapFillData.push({
+                            sentenceIndex: sentenceIndex,
+                            gapIndex: gapIndex,
+                            correctWord: omittedWord.word,
+                            inputId: `gap-${sentenceIndex}-${gapIndex}`
+                        });
+                    });
+                    
+                    // Agregar el resto de la frase
+                    for (let i = currentIndex; i < words.length; i++) {
+                        displayText += words[i] + ' ';
+                    }
+                    
+                    textElement.textContent = displayText.trim();
+                    sentenceElement.appendChild(textElement);
+                    
+                    // Crear inputs para cada espacio en blanco
+                    wordsToOmit.forEach((omittedWord, gapIndex) => {
+                        const inputContainer = document.createElement('div');
+                        inputContainer.className = 'gap-input-container';
+                        
+                        const label = document.createElement('label');
+                        label.textContent = `Espai ${gapIndex + 1}:`;
+                        label.htmlFor = `gap-${sentenceIndex}-${gapIndex}`;
+                        
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = 'gap-input';
+                        input.id = `gap-${sentenceIndex}-${gapIndex}`;
+                        input.placeholder = 'Escriu la paraula que falta';
+                        
+                        const hintButton = document.createElement('button');
+                        hintButton.className = 'hint-btn';
+                        hintButton.textContent = 'Pista';
+                        hintButton.dataset.sentenceIndex = sentenceIndex;
+                        hintButton.dataset.gapIndex = gapIndex;
+                        hintButton.onclick = function() {
+                            provideHint(this.dataset.sentenceIndex, this.dataset.gapIndex);
+                        };
+                        
+                        inputContainer.appendChild(label);
+                        inputContainer.appendChild(input);
+                        inputContainer.appendChild(hintButton);
+                        
+                        sentenceElement.appendChild(inputContainer);
+                    });
+                    
+                    gapFillExercise.appendChild(sentenceElement);
+                });
+            }
+
+            function provideHint(sentenceIndex, gapIndex) {
+                const gap = gapFillData.find(g => 
+                    g.sentenceIndex == sentenceIndex && g.gapIndex == gapIndex
+                );
+                
+                if (gap) {
+                    const input = document.getElementById(gap.inputId);
+                    const firstLetter = gap.correctWord.charAt(0);
+                    
+                    // Mostrar la primera letra como pista
+                    showNotification(`Pista: La paraula comença per "${firstLetter.toUpperCase()}"`, 'info');
+                    
+                    // Opcional: deshabilitar el botón de pista después de usarlo
+                    // event.target.disabled = true;
+                }
+            }
+
+            function checkGapFillAnswers() {
+                let correctCount = 0;
+                let totalCount = gapFillData.length;
+                
+                gapFillData.forEach(gap => {
+                    const input = document.getElementById(gap.inputId);
+                    const userAnswer = input.value.trim().toLowerCase();
+                    const correctAnswer = gap.correctWord.toLowerCase();
+                    
+                    // Verificar si la respuesta es correcta (permite variaciones menores)
+                    if (userAnswer === correctAnswer) {
+                        input.style.borderColor = '#2ecc71';
+                        input.style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
+                        correctCount++;
+                    } else {
+                        input.style.borderColor = '#e74c3c';
+                        input.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+                    }
+                });
+                
+                // Mostrar retroalimentación
+                if (correctCount === totalCount) {
+                    gapFillSuccess.style.display = 'block';
+                    gapFillError.style.display = 'none';
+                    showNotification('Excel·lent! Has completat correctament tots els espais.', 'success');
+                } else {
+                    gapFillSuccess.style.display = 'none';
+                    gapFillError.style.display = 'block';
+                    showNotification(`Has completat ${correctCount} de ${totalCount} espais correctament. Revisa les respostes.`, 'error');
+                }
+                
+                // Actualizar puntuación de escritura
+                writingScoreValue.correct = correctCount;
+                writingScoreValue.total = totalCount;
+                writingScore.textContent = `${correctCount}/${totalCount}`;
+                totalScore.textContent = `${3 + correctCount}/${3 + totalCount}`;
+                
+                // Mostrar botón de siguiente ejercicio
+                nextExerciseBtn.style.display = 'inline-block';
+                tryAgainBtn.style.display = 'inline-block';
+                
+                // Mostrar evaluación
+                evaluationSection.style.display = 'block';
+                evaluationResultDiv.textContent = `Has completat ${correctCount} de ${totalCount} espais correctament a l’exercici d’escriptura.`;
+            }
+
+            // --- Generación y Avaluació de Ejercicios ---
+            generateBtn.addEventListener('click', async function() {
+                const theme = themeInput.value.trim();
+                                
+                if (!theme) {
+                    showNotification('Escriu un tema o tria’n un dels exemples.', 'error');
+                    return;
+                }
+
+                if (!selectedLevel) {
+                    showNotification('Primer has de seleccionar el nivell.', 'error');
+                    return;
+                }
+
+                setUIState(true);
+                
+                currentTheme = theme;
+
+                // Ajustar prompt según el nivel seleccionado
+                let complexityHint = "";
+                switch(selectedLevel) {
+                    case "beginner":
+                        complexityHint = "Fes servir vocabulari senzill i frases curtes adequades per a estudiants A1-A2.";
+                        break;
+                    case "intermediate":
+                        complexityHint = "Fes servir vocabulari intermedi i frases moderadament complexes adequades per a estudiants B1-B2.";
+                        break;
+                }
+
+                // Prompt en català per generar contingut en català
+                const prompt = `Crea un exercici d’emparellament amb SIS elements (tres inicis de frase i tres finals) que s’han d’emparellar per formar tres frases completes. El tema és: "${theme}"
+
+                ${complexityHint}
+                
+                Proporciona exactamente tres inicis de frase i tres finals que puedan mezclarse y emparejarse para formar tres frases completas y lógicas.
+                
+                FORMAT DE RESPOSTA:
+                INICI 1: [Primer comienzo de frase]
+                INICI 2: [Segundo comienzo de frase]
+                INICI 3: [Tercer comienzo de frase]
+                FINAL 1: [Primer final de frase]
+                FINAL 2: [Segundo final de frase]
+                FINAL 3: [Tercer final de frase]
+                PARELLES CORRECTES: [Inici 1 amb Final 1, Inici 2 amb Final 2, Inici 3 amb Final 3] O [Inici 1 amb Final 2, Inici 2 amb Final 3, Inici 3 amb Final 1] etc.
+
+                Exemple per al tema "Viatges" al nivell inicial:
+                INICI 1: Les ruïnes antigues que vam visitar
+                INICI 2: Ens vam perdre completament pel barri antic
+                INICI 3: El menjar local que vam tastar
+                FINAL 1: era deliciós i molt assequible.
+                FINAL 2: eren encara més impressionants a la sortida del sol.
+                FINAL 3: però finalment vam trobar el camí de tornada.
+                PARELLES CORRECTES: Inici 1 amb Final 2, Inici 2 amb Final 3, Inici 3 amb Final 1
+
+                Assegura’t que les frases siguin adequades per al nivell indicat i que les parelles formin frases lògiques i coherents.`;
+
+                try {
+                    const exerciseText = await callGeminiAPI(prompt, 'gemini-2.5-flash', 0.8);
+                    
+                    // Analizar los datos del ejercicio
+                    const lines = exerciseText.split('\n');
+                    let beginnings = [];
+                    let endings = [];
+                    let correctPairsText = '';
+                    
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith('INICI 1:')) {
+                            beginnings[0] = line.substring('INICI 1:'.length).trim();
+                        } else if (line.startsWith('INICI 2:')) {
+                            beginnings[1] = line.substring('INICI 2:'.length).trim();
+                        } else if (line.startsWith('INICI 3:')) {
+                            beginnings[2] = line.substring('INICI 3:'.length).trim();
+                        } else if (line.startsWith('FINAL 1:')) {
+                            endings[0] = line.substring('FINAL 1:'.length).trim();
+                        } else if (line.startsWith('FINAL 2:')) {
+                            endings[1] = line.substring('FINAL 2:'.length).trim();
+                        } else if (line.startsWith('FINAL 3:')) {
+                            endings[2] = line.substring('FINAL 3:'.length).trim();
+                        } else if (line.startsWith('PARELLES CORRECTES:')) {
+                            correctPairsText = line.substring('PARELLES CORRECTES:'.length).trim();
+                        }
+                    }
+
+                    // Si el análisis falla, usar alternativa
+                    if (beginnings.length < 3 || endings.length < 3) {
+                        beginnings = [
+                            `La bonica posta de sol sobre ${theme.toLowerCase()}`,
+                            `Explorant les meravelles de ${theme.toLowerCase()}`,
+                            `El nostre viatge pel paisatge de ${theme.toLowerCase()}`
+                        ];
+                        endings = [
+                            'va ser una experiència impressionant.',
+                            'em va omplir d’una sensació d’aventura.',
+                            'va crear records que duraran tota la vida.'
+                        ];
+                        correctPairsText = 'Inici 1 amb Final 1, Inici 2 amb Final 2, Inici 3 amb Final 3';
+                    }
+
+                    // Analizar pares correctos
+                    correctPairs = parseCorrectPairs(correctPairsText);
+                    
+                    // Almacenar datos del ejercicio
+                    currentExercise = {
+                        beginnings,
+                        endings,
+                        correctPairs: correctPairsText,
+                        theme,
+                        level: selectedLevel
+                    };
+
+                    // Mostrar el ejercicio
+                    const displayText = `Tema: ${theme}\nNivell: ${selectedLevel.charAt(0).toUpperCase() + selectedLevel.slice(1)}\n\nEmparella els inicis de frase amb els finals correctes per formar tres frases completes.`;
+                    questionResult.textContent = displayText;
+                    
+                    // Mostrar elementos de emparejamiento
+                    matchingContainer.style.display = 'block';
+                    beginningsList.innerHTML = '';
+                    endingsList.innerHTML = '';
+                    
+                    // Restablecer índice de color
+                    colorIndex = 0;
+                    
+                    // Crear elementos con índices originales
+                    beginnings.forEach((beginning, index) => {
+                        const beginningElement = document.createElement('div');
+                        beginningElement.className = 'matching-item';
+                        beginningElement.textContent = beginning;
+                        beginningElement.dataset.originalIndex = index;
+                        beginningElement.onclick = () => handleMatchingItemClick(beginningElement, 'beginning');
+                        beginningsList.appendChild(beginningElement);
+                    });
+                    
+                    endings.forEach((ending, index) => {
+                        const endingElement = document.createElement('div');
+                        endingElement.className = 'matching-item';
+                        endingElement.textContent = ending;
+                        endingElement.dataset.originalIndex = index;
+                        endingElement.onclick = () => handleMatchingItemClick(endingElement, 'ending');
+                        endingsList.appendChild(endingElement);
+                    });
+                    
+                    // Restablecer estado de emparejamiento
+                    matches = [];
+                    selectedBeginning = null;
+                    selectedEnding = null;
+                    updateMatchesDisplay();
+                    
+                    // Restablecer retroalimentación y sección de escritura
+                    correctFeedback.style.display = 'none';
+                    incorrectFeedback.style.display = 'none';
+                    writingSection.style.display = 'none';
+                    evaluationSection.style.display = 'none';
+                    correctSentencesSection.style.display = 'none';
+                    scoreDisplay.style.display = 'none';
+                    gapFillSuccess.style.display = 'none';
+                    gapFillError.style.display = 'none';
+                    nextExerciseBtn.style.display = 'none';
+                    tryAgainBtn.style.display = 'none';
+                    checkWritingBtn.style.display = 'none';
+                    
+                    showNotification('Exercici generat! Emparella les frases i després completa els espais en blanc.', 'success');
+                } catch (error) {
+                    questionResult.textContent = 'S’ha produït un error en generar l’exercici. ' + error.message;
+                    showNotification('S’ha produït un error en generar l’exercici.', 'error');
+                } finally {
+                    setUIState(false);
+                }
+            });
+
+            function parseCorrectPairs(correctPairsText) {
+                const pairs = [];
+                // Analizar el texto de pares correctos para extraer índices
+                // Ejemplo: "Inici 1 amb Final 2, Inici 2 amb Final 3, Inici 3 amb Final 1"
+                const pairStrings = correctPairsText.split(',');
+                
+                pairStrings.forEach(pairStr => {
+                    const match = pairStr.trim().match(/Inici\s+(\d+)\s+amb\s+Final\s+(\d+)/i);
+                    if (match) {
+                        const beginningIndex = parseInt(match[1]) - 1; // Convertir a índice basado en 0
+                        const endingIndex = parseInt(match[2]) - 1; // Convertir a índice basado en 0
+                        pairs.push({ beginningIndex, endingIndex });
+                    }
+                });
+                
+                // Si el análisis falla, usar pares predeterminados
+                if (pairs.length !== 3) {
+                    return [
+                        { beginningIndex: 0, endingIndex: 0 },
+                        { beginningIndex: 1, endingIndex: 1 },
+                        { beginningIndex: 2, endingIndex: 2 }
+                    ];
+                }
+                
+                return pairs;
+            }
+
+            function nextExercise() {
+                if (currentTheme) {
+                    generateBtn.click();
+                } else {
+                    showNotification('Primer has d’escriure un tema.', 'error');
+                }
+            }
+
+            copyBtn.addEventListener('click', function() {
+                let textToCopy = questionResult.textContent + "\n\nComienzos de Frases:\n";
+                
+                if (currentExercise) {
+                    currentExercise.beginnings.forEach((beginning, index) => {
+                        textToCopy += `${index + 1}. ${beginning}\n`;
+                    });
+                    
+                    textToCopy += "\nFinals de frase:\n";
+                    currentExercise.endings.forEach((ending, index) => {
+                        textToCopy += `${index + 1}. ${ending}\n`;
+                    });
+                }
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showNotification('Exercici copiat!', 'success');
+                }).catch(err => {
+                    showNotification('S’ha produït un error en copiar l’exercici.', 'error');
+                });
+            });
+
+            tryAgainBtn.addEventListener('click', function() {
+                // Restablecer el ejercicio de escritura
+                gapFillData.forEach(gap => {
+                    const input = document.getElementById(gap.inputId);
+                    input.value = '';
+                    input.style.borderColor = '';
+                    input.style.backgroundColor = '';
+                });
+                
+                gapFillSuccess.style.display = 'none';
+                gapFillError.style.display = 'none';
+                nextExerciseBtn.style.display = 'none';
+                tryAgainBtn.style.display = 'none';
+                evaluationSection.style.display = 'none';
+                
+                showNotification('Exercici d’escriptura reiniciat. Torna-ho a provar!', 'info');
+            });
+
+            nextExerciseBtn.addEventListener('click', function() {
+                nextExercise();
+            });
+
+            checkWritingBtn.addEventListener('click', function() {
+                checkGapFillAnswers();
+            });
+
+            clearBtn.addEventListener('click', function() {
+                themeInput.value = '';
+                themeInput.classList.add('theme-attention');
+                questionResult.textContent = 'L’exercici d’emparellament apareixerà aquí';
+                matchingContainer.style.display = 'none';
+                beginningsList.innerHTML = '';
+                endingsList.innerHTML = '';
+                matchesContainer.style.display = 'none';
+                matchesList.innerHTML = '';
+                currentExercise = null;
+                matches = [];
+                selectedBeginning = null;
+                selectedEnding = null;
+                writingScoreValue = { correct: 0, total: 0 };
+                selectedLevel = null;
+                
+                levelBtns.forEach(btn => btn.classList.remove('selected'));
+                themeExamples.forEach(example => example.classList.remove('selected'));
+                
+                writingSection.style.display = 'none';
+                evaluationSection.style.display = 'none';
+                scoreDisplay.style.display = 'none';
+                correctFeedback.style.display = 'none';
+                incorrectFeedback.style.display = 'none';
+                correctSentencesSection.style.display = 'none';
+                gapFillSuccess.style.display = 'none';
+                gapFillError.style.display = 'none';
+                nextExerciseBtn.style.display = 'none';
+                tryAgainBtn.style.display = 'none';
+                checkWritingBtn.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
