@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Me'n vaig d'Erasmus</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner img {
+  width: 46px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.banner-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #3a2b00;
+}
+
+.home {
+  color: white;
+  font-size: 1.35rem;
+  text-decoration: none;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 18px 30px;
+}
+
+.left-col {
+  position: sticky;
+  top: 72px;
+  align-self: start;
+  z-index: 20;
+}
+
+.media-card, .exercise-card, .intro-card, .transcript-box {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+}
+
+.media-card {
+  padding: 10px;
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+h2 {
+  color: #8B4513;
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.intro-card p, .exercise-card p, .transcript-box p {
+  line-height: 1.55;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 15px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #ffcc00;
+  color: #3a2b00;
+  margin: 4px 5px 4px 0;
+}
+
+button:hover {
+  filter: brightness(0.96);
+}
+
+.option-row {
+  margin: 12px 0;
+  padding: 12px;
+  background: #faf7ec;
+  border-radius: 14px;
+}
+
+.option-row p {
+  margin: 0 0 8px;
+}
+
+.feedback {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.94rem;
+}
+
+.correct { color: #207245; }
+.incorrect { color: #b3261e; }
+
+.mc-option {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  background: #faf7ec;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.mc-option input {
+  margin-right: 8px;
+}
+
+select, .gap {
+  padding: 7px 9px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  background: white;
+}
+
+.gap {
+  width: 90px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.word-bank {
+  background: #fff8d6;
+  border-left: 5px solid #ffcc00;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+
+/* MOBILE FIX: keeps avatar head visible */
+@media (max-width: 850px) {
+  .banner {
+    padding: 10px 12px;
+  }
+
+  .banner-title {
+    font-size: 1rem;
+  }
+
+  .home {
+    font-size: 1.1rem;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 0 10px 20px;
+    gap: 12px;
+  }
+
+  .left-col {
+    position: sticky;
+    top: 56px;
+    order: -1;
+    z-index: 90;
+    background: #f7f6f2;
+  }
+
+  .media-card {
+    border-radius: 0 0 16px 16px;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-shadow: none;
+    background: #f7f6f2;
+  }
+
+  .video-wrap {
+    width: 100%;
+    height: 42vh;
+    min-height: 260px;
+    max-height: 420px;
+    aspect-ratio: auto;
+    border-radius: 0 0 14px 14px;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    background: #000;
+  }
+
+  .intro-card, .exercise-card, .transcript-box {
+    padding: 15px;
+    border-radius: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <div class="banner-title">VIDCATALA · Me'n vaig d'Erasmus</div>
+  </div>
+  <a class='home' href='/' title='Inici'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="layout">
+
+<section class="left-col">
+  <div class="media-card">
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata" src="estudiar.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<section class="right-col">
+
+  <div class="intro-card">
+    <button onclick="toggleTranscript()">Mostra / amaga el text</button>
+    <p>
+      En aquest monòleg, una estudiant explica per què va triar estudiar català
+      i com va reaccionar la seva família.
+    </p>
+  </div>
+
+  <div id="transcript" class="transcript-box hidden">
+    <h2>Transcripció</h2>
+    <p>
+      Quan vaig dir a la meva família que estudiaria català a la universitat, es van quedar de pedra.
+      Em deien: “Però per què no estudies espanyol o xinès, que tenen més sortides gairebé a tot el món?”.
+    </p>
+    <p>
+      Però a mi sempre m'han interessat les llengües minoritzades i la traducció.
+      El català és una llengua fascinant perquè té una producció literària i cultural increïble
+      per a la quantitat de parlants que té.
+    </p>
+    <p>
+      Ara que estic fent el tercer any de carrera, estic traduint poemes de Mercè Rodoreda
+      i Salvador Espriu, i la veritat és que m'encanta.
+    </p>
+    <p>
+      A més, el pròxim semestre me'n vaig d'Erasmus a la Universitat Autònoma de Barcelona!
+      Tinc una mica de por de no entendre els diferents accents de la gent del carrer,
+      perquè a classe sempre escoltem un català molt substituït o estàndard,
+      però tinc moltíssimes ganes de viure l'experiència i parlar-lo cada dia al campus.
+    </p>
+  </div>
+
+  <div class="exercise-card">
+    <h2>1. Comprensió global i matisos</h2>
+    <p>Tria la millor resposta segons el vídeo.</p>
+    <div id="mc-container"></div>
+    <button onclick="checkMC()">Comprova</button>
+    <div id="mc-feedback" class="feedback"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>2. Sí o No?</h2>
+    <p>Decideix si cada frase és correcta segons el monòleg.</p>
+    <div id="tf-container"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>3. Omple els buits</h2>
+
+    <div class="word-bank">
+      experiència · producció · pedra · campus · minoritzades · accents · fascinant · semestre · sortides · carrera
+    </div>
+
+    <p>1. La seva família es va quedar de <input class="gap main-gap" data-answer="pedra"> quan va saber que estudiaria català.</p>
+    <p>2. Li deien que l’espanyol o el xinès tenien més <input class="gap main-gap" data-answer="sortides">.</p>
+    <p>3. A ella li interessen les llengües <input class="gap main-gap" data-answer="minoritzades">.</p>
+    <p>4. Considera que el català és una llengua <input class="gap main-gap" data-answer="fascinant">.</p>
+    <p>5. Diu que el català té una <input class="gap main-gap" data-answer="producció"> literària i cultural increïble.</p>
+    <p>6. Ara està fent el tercer any de <input class="gap main-gap" data-answer="carrera">.</p>
+    <p>7. El pròxim <input class="gap main-gap" data-answer="semestre"> se’n va d’Erasmus.</p>
+    <p>8. Té por de no entendre els diferents <input class="gap main-gap" data-answer="accents"> del carrer.</p>
+    <p>9. Vol parlar català cada dia al <input class="gap main-gap" data-answer="campus">.</p>
+    <p>10. Té moltes ganes de viure l’<input class="gap main-gap" data-answer="experiència">.</p>
+
+    <button onclick="checkGaps()">Comprova</button>
+    <button onclick="showGapAnswers()">Mostra respostes</button>
+    <button onclick="resetGaps()">Reinicia</button>
+
+    <div id="gap-feedback" class="feedback"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>4. Preposicions</h2>
+    <p>Completa els espais amb <strong>de</strong>, <strong>a</strong>, <strong>per</strong> o deixa-ho buit si no cal cap preposició.</p>
+
+    <div class="word-bank">
+      de · a · per · Ø
+    </div>
+
+    <p>1. Vaig dir <input class="gap prep" data-answer="a"> la meva família que estudiaria català.</p>
+    <p>2. El català és fascinant <input class="gap prep" data-answer="per"> la quantitat de cultura que produeix.</p>
+    <p>3. El pròxim semestre me'n vaig d'Erasmus <input class="gap prep" data-answer="a"> Barcelona.</p>
+    <p>4. Tinc una mica de por <input class="gap prep" data-answer="de"> no entendre els diferents accents.</p>
+    <p>5. Tinc moltíssimes ganes <input class="gap prep" data-answer="de"> viure l’experiència.</p>
+    <p>6. Sempre m’han interessat <input class="gap prep" data-answer=""> les llengües minoritzades.</p>
+
+    <button onclick="checkPrep()">Comprova</button>
+    <button onclick="showPrepAnswers()">Mostra respostes</button>
+    <button onclick="resetPrep()">Reinicia</button>
+
+    <div id="prep-feedback" class="feedback"></div>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+function toggleTranscript() {
+  document.getElementById("transcript").classList.toggle("hidden");
+}
+
+const mcQuestions = [
+  {
+    q: "Quina és la principal preocupació de l'estudiant respecte a la seva estada a Barcelona?",
+    options: [
+      "Que el nivell acadèmic dels textos sigui massa elevat.",
+      "La dificultat d’entendre els diferents accents de la gent del carrer.",
+      "Que els professors no utilitzin català estàndard."
+    ],
+    answer: 1
+  },
+  {
+    q: "Segons el text, què destaca sobre la producció cultural catalana?",
+    options: [
+      "Que és limitada perquè hi ha pocs parlants.",
+      "Que és sorprenentment rica per la quantitat de parlants que té.",
+      "Que només està centrada en la poesia clàssica."
+    ],
+    answer: 1
+  },
+  {
+    q: "Com reacciona la família quan diu que estudiarà català?",
+    options: [
+      "Ho troben una decisió molt pràctica des del primer moment.",
+      "Es queden molt sorpresos.",
+      "Li proposen que estudiï portuguès."
+    ],
+    answer: 1
+  },
+  {
+    q: "Què està traduint actualment?",
+    options: [
+      "Poemes de Mercè Rodoreda i Salvador Espriu.",
+      "Novel·les angleses contemporànies.",
+      "Articles de premsa sobre Barcelona."
+    ],
+    answer: 0
+  },
+  {
+    q: "Quina actitud mostra al final del monòleg?",
+    options: [
+      "Només preocupació i inseguretat.",
+      "Indiferència davant l’experiència.",
+      "Una barreja de por i moltes ganes de viure l’experiència."
+    ],
+    answer: 2
+  },
+  {
+    q: "Per què la família li recomana altres llengües?",
+    options: [
+      "Perquè pensen que tenen més utilitat professional.",
+      "Perquè no volen que viatgi a Barcelona.",
+      "Perquè desconeixen completament la traducció."
+    ],
+    answer: 0
+  },
+  {
+    q: "Quin camp d’estudi sembla interessar especialment a la protagonista?",
+    options: [
+      "La biologia i la medicina.",
+      "Les llengües minoritzades i la traducció.",
+      "L’economia internacional."
+    ],
+    answer: 1
+  },
+  {
+    q: "Quina diferència lingüística li preocupa?",
+    options: [
+      "La diferència entre el català escrit i el català antic.",
+      "La diferència entre el català de classe i el català real del carrer.",
+      "La diferència entre català i francès."
+    ],
+    answer: 1
+  }
+];
+
+const mcContainer = document.getElementById("mc-container");
+
+mcQuestions.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "option-row";
+
+  let html = `<p><strong>${index + 1}.</strong> ${item.q}</p>`;
+
+  item.options.forEach((opt, optIndex) => {
+    html += `
+      <label class="mc-option">
+        <input type="radio" name="mc${index}" value="${optIndex}">
+        ${opt}
+      </label>
+    `;
+  });
+
+  div.innerHTML = html;
+  mcContainer.appendChild(div);
+});
+
+function checkMC() {
+  let score = 0;
+
+  mcQuestions.forEach((item, index) => {
+    const selected = document.querySelector(`input[name="mc${index}"]:checked`);
+    if (selected && Number(selected.value) === item.answer) {
+      score++;
+    }
+  });
+
+  const fb = document.getElementById("mc-feedback");
+  fb.textContent = `Puntuació: ${score}/${mcQuestions.length}`;
+  fb.className = score === mcQuestions.length ? "feedback correct" : "feedback incorrect";
+}
+
+const tfQuestions = [
+  {
+    q: "La protagonista estudia català a la universitat.",
+    a: "si",
+    ok: "Correcte. El text comença amb aquesta idea.",
+    no: "No. Ella sí que estudia català a la universitat."
+  },
+  {
+    q: "La família entén immediatament la seva decisió.",
+    a: "no",
+    ok: "Correcte. Es queden de pedra.",
+    no: "No exactament. La família queda molt sorpresa."
+  },
+  {
+    q: "La família creu que l’espanyol o el xinès poden tenir més sortides.",
+    a: "si",
+    ok: "Correcte. Aquesta és la seva objecció principal.",
+    no: "No. Aquesta idea apareix clarament al monòleg."
+  },
+  {
+    q: "A ella només li interessa el català perquè vol anar de vacances.",
+    a: "no",
+    ok: "Correcte. Li interessen les llengües minoritzades i la traducció.",
+    no: "No. La seva motivació és més acadèmica i cultural."
+  },
+  {
+    q: "Està traduint textos de Rodoreda i Espriu.",
+    a: "si",
+    ok: "Correcte. Diu que està traduint poemes d’aquests autors.",
+    no: "No. Rodoreda i Espriu sí que apareixen al text."
+  },
+  {
+    q: "Té molta por i no vol anar a Barcelona.",
+    a: "no",
+    ok: "Correcte. Té una mica de por, però també moltes ganes.",
+    no: "No. El final expressa il·lusió, no rebuig."
+  },
+  {
+    q: "Vol parlar català cada dia al campus.",
+    a: "si",
+    ok: "Correcte. Aquesta és una de les seves expectatives.",
+    no: "No. Ho diu al final del monòleg."
+  },
+  {
+    q: "El monòleg tracta també de la diferència entre llengua de classe i llengua del carrer.",
+    a: "si",
+    ok: "Correcte. Aquesta diferència és important al final.",
+    no: "No. Aquesta és una de les idees centrals."
+  }
+];
+
+const tfContainer = document.getElementById("tf-container");
+
+tfQuestions.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "option-row";
+  div.innerHTML = `
+    <p><strong>${index + 1}.</strong> ${item.q}</p>
+    <button onclick="checkTF(${index}, 'si')">Sí</button>
+    <button onclick="checkTF(${index}, 'no')">No</button>
+    <div id="tf-feedback-${index}" class="feedback"></div>
+  `;
+  tfContainer.appendChild(div);
+});
+
+function checkTF(index, choice) {
+  const fb = document.getElementById(`tf-feedback-${index}`);
+  const item = tfQuestions[index];
+
+  if (choice === item.a) {
+    fb.textContent = item.ok;
+    fb.className = "feedback correct";
+  } else {
+    fb.textContent = item.no;
+    fb.className = "feedback incorrect";
+  }
+}
+
+function normalize(text) {
+  return text.trim().toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function checkGaps() {
+  const gaps = document.querySelectorAll(".main-gap");
+  let score = 0;
+
+  gaps.forEach(gap => {
+    if (normalize(gap.value) === normalize(gap.dataset.answer)) {
+      gap.style.borderColor = "#207245";
+      score++;
+    } else {
+      gap.style.borderColor = "#b3261e";
+    }
+  });
+
+  const fb = document.getElementById("gap-feedback");
+  fb.textContent = `Puntuació: ${score}/${gaps.length}`;
+  fb.className = score === gaps.length ? "feedback correct" : "feedback incorrect";
+}
+
+function showGapAnswers() {
+  const gaps = document.querySelectorAll(".main-gap");
+  gaps.forEach(gap => {
+    gap.value = gap.dataset.answer;
+    gap.style.borderColor = "#207245";
+  });
+
+  const fb = document.getElementById("gap-feedback");
+  fb.textContent = "Respostes mostrades.";
+  fb.className = "feedback correct";
+}
+
+function resetGaps() {
+  const gaps = document.querySelectorAll(".main-gap");
+  gaps.forEach(gap => {
+    gap.value = "";
+    gap.style.borderColor = "#ddd";
+  });
+
+  document.getElementById("gap-feedback").textContent = "";
+}
+
+function checkPrep() {
+  const gaps = document.querySelectorAll(".prep");
+  let score = 0;
+
+  gaps.forEach(gap => {
+    if (normalize(gap.value) === normalize(gap.dataset.answer)) {
+      gap.style.borderColor = "#207245";
+      score++;
+    } else {
+      gap.style.borderColor = "#b3261e";
+    }
+  });
+
+  const fb = document.getElementById("prep-feedback");
+  fb.textContent = `Puntuació: ${score}/${gaps.length}`;
+  fb.className = score === gaps.length ? "feedback correct" : "feedback incorrect";
+}
+
+function showPrepAnswers() {
+  document.querySelectorAll(".prep").forEach(gap => {
+    gap.value = gap.dataset.answer || "Ø";
+    gap.style.borderColor = "#207245";
+  });
+
+  const fb = document.getElementById("prep-feedback");
+  fb.textContent = "Respostes mostrades.";
+  fb.className = "feedback correct";
+}
+
+function resetPrep() {
+  document.querySelectorAll(".prep").forEach(gap => {
+    gap.value = "";
+    gap.style.borderColor = "#ddd";
+  });
+
+  document.getElementById("prep-feedback").textContent = "";
+}
+</script>
+
+</body>
+</html>

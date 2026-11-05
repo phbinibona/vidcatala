@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Barcelona 92</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.banner-logo {
+  width: 70px;
+  height: 44px;
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      #f7c600 0%, #f7c600 20%,
+      #d71920 20%, #d71920 32%,
+      #f7c600 32%, #f7c600 44%,
+      #d71920 44%, #d71920 56%,
+      #f7c600 56%, #f7c600 68%,
+      #d71920 68%, #d71920 80%,
+      #f7c600 80%, #f7c600 100%
+    );
+  border: 2px solid rgba(255,255,255,0.75);
+}
+
+.banner-title h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.banner-title p {
+  margin: 2px 0 0;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.home-btn {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 9px 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 24px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 18px;
+  align-self: start;
+}
+
+.video-card, .content-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.video-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+}
+
+video {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+
+.overlay-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,204,0,0.96);
+  color: #222;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+}
+
+.video-note {
+  font-size: .92rem;
+  margin-bottom: 0;
+  color: #555;
+}
+
+.intro {
+  background: #fff6cc;
+  border-left: 6px solid #ffcc00;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.headline {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.exercise {
+  border-top: 2px solid #eee;
+  padding-top: 18px;
+  margin-top: 22px;
+}
+
+.transcript {
+  display: none;
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 15px;
+  line-height: 1.65;
+}
+
+.subj-highlight {
+  background: #ffec80;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 6px;
+}
+
+select, input[type="text"] {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  margin: 3px;
+}
+
+input[type="text"] {
+  min-width: 160px;
+}
+
+button {
+  font-family: inherit;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  background: #ffcc00;
+  color: #222;
+  padding: 9px 13px;
+  margin: 6px 4px 6px 0;
+  cursor: pointer;
+}
+
+.clip-btn {
+  background: #fff1a8;
+  border: 2px solid #ffcc00;
+  border-radius: 999px;
+  padding: 7px 12px;
+  margin: 4px;
+}
+
+.clip-btn:hover {
+  background: #ffcc00;
+}
+
+.question {
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.feedback {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.correct { color: #188038; }
+.wrong { color: #c5221f; }
+
+.explanation-box {
+  background: #f8f8f8;
+  border-left: 5px solid #ffcc00;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+label {
+  display: block;
+  margin: 6px 0;
+}
+
+@media (max-width: 850px) {
+  .page {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .banner {
+    flex-wrap: wrap;
+  }
+
+  .banner-title h1 {
+    font-size: 1.05rem;
+  }
+
+  .banner-logo {
+    width: 58px;
+    height: 36px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="banner-logo" aria-label="Senyera catalana"></div>
+    <div class="banner-title">
+      <h1>VIDCATALA · Barcelona 92</h1>
+      <p>Els Jocs Olímpics i la transformació de la ciutat</p>
+    </div>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left-column">
+  <div class="video-card">
+    <div class="video-wrap">
+      <video id="mainVideo" src="Barcelona.mp4" playsinline></video>
+      <button class="overlay-btn" id="playBtn" onclick="toggleVideo()">
+        <i class="fa-solid fa-play"></i>
+      </button>
+    </div>
+    <p class="video-note">
+      Mira el vídeo primer sense transcripció. Després utilitza els botons de l’exercici 2 per escoltar els subjuntius en context.
+    </p>
+  </div>
+</section>
+
+<section class="content-card">
+
+<div class="intro">
+  <div class="headline">Barcelona 92: el moment que va transformar la ciutat</div>
+  <p>
+    Aquest vídeo presenta els Jocs Olímpics de 1992 com un moment de canvi profund:
+    Barcelona deixa de semblar una ciutat tancada i guanya confiança, visibilitat i una nova relació amb el mar.
+  </p>
+</div>
+
+<button onclick="toggleTranscript()">Mostra / amaga la transcripció</button>
+
+<div id="transcript" class="transcript">
+  <p>
+    Saps? De vegades oblidem com era Barcelona abans del 92.
+    Semblava una ciutat que <span class="subj-highlight">volgués</span> amagar-se
+    d'esquena al mar, una mica grisa.
+  </p>
+
+  <p>
+    I de sobte, tot va canviar. Quan van arribar els Jocs Olímpics,
+    va ser com si ens <span class="subj-highlight">haguéssim tret</span> una disfressa.
+    De cop, teníem tothom mirant-nos.
+  </p>
+
+  <p>
+    Recordo l'ambient pels carrers. El soroll, les banderes, els turistes.
+    I nosaltres, orgullosos.
+  </p>
+
+  <p>
+    I és que, per molt que el món <span class="subj-highlight">hagués vist</span>
+    altres ciutats abans, em <span class="subj-highlight">sorprengués</span> o no,
+    Barcelona va decidir que el món també
+    <span class="subj-highlight">hagués de veure</span> qui érem.
+  </p>
+
+  <p>
+    Ja no era només el Barça, era la ciutat sencera.
+    Vam obrir les finestres i vam netejar les platges.
+    Encara que tot <span class="subj-highlight">hagi canviat</span> moltíssim des de llavors,
+    crec que aquells jocs van ser vitals.
+  </p>
+
+  <p>
+    Perquè no <span class="subj-highlight">calgués</span> que ningú ens
+    <span class="subj-highlight">digués</span> què podíem fer,
+    ens ho vam demostrar nosaltres mateixos.
+  </p>
+
+  <p>
+    I mira, per molt que el temps <span class="subj-highlight">hagi passat</span>,
+    aquell sentiment de «podem fer-ho» encara ens dura.
+  </p>
+
+  <p>
+    No vull que la gent <span class="subj-highlight">pensi</span> que només van ser uns jocs d'estiu.
+    Va ser el moment en què la ciutat va decidir que,
+    <span class="subj-highlight">fos</span> el que fos el futur,
+    nosaltres estaríem preparats.
+  </p>
+</div>
+
+<div class="exercise">
+<h2>Exercici 1 · Comprensió global</h2>
+<p><strong>Tria la resposta més adequada. Algunes opcions són possibles, però només una reflecteix millor el sentit del vídeo.</strong></p>
+
+<div class="question">
+<p><strong>1. Quan l’orador diu que Barcelona “semblava voler amagar-se”, vol suggerir que...</strong></p>
+<label><input type="radio" name="q1" value="a"> la ciutat tenia vergonya literalment.</label>
+<label><input type="radio" name="q1" value="b"> la ciutat encara no havia mostrat tot el seu potencial.</label>
+<label><input type="radio" name="q1" value="c"> la ciutat estava buida i abandonada.</label>
+</div>
+
+<div class="question">
+<p><strong>2. La imatge de “treure’s una disfressa” serveix per expressar que...</strong></p>
+<label><input type="radio" name="q2" value="a"> Barcelona va deixar veure una identitat més autèntica.</label>
+<label><input type="radio" name="q2" value="b"> els ciutadans celebraven el carnaval olímpic.</label>
+<label><input type="radio" name="q2" value="c"> la ciutat va perdre la seva personalitat.</label>
+</div>
+
+<div class="question">
+<p><strong>3. L’ambient dels carrers es presenta sobretot com...</strong></p>
+<label><input type="radio" name="q3" value="a"> caòtic i amenaçador.</label>
+<label><input type="radio" name="q3" value="b"> internacional, festiu i ple d’orgull ciutadà.</label>
+<label><input type="radio" name="q3" value="c"> silenciós, solemne i distant.</label>
+</div>
+
+<div class="question">
+<p><strong>4. Quan diu “ja no era només el Barça”, l’orador vol remarcar que...</strong></p>
+<label><input type="radio" name="q4" value="a"> el futbol va desaparèixer de Barcelona.</label>
+<label><input type="radio" name="q4" value="b"> tota la ciutat, no només l’equip, va quedar al centre de l’atenció.</label>
+<label><input type="radio" name="q4" value="c"> els Jocs van ser més importants que qualsevol esport.</label>
+</div>
+
+<div class="question">
+<p><strong>5. “Vam obrir les finestres i vam netejar les platges” s’ha d’entendre com...</strong></p>
+<label><input type="radio" name="q5" value="a"> una metàfora d’obertura, renovació i recuperació urbana.</label>
+<label><input type="radio" name="q5" value="b"> una simple descripció de tasques domèstiques.</label>
+<label><input type="radio" name="q5" value="c"> una crítica contra la vida al litoral.</label>
+</div>
+
+<div class="question">
+<p><strong>6. Per què diu que els Jocs van ser “vitals”?</strong></p>
+<label><input type="radio" name="q6" value="a"> perquè van permetre a Barcelona demostrar-se a si mateixa que podia canviar.</label>
+<label><input type="radio" name="q6" value="b"> perquè van fer que la ciutat deixés de tenir problemes.</label>
+<label><input type="radio" name="q6" value="c"> perquè van substituir la identitat catalana per una imatge internacional.</label>
+</div>
+
+<div class="question">
+<p><strong>7. El sentiment de “podem fer-ho” representa...</strong></p>
+<label><input type="radio" name="q7" value="a"> una confiança col·lectiva que encara perdura.</label>
+<label><input type="radio" name="q7" value="b"> una frase publicitària sense efecte real.</label>
+<label><input type="radio" name="q7" value="c"> una crítica a la preparació olímpica.</label>
+</div>
+
+<div class="question">
+<p><strong>8. La conclusió del vídeo és que els Jocs Olímpics...</strong></p>
+<label><input type="radio" name="q8" value="a"> van ser només uns jocs d’estiu amb molt turisme.</label>
+<label><input type="radio" name="q8" value="b"> van ser un moment simbòlic en què Barcelona es va preparar per al futur.</label>
+<label><input type="radio" name="q8" value="c"> van tenir importància esportiva però poca importància ciutadana.</label>
+</div>
+
+<button onclick="checkMCQ()">Comprova</button>
+<button onclick="resetMCQ()">Reinicia</button>
+<div id="fb1" class="feedback"></div>
+</div>
+
+<div class="exercise">
+<h2>Exercici 2 · Escolta els subjuntius del vídeo</h2>
+
+<p>Clica cada forma verbal. El vídeo saltarà al fragment on apareix.</p>
+
+<p>
+<button class="clip-btn" onclick="playClip(4,9)">volgués</button>
+<button class="clip-btn" onclick="playClip(11,16)">haguéssim tret</button>
+<button class="clip-btn" onclick="playClip(27,32)">hagués vist</button>
+<button class="clip-btn" onclick="playClip(30,35)">sorprengués</button>
+<button class="clip-btn" onclick="playClip(33,38)">hagués de veure</button>
+<button class="clip-btn" onclick="playClip(45,49)">hagi canviat</button>
+<button class="clip-btn" onclick="playClip(51,56)">calgués</button>
+<button class="clip-btn" onclick="playClip(52,57)">digués</button>
+<button class="clip-btn" onclick="playClip(57,63)">hagi passat</button>
+<button class="clip-btn" onclick="playClip(65,69)">pensi</button>
+<button class="clip-btn" onclick="playClip(68,75)">fos</button>
+</p>
+
+<div class="explanation-box">
+<strong>volgués</strong> → “semblava una ciutat que volgués...” Expressa una impressió, no una acció literal.
+</div>
+
+<div class="explanation-box">
+<strong>haguéssim tret</strong> → “com si ens haguéssim tret...” És una comparació imaginada.
+</div>
+
+<div class="explanation-box">
+<strong>hagués vist / sorprengués / hagués de veure</strong> → Presenten una idea valorada, hipotètica o vista des d’una perspectiva personal.
+</div>
+
+<div class="explanation-box">
+<strong>hagi canviat / hagi passat</strong> → Reconeixen un fet, però el parlant vol destacar una altra idea.
+</div>
+
+<div class="explanation-box">
+<strong>calgués / digués</strong> → Apareixen dins una idea de necessitat o finalitat: demostrar-ho perquè no fes falta que algú ho digués.
+</div>
+
+<div class="explanation-box">
+<strong>pensi / fos</strong> → Expressen una idea possible, no afirmada com a fet segur.
+</div>
+</div>
+
+<div class="exercise">
+<h2>Exercici 3 · Escriu la forma correcta</h2>
+
+<p>1. Semblava una ciutat que <input class="writeSubj" data-answer="volgués"> amagar-se. <em>(voler)</em></p>
+<p>2. Va ser com si nosaltres <input class="writeSubj" data-answer="haguéssim tret"> una disfressa. <em>(treure)</em></p>
+<p>3. Per molt que el món <input class="writeSubj" data-answer="hagués vist"> altres ciutats abans. <em>(veure)</em></p>
+<p>4. Encara que tot <input class="writeSubj" data-answer="hagi canviat"> moltíssim. <em>(canviar)</em></p>
+<p>5. Perquè no <input class="writeSubj" data-answer="calgués"> que ningú ens <input class="writeSubj" data-answer="digués"> què podíem fer. <em>(caldre / dir)</em></p>
+<p>6. Per molt que el temps <input class="writeSubj" data-answer="hagi passat">, aquell sentiment encara ens dura. <em>(passar)</em></p>
+<p>7. No vull que la gent <input class="writeSubj" data-answer="pensi"> que només van ser uns jocs d’estiu. <em>(pensar)</em></p>
+<p>8. Fos el que <input class="writeSubj" data-answer="fos"> el futur, estaríem preparats. <em>(ser)</em></p>
+
+<button onclick="checkInputs('.writeSubj','fb3')">Comprova</button>
+<button onclick="showInputs('.writeSubj','fb3')">Mostra respostes</button>
+<button onclick="resetInputs('.writeSubj','fb3')">Reinicia</button>
+<div id="fb3" class="feedback"></div>
+</div>
+
+<div class="exercise">
+<h2>Exercici 4 · Tria la forma correcta</h2>
+
+<p>
+1. Va ser com si ens
+<select class="choiceSubj" data-answer="haguéssim tret">
+<option></option><option>hauríem tret</option><option>ens trèiem</option><option>haguéssim tret</option>
+</select>
+una disfressa.
+</p>
+
+<p>
+2. Per molt que el món
+<select class="choiceSubj" data-answer="hagués vist">
+<option></option><option>havia vist</option><option>hagués vist</option><option>ha vist</option>
+</select>
+altres ciutats abans.
+</p>
+
+<p>
+3. Encara que la ciutat
+<select class="choiceSubj" data-answer="hagi canviat">
+<option></option><option>ha canviat</option><option>canviarà</option><option>hagi canviat</option>
+</select>
+molt, l’esperit olímpic es manté.
+</p>
+
+<p>
+4. Ens ho vam demostrar perquè no
+<select class="choiceSubj" data-answer="calgués">
+<option></option><option>calia</option><option>calgués</option><option>caldrà</option>
+</select>
+que ningú ens
+<select class="choiceSubj" data-answer="digués">
+<option></option><option>deia</option><option>digués</option><option>dirà</option>
+</select>
+què podíem fer.
+</p>
+
+<button onclick="checkSelects('.choiceSubj','fb4')">Comprova</button>
+<button onclick="showSelects('.choiceSubj','fb4')">Mostra respostes</button>
+<button onclick="resetSelects('.choiceSubj','fb4')">Reinicia</button>
+<div id="fb4" class="feedback"></div>
+</div>
+
+<div class="exercise">
+<h2>Exercici 5 · Detecta l’error: subjuntiu o no?</h2>
+
+<p>
+Algunes frases necessiten subjuntiu. Altres no. Escriu la forma correcta de la paraula marcada.
+</p>
+
+<p>1. Semblava una ciutat que <strong>volia</strong> amagar-se.  
+<input class="errorSubj" data-answer="volgués"></p>
+
+<p>2. Per molt que el món <strong>havia vist</strong> altres ciutats abans.  
+<input class="errorSubj" data-answer="hagués vist"></p>
+
+<p>3. Encara que tot <strong>ha canviat</strong> moltíssim des de llavors, crec que els Jocs van ser vitals.  
+<input class="errorSubj" data-answer="hagi canviat"></p>
+
+<p>4. Es va fer tot perquè no <strong>va caldre</strong> que ningú ens digués què podíem fer.  
+<input class="errorSubj" data-answer="calgués"></p>
+
+<p>5. De vegades oblidem com <strong>fos</strong> Barcelona abans del 92.  
+<input class="errorSubj" data-answer="era"></p>
+
+<p>6. Recordo que els carrers <strong>estiguessin</strong> plens de banderes i turistes.  
+<input class="errorSubj" data-answer="estaven"></p>
+
+<p>7. És evident que aquells Jocs <strong>fossin</strong> vitals.  
+<input class="errorSubj" data-answer="van ser"></p>
+
+<p>8. Ens ho vam demostrar nosaltres mateixos: <strong>poguéssim</strong> fer-ho.  
+<input class="errorSubj" data-answer="podíem"></p>
+
+<button onclick="checkInputs('.errorSubj','fb5')">Comprova</button>
+<button onclick="showInputs('.errorSubj','fb5')">Mostra respostes</button>
+<button onclick="resetInputs('.errorSubj','fb5')">Reinicia</button>
+<div id="fb5" class="feedback"></div>
+</div>
+
+</section>
+</main>
+
+<script>
+const video = document.getElementById("mainVideo");
+const playBtn = document.getElementById("playBtn");
+let clipEnd = null;
+
+function toggleVideo() {
+  clipEnd = null;
+
+  if (video.paused) {
+    video.play();
+    playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+  } else {
+    video.pause();
+    playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+}
+
+function playClip(start, end) {
+  clipEnd = end;
+  video.currentTime = start;
+  video.play();
+  playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+video.addEventListener("timeupdate", () => {
+  if (clipEnd !== null && video.currentTime >= clipEnd) {
+    video.pause();
+    clipEnd = null;
+    playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+});
+
+video.addEventListener("ended", () => {
+  playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+});
+
+function toggleTranscript() {
+  const t = document.getElementById("transcript");
+  t.style.display = t.style.display === "block" ? "none" : "block";
+}
+
+function normalise(text) {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/[’']/g, "’")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function checkSelects(selector, feedbackId) {
+  const items = document.querySelectorAll(selector);
+  let correct = 0;
+
+  items.forEach(item => {
+    if (item.value === item.dataset.answer) correct++;
+  });
+
+  const fb = document.getElementById(feedbackId);
+  fb.textContent = `${correct} / ${items.length} correctes`;
+  fb.className = correct === items.length ? "feedback correct" : "feedback wrong";
+}
+
+function showSelects(selector, feedbackId) {
+  document.querySelectorAll(selector).forEach(item => {
+    item.value = item.dataset.answer;
+  });
+  checkSelects(selector, feedbackId);
+}
+
+function resetSelects(selector, feedbackId) {
+  document.querySelectorAll(selector).forEach(item => {
+    item.value = "";
+  });
+  document.getElementById(feedbackId).textContent = "";
+}
+
+function checkInputs(selector, feedbackId) {
+  const items = document.querySelectorAll(selector);
+  let correct = 0;
+
+  items.forEach(item => {
+    if (normalise(item.value) === normalise(item.dataset.answer)) correct++;
+  });
+
+  const fb = document.getElementById(feedbackId);
+  fb.textContent = `${correct} / ${items.length} correctes`;
+  fb.className = correct === items.length ? "feedback correct" : "feedback wrong";
+}
+
+function showInputs(selector, feedbackId) {
+  document.querySelectorAll(selector).forEach(item => {
+    item.value = item.dataset.answer;
+  });
+  checkInputs(selector, feedbackId);
+}
+
+function resetInputs(selector, feedbackId) {
+  document.querySelectorAll(selector).forEach(item => {
+    item.value = "";
+  });
+  document.getElementById(feedbackId).textContent = "";
+}
+
+function checkMCQ() {
+  const answers = {
+    q1: "b",
+    q2: "a",
+    q3: "b",
+    q4: "b",
+    q5: "a",
+    q6: "a",
+    q7: "a",
+    q8: "b"
+  };
+
+  let correct = 0;
+
+  Object.keys(answers).forEach(q => {
+    const chosen = document.querySelector(`input[name="${q}"]:checked`);
+    if (chosen && chosen.value === answers[q]) correct++;
+  });
+
+  const fb = document.getElementById("fb1");
+  fb.textContent = `${correct} / 8 correctes`;
+  fb.className = correct === 8 ? "feedback correct" : "feedback wrong";
+}
+
+function resetMCQ() {
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.getElementById("fb1").textContent = "";
+}
+</script>
+
+</body>
+</html>

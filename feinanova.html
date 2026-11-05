@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIDCATALA · Canviar de feina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #222;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-logo {
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      #f7c600 0%, #f7c600 20%,
+      #d71920 20%, #d71920 32%,
+      #f7c600 32%, #f7c600 44%,
+      #d71920 44%, #d71920 56%,
+      #f7c600 56%, #f7c600 68%,
+      #d71920 68%, #d71920 80%,
+      #f7c600 80%, #f7c600 100%
+    );
+  border: 2px solid rgba(255,255,255,0.75);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.home-btn {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px 20px;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 20px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 20;
+}
+
+.video-card,
+.exercise {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.video-card {
+  padding: 8px;
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-note {
+  margin: 8px 4px 0;
+  font-size: .9rem;
+  color: #555;
+}
+
+.right-column {
+  padding-bottom: 40px;
+}
+
+.exercise {
+  margin-bottom: 20px;
+}
+
+.exercise h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #8B4513;
+}
+
+.intro,
+.objective-box,
+.transcript {
+  background: #fff8d8;
+  border-left: 5px solid #ffcc00;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.transcript {
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.question {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #e6e6e6;
+}
+
+.question p {
+  margin-top: 0;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+label {
+  display: block;
+  margin: 7px 0;
+  cursor: pointer;
+}
+
+button {
+  background: #ffcc00;
+  color: #222;
+  border: none;
+  padding: 8px 13px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 8px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+button:hover {
+  background: #e8be2e;
+}
+
+.feedback {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  line-height: 1.45;
+}
+
+.feedback.correct {
+  display: block;
+  background: #d8f5dc;
+  color: #145c21;
+}
+
+.feedback.incorrect {
+  display: block;
+  background: #ffe0e0;
+  color: #8a1f1f;
+}
+
+.feedback.warning {
+  display: block;
+  background: #fff3cd;
+  color: #7a5b00;
+}
+
+.highlight-text {
+  background: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  line-height: 2.1;
+  border: 1px solid #e6e6e6;
+}
+
+.word {
+  padding: 3px 5px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin: 1px;
+  display: inline;
+}
+
+.word:hover {
+  background: #fff3b0;
+}
+
+.selected {
+  background: #ffcc00;
+  font-weight: 700;
+}
+
+.right-choice {
+  background: #d8f5dc !important;
+  border: 1px solid #28a745;
+  font-weight: 700;
+}
+
+.wrong-choice {
+  background: #ffd6d6 !important;
+  border: 1px solid #dc3545;
+  font-weight: 700;
+}
+
+.word-bank {
+  margin: 14px 0;
+}
+
+.word-bank span {
+  display: inline-block;
+  background: #ffcc00;
+  padding: 7px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.gap-line {
+  background: #fff;
+  padding: 11px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+input.gap {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-width: 145px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+input.correct {
+  border-color: #28a745;
+  background: #e6f7e9;
+}
+
+input.incorrect {
+  border-color: #dc3545;
+  background: #fdecec;
+}
+
+.score-box {
+  display: none;
+  margin-top: 14px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@media(max-width:850px) {
+  .banner h1 {
+    font-size: 1rem;
+  }
+
+  .page {
+    grid-template-columns: 1fr;
+    padding: 0 10px 15px;
+    gap: 10px;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .video-card {
+    padding: 6px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-note {
+    display: none;
+  }
+
+  .exercise {
+    padding: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="banner-logo"></div>
+    <h1>VIDCATALA · Canviar de feina</h1>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left-column">
+  <div class="video-card">
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="feinanova.mp4" type="video/mp4">
+        El teu navegador no pot reproduir aquest vídeo.
+      </video>
+    </div>
+
+    <p class="video-note">
+      Escolta atentament la narració. Després treballaràs la comprensió global i l’ús dels connectors.
+    </p>
+  </div>
+</section>
+
+<section class="right-column">
+
+<div class="exercise">
+  <h2>Canviar de feina</h2>
+
+  <div class="objective-box">
+    <strong>Objectiu:</strong> entendre una experiència personal i observar com els connectors organitzen les idees.
+  </div>
+
+  <button onclick="toggleTranscript()">Mostra / amaga el text</button>
+
+  <div class="transcript" id="transcript">
+    Quan vaig decidir canviar de feina, molta gent em va dir que era una decisió massa arriscada.
+    Tanmateix, jo sentia que necessitava un repte nou.
+    Al principi, em feia por equivocar-me; de fet, vaig passar setmanes dubtant.
+    Tot i això, vaig entendre que quedar-me quiet també tenia conseqüències.
+    A més, el nou projecte em permetia aprendre coses que sempre havia volgut dominar.
+    Per una banda, perdia seguretat; per l’altra, guanyava llibertat.
+    No va ser fàcil, ja que havia de començar gairebé des de zero.
+    Ara bé, cada dificultat em va obligar a ser més flexible.
+    Per tant, no diria que va ser una decisió còmoda, sinó necessària.
+    En definitiva, de vegades créixer vol dir acceptar una mica d’incertesa.
+  </div>
+</div>
+
+<div class="exercise">
+  <h2>Exercici 1 · Comprensió de la narració</h2>
+  <div class="intro">
+    Tria la millor resposta. Aquest exercici se centra en la història i les idees principals.
+  </div>
+
+  <div class="question" data-answer="b">
+    <p>1. Per què el narrador volia canviar de feina?</p>
+    <label><input type="radio" name="mc1" value="a"> Perquè la gent li deia que era una bona idea.</label>
+    <label><input type="radio" name="mc1" value="b"> Perquè sentia que necessitava un repte nou.</label>
+    <label><input type="radio" name="mc1" value="c"> Perquè ja dominava completament la feina nova.</label>
+    <button onclick="checkMC(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. La motivació principal és interna: necessita un repte nou."
+         data-wrong="No exactament. El text no diu que els altres l’animessin; al contrari, li advertien del risc."></div>
+  </div>
+
+  <div class="question" data-answer="c">
+    <p>2. Com se sentia al principi?</p>
+    <label><input type="radio" name="mc2" value="a"> Completament segur.</label>
+    <label><input type="radio" name="mc2" value="b"> Indiferent.</label>
+    <label><input type="radio" name="mc2" value="c"> Insegur i amb por d’equivocar-se.</label>
+    <button onclick="checkMC(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. Va passar setmanes dubtant, cosa que mostra inseguretat."
+         data-wrong="No. El text insisteix en la por i els dubtes inicials."></div>
+  </div>
+
+  <div class="question" data-answer="a">
+    <p>3. Quina idea descobreix sobre quedar-se quiet?</p>
+    <label><input type="radio" name="mc3" value="a"> Que també pot tenir conseqüències.</label>
+    <label><input type="radio" name="mc3" value="b"> Que sempre és l’opció més segura.</label>
+    <label><input type="radio" name="mc3" value="c"> Que elimina tots els riscos.</label>
+    <button onclick="checkMC(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. La narració suggereix que no actuar també pot ser arriscat."
+         data-wrong="No. El punt important és que quedar-se quiet no és neutral: també té conseqüències."></div>
+  </div>
+
+  <div class="question" data-answer="b">
+    <p>4. Quin equilibri planteja el narrador?</p>
+    <label><input type="radio" name="mc4" value="a"> Diners contra temps lliure.</label>
+    <label><input type="radio" name="mc4" value="b"> Seguretat contra llibertat.</label>
+    <label><input type="radio" name="mc4" value="c"> Família contra feina.</label>
+    <button onclick="checkMC(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. Perd seguretat, però guanya llibertat."
+         data-wrong="No. El contrast explícit és entre seguretat i llibertat."></div>
+  </div>
+
+  <div class="question" data-answer="c">
+    <p>5. Com interpreta finalment la decisió?</p>
+    <label><input type="radio" name="mc5" value="a"> Com una decisió fàcil i còmoda.</label>
+    <label><input type="radio" name="mc5" value="b"> Com un error inevitable.</label>
+    <label><input type="radio" name="mc5" value="c"> Com una decisió difícil però necessària.</label>
+    <button onclick="checkMC(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. La decisió no és còmoda, però el narrador la veu com a necessària."
+         data-wrong="No exactament. El text no presenta la decisió com a fàcil ni com a error."></div>
+  </div>
+</div>
+
+<div class="exercise">
+  <h2>Exercici 2 · Identifica els connectors</h2>
+  <div class="intro">
+    Fes clic només sobre les expressions que creus que actuen com a connectors discursius.
+    Després clica <strong>Comprova</strong>. Només es marcaran les paraules que hagis seleccionat.
+  </div>
+
+  <div class="highlight-text" id="highlightText"></div>
+
+  <button onclick="checkHighlights()">Comprova</button>
+  <button onclick="showHighlightAnswers()">Mostra respostes</button>
+  <button onclick="resetHighlights()">Reinicia</button>
+
+  <div class="score-box" id="highlightFeedback"></div>
+</div>
+
+<div class="exercise">
+  <h2>Exercici 3 · Connectors intercanviables</h2>
+  <div class="intro">
+    Marca si els connectors o expressions poden substituir-se en aquest context sense canviar gaire el significat.
+  </div>
+
+  <div class="question" data-answer="yes">
+    <p>1. <em>Tanmateix</em> pot substituir-se per <em>Tot i això</em>.</p>
+    <label><input type="radio" name="int1" value="yes"> Sí</label>
+    <label><input type="radio" name="int1" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. Tots dos introdueixen contrast o concessió."
+         data-wrong="No exactament. En aquest context, tots dos poden introduir una oposició a l’opinió anterior."></div>
+  </div>
+
+  <div class="question" data-answer="no">
+    <p>2. <em>Per tant</em> pot substituir-se per <em>En definitiva</em>.</p>
+    <label><input type="radio" name="int2" value="yes"> Sí</label>
+    <label><input type="radio" name="int2" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. No són equivalents: «Per tant» expressa conseqüència; «En definitiva» introdueix una conclusió global."
+         data-wrong="No. S’assemblen perquè apareixen al final, però fan funcions diferents."></div>
+  </div>
+
+  <div class="question" data-answer="yes">
+    <p>3. <em>A més</em> pot substituir-se per <em>també</em>.</p>
+    <label><input type="radio" name="int3" value="yes"> Sí</label>
+    <label><input type="radio" name="int3" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. En aquest cas, tots dos afegeixen una idea."
+         data-wrong="No exactament. Aquí «també» pot fer la mateixa funció d’addició que «A més»."></div>
+  </div>
+
+  <div class="question" data-answer="no">
+    <p>4. <em>de fet</em> pot substituir-se per <em>per tant</em>.</p>
+    <label><input type="radio" name="int4" value="yes"> Sí</label>
+    <label><input type="radio" name="int4" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. «de fet» reforça o concreta; «per tant» indica conseqüència."
+         data-wrong="No. «de fet» no expressa conseqüència, sinó reforç o precisió."></div>
+  </div>
+
+  <div class="question" data-answer="yes">
+    <p>5. <em>Ara bé</em> pot aproximar-se a <em>tanmateix</em>.</p>
+    <label><input type="radio" name="int5" value="yes"> Sí</label>
+    <label><input type="radio" name="int5" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. Tots dos poden introduir un gir o matís, tot i que «ara bé» sona més discursiu."
+         data-wrong="No exactament. En molts contextos, «ara bé» i «tanmateix» poden introduir una oposició o matís."></div>
+  </div>
+
+  <div class="question" data-answer="no">
+    <p>6. <em>Per una banda... per l’altra</em> és igual que <em>tanmateix</em>.</p>
+    <label><input type="radio" name="int6" value="yes"> Sí</label>
+    <label><input type="radio" name="int6" value="no"> No</label>
+    <button onclick="checkInterchange(this)">Comprova</button>
+    <div class="feedback" data-correct="Correcte. Aquesta parella organitza dos costats d’una situació; no és simplement un connector d’oposició."
+         data-wrong="No. «Per una banda... per l’altra» estructura una comparació equilibrada."></div>
+  </div>
+</div>
+
+<div class="exercise">
+  <h2>Exercici 4 · Escriu els connectors</h2>
+  <div class="intro">
+    Completa el text escrivint els connectors correctes.
+  </div>
+
+  <div class="word-bank">
+    <span>Per tant</span>
+    <span>A més</span>
+    <span>de fet</span>
+    <span>En definitiva</span>
+    <span>per l’altra</span>
+    <span>Ara bé</span>
+    <span>Tanmateix</span>
+    <span>ja que</span>
+    <span>Tot i això</span>
+    <span>Per una banda</span>
+  </div>
+
+  <div class="gap-line">1. <input class="gap" data-answer="Tanmateix">, jo sentia que necessitava un repte nou.</div>
+  <div class="gap-line">2. Al principi, em feia por equivocar-me; <input class="gap" data-answer="de fet">, vaig passar setmanes dubtant.</div>
+  <div class="gap-line">3. <input class="gap" data-answer="Tot i això">, vaig entendre que quedar-me quiet també tenia conseqüències.</div>
+  <div class="gap-line">4. <input class="gap" data-answer="A més">, el nou projecte em permetia aprendre coses noves.</div>
+  <div class="gap-line">5. <input class="gap" data-answer="Per una banda">, perdia seguretat; <input class="gap" data-answer="per l’altra">, guanyava llibertat.</div>
+  <div class="gap-line">6. No va ser fàcil, <input class="gap" data-answer="ja que"> havia de començar gairebé des de zero.</div>
+  <div class="gap-line">7. <input class="gap" data-answer="Ara bé">, cada dificultat em va obligar a ser més flexible.</div>
+  <div class="gap-line">8. <input class="gap" data-answer="Per tant">, no diria que va ser una decisió còmoda, sinó necessària.</div>
+  <div class="gap-line">9. <input class="gap" data-answer="En definitiva">, de vegades créixer vol dir acceptar una mica d’incertesa.</div>
+
+  <button onclick="checkGaps()">Comprova</button>
+  <button onclick="showGapAnswers()">Mostra respostes</button>
+  <button onclick="resetGaps()">Reinicia</button>
+
+  <div class="score-box" id="gapScore"></div>
+</div>
+
+</section>
+</main>
+
+<script>
+function toggleTranscript() {
+  const t = document.getElementById("transcript");
+  t.style.display = t.style.display === "block" ? "none" : "block";
+}
+
+function checkMC(button) {
+  const q = button.closest(".question");
+  const selected = q.querySelector("input[type='radio']:checked");
+  const feedback = q.querySelector(".feedback");
+
+  if (!selected) {
+    feedback.className = "feedback warning";
+    feedback.textContent = "Tria una resposta abans de comprovar.";
+    return;
+  }
+
+  if (selected.value === q.dataset.answer) {
+    feedback.className = "feedback correct";
+    feedback.textContent = "✅ " + feedback.dataset.correct;
+  } else {
+    feedback.className = "feedback incorrect";
+    feedback.textContent = "❌ " + feedback.dataset.wrong;
+  }
+}
+
+function checkInterchange(button) {
+  checkMC(button);
+}
+
+const highlightItems = [
+  { text: "Quan vaig decidir canviar de feina, molta gent em va dir que era una decisió massa arriscada. ", connector: false },
+  { text: "Tanmateix,", connector: true, type: "contrast" },
+  { text: " jo sentia que necessitava un repte nou. ", connector: false },
+  { text: "Al principi, em feia por equivocar-me; ", connector: false },
+  { text: "de fet,", connector: true, type: "reforç" },
+  { text: " vaig passar setmanes dubtant. ", connector: false },
+  { text: "Tot i això,", connector: true, type: "concessió" },
+  { text: " vaig entendre que quedar-me quiet també tenia conseqüències. ", connector: false },
+  { text: "A més,", connector: true, type: "addició" },
+  { text: " el nou projecte em permetia aprendre coses que sempre havia volgut dominar. ", connector: false },
+  { text: "Per una banda,", connector: true, type: "organització" },
+  { text: " perdia seguretat; ", connector: false },
+  { text: "per l’altra,", connector: true, type: "organització" },
+  { text: " guanyava llibertat. ", connector: false },
+  { text: "No va ser fàcil, ", connector: false },
+  { text: "ja que", connector: true, type: "causa" },
+  { text: " havia de començar gairebé des de zero. ", connector: false },
+  { text: "Ara bé,", connector: true, type: "matís" },
+  { text: " cada dificultat em va obligar a ser més flexible. ", connector: false },
+  { text: "Per tant,", connector: true, type: "conseqüència" },
+  { text: " no diria que va ser una decisió còmoda, sinó necessària. ", connector: false },
+  { text: "En definitiva,", connector: true, type: "conclusió" },
+  { text: " de vegades créixer vol dir acceptar una mica d’incertesa.", connector: false }
+];
+
+function renderHighlights() {
+  const container = document.getElementById("highlightText");
+  container.innerHTML = "";
+
+  highlightItems.forEach((item, index) => {
+    const span = document.createElement("span");
+    span.textContent = item.text;
+    span.className = "word";
+    span.dataset.index = index;
+    span.dataset.connector = item.connector;
+    span.dataset.type = item.type || "";
+    span.onclick = () => span.classList.toggle("selected");
+    container.appendChild(span);
+  });
+}
+
+function checkHighlights() {
+  const spans = document.querySelectorAll("#highlightText .word");
+  let correctSubmitted = 0;
+  let wrongSubmitted = 0;
+  let submitted = 0;
+
+  spans.forEach(span => {
+    span.classList.remove("right-choice", "wrong-choice");
+
+    const isConnector = span.dataset.connector === "true";
+    const isSelected = span.classList.contains("selected");
+
+    if (isSelected) {
+      submitted++;
+
+      if (isConnector) {
+        correctSubmitted++;
+        span.classList.add("right-choice");
+      } else {
+        wrongSubmitted++;
+        span.classList.add("wrong-choice");
+      }
+    }
+  });
+
+  const box = document.getElementById("highlightFeedback");
+  box.style.display = "block";
+
+  if (submitted === 0) {
+    box.innerHTML = "Encara no has seleccionat cap paraula o expressió.";
+    return;
+  }
+
+  box.innerHTML =
+    "Has seleccionat <strong>" + submitted + "</strong> paraules o expressions." +
+    "<br>Correctes: <strong>" + correctSubmitted + "</strong>" +
+    "<br>Incorrectes: <strong>" + wrongSubmitted + "</strong>" +
+    "<br><br><strong>Nota:</strong> només es marquen les respostes que has enviat. Els connectors que no has seleccionat no es mostren.";
+}
+
+function showHighlightAnswers() {
+  const spans = document.querySelectorAll("#highlightText .word");
+  let total = 0;
+
+  spans.forEach(span => {
+    span.classList.remove("selected", "wrong-choice");
+
+    if (span.dataset.connector === "true") {
+      span.classList.add("right-choice");
+      total++;
+    } else {
+      span.classList.remove("right-choice");
+    }
+  });
+
+  const box = document.getElementById("highlightFeedback");
+  box.style.display = "block";
+  box.innerHTML =
+    "Respostes mostrades.<br>" +
+    "Connectors del text: <strong>" + total + "</strong>.";
+}
+
+function resetHighlights() {
+  document.querySelectorAll("#highlightText .word").forEach(span => {
+    span.classList.remove("selected", "right-choice", "wrong-choice");
+  });
+
+  document.getElementById("highlightFeedback").style.display = "none";
+}
+
+function normalize(text) {
+  return text.trim().toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, "'");
+}
+
+function checkGaps() {
+  const gaps = document.querySelectorAll(".gap");
+  let score = 0;
+
+  gaps.forEach(gap => {
+    gap.classList.remove("correct", "incorrect");
+
+    if (normalize(gap.value) === normalize(gap.dataset.answer)) {
+      gap.classList.add("correct");
+      score++;
+    } else {
+      gap.classList.add("incorrect");
+    }
+  });
+
+  const box = document.getElementById("gapScore");
+  box.style.display = "block";
+  box.textContent = "Puntuació: " + score + " / " + gaps.length;
+}
+
+function showGapAnswers() {
+  document.querySelectorAll(".gap").forEach(gap => {
+    gap.value = gap.dataset.answer;
+    gap.classList.remove("incorrect");
+    gap.classList.add("correct");
+  });
+
+  const box = document.getElementById("gapScore");
+  box.style.display = "block";
+  box.textContent = "Respostes mostrades.";
+}
+
+function resetGaps() {
+  document.querySelectorAll(".gap").forEach(gap => {
+    gap.value = "";
+    gap.classList.remove("correct", "incorrect");
+  });
+
+  document.getElementById("gapScore").style.display = "none";
+}
+
+renderHighlights();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · La cuidadora</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.banner img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.banner h1 {
+  margin: 0;
+  color: #8B4513;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.home-btn {
+  color: white;
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 270px minmax(540px, 820px) 270px;
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+}
+
+.video-panel {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-label {
+  background: #8B4513;
+  color: white;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+}
+
+.portrait-video {
+  width: 248px;
+  aspect-ratio: 9 / 16;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #111;
+  border: 5px solid white;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+  opacity: 0.72;
+  transition: 0.25s ease;
+}
+
+.portrait-video.active {
+  opacity: 1;
+  transform: scale(1.03);
+  box-shadow: 0 0 0 5px #ffcc00, 0 14px 34px rgba(0,0,0,0.25);
+}
+
+.portrait-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.centre-column {
+  background: white;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.listen-box {
+  background: #fff4bf;
+  border-left: 6px solid #ffcc00;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 26px;
+}
+
+.listen-box h2 {
+  margin: 0 0 10px;
+  color: #8B4513;
+  font-size: 1.45rem;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.main-btn,
+.play-btn {
+  background: #ffcc00;
+  color: #533300;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 999px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.main-btn:hover,
+.play-btn:hover {
+  background: #f0bd00;
+}
+
+.transcript {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  max-height: 430px;
+  overflow-y: auto;
+  border: 1px solid #eadfbd;
+}
+
+.line {
+  padding: 8px 10px;
+  border-radius: 12px;
+  margin-bottom: 5px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.line:hover {
+  background: #fff7cc;
+}
+
+.line strong {
+  color: #8B4513;
+}
+
+.line.active {
+  background: #ffec8b;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 2px #ffcc00;
+}
+
+.section-title {
+  color: #8B4513;
+  margin: 28px 0 20px;
+  font-size: 1.65rem;
+}
+
+.instruction {
+  background: #faf8f3;
+  border-left: 6px solid #ffcc00;
+  padding: 14px 16px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+
+.question-card {
+  background: #faf8f3;
+  border: 1px solid #ece6d9;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.question-card h3 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  color: #3b3429;
+  line-height: 1.5;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option-btn {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.97rem;
+  text-align: left;
+}
+
+.option-btn:hover {
+  border-color: #ffcc00;
+  background: #fff9dc;
+}
+
+.correct {
+  background: #d9f6df !important;
+  border-color: #2d9c4b !important;
+}
+
+.incorrect {
+  background: #ffe0e0 !important;
+  border-color: #d64545 !important;
+}
+
+.feedback {
+  margin-top: 14px;
+  display: none;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@media(max-width: 1050px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .video-panel {
+    position: relative;
+    top: 0;
+  }
+
+  .portrait-video {
+    width: 210px;
+  }
+
+  .banner h1 {
+    font-size: 1.45rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <h1>VIDCATALA · La cuidadora</h1>
+  </div>
+
+  <a class='home-btn' href='/'>
+    <i class="fas fa-home"></i>
+  </a>
+</header>
+
+<main class="page">
+
+  <aside class="video-panel">
+    <div class="video-label">Antònia</div>
+    <div class="portrait-video" id="oldFrame">
+      <video id="oldVideo" src="donagran.mp4"></video>
+    </div>
+  </aside>
+
+  <section class="centre-column">
+
+    <div class="listen-box">
+      <h2>Escolta el diàleg complet</h2>
+
+      <p>
+        Escolta la conversa sencera. El vídeo canvia entre Antònia i Marinella,
+        i la línia corresponent queda marcada en groc. També pots clicar qualsevol línia
+        del text per tornar-la a escoltar.
+      </p>
+
+      <div class="controls">
+        <button class="main-btn" onclick="playFullDialogue()">▶ Escolta el diàleg complet</button>
+        <button class="main-btn" onclick="stopAll()">■ Atura</button>
+      </div>
+
+      <div class="transcript" id="transcript"></div>
+    </div>
+
+    <h2 class="section-title">Comprensió oral · Paraules exactes</h2>
+
+    <div class="instruction">
+      Tria les paraules exactes que diu cada persona. Després de respondre, fes clic a
+      <strong>Escolta</strong> per sentir el fragment.
+    </div>
+
+    <div id="questions"></div>
+
+    <h2 class="section-title">Quina és la millor resposta?</h2>
+
+    <div class="instruction">
+      Llegeix el que diu Antònia. Tria la resposta més adequada, afectuosa i professional
+      que podria donar Marinella.
+    </div>
+
+    <div id="situationQuestions"></div>
+
+  </section>
+
+  <aside class="video-panel">
+    <div class="video-label">Marinella</div>
+    <div class="portrait-video" id="carerFrame">
+      <video id="carerVideo" src="cuidadora.mp4"></video>
+    </div>
+  </aside>
+
+</main>
+
+<script>
+const oldVideo = document.getElementById("oldVideo");
+const carerVideo = document.getElementById("carerVideo");
+
+const oldFrame = document.getElementById("oldFrame");
+const carerFrame = document.getElementById("carerFrame");
+
+const transcriptBox = document.getElementById("transcript");
+
+let sequenceTimer = null;
+
+const dialogueSequence = [
+  { speaker: "old", start: 0, end: 2.8, text: "Bon dia, nina. No em trob gaire bé avui." },
+  { speaker: "carer", start: 0, end: 5.8, text: "Bon dia. Què li passa? Té dolor o mareig?" },
+  { speaker: "old", start: 3, end: 5.8, text: "Em fa mal el cap i estic un poc marejada." },
+  { speaker: "carer", start: 6, end: 10.8, text: "D'acord, ara li porto aigua i pot seure tranquil·la." },
+  { speaker: "old", start: 6, end: 8, text: "Me podries ajudar a anar al bany?" },
+  { speaker: "carer", start: 11, end: 15.9, text: "Sí, esclar. L'ajudo a aixecar-se a poc a poc." },
+  { speaker: "old", start: 8, end: 10.1, text: "No tenc gaire força a les cames." },
+  { speaker: "carer", start: 16, end: 20.6, text: "No es preocupi, jo l'aguanto. Anem a poc a poc." },
+  { speaker: "old", start: 10.1, end: 12.6, text: "Després voldria rentar-me una mica." },
+  { speaker: "carer", start: 21, end: 26.3, text: "Perfecte, després del bany t'ajudo a rentar-se." },
+  { speaker: "old", start: 13, end: 14.8, text: "Has anat a comprar avui?" },
+  { speaker: "carer", start: 27, end: 30, text: "Encara no, però hi aniré aquest matí." },
+  { speaker: "old", start: 15, end: 17, text: "Necessitam pa i llet, crec." },
+  { speaker: "carer", start: 30, end: 34, text: "Sí, ho apunto. Vols res més?" },
+  { speaker: "old", start: 17, end: 19.2, text: "Un poc de fruita també, si pot ser." },
+  { speaker: "carer", start: 34, end: 37.5, text: "D'acord, compraré fruita fresca." },
+  { speaker: "old", start: 19, end: 21.2, text: "Digue'm, nina, què farem avui?" },
+  { speaker: "carer", start: 38, end: 43.8, text: "Avui descansarem una mica i després podem sortir a fer una volta curta." },
+  { speaker: "old", start: 21, end: 24, text: "M'agradaria seure al sol una estona." },
+  { speaker: "carer", start: 44, end: 47.8, text: "Perfecte, l'acompanyaré a la terrassa." },
+  { speaker: "old", start: 24, end: 25.8, text: "Tinc una mica de fred ara." },
+  { speaker: "carer", start: 48, end: 50.8, text: "Li porto una jaqueta o una manta?" },
+  { speaker: "old", start: 26, end: 27.8, text: "Gràcies, ets molt amable." },
+  { speaker: "carer", start: 51, end: 54.5, text: "De res, estic aquí per ajudar-la." },
+  { speaker: "old", start: 28, end: 30.5, text: "Digue'm, a quina hora dinarem avui?" },
+  { speaker: "carer", start: 55, end: 57.6, text: "Dinem a la una, com cada dia." },
+  { speaker: "old", start: 30, end: 32.8, text: "Em podries recordar la medicació?" },
+  { speaker: "carer", start: 58, end: 62, text: "Sí, li donaré la medicació a l'hora correcta." },
+  { speaker: "old", start: 33, end: 35.5, text: "Moltes gràcies per tot. Ets molt bona." },
+  { speaker: "carer", start: 62, end: 66.5, text: "És un plaer. Cuidar-la és la meva feina." }
+];
+
+dialogueSequence.forEach((line, index) => {
+  const div = document.createElement("div");
+  div.className = "line";
+  div.id = "line" + index;
+
+  div.innerHTML = `
+    <strong>${line.speaker === "old" ? "Antònia" : "Marinella"}:</strong>
+    ${line.text}
+  `;
+
+  div.addEventListener("click", () => {
+    playSegment(line, index);
+  });
+
+  transcriptBox.appendChild(div);
+});
+
+function stopAll() {
+  clearTimeout(sequenceTimer);
+
+  oldVideo.pause();
+  carerVideo.pause();
+
+  oldVideo.ontimeupdate = null;
+  carerVideo.ontimeupdate = null;
+
+  oldFrame.classList.remove("active");
+  carerFrame.classList.remove("active");
+
+  document.querySelectorAll(".line").forEach(line => {
+    line.classList.remove("active");
+  });
+}
+
+function highlightLine(index) {
+  document.querySelectorAll(".line").forEach(line => {
+    line.classList.remove("active");
+  });
+
+  const activeLine = document.getElementById("line" + index);
+
+  if (activeLine) {
+    activeLine.classList.add("active");
+    activeLine.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+}
+
+function playSegment(item, index, callback = null) {
+  clearTimeout(sequenceTimer);
+
+  oldVideo.pause();
+  carerVideo.pause();
+
+  oldVideo.ontimeupdate = null;
+  carerVideo.ontimeupdate = null;
+
+  oldFrame.classList.remove("active");
+  carerFrame.classList.remove("active");
+
+  const video = item.speaker === "old" ? oldVideo : carerVideo;
+  const frame = item.speaker === "old" ? oldFrame : carerFrame;
+
+  highlightLine(index);
+
+  frame.classList.add("active");
+
+  video.currentTime = item.start;
+  video.play();
+
+  video.ontimeupdate = function () {
+    if (video.currentTime >= item.end) {
+      video.pause();
+      video.ontimeupdate = null;
+      frame.classList.remove("active");
+
+      if (callback) callback();
+    }
+  };
+}
+
+function playFullDialogue(index = 0) {
+  if (index === 0) stopAll();
+
+  if (index >= dialogueSequence.length) {
+    stopAll();
+    return;
+  }
+
+  playSegment(dialogueSequence[index], index, () => {
+    sequenceTimer = setTimeout(() => {
+      playFullDialogue(index + 1);
+    }, 250);
+  });
+}
+
+function playClip(speaker, start, end) {
+  stopAll();
+
+  const item = { speaker, start, end };
+  playSegment(item, -1);
+}
+
+/* EXERCISE 1: correct answers now appear in mixed positions */
+const quiz = [
+  {
+    q: "1. Quines paraules diu Antònia per saludar?",
+    speaker: "old",
+    start: 0,
+    end: 1.2,
+    correctText: "Bon dia, nina.",
+    options: ["Bon dia.", "Bon dia, nina.", "Digue'm, nina.", "Gràcies, nina."],
+    correct: 1
+  },
+  {
+    q: "2. Què diu Antònia sobre com es troba?",
+    speaker: "old",
+    start: 1,
+    end: 2.8,
+    correctText: "No em trob gaire bé avui.",
+    options: ["No tenc gaire força avui.", "Tinc una mica de fred ara.", "No em trob gaire bé avui.", "Em fa mal el cap."],
+    correct: 2
+  },
+  {
+    q: "3. Com saluda Marinella?",
+    speaker: "carer",
+    start: 0,
+    end: 1.8,
+    correctText: "Bon dia.",
+    options: ["Bon dia, nina.", "De res.", "Perfecte.", "Bon dia."],
+    correct: 3
+  },
+  {
+    q: "4. Quina pregunta fa Marinella?",
+    speaker: "carer",
+    start: 2,
+    end: 3.1,
+    correctText: "Què li passa?",
+    options: ["Què li passa?", "Què farem avui?", "Vols res més?", "A quina hora dinarem avui?"],
+    correct: 0
+  },
+  {
+    q: "5. Què diu Antònia sobre el mareig?",
+    speaker: "old",
+    start: 3,
+    end: 5.8,
+    correctText: "Em fa mal el cap i estic un poc marejada.",
+    options: ["No tenc gaire força a les cames.", "Em fa mal el cap i estic un poc marejada.", "Tinc una mica de fred ara.", "No em trob gaire bé avui."],
+    correct: 1
+  },
+  {
+    q: "6. Què demana Antònia?",
+    speaker: "old",
+    start: 6,
+    end: 7.8,
+    correctText: "Me podries ajudar a anar al bany?",
+    options: ["Em podries recordar la medicació?", "Has anat a comprar avui?", "Vols res més?", "Me podries ajudar a anar al bany?"],
+    correct: 3
+  },
+  {
+    q: "7. Què diu Antònia sobre les cames?",
+    speaker: "old",
+    start: 8,
+    end: 9.8,
+    correctText: "No tenc gaire força a les cames.",
+    options: ["Tinc una mica de fred ara.", "Necessitam pa i llet, crec.", "No tenc gaire força a les cames.", "No em trob gaire bé avui."],
+    correct: 2
+  },
+  {
+    q: "8. Què vol fer després Antònia?",
+    speaker: "old",
+    start: 10,
+    end: 12.6,
+    correctText: "Després voldria rentar-me una mica.",
+    options: ["Després voldria rentar-me una mica.", "Després podem sortir a fer una volta curta.", "Després compraré fruita fresca.", "Després li porto aigua."],
+    correct: 0
+  },
+  {
+    q: "9. Què pregunta Antònia sobre les compres?",
+    speaker: "old",
+    start: 13,
+    end: 14.8,
+    correctText: "Has anat a comprar avui?",
+    options: ["Digue'm, què farem avui?", "Vols res més?", "Has anat a comprar avui?", "A quina hora dinarem?"],
+    correct: 2
+  },
+  {
+    q: "10. Què diu Antònia al final?",
+    speaker: "old",
+    start: 33,
+    end: 35.5,
+    correctText: "Moltes gràcies per tot. Ets molt bona.",
+    options: ["És un plaer. Cuidar-la és la meva feina.", "De res, estic aquí per ajudar-la.", "Perfecte, l'acompanyaré a la terrassa.", "Moltes gràcies per tot. Ets molt bona."],
+    correct: 3
+  }
+];
+
+const questionsContainer = document.getElementById("questions");
+
+quiz.forEach((item, index) => {
+  const card = document.createElement("div");
+  card.className = "question-card";
+
+  card.innerHTML = `
+    <h3>${item.q}</h3>
+
+    <div class="options">
+      ${item.options.map((option, i) => `
+        <button
+          class="option-btn"
+          onclick="checkAnswer(this, ${i}, ${item.correct}, ${index})"
+        >
+          ${String.fromCharCode(65 + i)}. “${option}”
+        </button>
+      `).join("")}
+    </div>
+
+    <div class="feedback" id="fb${index}"></div>
+  `;
+
+  questionsContainer.appendChild(card);
+});
+
+function checkAnswer(button, selected, correct, index) {
+  const item = quiz[index];
+  const buttons = button.parentElement.querySelectorAll(".option-btn");
+  const feedback = document.getElementById("fb" + index);
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+  });
+
+  if (selected === correct) {
+    button.classList.add("correct");
+    feedback.style.color = "#2d9c4b";
+
+    feedback.innerHTML = `
+      ✔ Correcte: “${item.correctText}”
+      <button class="play-btn" onclick="playClip('${item.speaker}', ${item.start}, ${item.end})">
+        ▶ Escolta
+      </button>
+    `;
+  } else {
+    button.classList.add("incorrect");
+    buttons[correct].classList.add("correct");
+    feedback.style.color = "#c0392b";
+
+    feedback.innerHTML = `
+      ✘ La resposta correcta és: “${item.correctText}”
+      <button class="play-btn" onclick="playClip('${item.speaker}', ${item.start}, ${item.end})">
+        ▶ Escolta
+      </button>
+    `;
+  }
+
+  feedback.style.display = "block";
+}
+
+/* FINAL EXERCISE: correct answers also appear in mixed positions */
+const situationQuiz = [
+  {
+    q: "1. Antònia diu: “Bon dia, nina. No em trob gaire bé avui.” Quina és la millor resposta de la cuidadora?",
+    options: [
+      "Ja està, no es queixi tant.",
+      "Bon dia. Què li passa? Té dolor o mareig?",
+      "Això és normal a la seva edat.",
+      "Doncs prengui una pastilla."
+    ],
+    correct: 1,
+    feedback: "És una resposta atenta perquè demana informació concreta i mostra preocupació."
+  },
+  {
+    q: "2. Antònia diu: “Me podries ajudar a anar al bany?” Quina resposta demostra més suport?",
+    options: [
+      "D’acord, però de pressa.",
+      "Fes-ho sola, que jo tinc feina.",
+      "Sí, esclar. L’ajudo a aixecar-se a poc a poc.",
+      "Per què no ho vas fer abans?"
+    ],
+    correct: 2,
+    feedback: "La resposta és respectuosa i dona ajuda sense pressa."
+  },
+  {
+    q: "3. Antònia diu: “No tenc gaire força a les cames.” Què li dius per tranquil·litzar-la?",
+    options: [
+      "No es preocupi, jo l’aguanto. Anem a poc a poc.",
+      "Això és culpa de no fer exercici.",
+      "Doncs quedi’s al llit.",
+      "Ja ho faré jo, però no em queixis."
+    ],
+    correct: 0,
+    feedback: "La cuidadora dona seguretat i adapta el ritme a la persona gran."
+  },
+  {
+    q: "4. Antònia diu: “Després voldria rentar-me una mica.” Quina resposta organitza bé la rutina?",
+    options: [
+      "Renta’t sola, que ja ets gran.",
+      "Ara no tinc temps, potser demà.",
+      "Perfecte, després del bany t’ajudo a rentar-te.",
+      "Ja et rentaràs més tard."
+    ],
+    correct: 2,
+    feedback: "És una resposta clara, organitzada i col·laborativa."
+  },
+  {
+    q: "5. Antònia diu: “M’agradaria seure al sol una estona. Tinc una mica de fred ara.” Quina és la resposta més atenta?",
+    options: [
+      "Doncs poseu-vos un abric i sortiu sola.",
+      "El sol és dolent per a la pell, millor a casa.",
+      "No tinc temps per acompanyar-la.",
+      "Perfecte, l’acompanyaré a la terrassa. Li porto una jaqueta o una manta?"
+    ],
+    correct: 3,
+    feedback: "La resposta combina companyia, respecte i cura pràctica."
+  },
+  {
+    q: "6. Antònia diu: “Necessitam pa i llet, crec. Un poc de fruita també, si pot ser.” Què respons per mostrar que t’importen les seves necessitats?",
+    options: [
+      "Ja tens pa a casa, no facis nosa.",
+      "D’acord, compraré fruita fresca. Vols alguna cosa més?",
+      "Això ho pot demanar a la família.",
+      "Ja en tinc prou, no vull anar a comprar."
+    ],
+    correct: 1,
+    feedback: "La cuidadora escolta, confirma i dona l’oportunitat d’afegir altres necessitats."
+  },
+  {
+    q: "7. Antònia diu: “Em podries recordar la medicació?” Quina resposta dona seguretat i confiança?",
+    options: [
+      "Recorda-ho tu mateixa.",
+      "No sé quines pastilles pren.",
+      "Ja ho faré si no se m’oblida.",
+      "Sí, li donaré la medicació a l’hora correcta."
+    ],
+    correct: 3,
+    feedback: "La resposta transmet responsabilitat i seguretat."
+  },
+  {
+    q: "8. Antònia acaba dient: “Moltes gràcies per tot. Ets molt bona.” Quina és la millor manera de respondre?",
+    options: [
+      "Sí, ja ho sé, sóc la millor.",
+      "No vinguis amb compliments, només faig la meva obligació.",
+      "De res, estic aquí per ajudar-la. Cuidar-la és la meva feina i el meu gust.",
+      "Prou, ja està bé."
+    ],
+    correct: 2,
+    feedback: "És una resposta afectuosa, professional i humana."
+  }
+];
+
+const situationContainer = document.getElementById("situationQuestions");
+
+situationQuiz.forEach((item, index) => {
+  const card = document.createElement("div");
+  card.className = "question-card";
+
+  card.innerHTML = `
+    <h3>${item.q}</h3>
+
+    <div class="options">
+      ${item.options.map((option, i) => `
+        <button
+          class="option-btn"
+          onclick="checkSituationAnswer(this, ${i}, ${item.correct}, ${index})"
+        >
+          ${String.fromCharCode(65 + i)}. ${option}
+        </button>
+      `).join("")}
+    </div>
+
+    <div class="feedback" id="sfb${index}"></div>
+  `;
+
+  situationContainer.appendChild(card);
+});
+
+function checkSituationAnswer(button, selected, correct, index) {
+  const item = situationQuiz[index];
+  const buttons = button.parentElement.querySelectorAll(".option-btn");
+  const feedback = document.getElementById("sfb" + index);
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+  });
+
+  if (selected === correct) {
+    button.classList.add("correct");
+    feedback.style.color = "#2d9c4b";
+    feedback.innerHTML = `✔ Correcte. ${item.feedback}`;
+  } else {
+    button.classList.add("incorrect");
+    buttons[correct].classList.add("correct");
+    feedback.style.color = "#c0392b";
+    feedback.innerHTML = `
+      ✘ No és la millor resposta.<br>
+      La millor opció és: “${item.options[correct]}”<br>
+      ${item.feedback}
+    `;
+  }
+
+  feedback.style.display = "block";
+}
+</script>
+
+</body>
+</html>

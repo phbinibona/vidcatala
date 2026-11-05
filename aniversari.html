@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDCATALA · Aniversari sorpresa</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --yellow: #ffcc00;
+      --yellow-soft: #fff8d6;
+      --yellow-pale: #fffdf3;
+      --text: #2f2f2f;
+      --muted: #666;
+      --border: #e8e2c8;
+      --bg: #f7f6f2;
+      --card: #ffffff;
+      --green: #157a2c;
+      --red: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .banner {
+      background: var(--yellow);
+      color: #222;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .banner h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .home-link {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.3rem;
+      background: rgba(255,255,255,0.55);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: 0.2s ease;
+    }
+
+    .home-link:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      max-width: 1180px;
+      margin: 18px auto;
+      padding: 0 20px 40px;
+      align-items: start;
+    }
+
+    .left-column {
+      position: sticky;
+      top: 68px;
+      align-self: start;
+    }
+
+    .video-card,
+    .content-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.045);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .video-card .card-body {
+      padding: 10px;
+    }
+
+    .card-header {
+      background: var(--yellow-soft);
+      border-bottom: 1px solid #eee2a8;
+      padding: 12px 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .video-note {
+      font-size: 0.88rem;
+      line-height: 1.3;
+      color: #444;
+      margin-bottom: 7px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: contain;
+      background: #000;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .intro-text {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      background: var(--yellow-pale);
+      border-left: 4px solid var(--yellow);
+      padding: 13px 15px;
+      border-radius: 12px;
+      color: #3c3c3c;
+    }
+
+    .exercise-intro {
+      margin-bottom: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .question-block,
+    .gap-item,
+    .future-item {
+      margin-bottom: 14px;
+      padding: 13px 15px;
+      background: #fffefa;
+      border: 1px solid #eee8d4;
+      border-radius: 13px;
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .question-block p {
+      margin: 0 0 11px;
+      font-weight: 600;
+    }
+
+    .options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .options label {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border: 1px solid #ddd2a5;
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 700;
+      transition: 0.15s ease;
+    }
+
+    .options label:hover {
+      background: #fff8d6;
+    }
+
+    .feedback {
+      margin-top: 9px;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .feedback-note {
+      margin-top: 6px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .correct { color: var(--green); }
+    .incorrect { color: var(--red); }
+
+    .word-bank {
+      background: #fff7cc;
+      border: 1px dashed #d1ae00;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+      line-height: 2.1;
+      font-size: 0.96rem;
+    }
+
+    .word-bank span {
+      display: inline-block;
+      background: var(--yellow);
+      color: #222;
+      padding: 4px 11px;
+      margin: 4px 6px 4px 0;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .gap-input,
+    .future-input,
+    .person-select {
+      padding: 6px 8px;
+      border: 1px solid #bcbcbc;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      margin: 0 4px;
+      background: #fff;
+    }
+
+    .gap-input,
+    .future-input {
+      width: 125px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .person-select {
+      min-width: 130px;
+    }
+
+    .future-subline {
+      margin-top: 9px;
+      font-size: 0.95rem;
+    }
+
+    .future-label {
+      font-weight: 700;
+      color: #444;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 17px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .check-btn {
+      background: var(--yellow);
+      color: #222;
+    }
+
+    .reset-btn {
+      background: #ececec;
+      color: #222;
+    }
+
+    .score-box {
+      margin-top: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: inline-block;
+    }
+
+    @media (max-width: 900px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+
+      .left-column {
+        position: static;
+      }
+
+      video {
+        max-height: 520px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="banner">
+    <div class="banner-left">
+      <img src="bandera.png" alt="Bandera catalana">
+      <h1>VIDCATALA</h1>
+    </div>
+    <a aria-label='Torna a l\'inici' class='home-link' href='/'>
+      <i class="fa-solid fa-house"></i>
+    </a>
+  </div>
+
+  <div class="main-container">
+
+    <div class="left-column">
+      <div class="video-card">
+        <div class="card-body">
+          <div class="video-note">Mira el vídeo i respon els exercicis.</div>
+          <video controls>
+            <source src="aniversari.mp4" type="video/mp4">
+            El teu navegador no pot reproduir aquest vídeo.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+
+      <div class="content-card">
+        <div class="card-header"><i class="fa-solid fa-circle-info"></i> Context</div>
+        <div class="card-body">
+          <div class="intro-text">
+            Una dona parla amb una amiga sobre els preparatius d’una festa familiar per celebrar els seixanta anys de la seva mare. La família vol organitzar una sorpresa, repartir les tasques i preparar una celebració emotiva amb menjar, convidats i brindis.
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header"><i class="fa-solid fa-check-double"></i> Exercici 1 · Sí o No</div>
+        <div class="card-body">
+
+          <div class="exercise-intro">
+            Decideix si cada afirmació concorda amb el vídeo. Algunes preguntes demanen entendre la situació general, no només una paraula concreta.
+          </div>
+
+          <div class="question-block" data-answer="no">
+            <p>1. La festa sembla improvisada i encara no han repartit responsabilitats concretes.</p>
+            <div class="options">
+              <label><input type="radio" name="q1" value="si"> Sí</label>
+              <label><input type="radio" name="q1" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q1"></div>
+            <div class="feedback-note" id="feedback-note-q1"></div>
+          </div>
+
+          <div class="question-block" data-answer="si">
+            <p>2. La celebració inclourà parents pròxims i també persones molt vinculades a la família.</p>
+            <div class="options">
+              <label><input type="radio" name="q2" value="si"> Sí</label>
+              <label><input type="radio" name="q2" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q2"></div>
+            <div class="feedback-note" id="feedback-note-q2"></div>
+          </div>
+
+          <div class="question-block" data-answer="no">
+            <p>3. Pel que fa al menjar, la família vol una celebració moderna i poc tradicional.</p>
+            <div class="options">
+              <label><input type="radio" name="q3" value="si"> Sí</label>
+              <label><input type="radio" name="q3" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q3"></div>
+            <div class="feedback-note" id="feedback-note-q3"></div>
+          </div>
+
+          <div class="question-block" data-answer="si">
+            <p>4. L’objectiu és que la mare visqui un moment emotiu quan vegi la sorpresa.</p>
+            <div class="options">
+              <label><input type="radio" name="q4" value="si"> Sí</label>
+              <label><input type="radio" name="q4" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q4"></div>
+            <div class="feedback-note" id="feedback-note-q4"></div>
+          </div>
+
+          <div class="question-block" data-answer="si">
+            <p>5. Diversos membres de la família tindran una tasca concreta dins dels preparatius.</p>
+            <div class="options">
+              <label><input type="radio" name="q5" value="si"> Sí</label>
+              <label><input type="radio" name="q5" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q5"></div>
+            <div class="feedback-note" id="feedback-note-q5"></div>
+          </div>
+
+          <div class="question-block" data-answer="no">
+            <p>6. L’amiga pensa que la mare no valorarà positivament que li amaguen la celebració.</p>
+            <div class="options">
+              <label><input type="radio" name="q6" value="si"> Sí</label>
+              <label><input type="radio" name="q6" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q6"></div>
+            <div class="feedback-note" id="feedback-note-q6"></div>
+          </div>
+
+          <div class="question-block" data-answer="si">
+            <p>7. El secret és important perquè la mare no ha de sospitar res abans d’arribar.</p>
+            <div class="options">
+              <label><input type="radio" name="q7" value="si"> Sí</label>
+              <label><input type="radio" name="q7" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q7"></div>
+            <div class="feedback-note" id="feedback-note-q7"></div>
+          </div>
+
+          <div class="question-block" data-answer="si">
+            <p>8. La conversa mostra una organització familiar col·laborativa.</p>
+            <div class="options">
+              <label><input type="radio" name="q8" value="si"> Sí</label>
+              <label><input type="radio" name="q8" value="no"> No</label>
+            </div>
+            <div class="feedback" id="feedback-q8"></div>
+            <div class="feedback-note" id="feedback-note-q8"></div>
+          </div>
+
+          <div class="buttons">
+            <button class="check-btn" onclick="checkTrueFalse()">Comprova</button>
+            <button class="reset-btn" onclick="resetTrueFalse()">Reinicia</button>
+          </div>
+
+          <div class="score-box" id="tf-score"></div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header"><i class="fa-solid fa-pen"></i> Exercici 2 · Omple els buits</div>
+        <div class="card-body">
+
+          <div class="exercise-intro">
+            Completa les frases amb les paraules del requadre. Pots escriure amb accents o sense accents.
+          </div>
+
+          <div class="word-bank">
+            <span>decorarà</span>
+            <span>cava</span>
+            <span>sorpresa</span>
+            <span>seixantè</span>
+            <span>pastís</span>
+            <span>cosins</span>
+            <span>avis</span>
+            <span>truita</span>
+          </div>
+
+          <div class="gap-item">
+            1. La família celebrarà el <input type="text" id="gap1" class="gap-input"> aniversari de la mare.
+            <div class="feedback" id="gap-feedback1"></div>
+          </div>
+
+          <div class="gap-item">
+            2. Entre els convidats hi haurà els tiets, els <input type="text" id="gap2" class="gap-input"> i alguns amics molt propers.
+            <div class="feedback" id="gap-feedback2"></div>
+          </div>
+
+          <div class="gap-item">
+            3. Els <input type="text" id="gap3" class="gap-input"> també assistiran a la celebració familiar.
+            <div class="feedback" id="gap-feedback3"></div>
+          </div>
+
+          <div class="gap-item">
+            4. Prepararan coca, embotits i <input type="text" id="gap4" class="gap-input"> de patates.
+            <div class="feedback" id="gap-feedback4"></div>
+          </div>
+
+          <div class="gap-item">
+            5. Per brindar tots junts, obriran unes ampolles de <input type="text" id="gap5" class="gap-input">.
+            <div class="feedback" id="gap-feedback5"></div>
+          </div>
+
+          <div class="gap-item">
+            6. La germana gran s’encarregarà de portar el <input type="text" id="gap6" class="gap-input">.
+            <div class="feedback" id="gap-feedback6"></div>
+          </div>
+
+          <div class="gap-item">
+            7. El germà petit <input type="text" id="gap7" class="gap-input"> la sala abans que arribi la mare.
+            <div class="feedback" id="gap-feedback7"></div>
+          </div>
+
+          <div class="gap-item">
+            8. El més important és que tot serà una <input type="text" id="gap8" class="gap-input">.
+            <div class="feedback" id="gap-feedback8"></div>
+          </div>
+
+          <div class="buttons">
+            <button class="check-btn" onclick="checkGapFill()">Comprova</button>
+            <button class="reset-btn" onclick="resetGapFill()">Reinicia</button>
+          </div>
+
+          <div class="score-box" id="gap-score"></div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header"><i class="fa-solid fa-language"></i> Exercici 3 · El futur</div>
+        <div class="card-body">
+
+          <div class="exercise-intro">
+            Escriu la forma correcta del futur i tria la persona gramatical. Cada frase val dos punts: un per la forma verbal i un per la persona.
+          </div>
+
+          <div id="future-container"></div>
+
+          <div class="buttons">
+            <button class="check-btn" onclick="checkFutureExercise()">Comprova</button>
+            <button class="reset-btn" onclick="resetFutureExercise()">Reinicia</button>
+          </div>
+
+          <div class="score-box" id="future-score"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function restoreAccent(word) {
+      const map = {
+        seixante: "seixantè",
+        pastis: "pastís",
+        decorara: "decorarà",
+        preparara: "prepararà",
+        sabra: "sabrà",
+        estara: "estarà"
+      };
+      return map[word] || word;
+    }
+
+    function checkTrueFalse() {
+      let score = 0;
+      const questions = document.querySelectorAll(".question-block");
+
+      const explanations = {
+        1: "No. La festa no és improvisada: ja hi ha tasques repartides i una organització clara.",
+        2: "Sí. La celebració inclou família pròxima i també persones properes a la família.",
+        3: "No. El menjar és més aviat tradicional: coca, embotits, truita i cava.",
+        4: "Sí. La sorpresa busca provocar una reacció d’alegria i emoció en la mare.",
+        5: "Sí. Cada persona sembla tenir una funció: portar menjar, preparar el pastís, decorar o organitzar.",
+        6: "No. L’amiga no rebutja la idea; entén que la mare quedarà contenta.",
+        7: "Sí. El secret és essencial perquè la sorpresa funcioni.",
+        8: "Sí. La conversa mostra una família que treballa conjuntament per preparar la festa."
+      };
+
+      questions.forEach((question, index) => {
+        const qNum = index + 1;
+        const correctAnswer = question.dataset.answer;
+        const selected = question.querySelector('input[type="radio"]:checked');
+        const feedback = document.getElementById(`feedback-q${qNum}`);
+        const feedbackNote = document.getElementById(`feedback-note-q${qNum}`);
+
+        if (!selected) {
+          feedback.textContent = "No has seleccionat cap resposta.";
+          feedback.className = "feedback incorrect";
+          feedbackNote.textContent = "";
+          return;
+        }
+
+        if (selected.value === correctAnswer) {
+          feedback.textContent = "Correcte!";
+          feedback.className = "feedback correct";
+          score++;
+        } else {
+          feedback.textContent = "Incorrecte.";
+          feedback.className = "feedback incorrect";
+        }
+
+        feedbackNote.textContent = explanations[qNum];
+      });
+
+      document.getElementById("tf-score").textContent = `Puntuació: ${score} / 8`;
+    }
+
+    function resetTrueFalse() {
+      document.querySelectorAll(".question-block input[type='radio']").forEach(radio => radio.checked = false);
+
+      for (let i = 1; i <= 8; i++) {
+        document.getElementById(`feedback-q${i}`).textContent = "";
+        document.getElementById(`feedback-q${i}`).className = "feedback";
+        document.getElementById(`feedback-note-q${i}`).textContent = "";
+      }
+
+      document.getElementById("tf-score").textContent = "";
+    }
+
+    function checkGapFill() {
+      const answers = {
+        gap1: "seixante",
+        gap2: "cosins",
+        gap3: "avis",
+        gap4: "truita",
+        gap5: "cava",
+        gap6: "pastis",
+        gap7: "decorara",
+        gap8: "sorpresa"
+      };
+
+      let score = 0;
+
+      Object.keys(answers).forEach((gapId, index) => {
+        const input = document.getElementById(gapId);
+        const feedback = document.getElementById(`gap-feedback${index + 1}`);
+        const userAnswer = normalizeText(input.value);
+        const correctAnswer = answers[gapId];
+
+        if (userAnswer === correctAnswer) {
+          feedback.textContent = "Correcte!";
+          feedback.className = "feedback correct";
+          score++;
+        } else if (userAnswer === "") {
+          feedback.textContent = "Falta resposta.";
+          feedback.className = "feedback incorrect";
+        } else {
+          feedback.textContent = `Incorrecte. La resposta correcta és "${restoreAccent(correctAnswer)}".`;
+          feedback.className = "feedback incorrect";
+        }
+      });
+
+      document.getElementById("gap-score").textContent = `Puntuació: ${score} / 8`;
+    }
+
+    function resetGapFill() {
+      for (let i = 1; i <= 8; i++) {
+        document.getElementById(`gap${i}`).value = "";
+        document.getElementById(`gap-feedback${i}`).textContent = "";
+        document.getElementById(`gap-feedback${i}`).className = "feedback";
+      }
+
+      document.getElementById("gap-score").textContent = "";
+    }
+
+    const futureItems = [
+      ["La setmana que ve nosaltres", "una festa molt especial.", "organitzar", "organitzarem", "nosaltres"],
+      ["Els avis també", "a la celebració familiar.", "venir", "vindran", "ells/es"],
+      ["La meva germana", "el pastís d’aniversari.", "preparar", "preparara", "ell/a"],
+      ["El meu germà petit", "la sala amb banderoles.", "decorar", "decorara", "ell/a"],
+      ["Nosaltres", "embotits, truita i coca per a tothom.", "portar", "portarem", "nosaltres"],
+      ["Després", "tots junts amb cava.", "brindar", "brindarem", "nosaltres"],
+      ["Quan arribi, la mare no", "res de res.", "saber", "sabra", "ell/a"],
+      ["Segur que ella", "molt contenta amb la sorpresa.", "estar", "estara", "ell/a"],
+      ["Els cosins", "una mica més tard.", "arribar", "arribaran", "ells/es"],
+      ["Al final, tots", "una foto de família.", "fer", "farem", "nosaltres"]
+    ];
+
+    function buildFutureExercise() {
+      const container = document.getElementById("future-container");
+
+      futureItems.forEach((item, index) => {
+        const n = index + 1;
+        container.innerHTML += `
+          <div class="future-item">
+            ${n}. ${item[0]} <input type="text" id="future${n}" class="future-input"> ${item[1]} <em>(${item[2]})</em>
+            <div class="future-subline">
+              <span class="future-label">Persona:</span>
+              <select id="person${n}" class="person-select">
+                <option value="">--tria--</option>
+                <option value="jo">jo</option>
+                <option value="tu">tu</option>
+                <option value="ell/a">ell/a</option>
+                <option value="nosaltres">nosaltres</option>
+                <option value="vosaltres">vosaltres</option>
+                <option value="ells/es">ells/es</option>
+              </select>
+            </div>
+            <div class="feedback" id="future-feedback${n}"></div>
+          </div>
+        `;
+      });
+    }
+
+    buildFutureExercise();
+
+    function checkFutureExercise() {
+      let score = 0;
+
+      futureItems.forEach((item, index) => {
+        const n = index + 1;
+        const correctVerb = item[3];
+        const correctPerson = item[4];
+
+        const userVerb = normalizeText(document.getElementById(`future${n}`).value);
+        const userPerson = document.getElementById(`person${n}`).value;
+        const feedback = document.getElementById(`future-feedback${n}`);
+
+        const verbCorrect = userVerb === correctVerb;
+        const personCorrect = userPerson === correctPerson;
+
+        if (verbCorrect && personCorrect) {
+          feedback.textContent = "Correcte! Forma verbal i persona ben triades.";
+          feedback.className = "feedback correct";
+          score += 2;
+        } else if (verbCorrect) {
+          feedback.textContent = `La forma verbal és correcta, però la persona correcta és "${correctPerson}".`;
+          feedback.className = "feedback incorrect";
+          score += 1;
+        } else if (personCorrect) {
+          feedback.textContent = `La persona és correcta, però la forma verbal és "${restoreAccent(correctVerb)}".`;
+          feedback.className = "feedback incorrect";
+          score += 1;
+        } else if (userVerb === "" && userPerson === "") {
+          feedback.textContent = "Falten la forma verbal i la persona.";
+          feedback.className = "feedback incorrect";
+        } else {
+          feedback.textContent = `Incorrecte. La resposta correcta és "${restoreAccent(correctVerb)}" i la persona és "${correctPerson}".`;
+          feedback.className = "feedback incorrect";
+        }
+      });
+
+      document.getElementById("future-score").textContent = `Puntuació: ${score} / 20`;
+    }
+
+    function resetFutureExercise() {
+      for (let i = 1; i <= 10; i++) {
+        document.getElementById(`future${i}`).value = "";
+        document.getElementById(`person${i}`).selectedIndex = 0;
+        document.getElementById(`future-feedback${i}`).textContent = "";
+        document.getElementById(`future-feedback${i}`).className = "feedback";
+      }
+
+      document.getElementById("future-score").textContent = "";
+    }
+  </script>
+
+</body>
+</html>

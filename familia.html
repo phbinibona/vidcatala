@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIDCATALA · Aina i la seva família</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 12px;
+  background: #fff;
+  color: #222;
+}
+
+.banner {
+  background: #ffcc00;
+  color: #222;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-left img {
+  height: 38px;
+  width: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.banner-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.home-link {
+  color: #222;
+  text-decoration: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+
+.page-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.panel-header {
+  background: #fff8d7;
+  border-bottom: 1px solid #eee2a8;
+  padding: 14px 16px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+.video-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.video-frame {
+  background: #f8f8f8;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.video-frame video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.exercise-intro,
+.result-box {
+  background: #fffdf5;
+  border: 1px solid #efe2a6;
+  border-left: 5px solid #ffcc00;
+  border-radius: 12px;
+  padding: 11px 13px;
+  line-height: 1.55;
+  color: #333;
+}
+
+.exercise-intro {
+  margin-bottom: 16px;
+}
+
+.exercise-block {
+  background: #fffdf7;
+  border: 1px solid #efe7c8;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.exercise-block h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.exercise-subnote {
+  margin: 0 0 12px;
+  color: #555;
+  line-height: 1.45;
+}
+
+.question-card {
+  background: #fff;
+  border: 1px solid #eee4c5;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.question-title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.option-btn,
+.grammar-btn,
+.family-btn,
+.action-btn,
+.word-bank button {
+  font-family: 'Quicksand', sans-serif;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.option-btn.correct-choice,
+.grammar-btn.correct-choice,
+.family-btn.correct-choice {
+  background: #eaf7ea;
+  border-color: #b9ddb9;
+  color: #216738;
+}
+
+.option-btn.wrong-choice,
+.grammar-btn.wrong-choice,
+.family-btn.wrong-choice {
+  background: #fff0f0;
+  border-color: #efc0c0;
+  color: #9b2d2d;
+}
+
+.feedback-box,
+.grammar-box,
+.gap-feedback,
+.family-feedback {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  display: none;
+}
+
+.feedback-box.success,
+.grammar-box.success,
+.gap-feedback.success,
+.family-feedback.success {
+  display: block;
+  background: #edf8ef;
+  border: 1px solid #bddfc6;
+  color: #216738;
+}
+
+.feedback-box.error,
+.grammar-box.error,
+.gap-feedback.error,
+.family-feedback.error {
+  display: block;
+  background: #fff3f3;
+  border: 1px solid #efc4c4;
+  color: #9a2f2f;
+}
+
+.grammar-area {
+  margin-top: 10px;
+  display: none;
+}
+
+.grammar-question {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.grammar-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gap-text {
+  background: #fff;
+  border: 1px solid #eee4c5;
+  border-radius: 14px;
+  padding: 14px;
+  line-height: 1.9;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.gap-input {
+  width: 105px;
+  border: 1px solid #d8cfb2;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 12px;
+  background: #fffdf8;
+  text-align: center;
+  font-weight: 700;
+}
+
+.gap-input.active {
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 3px rgba(255,204,0,0.22);
+}
+
+.gap-input.correct {
+  background: #eaf7ea;
+  border-color: #b9ddb9;
+  color: #216738;
+}
+
+.gap-input.wrong {
+  background: #fff0f0;
+  border-color: #efc0c0;
+  color: #9b2d2d;
+}
+
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.word-bank button {
+  background: #fff8d7;
+  border-color: #eee2a8;
+}
+
+.word-bank button.used {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.exercise-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.action-btn {
+  background: #ffcc00;
+  border-color: #f0c200;
+}
+
+.secondary-btn {
+  background: #fff;
+  border-color: #ddd;
+}
+
+.result-box {
+  margin-top: 12px;
+  display: none;
+}
+
+@media (max-width: 920px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    padding-bottom: 8px;
+  }
+
+  .left-column .panel {
+    border-radius: 0 0 18px 18px;
+  }
+
+  .left-column .panel-header,
+  .video-title {
+    display: none;
+  }
+
+  .video-frame {
+    padding: 6px;
+    border-radius: 12px;
+  }
+
+  .video-frame video {
+    border-radius: 10px;
+  }
+
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-wrap {
+    padding: 0 10px 14px;
+  }
+
+  .banner {
+    padding: 12px 14px;
+  }
+
+  .banner-title {
+    font-size: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera">
+    <h1 class="banner-title">VIDCATALA · Aina i la seva família</h1>
+  </div>
+  <a aria-label='Tornar a l\'índex' class='home-link' href='/'>
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="page-wrap">
+  <div class="content-grid">
+
+    <div class="left-column">
+      <div class="panel">
+        <div class="panel-header">
+          <h2><i class="fas fa-video"></i> Vídeo</h2>
+        </div>
+        <div class="panel-body">
+          <h3 class="video-title">Aina i la seva família</h3>
+          <div class="video-frame">
+            <video controls preload="metadata" playsinline>
+              <source src="familia.mp4" type="video/mp4">
+              El teu navegador no pot reproduir aquest vídeo.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="panel">
+        <div class="panel-header">
+          <h2><i class="fas fa-pen"></i> Exercicis</h2>
+        </div>
+
+        <div class="panel-body">
+
+          <div class="exercise-intro">
+            <strong>Com fer els exercicis</strong><br>
+            Exercici 1: comprensió i deducció.  
+            Exercici 2: vocabulari del vídeo.  
+            Exercici 3: parentius, famílies recompostes i paraules més difícils.
+          </div>
+
+          <div class="exercise-block">
+            <h3>Exercici 1 · Comprensió i deducció</h3>
+            <p class="exercise-subnote">Tria la millor resposta. Després apareixerà una pregunta curta de gramàtica.</p>
+            <div id="quizContainer"></div>
+
+            <div class="exercise-actions">
+              <button class="action-btn" onclick="showExercise1Result()">Veure resultat</button>
+              <button class="action-btn secondary-btn" onclick="resetQuiz()">Reinicia l’exercici 1</button>
+            </div>
+
+            <div class="result-box" id="exercise1Result"></div>
+          </div>
+
+          <div class="exercise-block">
+            <h3>Exercici 2 · Omple els buits</h3>
+            <p class="exercise-subnote">Fes clic en un buit i després en una paraula del requadre.</p>
+
+            <div class="word-bank" id="wordBank">
+              <button type="button" onclick="insertWord('fills', this)">fills</button>
+              <button type="button" onclick="insertWord('gendres', this)">gendres</button>
+              <button type="button" onclick="insertWord('jove', this)">jove</button>
+              <button type="button" onclick="insertWord('nets', this)">nets</button>
+              <button type="button" onclick="insertWord('germans', this)">germans</button>
+              <button type="button" onclick="insertWord('cunyats', this)">cunyats</button>
+              <button type="button" onclick="insertWord('nebots', this)">nebots</button>
+              <button type="button" onclick="insertWord('nebodes', this)">nebodes</button>
+            </div>
+
+            <div class="gap-text">
+              Bé, la veritat és que sempre dic que la meva família és immensa.<br>
+              Tinc tres <input class="gap-input" id="gap1" type="text" autocomplete="off">, i cadascun ja està casat i amb la seva pròpia vida.<br>
+              Els meus <input class="gap-input" id="gap2" type="text" autocomplete="off"> són molt diferents entre ells, però tots em cauen bé.<br>
+              També tinc una <input class="gap-input" id="gap3" type="text" autocomplete="off"> encantadora que sempre m’ajuda quan la necessito.<br>
+              Entre tots, m’han donat set <input class="gap-input" id="gap4" type="text" autocomplete="off">, així que a casa mai no hi ha silenci.<br>
+              A més, encara mantinc molt bona relació amb els meus <input class="gap-input" id="gap5" type="text" autocomplete="off"> i <input class="gap-input" id="gap6" type="text" autocomplete="off">.<br>
+              Els meus <input class="gap-input" id="gap7" type="text" autocomplete="off"> i <input class="gap-input" id="gap8" type="text" autocomplete="off"> venen sovint a dinar els diumenges.
+            </div>
+
+            <div class="exercise-actions">
+              <button class="action-btn" onclick="checkGapfill()">Comprova</button>
+              <button class="action-btn secondary-btn" onclick="showGapAnswers()">Mostra solucions</button>
+              <button class="action-btn secondary-btn" onclick="resetGapfill()">Reinicia l’exercici 2</button>
+            </div>
+
+            <div class="gap-feedback" id="gapFeedback"></div>
+            <div class="result-box" id="exercise2Result"></div>
+          </div>
+
+          <div class="exercise-block">
+            <h3>Exercici 3 · Detectiu de la família</h3>
+            <p class="exercise-subnote">
+              Tria la paraula correcta. Compte: algunes preguntes són fàcils, però d’altres són de nivell “dinar familiar amb vint persones”.
+            </p>
+
+            <div id="familyContainer"></div>
+
+            <div class="exercise-actions">
+              <button class="action-btn" onclick="showFamilyResult()">Veure resultat</button>
+              <button class="action-btn secondary-btn" onclick="resetFamilyQuiz()">Reinicia l’exercici 3</button>
+            </div>
+
+            <div class="result-box" id="familyResult"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    statement: "Aina té tres fills.",
+    answer: "segur",
+    feedbackCorrect: "Correcte. El text ho diu directament: «Tinc tres fills».",
+    feedbackWrong: "No. Això és segur perquè el text ho diu directament.",
+    grammarQuestion: "Quina forma dona la informació directa?",
+    grammarOptions: [
+      { text: "«Tinc tres fills»", correct: true },
+      { text: "«Els meus gendres»", correct: false },
+      { text: "«De vegades som més de vint»", correct: false }
+    ],
+    grammarCorrect: "Exacte. «Tinc tres fills» és una afirmació directa i explícita.",
+    grammarWrong: "La clau és «Tinc tres fills», perquè és informació literal del text."
+  },
+  {
+    statement: "Aina té dues filles i un fill.",
+    answer: "probable",
+    feedbackCorrect: "Correcte. És una deducció probable, però el text no ho diu de manera exacta.",
+    feedbackWrong: "No exactament. No és segur, però sí que sembla probable.",
+    grammarQuestion: "Quin detall permet fer aquesta deducció?",
+    grammarOptions: [
+      { text: "«Gendres» i «una jove»", correct: true },
+      { text: "«Set nets»", correct: false },
+      { text: "«Germans i cunyats»", correct: false }
+    ],
+    grammarCorrect: "Molt bé. «Gendres» fa pensar en filles, i «una jove» fa pensar en un fill.",
+    grammarWrong: "La pista principal és la combinació «gendres» + «una jove»."
+  },
+  {
+    statement: "Aina té tres fills varons.",
+    answer: "descartat",
+    feedbackCorrect: "Correcte. Aquesta hipòtesi queda descartada.",
+    feedbackWrong: "No. Això queda descartat pel text.",
+    grammarQuestion: "Per què es descarta aquesta opció?",
+    grammarOptions: [
+      { text: "Perquè «fills» vol dir només nois", correct: false },
+      { text: "Perquè també apareixen «gendres»", correct: true },
+      { text: "Perquè no té nets", correct: false }
+    ],
+    grammarCorrect: "Exacte. Si tots tres fossin varons, no esperaríem la presència de «gendres».",
+    grammarWrong: "Es descarta sobretot perquè el text menciona «els meus gendres»."
+  },
+  {
+    statement: "Aina té una germana.",
+    answer: "no_clar",
+    feedbackCorrect: "Correcte. Això no queda clar.",
+    feedbackWrong: "No. El text no permet saber-ho amb seguretat.",
+    grammarQuestion: "Quina és la dificultat gramatical aquí?",
+    grammarOptions: [
+      { text: "«Germans» pot ser masculí plural mixt", correct: true },
+      { text: "«Germans» vol dir només germans homes", correct: false },
+      { text: "«Germans» vol dir cosins", correct: false }
+    ],
+    grammarCorrect: "Molt bé. En català, el masculí plural pot incloure homes i dones.",
+    grammarWrong: "La clau és que «germans» pot ser un plural mixt."
+  },
+  {
+    statement: "Aina és vídua.",
+    answer: "no_clar",
+    feedbackCorrect: "Correcte. El text no ho revela.",
+    feedbackWrong: "No. No hi ha informació suficient per afirmar-ho ni negar-ho.",
+    grammarQuestion: "Per què no ho podem saber?",
+    grammarOptions: [
+      { text: "Perquè no es menciona cap marit ni estat civil", correct: true },
+      { text: "Perquè diu que viu sola", correct: false },
+      { text: "Perquè diu que és soltera", correct: false }
+    ],
+    grammarCorrect: "Exacte. El text guarda silenci sobre la seva situació de parella.",
+    grammarWrong: "No ho sabem perquè no es menciona cap marit ni cap estat civil."
+  },
+  {
+    statement: "Aina té set nets.",
+    answer: "segur",
+    feedbackCorrect: "Correcte. És una dada directa del text.",
+    feedbackWrong: "No. Això és segur perquè apareix literalment al text.",
+    grammarQuestion: "Quina expressió ho confirma?",
+    grammarOptions: [
+      { text: "«M’han donat set nets»", correct: true },
+      { text: "«Mai no hi ha silenci»", correct: false },
+      { text: "«Molt bona relació»", correct: false }
+    ],
+    grammarCorrect: "Perfecte. «M’han donat set nets» dona la xifra exacta.",
+    grammarWrong: "La resposta surt de l’expressió «m’han donat set nets»."
+  },
+  {
+    statement: "La família sempre és de més de vint persones.",
+    answer: "descartat",
+    feedbackCorrect: "Correcte. El text diu «de vegades», no pas sempre.",
+    feedbackWrong: "No. Aquesta afirmació queda descartada.",
+    grammarQuestion: "Quina paraula fa canviar completament el sentit?",
+    grammarOptions: [
+      { text: "«sempre»", correct: false },
+      { text: "«de vegades»", correct: true },
+      { text: "«mateixa»", correct: false }
+    ],
+    grammarCorrect: "Exacte. «De vegades» indica ocasionalitat, no regularitat absoluta.",
+    grammarWrong: "La paraula clau és «de vegades»."
+  },
+  {
+    statement: "Aina s’estima molt la seva família.",
+    answer: "segur",
+    feedbackCorrect: "Correcte. El to final del text ho deixa molt clar.",
+    feedbackWrong: "No. Això és clarament segur.",
+    grammarQuestion: "Quina frase ho expressa millor?",
+    grammarOptions: [
+      { text: "«És una mica caòtic»", correct: false },
+      { text: "«No ho canviaria per res del món»", correct: true },
+      { text: "«Operació militar»", correct: false }
+    ],
+    grammarCorrect: "Molt bé. Aquesta frase expressa una valoració afectiva molt forta.",
+    grammarWrong: "La millor prova és «No ho canviaria per res del món»."
+  }
+];
+
+const gapAnswers = {
+  gap1: "fills",
+  gap2: "gendres",
+  gap3: "jove",
+  gap4: "nets",
+  gap5: "germans",
+  gap6: "cunyats",
+  gap7: "nebots",
+  gap8: "nebodes"
+};
+
+const familyQuestions = [
+  {
+    clue: "La mare del meu marit és la meva...",
+    options: ["cunyada", "sogra", "neboda", "jove"],
+    answer: "sogra",
+    feedback: "Exacte! Si és la mare del teu marit, és la teva sogra."
+  },
+  {
+    clue: "Els fills de la meva tia són els meus...",
+    options: ["cosins", "nebots", "gendres", "cunyats"],
+    answer: "cosins",
+    feedback: "Molt bé! Els cosins solen aparèixer als dinars familiars més llargs del món."
+  },
+  {
+    clue: "La dona del meu fill és la meva...",
+    options: ["jove", "cunyada", "neboda", "tia"],
+    answer: "jove",
+    feedback: "Correcte! En català diem «la meva jove»."
+  },
+  {
+    clue: "El marit de la meva filla és el meu...",
+    options: ["sogre", "gendre", "nebot", "cosí"],
+    answer: "gendre",
+    feedback: "Exacte! És el teu gendre."
+  },
+  {
+    clue: "El fill del meu germà és el meu...",
+    options: ["nebot", "cosí", "gendre", "sogre"],
+    answer: "nebot",
+    feedback: "Perfecte! I tu ets el seu oncle o la seva tia."
+  },
+  {
+    clue: "La germana del meu pare és la meva...",
+    options: ["cosina", "tia", "neboda", "sogra"],
+    answer: "tia",
+    feedback: "Sí! És la tia que coneix tots els secrets familiars."
+  },
+  {
+    clue: "Els pares dels meus avis són els meus...",
+    options: ["rebesavis", "besavis", "cosins segons", "padrins"],
+    answer: "besavis",
+    feedback: "Correcte. Els pares dels avis són els besavis."
+  },
+  {
+    clue: "Els pares dels meus besavis són els meus...",
+    options: ["avis", "rebesavis", "besavis", "sogres"],
+    answer: "rebesavis",
+    feedback: "Nivell avançat! Els rebesavis són una generació abans dels besavis."
+  },
+  {
+    clue: "El fill del meu fill és el meu...",
+    options: ["nebot", "nét", "cosí", "fillastre"],
+    answer: "nét",
+    feedback: "Correcte! El fill del teu fill és el teu nét."
+  },
+  {
+    clue: "La filla de la meva filla és la meva...",
+    options: ["neboda", "jove", "néta", "cosina"],
+    answer: "néta",
+    feedback: "Molt bé! La filla de la teva filla és la teva néta."
+  },
+  {
+    clue: "El fill del meu nebot és el meu...",
+    options: ["besnebot", "nebot", "cosí", "gendre"],
+    answer: "besnebot",
+    feedback: "Fantàstic! Aquest parentiu ja és de nivell expert."
+  },
+  {
+    clue: "La filla de la meva neboda és la meva...",
+    options: ["besneboda", "cosina", "jove", "sogra"],
+    answer: "besneboda",
+    feedback: "Exacte! La filla d’una neboda és una besneboda."
+  },
+  {
+    clue: "La nova esposa del meu pare és la meva...",
+    options: ["sogra", "madrastra", "cunyada", "jove"],
+    answer: "madrastra",
+    feedback: "Correcte. En una família recomposta, pot aparèixer una madrastra."
+  },
+  {
+    clue: "El nou marit de la meva mare és el meu...",
+    options: ["sogre", "padrastre", "cunyat", "gendre"],
+    answer: "padrastre",
+    feedback: "Molt bé! És el teu padrastre."
+  },
+  {
+    clue: "El fill de la meva madrastra, si no compartim cap pare, és el meu...",
+    options: ["cosí", "germanastre", "nebot", "gendre"],
+    answer: "germanastre",
+    feedback: "Sí! És un germanastre dins d’una família recomposta."
+  },
+  {
+    clue: "La filla del meu padrastre, si no compartim cap pare, és la meva...",
+    options: ["germanastra", "cosina", "neboda", "sogra"],
+    answer: "germanastra",
+    feedback: "Perfecte! És la teva germanastra."
+  },
+  {
+    clue: "La meva cosina té una filla. Aquesta nena és la meva...",
+    options: ["neboda", "cosina segona", "jove", "néta"],
+    answer: "cosina segona",
+    feedback: "Molt bé! Aquesta és una relació familiar menys freqüent."
+  },
+  {
+    clue: "El germà del meu avi és el meu...",
+    options: ["besavi", "oncle avi", "rebesavi", "padrastre"],
+    answer: "oncle avi",
+    feedback: "Excel·lent! El germà d’un avi és un oncle avi."
+  },
+  {
+    clue: "La dona del meu oncle és la meva...",
+    options: ["tia", "cunyada", "jove", "neboda"],
+    answer: "tia",
+    feedback: "Correcte! També és la teva tia."
+  },
+  {
+    clue: "El marit de la meva tia és el meu...",
+    options: ["cosí", "oncle", "sogre", "nebot"],
+    answer: "oncle",
+    feedback: "Exacte! I segurament també surt a totes les fotos familiars."
+  }
+];
+
+let mainScore = 0;
+let grammarScore = 0;
+let answeredMain = new Array(questions.length).fill(false);
+let answeredGrammar = new Array(questions.length).fill(false);
+let activeGap = null;
+
+let familyScore = 0;
+let answeredFamily = new Array(familyQuestions.length).fill(false);
+
+function renderQuiz() {
+  const container = document.getElementById("quizContainer");
+  container.innerHTML = "";
+
+  questions.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "question-card";
+
+    block.innerHTML = `
+      <p class="question-title">${i + 1}. ${q.statement}</p>
+      <div class="option-grid" id="mainOptions${i}">
+        <button class="option-btn" onclick="checkMain(${i}, 'segur', this)">Segur</button>
+        <button class="option-btn" onclick="checkMain(${i}, 'probable', this)">Probable</button>
+        <button class="option-btn" onclick="checkMain(${i}, 'no_clar', this)">No és clar</button>
+        <button class="option-btn" onclick="checkMain(${i}, 'descartat', this)">Definitivament no</button>
+      </div>
+      <div id="mainFeedback${i}" class="feedback-box"></div>
+      <div id="grammarArea${i}" class="grammar-area">
+        <p class="grammar-question">${q.grammarQuestion}</p>
+        <div class="grammar-options" id="grammarOptions${i}">
+          ${q.grammarOptions.map((opt, idx) => `
+            <button class="grammar-btn" onclick="checkGrammar(${i}, ${idx}, this)">${opt.text}</button>
+          `).join("")}
+        </div>
+        <div id="grammarFeedback${i}" class="grammar-box"></div>
+      </div>
+    `;
+
+    container.appendChild(block);
+  });
+}
+
+function renderFamilyQuiz() {
+  const container = document.getElementById("familyContainer");
+  container.innerHTML = "";
+
+  familyQuestions.forEach((q, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+
+    card.innerHTML = `
+      <p class="question-title">${i + 1}. ${q.clue}</p>
+      <div class="option-grid" id="familyOptions${i}">
+        ${q.options.map(opt => `
+          <button class="family-btn" onclick="checkFamily(${i}, '${opt.replace(/'/g, "\\'")}', this)">${opt}</button>
+        `).join("")}
+      </div>
+      <div id="familyFeedback${i}" class="family-feedback"></div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function checkMain(index, selected, btn) {
+  if (answeredMain[index]) return;
+
+  const q = questions[index];
+  const feedback = document.getElementById(`mainFeedback${index}`);
+  const buttons = document.querySelectorAll(`#mainOptions${index} .option-btn`);
+  buttons.forEach(b => b.disabled = true);
+
+  if (selected === q.answer) {
+    btn.classList.add("correct-choice");
+    feedback.className = "feedback-box success";
+    feedback.innerHTML = q.feedbackCorrect;
+    mainScore++;
+  } else {
+    btn.classList.add("wrong-choice");
+    feedback.className = "feedback-box error";
+    feedback.innerHTML = q.feedbackWrong;
+
+    buttons.forEach(b => {
+      if (
+        (q.answer === "segur" && b.textContent === "Segur") ||
+        (q.answer === "probable" && b.textContent === "Probable") ||
+        (q.answer === "no_clar" && b.textContent === "No és clar") ||
+        (q.answer === "descartat" && b.textContent === "Definitivament no")
+      ) {
+        b.classList.add("correct-choice");
+      }
+    });
+  }
+
+  answeredMain[index] = true;
+  document.getElementById(`grammarArea${index}`).style.display = "block";
+}
+
+function checkGrammar(index, optIndex, btn) {
+  if (answeredGrammar[index]) return;
+
+  const q = questions[index];
+  const feedback = document.getElementById(`grammarFeedback${index}`);
+  const buttons = document.querySelectorAll(`#grammarOptions${index} .grammar-btn`);
+  buttons.forEach(b => b.disabled = true);
+
+  if (q.grammarOptions[optIndex].correct) {
+    btn.classList.add("correct-choice");
+    feedback.className = "grammar-box success";
+    feedback.innerHTML = q.grammarCorrect;
+    grammarScore++;
+  } else {
+    btn.classList.add("wrong-choice");
+    feedback.className = "grammar-box error";
+    feedback.innerHTML = q.grammarWrong;
+    q.grammarOptions.forEach((opt, i) => {
+      if (opt.correct) buttons[i].classList.add("correct-choice");
+    });
+  }
+
+  answeredGrammar[index] = true;
+}
+
+function showExercise1Result() {
+  const panel = document.getElementById("exercise1Result");
+  panel.style.display = "block";
+  panel.innerHTML = `
+    <strong>Resultat de l’exercici 1</strong>
+    Comprensió: <strong>${mainScore} / ${questions.length}</strong><br>
+    Gramàtica: <strong>${grammarScore} / ${questions.length}</strong><br>
+    Total: <strong>${mainScore + grammarScore} / ${questions.length * 2}</strong>
+  `;
+}
+
+function resetQuiz() {
+  mainScore = 0;
+  grammarScore = 0;
+  answeredMain = new Array(questions.length).fill(false);
+  answeredGrammar = new Array(questions.length).fill(false);
+  document.getElementById("exercise1Result").style.display = "none";
+  renderQuiz();
+}
+
+function setActiveGap(input) {
+  document.querySelectorAll(".gap-input").forEach(el => el.classList.remove("active"));
+  activeGap = input;
+  input.classList.add("active");
+}
+
+function insertWord(word, btn) {
+  if (!activeGap) return;
+  activeGap.value = word;
+  activeGap.focus();
+  btn.classList.add("used");
+}
+
+function checkGapfill() {
+  let score = 0;
+  const total = Object.keys(gapAnswers).length;
+
+  for (const id in gapAnswers) {
+    const input = document.getElementById(id);
+    const value = input.value.trim().toLowerCase();
+    input.classList.remove("correct", "wrong");
+
+    if (value === gapAnswers[id]) {
+      input.classList.add("correct");
+      score++;
+    } else {
+      input.classList.add("wrong");
+    }
+  }
+
+  const feedback = document.getElementById("gapFeedback");
+  const result = document.getElementById("exercise2Result");
+
+  if (score === total) {
+    feedback.className = "gap-feedback success";
+    feedback.innerHTML = `Perfecte! Has completat correctament els ${score} buits.`;
+  } else {
+    feedback.className = "gap-feedback error";
+    feedback.innerHTML = `Has encertat <strong>${score}</strong> de <strong>${total}</strong>. Revisa els buits marcats en vermell.`;
+  }
+
+  result.style.display = "block";
+  result.innerHTML = `<strong>Resultat de l’exercici 2</strong> Has encertat <strong>${score} / ${total}</strong>.`;
+}
+
+function showGapAnswers() {
+  for (const id in gapAnswers) {
+    const input = document.getElementById(id);
+    input.value = gapAnswers[id];
+    input.classList.remove("wrong", "correct");
+    input.classList.add("correct");
+  }
+
+  document.getElementById("gapFeedback").className = "gap-feedback success";
+  document.getElementById("gapFeedback").innerHTML = "Ja tens les solucions completes de l’exercici 2.";
+
+  const result = document.getElementById("exercise2Result");
+  result.style.display = "block";
+  result.innerHTML = `<strong>Resultat de l’exercici 2</strong> Solucions mostrades.`;
+}
+
+function resetGapfill() {
+  Object.keys(gapAnswers).forEach(id => {
+    const input = document.getElementById(id);
+    input.value = "";
+    input.classList.remove("correct", "wrong", "active");
+  });
+
+  document.querySelectorAll(".word-bank button").forEach(btn => btn.classList.remove("used"));
+
+  document.getElementById("gapFeedback").className = "gap-feedback";
+  document.getElementById("gapFeedback").innerHTML = "";
+
+  document.getElementById("exercise2Result").style.display = "none";
+  document.getElementById("exercise2Result").innerHTML = "";
+
+  activeGap = null;
+}
+
+function checkFamily(index, selected, btn) {
+  if (answeredFamily[index]) return;
+
+  const q = familyQuestions[index];
+  const buttons = document.querySelectorAll(`#familyOptions${index} .family-btn`);
+  const feedback = document.getElementById(`familyFeedback${index}`);
+
+  buttons.forEach(b => b.disabled = true);
+
+  if (selected === q.answer) {
+    btn.classList.add("correct-choice");
+    feedback.className = "family-feedback success";
+    feedback.innerHTML = q.feedback;
+    familyScore++;
+  } else {
+    btn.classList.add("wrong-choice");
+    feedback.className = "family-feedback error";
+    feedback.innerHTML = `No exactament. La resposta correcta és <strong>${q.answer}</strong>. ${q.feedback}`;
+
+    buttons.forEach(b => {
+      if (b.textContent.trim() === q.answer) {
+        b.classList.add("correct-choice");
+      }
+    });
+  }
+
+  answeredFamily[index] = true;
+}
+
+function showFamilyResult() {
+  const panel = document.getElementById("familyResult");
+  let message = "";
+
+  if (familyScore <= 5) {
+    message = "👶 Família en construcció.";
+  } else if (familyScore <= 10) {
+    message = "🙂 Coneixes els parentius bàsics.";
+  } else if (familyScore <= 15) {
+    message = "😎 Expert en reunions familiars.";
+  } else if (familyScore <= 19) {
+    message = "🧠 Mestre dels arbres genealògics.";
+  } else {
+    message = "👑 Rei o reina de la genealogia catalana.";
+  }
+
+  panel.style.display = "block";
+  panel.innerHTML = `
+    <strong>Resultat de l’exercici 3</strong>
+    Has encertat <strong>${familyScore} / ${familyQuestions.length}</strong>.<br>
+    ${message}
+  `;
+}
+
+function resetFamilyQuiz() {
+  familyScore = 0;
+  answeredFamily = new Array(familyQuestions.length).fill(false);
+  document.getElementById("familyResult").style.display = "none";
+  document.getElementById("familyResult").innerHTML = "";
+  renderFamilyQuiz();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuiz();
+  renderFamilyQuiz();
+
+  document.querySelectorAll(".gap-input").forEach(input => {
+    input.addEventListener("focus", () => setActiveGap(input));
+    input.addEventListener("click", () => setActiveGap(input));
+  });
+});
+</script>
+
+</body>
+</html>

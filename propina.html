@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · La propina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #222;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-logo {
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      #f7c600 0%, #f7c600 20%,
+      #d71920 20%, #d71920 32%,
+      #f7c600 32%, #f7c600 44%,
+      #d71920 44%, #d71920 56%,
+      #f7c600 56%, #f7c600 68%,
+      #d71920 68%, #d71920 80%,
+      #f7c600 80%, #f7c600 100%
+    );
+  border: 2px solid rgba(255,255,255,0.75);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.home-btn {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 18px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+}
+
+.video-card,
+.exercise-card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-note {
+  margin: 8px 2px 0;
+  font-size: .85rem;
+  color: #555;
+}
+
+.exercise-card {
+  margin-bottom: 18px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #8B4513;
+}
+
+.intro {
+  margin: 0 0 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.question {
+  padding: 14px 0;
+  border-top: 1px solid #eee;
+}
+
+.question:first-of-type {
+  border-top: none;
+}
+
+.question-text {
+  margin: 0 0 10px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.choice-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.choice-btn {
+  background: #f1f1f1;
+  color: #222;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.choice-btn:hover {
+  border-color: #ffcc00;
+}
+
+.choice-btn.selected {
+  background: #ffcc00;
+  border-color: #e2b500;
+}
+
+.feedback {
+  display: none;
+  margin-top: 8px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+.feedback.good {
+  display: block;
+  background: #e9f8ec;
+  border-left: 5px solid #35a852;
+}
+
+.feedback.bad {
+  display: block;
+  background: #fff0ef;
+  border-left: 5px solid #d94444;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button.action {
+  background: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 17px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+}
+
+button.secondary {
+  background: #f1f1f1;
+  box-shadow: none;
+}
+
+.score {
+  margin-top: 13px;
+  display: inline-block;
+  background: #fff7cf;
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-weight: 700;
+}
+
+.word-bank,
+.syn-list,
+#synFeedback {
+  background: #fff7cf;
+  border: 1px solid #f0d86d;
+  border-radius: 15px;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.pill {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e0c95c;
+  border-radius: 999px;
+  padding: 5px 11px;
+  margin: 4px;
+  font-weight: 600;
+}
+
+.gap-text {
+  line-height: 2.1;
+}
+
+input.gap {
+  width: 126px;
+  padding: 7px 8px;
+  margin: 3px;
+  border-radius: 9px;
+  border: 2px solid #ddd;
+  font-family: inherit;
+}
+
+input.gap.correct {
+  border-color: #35a852;
+  background: #effaf0;
+}
+
+input.gap.wrong {
+  border-color: #d94444;
+  background: #fff0ef;
+}
+
+.syn-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.syn {
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.syn:hover {
+  border-color: #ffcc00;
+}
+
+.syn.active {
+  background: #ffcc00;
+  border-color: #e2b500;
+}
+
+.syn.used {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.click-text {
+  line-height: 1.9;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.click-word {
+  display: inline;
+  color: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.click-word:hover {
+  background: #fff2aa;
+}
+
+.click-word.done {
+  background: #dff4e3;
+  color: #237a3b;
+}
+
+@media(max-width:850px) {
+  .banner h1 {
+    font-size: 1rem;
+  }
+
+  .page {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .video-card {
+    padding: 8px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-note {
+    display: none;
+  }
+
+  .exercise-card {
+    padding: 12px;
+  }
+
+  input.gap {
+    width: 108px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="banner-logo"></div>
+    <h1>VIDCATALA · La propina</h1>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left-column">
+  <div class="video-card">
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="propina.mp4" type="video/mp4">
+        El teu navegador no pot reproduir aquest vídeo.
+      </video>
+    </div>
+    <p class="video-note">Mira el vídeo i completa els exercicis.</p>
+  </div>
+</section>
+
+<section class="right-column">
+
+<section class="exercise-card">
+  <h2>Exercici 1 · Comprensió profunda: Sí o No</h2>
+  <p class="intro">
+    Mira el vídeo amb atenció. Algunes afirmacions semblen correctes a primera vista,
+    però només una escolta precisa et permetrà decidir bé.
+  </p>
+
+  <div id="ex1"></div>
+
+  <div class="btn-row">
+    <button class="action" onclick="checkEx1()">Comprova</button>
+    <button class="action secondary" onclick="resetEx1()">Reinicia</button>
+  </div>
+
+  <p id="score1" class="score"></p>
+</section>
+
+<section class="exercise-card">
+  <h2>Exercici 2 · Omple els buits</h2>
+  <p class="intro">
+    Completa el text amb les paraules del requadre.
+  </p>
+
+  <div class="word-bank">
+    <span class="pill">monedes</span>
+    <span class="pill">deixen</span>
+    <span class="pill">replantejar-ho</span>
+    <span class="pill">compte</span>
+    <span class="pill">culpable</span>
+    <span class="pill">servei</span>
+    <span class="pill">següent</span>
+    <span class="pill">sinó</span>
+    <span class="pill">suggereixen</span>
+    <span class="pill">pressió</span>
+    <span class="pill">des que</span>
+    <span class="pill">llei</span>
+    <span class="pill">deixo</span>
+    <span class="pill">Estats Units</span>
+  </div>
+
+  <p class="gap-text">
+    Sempre em passava el mateix: acabava de sopar fora, venia el
+    <input class="gap" id="g1">,
+    i em quedava mirant la màquina de cobrar. A Catalunya, la propina no és obligatòria, però la
+    <input class="gap" id="g2">
+    social pot ser enorme. Si el
+    <input class="gap" id="g3">
+    ha estat correcte, alguns
+    <input class="gap" id="g4">
+    un 5% o el que sobra del canvi. Però
+    <input class="gap" id="g5">
+    viatjo més, sobretot als
+    <input class="gap" id="g6">,
+    la cultura de la propina m’ha fet
+    <input class="gap" id="g7">
+    tot. Allà, el 20% és gairebé una
+    <input class="gap" id="g8">
+    no escrita, i fins i tot les màquines et
+    <input class="gap" id="g9">
+    percentatges: 18%, 20%, 25%. I clar, amb l’euro digital i els pagaments amb targeta, ara és més fàcil que mai donar propina sense
+    <input class="gap" id="g10">.
+    El problema és que de vegades em sento
+    <input class="gap" id="g11">
+    si dono poc, i enfadada si dono molt. Al final, la meva regla és: si el servei ha sigut excel·lent,
+    <input class="gap" id="g12">
+    un 10%; si només correcte, arrodoneixo fins al
+    <input class="gap" id="g13">
+    euro. No vull que la propina sigui una font d’estrès,
+    <input class="gap" id="g14">
+    una manera conscient de valorar la feina ben feta.
+  </p>
+
+  <div class="btn-row">
+    <button class="action" onclick="checkEx2()">Comprova</button>
+    <button class="action" onclick="showEx2Answers()">Mostra respostes</button>
+    <button class="action secondary" onclick="resetEx2()">Reinicia</button>
+  </div>
+
+  <p id="score2" class="score"></p>
+</section>
+
+<section class="exercise-card">
+  <h2>Exercici 3 · Sinònims</h2>
+  <p class="intro">
+    Primer fes clic en una paraula de la llista. Després busca en el text la paraula que té el mateix sentit.
+  </p>
+
+  <div class="syn-list">
+    <span class="syn" data-key="compte">factura</span>
+    <span class="syn" data-key="pressio">influència</span>
+    <span class="syn" data-key="servei">atenció</span>
+    <span class="syn" data-key="correcte">adequat</span>
+    <span class="syn" data-key="sobra">queda</span>
+    <span class="syn" data-key="replantejar">reconsiderar</span>
+    <span class="syn" data-key="obligatoria">obligada</span>
+    <span class="syn" data-key="llei">norma</span>
+    <span class="syn" data-key="suggereixen">proposen</span>
+    <span class="syn" data-key="culpable">responsable</span>
+    <span class="syn" data-key="excellent">molt bo</span>
+    <span class="syn" data-key="seguent">proper</span>
+  </div>
+
+  <div class="click-text">
+    Sempre em passava el mateix: acabava de sopar fora, venia el
+    <span class="click-word" data-key="compte">compte</span>,
+    i em quedava mirant la màquina de cobrar. A Catalunya, la propina no és
+    <span class="click-word" data-key="obligatoria">obligatòria</span>,
+    però la
+    <span class="click-word" data-key="pressio">pressió</span>
+    social pot ser enorme. Si el
+    <span class="click-word" data-key="servei">servei</span>
+    ha estat
+    <span class="click-word" data-key="correcte">correcte</span>,
+    alguns deixen un 5% o el que
+    <span class="click-word" data-key="sobra">sobra</span>
+    del canvi. Però des que viatjo més, la cultura de la propina m’ha fet
+    <span class="click-word" data-key="replantejar">replantejar-ho</span>
+    tot. Allà, el 20% és gairebé una
+    <span class="click-word" data-key="llei">llei</span>
+    no escrita, i les màquines et
+    <span class="click-word" data-key="suggereixen">suggereixen</span>
+    percentatges. De vegades em sento
+    <span class="click-word" data-key="culpable">culpable</span>
+    si dono poc. Si el servei ha sigut
+    <span class="click-word" data-key="excellent">excel·lent</span>,
+    deixo un 10%; si només correcte, arrodoneixo fins al
+    <span class="click-word" data-key="seguent">següent</span>
+    euro.
+  </div>
+
+  <div id="synFeedback">
+    Tria primer una paraula de la llista.
+  </div>
+
+  <div class="btn-row">
+    <button class="action secondary" onclick="resetEx3()">Reinicia</button>
+  </div>
+
+  <p id="score3" class="score">Puntuació: 0/12</p>
+</section>
+
+</section>
+</main>
+
+<script>
+const ex1Questions = [
+  {
+    text: "La Laia afirma clarament que a Catalunya no existeix cap pressió social relacionada amb la propina.",
+    answer: "No",
+    good: "Correcte. Tot i que diu que la propina no és obligatòria, afegeix que la pressió social pot ser enorme.",
+    bad: "No exactament. La clau és el contrast: no és obligatòria, però sí que pot haver-hi pressió social."
+  },
+  {
+    text: "El vídeo mostra que viatjar ha fet canviar la manera de pensar de la Laia sobre la propina.",
+    answer: "Sí",
+    good: "Correcte. La Laia diu que viatjar, sobretot als Estats Units, l’ha fet replantejar-ho tot.",
+    bad: "No. El vídeo diu que l’experiència als Estats Units li ha fet revisar la seva manera de veure la propina."
+  },
+  {
+    text: "Segons la Laia, als Estats Units la propina és una obligació legal estricta.",
+    answer: "No",
+    good: "Correcte. Parla d’una “llei no escrita”: és una norma social forta, però no una llei legal.",
+    bad: "Atenció a l’expressió “llei no escrita”. No vol dir obligació legal, sinó pressió social molt consolidada."
+  },
+  {
+    text: "El vídeo suggereix que la tecnologia actual pot influir en el comportament dels clients.",
+    answer: "Sí",
+    good: "Correcte. Les màquines suggereixen percentatges i els pagaments digitals fan més fàcil donar propina.",
+    bad: "No. La referència a les màquines i als pagaments amb targeta mostra que la tecnologia condiciona la decisió."
+  },
+  {
+    text: "La Laia se sent sempre còmoda i segura amb les seves decisions sobre la propina.",
+    answer: "No",
+    good: "Correcte. Diu que se sent culpable si dona poc i enfadada si dona molt.",
+    bad: "No exactament. El vídeo mostra un conflicte intern, no una seguretat completa."
+  },
+  {
+    text: "L’opinió de l’amic coincideix completament amb la manera de pensar de la Laia.",
+    answer: "No",
+    good: "Correcte. La Laia reconeix que l’amic té part de raó, però també defensa el valor del petit gest.",
+    bad: "No. Hi ha acord parcial, però no coincidència total: la Laia afegeix una perspectiva més social i humana."
+  },
+  {
+    text: "El vídeo deixa entendre que la situació econòmica dels cambrers pot influir en la decisió de donar propina.",
+    answer: "Sí",
+    good: "Correcte. Quan parla de salaris baixos, vincula la propina amb una realitat social més àmplia.",
+    bad: "No. La menció dels salaris baixos indica que la situació econòmica dels treballadors forma part de la reflexió."
+  },
+  {
+    text: "La Laia defensa que la propina hauria de substituir el salari dels treballadors del sector serveis.",
+    answer: "No",
+    good: "Correcte. Reflexiona sobre el gest, però no proposa substituir el salari per propines.",
+    bad: "No. Aquesta afirmació va més enllà del text: la Laia no defensa cap substitució salarial."
+  },
+  {
+    text: "La regla final de la Laia elimina completament qualsevol incomoditat relacionada amb la propina.",
+    answer: "No",
+    good: "Correcte. La regla l’ajuda, però el fet que parli d’estrès mostra que el dilema encara existeix.",
+    bad: "No exactament. La regla organitza la seva decisió, però no elimina del tot la tensió emocional."
+  },
+  {
+    text: "El vídeo acaba convidant l’espectador a reflexionar sobre el seu propi comportament.",
+    answer: "Sí",
+    good: "Correcte. La pregunta final implica directament l’oient: “I tu, què fas?”",
+    bad: "No. El final és clarament una invitació personal a pensar en el propi comportament."
+  }
+];
+
+let ex1Choices = {};
+
+function renderEx1() {
+  const box = document.getElementById("ex1");
+  box.innerHTML = "";
+  ex1Choices = {};
+
+  ex1Questions.forEach((q, i) => {
+    box.innerHTML += `
+      <div class="question">
+        <p class="question-text">${i + 1}. ${q.text}</p>
+        <div class="choice-row">
+          <button type="button" class="choice-btn" onclick="selectEx1(${i}, 'Sí', this)">Sí</button>
+          <button type="button" class="choice-btn" onclick="selectEx1(${i}, 'No', this)">No</button>
+        </div>
+        <div id="fb${i}" class="feedback"></div>
+      </div>
+    `;
+  });
+}
+
+function selectEx1(index, value, btn) {
+  ex1Choices[index] = value;
+  const row = btn.parentElement;
+  row.querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+}
+
+function checkEx1() {
+  let score = 0;
+
+  ex1Questions.forEach((q, i) => {
+    const fb = document.getElementById("fb" + i);
+    const val = ex1Choices[i];
+
+    if (val === q.answer) {
+      score++;
+      fb.className = "feedback good";
+      fb.innerHTML = "✅ " + q.good;
+    } else {
+      fb.className = "feedback bad";
+      fb.innerHTML = "❌ " + q.bad;
+    }
+  });
+
+  document.getElementById("score1").innerHTML = `Puntuació: ${score}/10`;
+}
+
+function resetEx1() {
+  renderEx1();
+  document.getElementById("score1").innerHTML = "";
+}
+
+const gapAnswers = [
+  "compte",
+  "pressió",
+  "servei",
+  "deixen",
+  "des que",
+  "Estats Units",
+  "replantejar-ho",
+  "llei",
+  "suggereixen",
+  "monedes",
+  "culpable",
+  "deixo",
+  "següent",
+  "sinó"
+];
+
+function normalise(str) {
+  return str
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function checkEx2() {
+  let score = 0;
+
+  gapAnswers.forEach((ans, i) => {
+    const input = document.getElementById("g" + (i + 1));
+
+    if (normalise(input.value) === normalise(ans)) {
+      score++;
+      input.classList.remove("wrong");
+      input.classList.add("correct");
+    } else {
+      input.classList.remove("correct");
+      input.classList.add("wrong");
+    }
+  });
+
+  document.getElementById("score2").innerHTML = `Puntuació: ${score}/14`;
+}
+
+function showEx2Answers() {
+  gapAnswers.forEach((ans, i) => {
+    const input = document.getElementById("g" + (i + 1));
+    input.value = ans;
+    input.classList.remove("wrong");
+    input.classList.add("correct");
+  });
+
+  document.getElementById("score2").innerHTML = "Respostes mostrades.";
+}
+
+function resetEx2() {
+  gapAnswers.forEach((ans, i) => {
+    const input = document.getElementById("g" + (i + 1));
+    input.value = "";
+    input.classList.remove("correct", "wrong");
+  });
+
+  document.getElementById("score2").innerHTML = "";
+}
+
+let activeSynKey = null;
+let synScore = 0;
+const totalSyns = 12;
+
+const synFeedback = {
+  compte: "“Factura” correspon a “compte” perquè és el total que arriba després de menjar fora.",
+  pressio: "“Influència” correspon a “pressió” perquè parla de l’efecte social sobre la decisió.",
+  servei: "“Atenció” correspon a “servei” en el context d’un restaurant.",
+  correcte: "“Adequat” correspon a “correcte”: acceptable, però no necessàriament excel·lent.",
+  sobra: "“Queda” correspon a “sobra”, és a dir, el que resta del canvi.",
+  replantejar: "“Reconsiderar” correspon a “replantejar-ho”: tornar-ho a pensar d’una altra manera.",
+  obligatoria: "“Obligada” correspon a “obligatòria”: una cosa que s’ha de fer.",
+  llei: "“Norma” correspon a “llei” en aquest context de regla social no escrita.",
+  suggereixen: "“Proposen” correspon a “suggereixen”: ofereixen una opció possible.",
+  culpable: "“Responsable” correspon a “culpable” en aquest context emocional.",
+  excellent: "“Molt bo” correspon a “excel·lent”.",
+  seguent: "“Proper” correspon a “següent”: el que ve després."
+};
+
+function initEx3() {
+  document.querySelectorAll(".syn").forEach(syn => {
+    syn.addEventListener("click", () => {
+      if (syn.classList.contains("used")) return;
+
+      document.querySelectorAll(".syn").forEach(s => s.classList.remove("active"));
+      syn.classList.add("active");
+
+      activeSynKey = syn.dataset.key;
+      document.getElementById("synFeedback").innerHTML =
+        "Ara busca en el text la paraula que correspon a: <strong>" + syn.textContent + "</strong>";
+    });
+  });
+
+  document.querySelectorAll(".click-word").forEach(word => {
+    word.addEventListener("click", () => {
+      if (!activeSynKey) {
+        document.getElementById("synFeedback").innerHTML =
+          "Tria primer una paraula de la llista.";
+        return;
+      }
+
+      if (word.classList.contains("done")) return;
+
+      if (word.dataset.key === activeSynKey) {
+        word.classList.add("done");
+
+        const selectedSyn = document.querySelector(`.syn[data-key="${activeSynKey}"]`);
+        selectedSyn.classList.add("used");
+        selectedSyn.classList.remove("active");
+
+        synScore++;
+        document.getElementById("score3").innerHTML = `Puntuació: ${synScore}/${totalSyns}`;
+        document.getElementById("synFeedback").innerHTML =
+          "✅ Correcte. " + synFeedback[activeSynKey];
+
+        activeSynKey = null;
+      } else {
+        document.getElementById("synFeedback").innerHTML =
+          "❌ No exactament. Mira bé el context i prova una altra paraula del text.";
+      }
+    });
+  });
+}
+
+function resetEx3() {
+  activeSynKey = null;
+  synScore = 0;
+
+  document.querySelectorAll(".click-word").forEach(w => {
+    w.classList.remove("done");
+  });
+
+  document.querySelectorAll(".syn").forEach(s => {
+    s.classList.remove("active", "used");
+  });
+
+  document.getElementById("synFeedback").innerHTML =
+    "Tria primer una paraula de la llista.";
+
+  document.getElementById("score3").innerHTML = "Puntuació: 0/12";
+}
+
+renderEx1();
+initEx3();
+</script>
+
+</body>
+</html>

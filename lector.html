@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Estudiar català a la universitat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #222;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-logo {
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      #f7c600 0%, #f7c600 20%,
+      #d71920 20%, #d71920 32%,
+      #f7c600 32%, #f7c600 44%,
+      #d71920 44%, #d71920 56%,
+      #f7c600 56%, #f7c600 68%,
+      #d71920 68%, #d71920 80%,
+      #f7c600 80%, #f7c600 100%
+    );
+  border: 2px solid rgba(255,255,255,0.75);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.home-btn {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 18px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+}
+
+.video-card,
+.content-card,
+.transcript-box,
+.exercise-card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-note {
+  margin: 8px 2px 0;
+  font-size: .85rem;
+  color: #555;
+}
+
+h1.exercise-title {
+  margin: 0 0 10px;
+  color: #8B4513;
+  font-size: 1.35rem;
+}
+
+h2 {
+  color: #8B4513;
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.instructions {
+  background: #fff6cc;
+  border-left: 6px solid #ffcc00;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+button {
+  background: #ffcc00;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+  margin: 4px;
+}
+
+.option-row {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(255,204,0,.85);
+  box-shadow: 0 2px 4px rgba(0,0,0,.06);
+  padding: 12px;
+  margin: 10px 0;
+}
+
+.feedback {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.correct { color: #207245; }
+.incorrect { color: #b3261e; }
+
+.gap {
+  width: 130px;
+  padding: 6px 8px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.word-bank {
+  background: #FFF8E1;
+  border: 1px solid #ffcc00;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.mc-option {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  background: #FFF8E1;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.hidden {
+  display: none;
+}
+
+@media(max-width:850px) {
+  .banner h1 {
+    font-size: 1rem;
+  }
+
+  .page {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .video-card {
+    padding: 8px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-note {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="banner-logo"></div>
+    <h1>VIDCATALA · Estudiar català a la universitat</h1>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left-column">
+  <div class="video-card">
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="lector.mp4" type="video/mp4">
+        El teu navegador no pot reproduir aquest vídeo.
+      </video>
+    </div>
+    <p class="video-note">Mira el vídeo i completa els exercicis.</p>
+  </div>
+</section>
+
+<section class="right-column">
+
+<div class="content-card">
+  <h1 class="exercise-title">Estudiar català a la universitat</h1>
+
+  <div class="instructions">
+    En aquest monòleg, en Joan explica la seva experiència ensenyant català a Bristol:
+    els estudiants, els pronoms febles, el bilingüisme i Sant Jordi.
+  </div>
+
+  <button onclick="toggleTranscript()">Mostra / amaga el text</button>
+</div>
+
+<div id="transcript" class="transcript-box hidden">
+  <h2>Transcripció</h2>
+  <p>
+    Hola a tots! Sóc en Joan, soc de Palma i aquest és el meu segon any treballant com a lector de català
+    a una universitat de Bristol, al Regne Unit. Per a mi és un orgull veure com estudiants que no tenen
+    cap vincle familiar amb la meva terra s'interessen per la nostra cultura.
+  </p>
+  <p>
+    Sabeu què és el que més els costa al principi? El tema dels pronoms febles! Sempre em diuen que és
+    un autèntic mal de cap saber quan s'ha d'utilitzar “en”, “hi” o “ho”.
+  </p>
+  <p>
+    També els sobta molt el sistema de bilingüisme de Catalunya, València o les Illes Balears; els costa
+    imaginar com dues llengües conviuen al carrer, als mitjans de comunicació i a les aules de manera natural.
+  </p>
+  <p>
+    Però el millor moment del curs és a la primavera, quan organitzem la diada de Sant Jordi al pati de
+    la universitat i repartim llibres i roses entre tots els estudiants del campus.
+  </p>
+</div>
+
+<div class="exercise-card">
+  <h2>1. Sí o No?</h2>
+  <p>Decideix si cada frase és correcta segons el vídeo.</p>
+  <div id="tf-container"></div>
+</div>
+
+<div class="exercise-card">
+  <h2>2. Omple els buits</h2>
+
+  <div class="word-bank">
+    orgull · vincle · pronoms · mal de cap · bilingüisme · conviuen · primavera · roses
+  </div>
+
+  <p>1. Per a en Joan és un <input class="gap" data-answer="orgull"> veure l’interès dels estudiants.</p>
+  <p>2. Alguns estudiants no tenen cap <input class="gap" data-answer="vincle"> familiar amb Mallorca o Catalunya.</p>
+  <p>3. El que més els costa són els <input class="gap" data-answer="pronoms"> febles.</p>
+  <p>4. Saber usar “en”, “hi” i “ho” és un autèntic <input class="gap" data-answer="mal de cap">.</p>
+  <p>5. També els sorprèn el sistema de <input class="gap" data-answer="bilingüisme">.</p>
+  <p>6. Els costa imaginar com dues llengües <input class="gap" data-answer="conviuen"> de manera natural.</p>
+  <p>7. La diada de Sant Jordi s’organitza a la <input class="gap" data-answer="primavera">.</p>
+  <p>8. Durant Sant Jordi reparteixen llibres i <input class="gap" data-answer="roses">.</p>
+
+  <button onclick="checkGaps()">Comprova</button>
+  <button onclick="showGapAnswers()">Mostra respostes</button>
+  <button onclick="resetGaps()">Reinicia</button>
+
+  <div id="gap-feedback" class="feedback"></div>
+</div>
+
+<div class="exercise-card">
+  <h2>3. Tria la millor resposta</h2>
+  <p>Marca l’opció més adequada.</p>
+
+  <div id="mc-container"></div>
+  <button onclick="checkMC()">Comprova</button>
+  <div id="mc-feedback" class="feedback"></div>
+</div>
+
+<div class="exercise-card">
+  <h2>4. I tu?</h2>
+  <p>
+    Escriu una resposta breu. Què creus que seria més difícil per a un estudiant anglès que aprèn català:
+    els pronoms febles, la pronunciació, el vocabulari o el bilingüisme?
+  </p>
+  <textarea placeholder="Escriu aquí la teva resposta..."></textarea>
+</div>
+
+</section>
+</main>
+
+<script>
+function toggleTranscript() {
+  document.getElementById("transcript").classList.toggle("hidden");
+}
+
+const tfQuestions = [
+  {
+    q: "En Joan treballa com a lector de català a Bristol.",
+    a: "si",
+    ok: "Correcte. Diu que treballa a una universitat de Bristol.",
+    no: "No exactament. Bristol és la ciutat on treballa."
+  },
+  {
+    q: "Aquest és el seu primer any a la universitat.",
+    a: "no",
+    ok: "Correcte. Diu que és el seu segon any.",
+    no: "Compte: no és el primer any, sinó el segon."
+  },
+  {
+    q: "Tots els estudiants tenen família catalana o mallorquina.",
+    a: "no",
+    ok: "Correcte. Justament diu que molts no tenen cap vincle familiar amb la seva terra.",
+    no: "No. El text diu el contrari."
+  },
+  {
+    q: "Els pronoms febles són una dificultat important per als estudiants.",
+    a: "si",
+    ok: "Correcte. Els considera un autèntic mal de cap.",
+    no: "No. Aquesta és una de les dificultats principals."
+  },
+  {
+    q: "Els estudiants entenen fàcilment el bilingüisme de Catalunya, València i les Illes.",
+    a: "no",
+    ok: "Correcte. Els costa imaginar aquesta convivència de llengües.",
+    no: "No exactament. El bilingüisme els sorprèn molt."
+  },
+  {
+    q: "Sant Jordi se celebra al pati de la universitat.",
+    a: "si",
+    ok: "Correcte. Organitzen la diada al pati de la universitat.",
+    no: "No. El pati de la universitat sí que apareix al text."
+  },
+  {
+    q: "Durant Sant Jordi reparteixen llibres i roses.",
+    a: "si",
+    ok: "Correcte. És una referència clara a la tradició de Sant Jordi.",
+    no: "No. El text diu que reparteixen llibres i roses."
+  },
+  {
+    q: "El monòleg presenta una visió negativa de l’ensenyament del català a l’estranger.",
+    a: "no",
+    ok: "Correcte. El to és positiu i orgullós.",
+    no: "No. En Joan parla amb orgull i satisfacció."
+  }
+];
+
+const tfContainer = document.getElementById("tf-container");
+
+tfQuestions.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "option-row";
+  div.innerHTML = `
+    <p><strong>${index + 1}.</strong> ${item.q}</p>
+    <button onclick="checkTF(${index}, 'si')">Sí</button>
+    <button onclick="checkTF(${index}, 'no')">No</button>
+    <div id="tf-feedback-${index}" class="feedback"></div>
+  `;
+  tfContainer.appendChild(div);
+});
+
+function checkTF(index, choice) {
+  const fb = document.getElementById(`tf-feedback-${index}`);
+  const item = tfQuestions[index];
+
+  if (choice === item.a) {
+    fb.textContent = item.ok;
+    fb.className = "feedback correct";
+  } else {
+    fb.textContent = item.no;
+    fb.className = "feedback incorrect";
+  }
+}
+
+function normalize(text) {
+  return text.trim().toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function checkGaps() {
+  const gaps = document.querySelectorAll(".gap");
+  let score = 0;
+
+  gaps.forEach(gap => {
+    if (normalize(gap.value) === normalize(gap.dataset.answer)) {
+      gap.style.borderColor = "#207245";
+      score++;
+    } else {
+      gap.style.borderColor = "#b3261e";
+    }
+  });
+
+  const fb = document.getElementById("gap-feedback");
+  fb.textContent = `Puntuació: ${score}/${gaps.length}`;
+  fb.className = score === gaps.length ? "feedback correct" : "feedback incorrect";
+}
+
+function showGapAnswers() {
+  document.querySelectorAll(".gap").forEach(gap => {
+    gap.value = gap.dataset.answer;
+    gap.style.borderColor = "#207245";
+  });
+
+  document.getElementById("gap-feedback").textContent = "Respostes mostrades.";
+  document.getElementById("gap-feedback").className = "feedback correct";
+}
+
+function resetGaps() {
+  document.querySelectorAll(".gap").forEach(gap => {
+    gap.value = "";
+    gap.style.borderColor = "#ddd";
+  });
+
+  document.getElementById("gap-feedback").textContent = "";
+}
+
+const mcQuestions = [
+  {
+    q: "Quina és la feina d’en Joan?",
+    options: [
+      "És professor d’anglès a Palma.",
+      "És lector de català a una universitat.",
+      "És estudiant de català a Bristol."
+    ],
+    answer: 1
+  },
+  {
+    q: "Per què se sent orgullós?",
+    options: [
+      "Perquè els estudiants s’interessen per la cultura catalana.",
+      "Perquè tots els estudiants parlen català perfectament.",
+      "Perquè Sant Jordi és una festa britànica."
+    ],
+    answer: 0
+  },
+  {
+    q: "Què vol dir que els pronoms febles són un “mal de cap”?",
+    options: [
+      "Que són molt divertits.",
+      "Que són fàcils d’explicar.",
+      "Que són difícils i creen confusió."
+    ],
+    answer: 2
+  },
+  {
+    q: "Què sorprèn els estudiants sobre el bilingüisme?",
+    options: [
+      "Que dues llengües puguin conviure de manera natural.",
+      "Que només es parli català a les Illes Balears.",
+      "Que el català no existeixi als mitjans de comunicació."
+    ],
+    answer: 0
+  },
+  {
+    q: "Quin és el millor moment del curs per a en Joan?",
+    options: [
+      "El primer dia de classe.",
+      "La diada de Sant Jordi.",
+      "Les vacances d’estiu."
+    ],
+    answer: 1
+  }
+];
+
+const mcContainer = document.getElementById("mc-container");
+
+mcQuestions.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "option-row";
+
+  let html = `<p><strong>${index + 1}.</strong> ${item.q}</p>`;
+
+  item.options.forEach((opt, optIndex) => {
+    html += `
+      <label class="mc-option">
+        <input type="radio" name="mc${index}" value="${optIndex}">
+        ${opt}
+      </label>
+    `;
+  });
+
+  div.innerHTML = html;
+  mcContainer.appendChild(div);
+});
+
+function checkMC() {
+  let score = 0;
+
+  mcQuestions.forEach((item, index) => {
+    const selected = document.querySelector(`input[name="mc${index}"]:checked`);
+    if (selected && Number(selected.value) === item.answer) {
+      score++;
+    }
+  });
+
+  const fb = document.getElementById("mc-feedback");
+  fb.textContent = `Puntuació: ${score}/${mcQuestions.length}`;
+  fb.className = score === mcQuestions.length ? "feedback correct" : "feedback incorrect";
+}
+</script>
+
+</body>
+</html>

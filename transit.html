@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDCATALA · Trànsit a Barcelona</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      background: #fff;
+      color: #222;
+    }
+
+    .banner {
+      background: #ffcc00;
+      color: #222;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,.1);
+      position: relative;
+      min-height: 60px;
+      box-sizing: border-box;
+    }
+
+    .banner img.logo {
+      position: absolute;
+      left: 10px;
+      height: 40px;
+    }
+
+    .banner span {
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 60px;
+    }
+
+    .home-icon {
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      padding: 5px;
+      transition: .2s;
+    }
+
+    .home-icon:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    .left-column {
+      flex: 1.35;
+      padding: 20px 18px;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      overflow-y: auto;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      max-height: calc(100vh - 60px);
+    }
+
+    .right-column {
+      flex: 2.35;
+      padding: 20px;
+      background: #fff;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .media-card {
+      width: 100%;
+      max-width: 560px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,.1);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .media-head {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(255,204,0,.35), rgba(255,204,0,.05));
+      color: #8B4513;
+      font-weight: 700;
+      box-sizing: border-box;
+      font-size: 13px;
+    }
+
+    .mini-instructions {
+      padding: 12px 14px 4px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .landscape-video-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .landscape-video {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,.18);
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .landscape-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    .media-caption {
+      padding: 10px 14px 16px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .exercise-title {
+      text-align: center;
+      color: #8B4513;
+      font-size: 1.5em;
+      margin: 0 0 15px;
+      font-weight: 700;
+    }
+
+    .instructions {
+      background: #FFF8E1;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.06);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .section-title {
+      color: #8B4513;
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 5px;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .button {
+      background: #ffcc00;
+      color: #222;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 4px rgba(0,0,0,.2);
+      transition: .2s;
+      font-family: 'Quicksand', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .button:hover {
+      background: #e6b800;
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+
+    .q {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid rgba(255,204,0,.85);
+      box-shadow: 0 2px 4px rgba(0,0,0,.06);
+      padding: 12px;
+      margin: 10px 0;
+    }
+
+    .q-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .q-title {
+      font-weight: 700;
+      color: #8B4513;
+      margin: 0;
+    }
+
+    .q-sentence {
+      margin: 6px 0 0;
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    .opts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .opt {
+      background: #FFF8E1;
+      border: 1px solid rgba(255,204,0,.6);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .opt.correct {
+      border: 2px solid #4CAF50;
+      background: #E8F5E9;
+    }
+
+    .opt.wrong {
+      border: 2px solid #F44336;
+      background: #FFEBEE;
+    }
+
+    .opt input {
+      margin: 0;
+    }
+
+    .opt label {
+      cursor: pointer;
+      flex: 1;
+      font-size: 13px;
+    }
+
+    .per-q-feedback {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+      background: #fafafa;
+      border: 1px solid #eee;
+      display: none;
+    }
+
+    .per-q-feedback.correct {
+      background: #E8F5E9;
+      border-color: #4CAF50;
+    }
+
+    .per-q-feedback.wrong {
+      background: #FFEBEE;
+      border-color: #F44336;
+    }
+
+    .feedback-box {
+      margin-top: 15px;
+      padding: 12px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,.1);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+
+    .feedback-line {
+      margin: 0 0 6px;
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #FFF8E1;
+      border: 1px solid #ffcc00;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin: 6px 8px 0 0;
+      font-weight: 700;
+      color: #8B4513;
+      font-size: 12px;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .gap-wrap {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid rgba(255,204,0,.85);
+      box-shadow: 0 2px 4px rgba(0,0,0,.06);
+      padding: 14px;
+      margin: 10px 0;
+    }
+
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+
+    .word-bank span {
+      display: inline-block;
+      background: #FFF8E1;
+      border: 1px solid #ffcc00;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      color: #8B4513;
+      font-size: 12px;
+    }
+
+    .gap-text {
+      line-height: 2.1;
+      font-size: 13px;
+    }
+
+    .gap-input {
+      width: 120px;
+      border: 2px solid rgba(255,204,0,.45);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      outline: none;
+      background: #fffdf4;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .gap-input:focus {
+      border-color: #ffcc00;
+      box-shadow: 0 0 0 3px rgba(255,204,0,.18);
+    }
+
+    .gap-input.correct {
+      border-color: #4CAF50;
+      background: #E8F5E9;
+    }
+
+    .gap-input.wrong {
+      border-color: #F44336;
+      background: #FFEBEE;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .opts {
+        grid-template-columns: 1fr;
+      }
+
+      .left-column {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 8px 10px;
+        background: #f4f4f4;
+        max-height: none;
+        overflow: visible;
+        box-shadow: 0 4px 10px rgba(0,0,0,.12);
+      }
+
+      .right-column {
+        padding: 18px 16px 24px;
+      }
+
+      .media-card {
+        width: 100%;
+        max-width: none;
+        border-radius: 12px;
+      }
+
+      .landscape-video-wrap {
+        padding: 6px;
+      }
+
+      .landscape-video {
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+      }
+
+      .exercise-title {
+        font-size: 1.35em;
+      }
+
+      .q-sentence,
+      .opt label,
+      .instructions,
+      .feedback-line,
+      .gap-text {
+        font-size: 14px;
+      }
+
+      .button {
+        font-size: 13px;
+      }
+
+      .gap-input {
+        width: 105px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .banner span {
+        font-size: 14px;
+        line-height: 1.2;
+      }
+
+      .banner {
+        padding: 10px 14px;
+      }
+
+      .left-column {
+        top: 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="banner">
+    <img class="logo" src="bandera.png" alt="Bandera catalana">
+    <span>VIDCATALA · Trànsit a Barcelona</span>
+    <i class="fas fa-home home-icon" onclick="window.location.href='index.html'"></i>
+  </div>
+
+  <div class="container">
+
+    <div class="left-column">
+      <div class="media-card">
+<div class="landscape-video-wrap">
+          <div class="landscape-video">
+            <video controls preload="metadata" playsinline>
+              <source src="transit.mp4" type="video/mp4">
+              El teu navegador no pot reproduir aquest vídeo.
+            </video>
+          </div>
+        </div>
+</div>
+    </div>
+
+    <div class="right-column">
+<div class="instructions">
+        <p><strong>Fes dos exercicis:</strong> marca si les afirmacions són sí o no i després completa el text amb les paraules del requadre.</p>
+      </div>
+
+      <h3 class="section-title">Exercici 1 · Sí o No?</h3>
+      <div id="tfQuiz"></div>
+
+      <div class="actions-row">
+        <button class="button" onclick="checkQuiz('tf')"><i class="fa-solid fa-check"></i> Comprova Exercici 1</button>
+        <button class="button" onclick="showAnswers('tf')"><i class="fa-solid fa-lightbulb"></i> Mostra respostes</button>
+        <button class="button" onclick="resetQuiz('tf')"><i class="fa-solid fa-rotate-left"></i> Reinicia Exercici 1</button>
+      </div>
+
+      <div class="feedback-box" id="tfBox">
+        <p class="feedback-line" id="tfMsg"><strong>Feedback:</strong> Tria una opció a cada pregunta i prem “Comprova”.</p>
+        <div>
+          <span class="pill" id="tfScore">Puntuació: 0/8</span>
+          <span class="pill" id="tfPercent">Percentatge: 0%</span>
+        </div>
+      </div>
+
+      <h3 class="section-title">Exercici 2 · Omple els buits</h3>
+
+      <div class="gap-wrap">
+        <div class="word-bank" id="wordBank"></div>
+        <div class="gap-text" id="gapTextContainer"></div>
+      </div>
+
+      <div class="actions-row">
+        <button class="button" onclick="checkGapFill()"><i class="fa-solid fa-check"></i> Comprova Exercici 2</button>
+        <button class="button" onclick="showGapAnswers()"><i class="fa-solid fa-lightbulb"></i> Mostra respostes</button>
+        <button class="button" onclick="resetGapFill()"><i class="fa-solid fa-rotate-left"></i> Reinicia Exercici 2</button>
+      </div>
+
+      <div class="feedback-box" id="gapBox">
+        <p class="feedback-line" id="gapMsg"><strong>Feedback:</strong> Completa tots els espais i prem “Comprova”.</p>
+        <div>
+          <span class="pill" id="gapScore">Puntuació: 0/8</span>
+          <span class="pill" id="gapPercent">Percentatge: 0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function esc(s){
+      return (s || "").replace(/[&<>"]/g, c => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+      }[c]));
+    }
+
+    const quizzes = {
+      tf: [
+        {
+          id:"t1",
+          title:"1. La concentració del trànsit",
+          sentence:"La congestió del trànsit a Barcelona es concentra sobretot en moments molt concrets del dia.",
+          options:["Sí", "No"],
+          correct:0,
+          feedbackCorrect:"Correcte. El text destaca especialment les hores punta del matí i de la tarda.",
+          feedbackWrong:"No és correcte. El monòleg insisteix que el trànsit és especialment dens a les hores punta."
+        },
+        {
+          id:"t2",
+          title:"2. La situació de les rondes",
+          sentence:"Segons el monòleg, les rondes només presenten problemes de circulació quan hi ha accidents.",
+          options:["Sí", "No"],
+          correct:1,
+          feedbackCorrect:"Correcte. El text diu que les rondes sovint estan plenes, fins i tot sense parlar només d’accidents.",
+          feedbackWrong:"No és correcte. El monòleg no limita els problemes de les rondes als accidents."
+        },
+        {
+          id:"t3",
+          title:"3. Les causes del problema",
+          sentence:"La lentitud del trànsit s’explica exclusivament per l’excés de vehicles.",
+          options:["Sí", "No"],
+          correct:1,
+          feedbackCorrect:"Correcte. A més dels molts cotxes, el text també menciona accidents, avaries i obres.",
+          feedbackWrong:"No és correcte. El monòleg presenta diverses causes, no només una."
+        },
+        {
+          id:"t4",
+          title:"4. L’abast d’una avaria",
+          sentence:"Un vehicle avariat pot tenir conseqüències que van més enllà del lloc exacte on s’ha produït la incidència.",
+          options:["Sí", "No"],
+          correct:0,
+          feedbackCorrect:"Correcte. L’exemple del camió avariat que causa quilòmetres de cua mostra un efecte més ampli.",
+          feedbackWrong:"No és correcte. El text suggereix clarament que una avaria pot afectar una zona molt més extensa."
+        },
+        {
+          id:"t5",
+          title:"5. Factors que agreugen la circulació",
+          sentence:"El monòleg dona a entendre que la meteorologia i determinades activitats urbanes poden agreujar la circulació.",
+          options:["Sí", "No"],
+          correct:0,
+          feedbackCorrect:"Correcte. El text diu que quan plou o hi ha esdeveniments, el trànsit encara empitjora més.",
+          feedbackWrong:"No és correcte. El monòleg sí que relaciona la pluja i els esdeveniments amb un empitjorament del trànsit."
+        },
+        {
+          id:"t6",
+          title:"6. El paper del transport públic",
+          sentence:"L’ús del transport públic apareix al text com una solució totalment eficaç per evitar qualsevol problema de mobilitat.",
+          options:["Sí", "No"],
+          correct:1,
+          feedbackCorrect:"Correcte. Tot i que molta gent el prefereix, el text diu que els autobusos també es veuen afectats pel trànsit.",
+          feedbackWrong:"No és correcte. El monòleg matisa aquesta idea i indica que el transport públic no queda completament al marge del problema."
+        },
+        {
+          id:"t7",
+          title:"7. L’efecte de les mesures",
+          sentence:"Les mesures de les autoritats ja han resolt de manera clara la situació actual del trànsit.",
+          options:["Sí", "No"],
+          correct:1,
+          feedbackCorrect:"Correcte. El text diu que intenten millorar la situació, però que de moment circular continua sent lent i difícil.",
+          feedbackWrong:"No és correcte. El monòleg no presenta una resolució clara del problema."
+        },
+        {
+          id:"t8",
+          title:"8. La idea final del text",
+          sentence:"El to general del monòleg transmet la idea que la mobilitat a Barcelona continua sent problemàtica malgrat els intents de millora.",
+          options:["Sí", "No"],
+          correct:0,
+          feedbackCorrect:"Correcte. Aquesta és la conclusió general del text.",
+          feedbackWrong:"No és correcte. El final del monòleg subratlla que la situació continua sent complicada."
+        }
+      ]
+    };
+
+    const gapWords = [
+      "complicada",
+      "hores punta",
+      "plenes",
+      "lentament",
+      "retencions",
+      "obres",
+      "transport públic",
+      "difícil"
+    ];
+
+    const gapTextTemplate = `Actualment, la situació del trànsit a Barcelona és bastant __________. Hi ha molts cotxes, sobretot a les __________ del matí i de la tarda. Les rondes, com la Ronda Litoral i la Ronda de Dalt, sovint estan __________. En alguns moments, els vehicles avancen molt __________. A vegades hi ha accidents o avaries que provoquen més __________. També hi ha __________ en algunes zones que dificulten la circulació. Moltes persones prefereixen utilitzar el __________. Però, de moment, circular per Barcelona continua sent lent i __________.`;
+
+    const expectedAnswers = [
+      "complicada",
+      "hores punta",
+      "plenes",
+      "lentament",
+      "retencions",
+      "obres",
+      "transport públic",
+      "difícil"
+    ];
+
+    let gapInputs = [];
+
+    function renderQuiz(kind){
+      const wrap = document.getElementById(kind + "Quiz");
+      const items = quizzes[kind];
+      wrap.innerHTML = "";
+
+      items.forEach((q) => {
+        const qId = `${kind}_${q.id}`;
+        const card = document.createElement("div");
+        card.className = "q";
+        card.dataset.kind = kind;
+        card.dataset.qid = q.id;
+        card.dataset.correct = q.correct;
+        card.dataset.feedbackCorrect = q.feedbackCorrect;
+        card.dataset.feedbackWrong = q.feedbackWrong;
+
+        const head = document.createElement("div");
+        head.className = "q-head";
+
+        const left = document.createElement("div");
+        const h = document.createElement("div");
+        h.className = "q-title";
+        h.textContent = q.title;
+
+        const s = document.createElement("div");
+        s.className = "q-sentence";
+        s.innerHTML = esc(q.sentence);
+
+        left.appendChild(h);
+        left.appendChild(s);
+        head.appendChild(left);
+
+        const opts = document.createElement("div");
+        opts.className = "opts";
+
+        q.options.forEach((opt, oi) => {
+          const owrap = document.createElement("div");
+          owrap.className = "opt";
+          owrap.dataset.oi = oi;
+
+          const inp = document.createElement("input");
+          inp.type = "radio";
+          inp.name = qId;
+          inp.id = `${qId}_${oi}`;
+          inp.value = oi;
+
+          const lab = document.createElement("label");
+          lab.htmlFor = inp.id;
+          lab.textContent = opt;
+
+          owrap.appendChild(inp);
+          owrap.appendChild(lab);
+          opts.appendChild(owrap);
+        });
+
+        const feedback = document.createElement("div");
+        feedback.className = "per-q-feedback";
+        feedback.id = `fb_${kind}_${q.id}`;
+
+        card.appendChild(head);
+        card.appendChild(opts);
+        card.appendChild(feedback);
+        wrap.appendChild(card);
+      });
+    }
+
+    function setBox(kind, score, total, stats){
+      const pct = Math.round((score / total) * 100);
+
+      document.getElementById(kind + "Score").textContent = `Puntuació: ${score}/${total}`;
+      document.getElementById(kind + "Percent").textContent = `Percentatge: ${pct}%`;
+
+      const answered = stats?.answered ?? 0;
+      const blanks = stats?.blanks ?? (total - answered);
+      const wrong = stats?.wrong ?? (answered - score);
+
+      let msg = `Has encertat <strong>${score}</strong> de <strong>${total}</strong>.`;
+      msg += ` Has respost <strong>${answered}</strong> i n’has deixat <strong>${blanks}</strong> en blanc.`;
+
+      if (score === total) msg = `✅ <strong>Perfecte!</strong> ${msg}`;
+      else if (score >= total - 1) msg = `👍 <strong>Molt bé!</strong> ${msg}`;
+      else if (score >= Math.ceil(total * 0.6)) msg = `🙂 <strong>Bona feina!</strong> ${msg} Repassa els errors en vermell.`;
+      else msg = `💡 <strong>Continua!</strong> ${msg} (Verd = correcte, vermell = resposta incorrecta.)`;
+
+      if (wrong > 0) msg += ` Errors: <strong>${wrong}</strong>.`;
+
+      document.getElementById(kind + "Msg").innerHTML = `<strong>Feedback:</strong> ${msg}`;
+    }
+
+    function clearMarks(kind){
+      document.querySelectorAll(`[data-kind="${kind}"] .opt`).forEach(o => {
+        o.classList.remove("correct", "wrong");
+      });
+      document.querySelectorAll(`[data-kind="${kind}"] .per-q-feedback`).forEach(fb => {
+        fb.style.display = "none";
+        fb.classList.remove("correct", "wrong");
+        fb.innerHTML = "";
+      });
+    }
+
+    function checkQuiz(kind){
+      const cards = Array.from(document.querySelectorAll(`[data-kind="${kind}"]`));
+      let score = 0;
+      let answered = 0;
+      let wrong = 0;
+
+      clearMarks(kind);
+
+      cards.forEach(card => {
+        const correct = parseInt(card.dataset.correct, 10);
+        const groupName = `${kind}_${card.dataset.qid}`;
+        const chosen = document.querySelector(`input[name="${groupName}"]:checked`);
+        const opts = Array.from(card.querySelectorAll(".opt"));
+        const fb = card.querySelector(".per-q-feedback");
+
+        opts.forEach(o => {
+          const oi = parseInt(o.dataset.oi, 10);
+          if (oi === correct) o.classList.add("correct");
+        });
+
+        if (chosen) {
+          answered++;
+          const val = parseInt(chosen.value, 10);
+          fb.style.display = "block";
+
+          if (val === correct) {
+            score++;
+            fb.classList.add("correct");
+            fb.innerHTML = `<strong>Correcte.</strong> ${esc(card.dataset.feedbackCorrect)}`;
+          } else {
+            wrong++;
+            const wrongWrap = opts.find(o => parseInt(o.dataset.oi, 10) === val);
+            if (wrongWrap) wrongWrap.classList.add("wrong");
+            fb.classList.add("wrong");
+            fb.innerHTML = `<strong>Revisa-ho.</strong> ${esc(card.dataset.feedbackWrong)}`;
+          }
+        }
+      });
+
+      const total = cards.length;
+      const blanks = total - answered;
+      setBox(kind, score, total, { answered, blanks, wrong });
+    }
+
+    function showAnswers(kind){
+      document.querySelectorAll(`[data-kind="${kind}"]`).forEach(card => {
+        const correct = parseInt(card.dataset.correct, 10);
+        const groupName = `${kind}_${card.dataset.qid}`;
+        const inp = document.querySelector(`input[name="${groupName}"][value="${correct}"]`);
+        if (inp) inp.checked = true;
+      });
+      checkQuiz(kind);
+    }
+
+    function resetQuiz(kind){
+      document.querySelectorAll(`[data-kind="${kind}"] input[type="radio"]`).forEach(i => i.checked = false);
+      clearMarks(kind);
+      const total = quizzes[kind].length;
+      document.getElementById(kind + "Score").textContent = `Puntuació: 0/${total}`;
+      document.getElementById(kind + "Percent").textContent = `Percentatge: 0%`;
+      document.getElementById(kind + "Msg").innerHTML =
+        `<strong>Feedback:</strong> Tria una opció a cada pregunta i prem “Comprova”.`;
+    }
+
+    function renderGapFill(){
+      const container = document.getElementById("gapTextContainer");
+      const bank = document.getElementById("wordBank");
+
+      bank.innerHTML = gapWords.map(word => `<span>${esc(word)}</span>`).join("");
+
+      let i = 0;
+      const html = gapTextTemplate.replace(/__________/g, () => {
+        const n = i++;
+        return `<input type="text" class="gap-input" id="gap_${n}" maxlength="40">`;
+      });
+
+      container.innerHTML = html;
+      gapInputs = Array.from(document.querySelectorAll(".gap-input"));
+    }
+
+    function setGapBox(score, total, stats){
+      const pct = Math.round((score / total) * 100);
+      document.getElementById("gapScore").textContent = `Puntuació: ${score}/${total}`;
+      document.getElementById("gapPercent").textContent = `Percentatge: ${pct}%`;
+
+      const answered = stats?.answered ?? 0;
+      const blanks = stats?.blanks ?? (total - answered);
+      const wrong = stats?.wrong ?? (answered - score);
+
+      let msg = `Has encertat <strong>${score}</strong> de <strong>${total}</strong>.`;
+      msg += ` Has completat <strong>${answered}</strong> espais i n’has deixat <strong>${blanks}</strong> en blanc.`;
+
+      if (score === total) msg = `✅ <strong>Perfecte!</strong> ${msg}`;
+      else if (score >= total - 1) msg = `👍 <strong>Molt bé!</strong> ${msg}`;
+      else if (score >= Math.ceil(total * 0.6)) msg = `🙂 <strong>Bona feina!</strong> ${msg}`;
+      else msg = `💡 <strong>Continua!</strong> ${msg}`;
+
+      if (wrong > 0) msg += ` Errors: <strong>${wrong}</strong>.`;
+
+      document.getElementById("gapMsg").innerHTML = `<strong>Feedback:</strong> ${msg}`;
+    }
+
+    function clearGapMarks(){
+      gapInputs.forEach(inp => inp.classList.remove("correct", "wrong"));
+    }
+
+    function normAnswer(s){
+      return (s || "")
+        .toString()
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function checkGapFill(){
+      let score = 0;
+      let answered = 0;
+      let wrong = 0;
+
+      clearGapMarks();
+
+      gapInputs.forEach((inp, i) => {
+        const user = normAnswer(inp.value);
+        const correct = normAnswer(expectedAnswers[i]);
+
+        if (user) {
+          answered++;
+          if (user === correct) {
+            score++;
+            inp.classList.add("correct");
+          } else {
+            wrong++;
+            inp.classList.add("wrong");
+          }
+        }
+      });
+
+      const total = expectedAnswers.length;
+      const blanks = total - answered;
+      setGapBox(score, total, { answered, blanks, wrong });
+    }
+
+    function showGapAnswers(){
+      gapInputs.forEach((inp, i) => {
+        inp.value = expectedAnswers[i];
+      });
+      checkGapFill();
+    }
+
+    function resetGapFill(){
+      gapInputs.forEach(inp => {
+        inp.value = "";
+        inp.classList.remove("correct", "wrong");
+      });
+
+      const total = expectedAnswers.length;
+      document.getElementById("gapScore").textContent = `Puntuació: 0/${total}`;
+      document.getElementById("gapPercent").textContent = `Percentatge: 0%`;
+      document.getElementById("gapMsg").innerHTML =
+        `<strong>Feedback:</strong> Completa tots els espais i prem “Comprova”.`;
+    }
+
+    renderQuiz("tf");
+    renderGapFill();
+  </script>
+</body>
+</html>

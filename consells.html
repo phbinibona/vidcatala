@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDCATALA · Donar consells i fer recomanacions</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #f7f6f2;
+      color: #2f2f2f;
+    }
+
+    .banner {
+      background: #ffcc00;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .banner h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .home {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+    }
+
+    .left {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      color: #8B4513;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-text {
+      background: #fff8e7;
+      border-left: 5px solid #ffcc00;
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .patterns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .pattern-card {
+      background: #f7f6f2;
+      border-radius: 14px;
+      padding: 12px;
+      border-left: 4px solid #ffcc00;
+    }
+
+    .pattern-card h4 {
+      color: #8B4513;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .pattern-card p {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 0;
+    }
+
+    .word-salad {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px;
+      background: #fff8e7;
+      border: 2px dashed #d7c28a;
+      border-radius: 16px;
+      margin: 14px 0;
+      min-height: 80px;
+    }
+
+    .word {
+      background: #ffcc00;
+      color: #2f2f2f;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+      font-size: 0.95rem;
+    }
+
+    .word:hover {
+      transform: scale(1.05);
+      background: #f2bd00;
+    }
+
+    .sentence-builder {
+      background: #f0ede6;
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+      min-height: 60px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #ffcc00;
+    }
+
+    .btn-success {
+      background: #35a853;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e8e8e8;
+    }
+
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .feedback-box.ok {
+      display: block;
+      background: #e9f8ef;
+      border-left: 5px solid #35a853;
+    }
+
+    .feedback-box.bad {
+      display: block;
+      background: #fff0f0;
+      border-left: 5px solid #cc3d3d;
+    }
+
+    .feedback-box.info {
+      display: block;
+      background: #fff8d7;
+      border-left: 5px solid #f1d45c;
+    }
+
+    .counter {
+      display: inline-block;
+      background: #2f2f2f;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .answer-list {
+      max-height: 240px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .answer-item {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 760px;
+      max-height: 85vh;
+      overflow-y: auto;
+      margin: 40px auto;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      line-height: 1.7;
+    }
+
+    .modal-content h2 {
+      color: #8B4513;
+      margin-bottom: 14px;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .close-modal:hover {
+      color: #000;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+      }
+
+      .left {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .left .card {
+        border-radius: 0 0 18px 18px;
+        margin-bottom: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="banner">
+  <h1>VIDCATALA · Donar consells i fer recomanacions</h1>
+  <a class='home' href='/'><i class="fa-solid fa-house"></i></a>
+</header>
+
+<main class="page">
+
+  <section class="left">
+    <div class="card">
+      <div class="video-wrap">
+        <video id="mainVideo" controls playsinline preload="metadata">
+          <source src="advice.mp4" type="video/mp4">
+          El teu navegador no pot reproduir aquest vídeo.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="right">
+
+    <div class="card">
+      <h2>Introducció</h2>
+
+      <div class="intro-text">
+        <p>
+          En aquesta activitat aprendràs a donar consells i a fer recomanacions en català.
+          Fixa’t en estructures com <strong>cal que</strong>, <strong>podries</strong>,
+          <strong>has de</strong>, <strong>t’aconsello que</strong> i
+          <strong>et recomano que</strong>.
+        </p>
+
+        <p>
+          
+        </p>
+
+        <button class="btn btn-primary" onclick="openTranscript()">Mostra el text del vídeo</button>
+      </div>
+
+      <h2>📐 Estructures clau</h2>
+
+      <div class="patterns">
+        <div class="pattern-card">
+          <h4>Cal que + subjuntiu</h4>
+          <p>Cal que descansis<br>Cal que vagis al metge</p>
+        </div>
+
+        <div class="pattern-card">
+          <h4>Podries + infinitiu</h4>
+          <p>Podries fer exercici<br>Podries parlar amb ella</p>
+        </div>
+
+        <div class="pattern-card">
+          <h4>Has de + infinitiu</h4>
+          <p>Has de parlar amb ella<br>Has de llegir aquest llibre</p>
+        </div>
+
+        <div class="pattern-card">
+          <h4>T'aconsello que + subjuntiu</h4>
+          <p>T'aconsello que llegeixis<br>T'aconsello que descansis</p>
+        </div>
+
+        <div class="pattern-card">
+          <h4>Et recomano que + subjuntiu</h4>
+          <p>Et recomano que vagis<br>Et recomano que descansis</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🧩 Paraules disponibles</h2>
+      <p>Clica les paraules en l'ordre correcte per construir frases. Les paraules apareixen barrejades i sense signes de puntuació.</p>
+
+      <div class="word-salad" id="wordSalad"></div>
+
+      <div class="sentence-builder" id="sentenceDisplay">
+        Tria paraules per construir una frase
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="checkSentence()">Comprova</button>
+        <button class="btn btn-secondary" onclick="clearSentence()">Neteja frase</button>
+        <button class="btn btn-secondary" onclick="resetAll()">Reinicia tot</button>
+      </div>
+
+      <div class="feedback-box" id="feedbackBox"></div>
+
+      <div style="margin-top:14px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+        <span class="counter" id="comboCounter">Combinacions: 0</span>
+        <span class="counter" id="totalCounter">Possibles: 0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📝 Frases correctes trobades</h2>
+      <div id="correctList" class="answer-list">
+        <p style="color:#999;">Encara no hi ha cap frase.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<div id="transcriptModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeTranscript()">&times;</span>
+    <h2>Text del vídeo</h2>
+
+    <p>Hola! Benvingut a aquesta activitat. Potser et preguntaràs per què hem triat precisament aquestes expressions. La resposta és molt senzilla: són algunes de les estructures que els catalanoparlants fan servir més sovint quan donen consells, fan recomanacions o expliquen què és convenient fer. Les sentiràs en converses quotidianes, a la feina, amb els amics, a casa o fins i tot quan vas al metge. L'objectiu no és només construir frases correctes, sinó començar a reconèixer aquests models perquè després els puguis utilitzar de manera natural quan parlis català. Per això trobaràs diverses paraules que es poden combinar de més d'una manera. En la vida real, moltes idees es poden expressar amb diferents frases, i totes poden ser igualment correctes. No busquis una única resposta. Experimenta, prova diferents ordres de les paraules i descobreix totes les combinacions que siguin gramaticalment possibles. Cada frase correcta que construeixis és un pas més perquè aquestes estructures et surtin espontàniament quan parlis. Som-hi! A veure quantes combinacions ets capaç de trobar. 
+
+
+    <p>
+     
+  </div>
+</div>
+
+<script>
+  const wordBank = [
+    "Cal", "que", "descansis",
+    "Podries", "fer", "exercici",
+    "Has", "de", "parlar", "demà",
+    "T'aconsello", "que", "llegeixis", "aquest", "llibre",
+    "Et", "recomano", "que", "vagis", "al", "metge",
+    "un", "poc", "amb", "ella", "ell",
+    "descansar", "llegir"
+  ];
+
+  const validPatterns = [
+    ["Cal", "que", "descansis"],
+    ["Cal", "que", "descansis", "demà"],
+    ["Cal", "que", "descansis", "un", "poc"],
+    ["Cal", "que", "demà", "descansis"],
+    ["Cal", "que", "demà", "descansis", "un", "poc"],
+
+    ["Cal", "que", "llegeixis", "aquest", "llibre"],
+    ["Cal", "que", "llegeixis", "aquest", "llibre", "demà"],
+    ["Cal", "que", "demà", "llegeixis", "aquest", "llibre"],
+
+    ["Cal", "que", "vagis", "al", "metge"],
+    ["Cal", "que", "vagis", "al", "metge", "demà"],
+    ["Cal", "que", "demà", "vagis", "al", "metge"],
+
+    ["Podries", "fer", "exercici"],
+    ["Podries", "fer", "exercici", "demà"],
+    ["Podries", "demà", "fer", "exercici"],
+    ["Podries", "fer", "exercici", "un", "poc"],
+    ["Podries", "fer", "un", "poc", "exercici"],
+    ["Podries", "demà", "fer", "exercici", "un", "poc"],
+    ["Podries", "demà", "fer", "un", "poc", "exercici"],
+
+    ["Podries", "parlar", "amb", "ella"],
+    ["Podries", "parlar", "amb", "ella", "demà"],
+    ["Podries", "demà", "parlar", "amb", "ella"],
+    ["Podries", "parlar", "un", "poc", "amb", "ella"],
+    ["Podries", "parlar", "amb", "ella", "un", "poc"],
+    ["Podries", "demà", "parlar", "un", "poc", "amb", "ella"],
+
+    ["Podries", "parlar", "amb", "ell"],
+    ["Podries", "parlar", "amb", "ell", "demà"],
+    ["Podries", "demà", "parlar", "amb", "ell"],
+    ["Podries", "parlar", "un", "poc", "amb", "ell"],
+    ["Podries", "parlar", "amb", "ell", "un", "poc"],
+    ["Podries", "demà", "parlar", "un", "poc", "amb", "ell"],
+
+    ["Podries", "descansar"],
+    ["Podries", "descansar", "demà"],
+    ["Podries", "demà", "descansar"],
+    ["Podries", "descansar", "un", "poc"],
+    ["Podries", "demà", "descansar", "un", "poc"],
+
+    ["Podries", "llegir", "aquest", "llibre"],
+    ["Podries", "llegir", "aquest", "llibre", "demà"],
+    ["Podries", "demà", "llegir", "aquest", "llibre"],
+
+    ["Has", "de", "parlar", "amb", "ella"],
+    ["Has", "de", "parlar", "amb", "ella", "demà"],
+    ["Has", "de", "demà", "parlar", "amb", "ella"],
+    ["Has", "de", "parlar", "un", "poc", "amb", "ella"],
+    ["Has", "de", "parlar", "amb", "ella", "un", "poc"],
+
+    ["Has", "de", "parlar", "amb", "ell"],
+    ["Has", "de", "parlar", "amb", "ell", "demà"],
+    ["Has", "de", "demà", "parlar", "amb", "ell"],
+    ["Has", "de", "parlar", "un", "poc", "amb", "ell"],
+    ["Has", "de", "parlar", "amb", "ell", "un", "poc"],
+
+    ["Has", "de", "fer", "exercici"],
+    ["Has", "de", "fer", "exercici", "demà"],
+    ["Has", "de", "demà", "fer", "exercici"],
+    ["Has", "de", "fer", "exercici", "un", "poc"],
+    ["Has", "de", "fer", "un", "poc", "exercici"],
+    ["Has", "de", "demà", "fer", "exercici", "un", "poc"],
+    ["Has", "de", "demà", "fer", "un", "poc", "exercici"],
+
+    ["Has", "de", "llegir", "aquest", "llibre"],
+    ["Has", "de", "llegir", "aquest", "llibre", "demà"],
+    ["Has", "de", "demà", "llegir", "aquest", "llibre"],
+
+    ["Has", "de", "descansar"],
+    ["Has", "de", "descansar", "demà"],
+    ["Has", "de", "demà", "descansar"],
+    ["Has", "de", "descansar", "un", "poc"],
+    ["Has", "de", "demà", "descansar", "un", "poc"],
+
+    ["T'aconsello", "que", "llegeixis", "aquest", "llibre"],
+    ["T'aconsello", "que", "llegeixis", "aquest", "llibre", "demà"],
+    ["T'aconsello", "que", "demà", "llegeixis", "aquest", "llibre"],
+
+    ["T'aconsello", "que", "vagis", "al", "metge"],
+    ["T'aconsello", "que", "vagis", "al", "metge", "demà"],
+    ["T'aconsello", "que", "demà", "vagis", "al", "metge"],
+
+    ["T'aconsello", "que", "descansis"],
+    ["T'aconsello", "que", "descansis", "demà"],
+    ["T'aconsello", "que", "demà", "descansis"],
+    ["T'aconsello", "que", "descansis", "un", "poc"],
+    ["T'aconsello", "que", "demà", "descansis", "un", "poc"],
+
+    ["Et", "recomano", "que", "llegeixis", "aquest", "llibre"],
+    ["Et", "recomano", "que", "llegeixis", "aquest", "llibre", "demà"],
+    ["Et", "recomano", "que", "demà", "llegeixis", "aquest", "llibre"],
+
+    ["Et", "recomano", "que", "vagis", "al", "metge"],
+    ["Et", "recomano", "que", "vagis", "al", "metge", "demà"],
+    ["Et", "recomano", "que", "demà", "vagis", "al", "metge"],
+
+    ["Et", "recomano", "que", "descansis"],
+    ["Et", "recomano", "que", "descansis", "demà"],
+    ["Et", "recomano", "que", "demà", "descansis"],
+    ["Et", "recomano", "que", "descansis", "un", "poc"],
+    ["Et", "recomano", "que", "demà", "descansis", "un", "poc"]
+  ];
+
+  let availableTokens = [];
+  let sentenceTokens = [];
+  let correctSentences = [];
+  let comboCounter = 0;
+
+  const salad = document.getElementById("wordSalad");
+  const sentenceDisplay = document.getElementById("sentenceDisplay");
+  const feedbackBox = document.getElementById("feedbackBox");
+  const correctList = document.getElementById("correctList");
+  const comboCounterEl = document.getElementById("comboCounter");
+  const totalCounterEl = document.getElementById("totalCounter");
+
+  function makeTokens() {
+    availableTokens = wordBank.map((word, index) => ({
+      id: "w" + index,
+      text: word
+    }));
+  }
+
+  function shuffle(array) {
+    const copy = [...array];
+
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
+  }
+
+  function renderSalad() {
+    salad.innerHTML = "";
+    const shuffled = shuffle(availableTokens);
+
+    shuffled.forEach(token => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = token.text;
+      span.dataset.id = token.id;
+      span.onclick = () => addWord(token.id);
+      salad.appendChild(span);
+    });
+  }
+
+  function addWord(id) {
+    const token = availableTokens.find(item => item.id === id);
+    if (!token) return;
+
+    sentenceTokens.push(token);
+    availableTokens = availableTokens.filter(item => item.id !== id);
+
+    renderSalad();
+    updateSentence();
+    clearFeedback();
+  }
+
+  function updateSentence() {
+    if (sentenceTokens.length === 0) {
+      sentenceDisplay.textContent = "Tria paraules per construir una frase";
+      return;
+    }
+
+    sentenceDisplay.textContent = sentenceTokens.map(token => token.text).join(" ");
+  }
+
+  function clearSentence() {
+    availableTokens = availableTokens.concat(sentenceTokens);
+    sentenceTokens = [];
+
+    renderSalad();
+    updateSentence();
+    clearFeedback();
+  }
+
+  function normaliseSentence(tokens) {
+    return tokens.join(" ").trim().toLowerCase();
+  }
+
+  function getPatternType(sentence) {
+    if (sentence.startsWith("Cal que")) return "Has fet servir l'estructura cal que + subjuntiu";
+    if (sentence.startsWith("Podries")) return "Has fet servir podries + infinitiu";
+    if (sentence.startsWith("Has de")) return "Has fet servir has de + infinitiu";
+    if (sentence.startsWith("T'aconsello")) return "Has fet servir t'aconsello que + subjuntiu";
+    if (sentence.startsWith("Et recomano")) return "Has fet servir et recomano que + subjuntiu";
+    return "Frase correcta";
+  }
+
+  function checkSentence() {
+    if (sentenceTokens.length === 0) {
+      showFeedback("Primer has de construir una frase", "info");
+      return;
+    }
+
+    const currentSentence = sentenceTokens.map(token => token.text);
+    const currentText = currentSentence.join(" ");
+    const currentNormalised = normaliseSentence(currentSentence);
+
+    const isCorrect = validPatterns.some(pattern =>
+      normaliseSentence(pattern) === currentNormalised
+    );
+
+    if (isCorrect) {
+      if (!correctSentences.includes(currentText)) {
+        correctSentences.push(currentText);
+        comboCounter++;
+        updateCorrectList();
+        updateCounter();
+
+        const patternMessage = getPatternType(currentText);
+        showFeedback("✅ Correcte " + currentText + " · " + patternMessage, "ok");
+      } else {
+        showFeedback("⚠️ Aquesta frase ja l'has feta abans", "info");
+      }
+
+      sentenceTokens = [];
+      makeTokens();
+      renderSalad();
+      updateSentence();
+    } else {
+      showFeedback("❌ Aquesta combinació no és vàlida Prova una altra estructura", "bad");
+    }
+  }
+
+  function resetAll() {
+    sentenceTokens = [];
+    correctSentences = [];
+    comboCounter = 0;
+
+    makeTokens();
+    renderSalad();
+    updateSentence();
+    updateCorrectList();
+    updateCounter();
+    clearFeedback();
+  }
+
+  function updateCounter() {
+    comboCounterEl.textContent = "Combinacions: " + comboCounter;
+    totalCounterEl.textContent = "Possibles: " + validPatterns.length;
+  }
+
+  function updateCorrectList() {
+    if (correctSentences.length === 0) {
+      correctList.innerHTML = '<p style="color:#999;">Encara no hi ha cap frase.</p>';
+      return;
+    }
+
+    correctList.innerHTML = correctSentences
+      .map(sentence => `<div class="answer-item">✓ ${sentence}</div>`)
+      .join("");
+  }
+
+  function showFeedback(message, type) {
+    feedbackBox.textContent = message;
+    feedbackBox.className = "feedback-box " + type;
+  }
+
+  function clearFeedback() {
+    feedbackBox.textContent = "";
+    feedbackBox.className = "feedback-box";
+  }
+
+  function openTranscript() {
+    document.getElementById("transcriptModal").style.display = "block";
+  }
+
+  function closeTranscript() {
+    document.getElementById("transcriptModal").style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("transcriptModal");
+    if (event.target === modal) {
+      closeTranscript();
+    }
+  };
+
+  makeTokens();
+  renderSalad();
+  updateSentence();
+  updateCounter();
+</script>
+
+</body>
+</html>

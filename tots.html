@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIDCATALA · Totes les activitats</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #f7f6f2;
+      color: #2f2f2f;
+    }
+
+    .banner {
+      background: #ffcc00;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .banner img {
+      width: 48px;
+      border-radius: 4px;
+    }
+
+    .banner h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .home-button {
+      background: #fffdf8;
+      color: #2f2f2f;
+      text-decoration: none;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    }
+
+    .intro {
+      max-width: 900px;
+      margin: 24px auto 12px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .intro h2 {
+      margin: 0 0 10px;
+      font-size: 1.14rem;
+      font-weight: 700;
+    }
+
+    .intro p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    #top { scroll-margin-top: 20px; }
+
+    .quick-nav {
+      max-width: 1050px;
+      margin: 18px auto 4px;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quick-nav a {
+      background: #fffdf8;
+      color: #2f2f2f;
+      text-decoration: none;
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+    }
+
+    .quick-nav a:hover {
+      background: #ffcc00;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      padding: 22px;
+      max-width: 1320px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title {
+      grid-column: 1 / -1;
+      margin: 28px 0 2px;
+      padding: 12px 16px;
+      background: #ffcc00;
+      border-radius: 14px;
+      font-size: 1.12rem;
+      font-weight: 700;
+      scroll-margin-top: 90px;
+    }
+
+    .section-note {
+      grid-column: 1 / -1;
+      margin: -4px 0 4px;
+      color: #5a5a5a;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .back-top {
+      grid-column: 1 / -1;
+      text-align: right;
+      margin: 4px 0 22px;
+    }
+
+    .back-top a {
+      display: inline-block;
+      text-decoration: none;
+      background: #fffdf8;
+      color: #2f2f2f;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+    }
+
+    .back-top a:hover {
+      background: #ffcc00;
+      transform: translateY(-2px);
+    }
+
+    .card {
+      background: #fffdf8;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.12),
+        0 0 0 3px rgba(255,204,0,0.35);
+    }
+
+    .featured {
+      box-shadow:
+        0 6px 18px rgba(0,0,0,0.12),
+        0 0 0 3px rgba(255,204,0,0.55);
+    }
+
+    .card-image {
+      background: linear-gradient(180deg, #f3efe4 0%, #ece6d6 100%);
+      height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .thumb-frame {
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.58);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.85),
+        0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .thumb-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      transform: scale(0.96);
+      display: block;
+    }
+
+    .card-content {
+      padding: 12px 12px 14px;
+      text-align: center;
+    }
+
+    .card-content h2 {
+      margin: 0 0 6px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .card-content p {
+      margin: 0;
+      font-size: 0.79rem;
+      color: #5a5a5a;
+      line-height: 1.4;
+    }
+
+    
+    @media (max-width: 1180px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .card-image {
+        height: 135px;
+        padding: 10px;
+      }
+
+      .thumb-frame {
+        padding: 6px;
+      }
+
+      .card-content h2 {
+        font-size: 0.84rem;
+      }
+
+      .card-content p {
+        font-size: 0.73rem;
+      }
+
+      .feedback-button {
+        right: 14px;
+        bottom: 14px;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .banner {
+        align-items: flex-start;
+      }
+
+      .banner h1 {
+        font-size: 1.12rem;
+      }
+
+      .home-button {
+        font-size: 0.76rem;
+        padding: 8px 11px;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-image {
+        height: 118px;
+      }
+
+      .card-content h2 {
+        font-size: 0.8rem;
+      }
+
+      .card-content p {
+        font-size: 0.7rem;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .back-top {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="banner">
+    <div class="banner-left">
+      <img src="bandera.png" alt="Bandera catalana">
+      <h1>VIDCATALA · Totes les activitats</h1>
+    </div>
+    <a class='home-button' href='/'>← Inici</a>
+  </div>
+
+  <div class="intro">
+    <h2>Tria una activitat</h2>
+    <p>
+      Les activitats estan agrupades per tema perquè sigui més fàcil trobar el vídeo que vols treballar.
+    </p>
+  </div>
+
+  <div id="top"></div>
+
+  <div class="quick-nav">
+    <a href="#vida">Vida quotidiana</a>
+    <a href="#ciutat">Ciutat i serveis</a>
+    <a href="#aprendre">Aprendre català</a>
+    <a href="#llengua">Expressions i llengua</a>
+    <a href="#esport">Esport i lleure</a>
+    <a href="#histories">Històries personals</a>
+    <a href="#cancons">Cançons</a>
+    <a href="#dialegs">Diàlegs professionals</a>
+  </div>
+
+  <div class="cards-grid">
+
+    <h2 id="vida" class="section-title">Vida quotidiana</h2>
+    <p class="section-note">Situacions del dia a dia: compres, família, celebracions, diners i relacions quotidianes.</p>
+
+    
+
+    <a class='card' href='/propina'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="propina.png" alt="Propina">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>La propina</h2>
+        <p>Situacions socials i cortesia</p>
+      </div>
+    </a>
+
+    <a class='card' href='/aniversari'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="aniversari.png" alt="Aniversari">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Celebració sorpresa</h2>
+        <p>Plans i futur</p>
+      </div>
+    </a>
+
+    <a class='card' href='/familia'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="Familia.png" alt="Família">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Aina i la seva família</h2>
+        <p>Família i relacions familiars</p>
+      </div>
+    </a>
+
+    <a class='card' href='/cartera'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="cartera.png" alt="Cartera">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>La cartera perduda</h2>
+        <p>Comprensió i expressions útils</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="ciutat" class="section-title">Ciutat i serveis</h2>
+    <p class="section-note">Transport, emergències, incidències urbanes i vocabulari pràctic de la ciutat.</p>
+
+    
+
+    
+
+    <a class='card' href='/bomber'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="Bomber.png" alt="Bomber">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Incendi a la cuina</h2>
+        <p>Situacions d’emergència</p>
+      </div>
+    </a>
+
+    <a class='card' href='/transit'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="transit.png" alt="Trànsit">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Problemes de trànsit</h2>
+        <p>Vocabulari quotidià</p>
+      </div>
+    </a>
+
+    <a class='card' href='/robatori'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="robatori.png" alt="Robatori">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Robatori a Barcelona</h2>
+        <p>Comprensió i vocabulari</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="aprendre" class="section-title">Aprendre català</h2>
+    <p class="section-note">Vídeos sobre recursos, estratègies d’aprenentatge i experiències universitàries.</p>
+
+    
+
+    <a class='card' href='/estudiar'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="estudiar.png" alt="Estudiar català a la universitat">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Estudiar català a la universitat</h2>
+        <p>Experiències i reptes d'aprenentatge</p>
+      </div>
+    </a>
+
+    <a class='card' href='/lector'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="lector.png" alt="Lector de català">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Lector de català</h2>
+        <p>Ensenyar català a una universitat</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="llengua" class="section-title">Expressions i llengua</h2>
+    <p class="section-note">Expressions naturals, connectors, actituds, matisos i usos vius de la llengua.</p>
+
+    
+
+    <a class='card' href='/consells'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="consells.png" alt="Donar consells i fer recomanacions">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Donar consells</h2>
+        <p>Recomanacions, suggeriments i formes útils</p>
+      </div>
+    </a>
+
+    
+
+    
+
+    <a class="card" href="REPLA.HTML">
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="REPLA.png" alt="Els veïns del replà">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Els veïns del replà</h2>
+        <p>Convivència, actituds i respecte</p>
+      </div>
+    </a>
+
+    <a class='card' href='/feinanova'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="feinanova.png" alt="Feina nova">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Canviar de feina</h2>
+        <p>Connectors i canvi personal</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="esport" class="section-title">Esport i lleure</h2>
+    <p class="section-note">Activitats de temps lliure, aficions, esport, figures inspiradores i cultura contemporània.</p>
+
+    
+
+    <a class='card' href='/olympics'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="olympics.png" alt="Barcelona olímpica">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>Barcelona olímpica</h2>
+        <p>La transformació de la ciutat amb els Jocs Olímpics</p>
+      </div>
+    </a>
+
+    
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="histories" class="section-title">Històries personals</h2>
+    <p class="section-note">Records, identitat, aspiracions i personatges que expliquen vivències personals.</p>
+
+    
+
+    <a class='card' href='/ado'>
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="ado.png" alt="Ado">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>El futur d’en Lluís</h2>
+        <p>Aspiracions i projecte de vida</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="cancons" class="section-title">Cançons</h2>
+    <p class="section-note">Escolta la música, segueix la lletra i practica amb activitats senzilles.</p>
+    <a class='card featured' href='/mes-amunt-que-el-vent'>
+      <div class="card-image"><div class="thumb-frame">
+        <img src="assets/mes-amunt-que-el-vent.jpg" alt="Més amunt que el vent" loading="lazy">
+      </div></div>
+      <div class="card-content"><h2>Més amunt que el vent</h2>
+        <p>A2–B1 · Llibertat, natura i emocions. Completa els versos i respon les preguntes.</p>
+      </div>
+    </a>
+    <a class='card featured' href='/vora-el-foc'>
+      <div class="card-image"><div class="thumb-frame">
+        <img src="assets/vora-el-foc.jpg" alt="Vora el foc" loading="lazy">
+      </div></div>
+      <div class="card-content"><h2>Vora el foc</h2>
+        <p>A2–B1 · Escolta, comparteix i parla sense pressa. Completa els versos i respon les preguntes.</p>
+      </div>
+    </a>
+    <a class="card featured" href="entre-ahir-i-avui.html"><div class="card-image"><div class="thumb-frame"><img src="assets/entre-ahir-i-avui.jpg" alt="Entre ahir i avui" loading="lazy"></div></div><div class="card-content"><h2>Entre ahir i avui</h2><p>A2–B1 · Practica el passat perifràstic i el perfet amb música.</p></div></a><div class="back-top"><a href="#top">↑ Categories</a></div>
+
+    <h2 id="dialegs" class="section-title">Diàlegs professionals</h2>
+    <p class="section-note">Converses entre persones en situacions d’ajuda, servei o d’atenció professional.</p>
+
+    <a class="card" href="CUIDADORA.HTML">
+      <div class="card-image">
+        <div class="thumb-frame">
+          <img src="cuidadora.png" alt="La cuidadora">
+        </div>
+      </div>
+      <div class="card-content">
+        <h2>La cuidadora</h2>
+        <p>Diàleg, ajuda i respostes professionals</p>
+      </div>
+    </a>
+
+    <div class="back-top"><a href="#top">↑ Categories</a></div>
+
+  </div>
+
+  
+
+</body>
+</html>

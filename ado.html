@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDCATALA · El futur d’en Lluís</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      background: #fff;
+      color: #222;
+    }
+
+    .banner {
+      background: #ffcc00;
+      color: #222;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .banner img {
+      width: 52px;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .banner-title {
+      font-size: 1.7em;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .home-button {
+      color: #fff;
+      font-size: 1.55em;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .home-button:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 520px 1fr;
+      gap: 22px;
+      max-width: 1180px;
+      margin: 20px auto 28px;
+      padding: 0 20px;
+      align-items: start;
+    }
+
+    .left-column,
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .left-column {
+      position: sticky;
+      top: 16px;
+      align-self: start;
+    }
+
+    .card {
+      background: #fffdf8;
+      border: 1px solid #ecdca8;
+      border-radius: 14px;
+      padding: 15px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .video-card {
+      padding: 14px;
+    }
+
+    .video-heading {
+      margin: 0 0 4px;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #7a5200;
+    }
+
+    .video-subtitle {
+      margin: 0 0 12px;
+      font-size: 0.95em;
+      line-height: 1.45;
+      color: #555;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .exercise-title {
+      margin: 0 0 8px;
+      font-size: 1.23em;
+      color: #7a5200;
+    }
+
+    .instructions {
+      margin: 0 0 14px;
+      color: #555;
+      line-height: 1.5;
+      font-size: 0.98em;
+    }
+
+    .question-block {
+      margin-bottom: 14px;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid #f0e1b2;
+      border-radius: 10px;
+    }
+
+    .question-block p {
+      margin: 0 0 8px;
+      font-size: 1.01em;
+      line-height: 1.5;
+    }
+
+    .quote-box {
+      background: #fff8dc;
+      border-left: 5px solid #ffcc00;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin: 10px 0;
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .buttons,
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .button-row {
+      margin-top: 10px;
+    }
+
+    button.option-btn,
+    button.check-btn,
+    button.reset-btn,
+    button.show-btn {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.97em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button.option-btn {
+      background: #efefef;
+      color: #222;
+      padding: 7px 13px;
+    }
+
+    button.option-btn:hover {
+      background: #e4e4e4;
+    }
+
+    button.option-btn.selected {
+      background: #ffd84d;
+      font-weight: 700;
+    }
+
+    button.check-btn,
+    button.reset-btn,
+    button.show-btn {
+      padding: 9px 15px;
+    }
+
+    button.check-btn {
+      background: #7a5200;
+      color: #fff;
+    }
+
+    button.check-btn:hover {
+      background: #5f3f00;
+    }
+
+    button.reset-btn {
+      background: #d8d8d8;
+      color: #222;
+    }
+
+    button.reset-btn:hover {
+      background: #c9c9c9;
+    }
+
+    button.show-btn {
+      background: #ffcc00;
+      color: #222;
+    }
+
+    button.show-btn:hover {
+      background: #e6b800;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .feedback.correct {
+      color: #1f8a3b;
+    }
+
+    .feedback.incorrect {
+      color: #c62828;
+    }
+
+    .feedback-detail {
+      margin-top: 7px;
+      padding: 7px 9px;
+      font-size: 0.95em;
+      line-height: 1.45;
+      background: #faf6e8;
+      border-radius: 7px;
+      color: #555;
+      display: none;
+    }
+
+    .gap-word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .gap-word-bank span {
+      background: #fff3bf;
+      border: 1px solid #efd36b;
+      border-radius: 18px;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .gap-text {
+      font-size: 1.01em;
+      line-height: 2.15;
+    }
+
+    .gap-text input,
+    select {
+      padding: 6px 7px;
+      border: 1px solid #c8c8c8;
+      border-radius: 7px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1em;
+      background: #fff;
+    }
+
+    .gap-text input {
+      width: 112px;
+      max-width: 100%;
+      margin: 0 3px;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .gap-text input.correct,
+    select.correct {
+      border: 2px solid #1f8a3b;
+      background: #edf9f0;
+      color: #1f8a3b;
+    }
+
+    .gap-text input.incorrect,
+    select.incorrect {
+      border: 2px solid #c62828;
+      background: #fff0f0;
+      color: #c62828;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .category-item {
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #f0e1b2;
+    }
+
+    .answer-text {
+      display: none;
+      margin-top: 8px;
+      color: #555;
+      line-height: 1.45;
+      font-weight: 500;
+      background: #faf6e8;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .left-column {
+        order: 1;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        padding-bottom: 8px;
+      }
+
+      .right-column {
+        order: 2;
+      }
+
+      .video-card {
+        padding: 8px;
+        border-radius: 0;
+      }
+
+      .video-heading,
+      .video-subtitle {
+        display: none;
+      }
+
+      .video-wrapper {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 0;
+      }
+
+      video {
+        height: 100%;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .banner {
+        padding: 14px 16px;
+      }
+
+      .banner-title {
+        font-size: 1.4em;
+      }
+
+      .banner img {
+        width: 46px;
+      }
+
+      .container {
+        margin: 16px auto 24px;
+        padding: 0 12px;
+      }
+
+      .card {
+        padding: 13px;
+      }
+
+      .gap-text input {
+        width: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="banner">
+    <div class="banner-left">
+      <img src="bandera.png" alt="Bandera catalana">
+      <div class="banner-title">VIDCATALA · El futur d’en Lluís</div>
+    </div>
+    <a aria-label='Torna a l\'inici' class='home-button' href='/'>
+      <i class="fas fa-home"></i>
+    </a>
+  </header>
+
+  <main class="container">
+    <section class="left-column">
+      <div class="card video-card">
+        <h2 class="video-heading">El futur d’en Lluís</h2>
+        <p class="video-subtitle">Escolta amb atenció les seves aspiracions, els seus dubtes i les seves pors de cara al futur.</p>
+
+        <div class="video-wrapper">
+          <video controls playsinline preload="metadata">
+            <source src="ado.mp4" type="video/mp4">
+            El teu navegador no pot reproduir aquest vídeo.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="right-column">
+
+      <div class="card">
+        <h2 class="exercise-title">Exercici 1 · Completa el text</h2>
+        <p class="instructions">Escolta el vídeo i completa el resum amb les paraules del requadre. És una activitat d’entrada per entendre les idees principals.</p>
+
+        <div class="gap-word-bank">
+          <span>oportunitats</span>
+          <span>decisions</span>
+          <span>nerviós</span>
+          <span>objectius</span>
+          <span>feina</span>
+          <span>por</span>
+          <span>futur</span>
+          <span>suport</span>
+          <span>independent</span>
+          <span>estudiar</span>
+        </div>
+
+        <div class="gap-text">
+          Quan penso en el meu <input id="g1" type="text">, em sento il·lusionat, però també una mica <input id="g2" type="text">.
+          Encara no sé exactament què vull <input id="g3" type="text">.
+          M’agradaria tenir una <input id="g4" type="text"> que m’agradi i poder prendre les meves pròpies <input id="g5" type="text">.
+          També voldria ser més <input id="g6" type="text">, encara que de vegades tinc <input id="g7" type="text"> d’equivocar-me.
+          Sé que hauré de treballar molt per aconseguir els meus <input id="g8" type="text">.
+          El <input id="g9" type="text"> dels altres m’ajuda, i també m’agrada pensar en les <input id="g10" type="text"> que vindran.
+        </div>
+
+        <div class="button-row">
+          <button class="check-btn" onclick="checkGap1()">Comprova</button>
+          <button class="show-btn" onclick="showGap1()">Mostra respostes</button>
+          <button class="reset-btn" onclick="resetGap1()">Reinicia</button>
+        </div>
+
+        <div id="gap1-score" class="feedback"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="exercise-title">Exercici 2 · En Lluís ho diu?</h2>
+        <p class="instructions">Tria si cada afirmació apareix clarament al vídeo, si és falsa, o si no ho podem saber. Aquest exercici exigeix escoltar amb precisió.</p>
+
+        <div id="says-exercise"></div>
+
+        <div class="button-row">
+          <button class="check-btn" onclick="checkSays()">Comprova</button>
+          <button class="show-btn" onclick="showSays()">Mostra respostes</button>
+          <button class="reset-btn" onclick="resetSays()">Reinicia</button>
+        </div>
+
+        <div id="says-score" class="feedback"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="exercise-title">Exercici 3 · Què vol dir realment?</h2>
+        <p class="instructions">Ara has d’interpretar el sentit de les frases, no només repetir informació literal.</p>
+
+        <div id="inference-exercise"></div>
+
+        <div class="button-row">
+          <button class="check-btn" onclick="checkInference()">Comprova</button>
+          <button class="show-btn" onclick="showInference()">Mostra respostes</button>
+          <button class="reset-btn" onclick="resetInference()">Reinicia</button>
+        </div>
+
+        <div id="inference-score" class="feedback"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="exercise-title">Exercici 4 · Troba l’evidència</h2>
+        <p class="instructions">Tria la frase que millor justifica cada interpretació. És un exercici més exigent perquè has de buscar proves dins del text.</p>
+
+        <div id="evidence-exercise"></div>
+
+        <div class="button-row">
+          <button class="check-btn" onclick="checkEvidence()">Comprova</button>
+          <button class="show-btn" onclick="showEvidence()">Mostra respostes</button>
+          <button class="reset-btn" onclick="resetEvidence()">Reinicia</button>
+        </div>
+
+        <div id="evidence-score" class="feedback"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="exercise-title">Exercici 5 · Quins consells són adequats?</h2>
+        <p class="instructions">Marca els consells que serien adequats per a en Lluís. N’hi ha quatre de bons. Després pots comentar oralment per què els has triat.</p>
+
+        <div id="advice-exercise"></div>
+
+        <div class="button-row">
+          <button class="check-btn" onclick="checkAdvice()">Comprova</button>
+          <button class="show-btn" onclick="showAdvice()">Mostra respostes</button>
+          <button class="reset-btn" onclick="resetAdvice()">Reinicia</button>
+        </div>
+
+        <div id="advice-score" class="feedback"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[’']/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function markElement(el, correct) {
+      el.classList.remove("correct", "incorrect");
+      el.classList.add(correct ? "correct" : "incorrect");
+    }
+
+    /* EXERCISE 1 */
+    const gap1Answers = ["futur", "nerviós", "estudiar", "feina", "decisions", "independent", "por", "objectius", "suport", "oportunitats"];
+
+    function checkGap1() {
+      let score = 0;
+      gap1Answers.forEach((answer, i) => {
+        const el = document.getElementById("g" + (i + 1));
+        const ok = normalizeText(el.value) === normalizeText(answer);
+        if (ok) score++;
+        markElement(el, ok);
+      });
+      const fb = document.getElementById("gap1-score");
+      fb.textContent = "Resultat: " + score + "/" + gap1Answers.length;
+      fb.className = "feedback " + (score >= 8 ? "correct" : "incorrect");
+    }
+
+    function showGap1() {
+      gap1Answers.forEach((answer, i) => {
+        const el = document.getElementById("g" + (i + 1));
+        el.value = answer;
+        markElement(el, true);
+      });
+      const fb = document.getElementById("gap1-score");
+      fb.textContent = "Respostes mostrades.";
+      fb.className = "feedback correct";
+    }
+
+    function resetGap1() {
+      gap1Answers.forEach((answer, i) => {
+        const el = document.getElementById("g" + (i + 1));
+        el.value = "";
+        el.classList.remove("correct", "incorrect");
+      });
+      document.getElementById("gap1-score").textContent = "";
+      document.getElementById("gap1-score").className = "feedback";
+    }
+
+    /* GENERIC SELECT EXERCISE */
+    function renderSelectExercise(containerId, data, options) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      data.forEach((item, i) => {
+        const opts = options.map(opt => `<option value="${opt}">${opt}</option>`).join("");
+        container.innerHTML += `
+          <div class="question-block">
+            <p><strong>${i + 1}.</strong> ${item.q}</p>
+            ${item.quote ? `<div class="quote-box">${item.quote}</div>` : ""}
+            <select id="${containerId}-sel-${i}">
+              <option value="">Tria una resposta</option>
+              ${opts}
+            </select>
+            <div id="${containerId}-fb-${i}" class="feedback-detail"></div>
+          </div>
+        `;
+      });
+    }
+
+    function checkSelectExercise(containerId, data, scoreId) {
+      let score = 0;
+      data.forEach((item, i) => {
+        const sel = document.getElementById(`${containerId}-sel-${i}`);
+        const fb = document.getElementById(`${containerId}-fb-${i}`);
+        const ok = sel.value === item.answer;
+        if (ok) score++;
+        markElement(sel, ok);
+        fb.style.display = "block";
+        fb.textContent = ok ? "Correcte. " + item.feedback : "No exactament. Resposta correcta: " + item.answer + ". " + item.feedback;
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = "Resultat: " + score + "/" + data.length;
+      out.className = "feedback " + (score >= Math.ceil(data.length * 0.7) ? "correct" : "incorrect");
+    }
+
+    function showSelectExercise(containerId, data, scoreId) {
+      data.forEach((item, i) => {
+        const sel = document.getElementById(`${containerId}-sel-${i}`);
+        const fb = document.getElementById(`${containerId}-fb-${i}`);
+        sel.value = item.answer;
+        markElement(sel, true);
+        fb.style.display = "block";
+        fb.textContent = "Resposta correcta: " + item.answer + ". " + item.feedback;
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = "Respostes mostrades.";
+      out.className = "feedback correct";
+    }
+
+    function resetSelectExercise(containerId, data, scoreId) {
+      data.forEach((item, i) => {
+        const sel = document.getElementById(`${containerId}-sel-${i}`);
+        const fb = document.getElementById(`${containerId}-fb-${i}`);
+        sel.value = "";
+        sel.classList.remove("correct", "incorrect");
+        fb.textContent = "";
+        fb.style.display = "none";
+      });
+      document.getElementById(scoreId).textContent = "";
+      document.getElementById(scoreId).className = "feedback";
+    }
+
+    /* EXERCISE 2 */
+    const saysData = [
+      { q: "En Lluís té tot el futur clar.", answer: "No", feedback: "Diu que té dubtes i que encara no sap exactament què farà." },
+      { q: "Li agradaria tenir una feina que li agradés.", answer: "Sí", feedback: "Aquesta és una de les seves aspiracions principals." },
+      { q: "Vol estudiar medicina.", answer: "No ho sabem", feedback: "El vídeo parla d’estudis, però no especifica medicina." },
+      { q: "Vol prendre les seves pròpies decisions.", answer: "Sí", feedback: "Relaciona el futur amb la independència personal." },
+      { q: "No té cap por.", answer: "No", feedback: "Parla clarament de la por d’equivocar-se." },
+      { q: "Té suport d’altres persones.", answer: "Sí", feedback: "El suport dels altres l’ajuda a mirar endavant." },
+      { q: "Ja té una feina estable.", answer: "No ho sabem", feedback: "La feina estable és una aspiració, no una realitat confirmada." },
+      { q: "El to final és completament pessimista.", answer: "No", feedback: "Malgrat els dubtes, acaba amb una mirada positiva cap a les oportunitats." }
+    ];
+
+    function checkSays() { checkSelectExercise("says-exercise", saysData, "says-score"); }
+    function showSays() { showSelectExercise("says-exercise", saysData, "says-score"); }
+    function resetSays() { resetSelectExercise("says-exercise", saysData, "says-score"); }
+
+    /* EXERCISE 3 */
+    const categoryData = [
+      { q: "Encara no sé exactament què vull estudiar.", answer: "Estudis", feedback: "La idea central és la tria acadèmica." },
+      { q: "M’agradaria tenir una feina que m’agradi.", answer: "Feina", feedback: "Parla del món laboral i de la satisfacció professional." },
+      { q: "Vull prendre les meves pròpies decisions.", answer: "Independència", feedback: "La frase expressa autonomia personal." },
+      { q: "Tinc por d’equivocar-me.", answer: "Emocions", feedback: "La por és una emoció vinculada al futur." },
+      { q: "Hauré de treballar molt per aconseguir els meus objectius.", answer: "Feina", feedback: "També pot tocar els estudis, però aquí pesa sobretot l’esforç per assolir una trajectòria." },
+      { q: "El suport dels altres m’ajuda.", answer: "Emocions", feedback: "El suport afecta la confiança i la seguretat emocional." },
+      { q: "Voldria ser més independent.", answer: "Independència", feedback: "La paraula clau és independent." },
+      { q: "No sé quina opció triar.", answer: "Estudis", feedback: "Es refereix a l’orientació i a la tria del camí formatiu." }
+    ];
+
+    function renderCategories() {
+      const container = document.getElementById("category-exercise");
+      container.innerHTML = "";
+      categoryData.forEach((item, i) => {
+        container.innerHTML += `
+          <div class="category-item">
+            <p><strong>${i + 1}.</strong> ${item.q}</p>
+            <select id="cat-${i}">
+              <option value="">Tria un tema</option>
+              <option value="Estudis">Estudis</option>
+              <option value="Feina">Feina</option>
+              <option value="Independència">Independència</option>
+              <option value="Emocions">Emocions</option>
+            </select>
+            <div id="cat-fb-${i}" class="feedback-detail"></div>
+          </div>
+        `;
+      });
+    }
+
+    function checkCategories() {
+      let score = 0;
+      categoryData.forEach((item, i) => {
+        const sel = document.getElementById("cat-" + i);
+        const fb = document.getElementById("cat-fb-" + i);
+        const ok = sel.value === item.answer;
+        if (ok) score++;
+        markElement(sel, ok);
+        fb.style.display = "block";
+        fb.textContent = ok ? "Correcte. " + item.feedback : "No exactament. Tema correcte: " + item.answer + ". " + item.feedback;
+      });
+      const out = document.getElementById("category-score");
+      out.textContent = "Resultat: " + score + "/" + categoryData.length;
+      out.className = "feedback " + (score >= 6 ? "correct" : "incorrect");
+    }
+
+    function showCategories() {
+      categoryData.forEach((item, i) => {
+        const sel = document.getElementById("cat-" + i);
+        const fb = document.getElementById("cat-fb-" + i);
+        sel.value = item.answer;
+        markElement(sel, true);
+        fb.style.display = "block";
+        fb.textContent = "Tema correcte: " + item.answer + ". " + item.feedback;
+      });
+      const out = document.getElementById("category-score");
+      out.textContent = "Respostes mostrades.";
+      out.className = "feedback correct";
+    }
+
+    function resetCategories() {
+      categoryData.forEach((item, i) => {
+        const sel = document.getElementById("cat-" + i);
+        const fb = document.getElementById("cat-fb-" + i);
+        sel.value = "";
+        sel.classList.remove("correct", "incorrect");
+        fb.textContent = "";
+        fb.style.display = "none";
+      });
+      document.getElementById("category-score").textContent = "";
+      document.getElementById("category-score").className = "feedback";
+    }
+
+    /* EXERCISE 4 */
+    const inferenceData = [
+      {
+        q: "Què vol dir realment quan diu que no té totes les respostes?",
+        quote: "No tinc totes les respostes.",
+        answer: "Encara té dubtes sobre el futur.",
+        feedback: "No vol dir que no sàpiga res, sinó que encara està buscant el seu camí."
+      },
+      {
+        q: "Què expressa quan parla de prendre les seves pròpies decisions?",
+        quote: "Vull prendre les meves pròpies decisions.",
+        answer: "Vol més autonomia.",
+        feedback: "La idea de decisió pròpia està relacionada amb la independència personal."
+      },
+      {
+        q: "Què indica la por d’equivocar-se?",
+        quote: "Tinc por d’equivocar-me.",
+        answer: "El futur li genera inseguretat.",
+        feedback: "La frase mostra incertesa, no falta d’interès."
+      },
+      {
+        q: "Què suggereix quan diu que haurà de treballar molt?",
+        quote: "Hauré de treballar molt.",
+        answer: "Sap que els objectius exigeixen esforç.",
+        feedback: "No espera que el futur arribi sol: associa el futur amb responsabilitat."
+      },
+      {
+        q: "Què mostra la referència al suport dels altres?",
+        quote: "El suport dels altres m’ajuda.",
+        answer: "No afronta el futur completament sol.",
+        feedback: "El suport personal és una ajuda emocional important."
+      }
+    ];
+
+    function renderInference() {
+      renderSelectExercise("inference-exercise", inferenceData, [
+        "Encara té dubtes sobre el futur.",
+        "Vol més autonomia.",
+        "El futur li genera inseguretat.",
+        "Sap que els objectius exigeixen esforç.",
+        "No afronta el futur completament sol."
+      ]);
+    }
+
+    function checkInference() { checkSelectExercise("inference-exercise", inferenceData, "inference-score"); }
+    function showInference() { showSelectExercise("inference-exercise", inferenceData, "inference-score"); }
+    function resetInference() { resetSelectExercise("inference-exercise", inferenceData, "inference-score"); }
+
+    /* EXERCISE 5 */
+    const evidenceData = [
+      {
+        q: "Interpretació: En Lluís és optimista malgrat els dubtes.",
+        answer: "M’agrada pensar en les oportunitats que vindran.",
+        feedback: "Aquesta frase mostra una mirada positiva cap al futur."
+      },
+      {
+        q: "Interpretació: En Lluís encara no té una decisió definitiva sobre els estudis.",
+        answer: "Encara no sé exactament què vull estudiar.",
+        feedback: "Aquesta és la prova més directa de la seva incertesa acadèmica."
+      },
+      {
+        q: "Interpretació: En Lluís vol autonomia personal.",
+        answer: "Vull prendre les meves pròpies decisions.",
+        feedback: "Aquesta frase justifica clarament la idea d’autonomia."
+      },
+      {
+        q: "Interpretació: En Lluís és conscient que haurà d’esforçar-se.",
+        answer: "Hauré de treballar molt per aconseguir els meus objectius.",
+        feedback: "La frase uneix esforç i objectius personals."
+      },
+      {
+        q: "Interpretació: En Lluís no se sent completament sol.",
+        answer: "El suport dels altres m’ajuda.",
+        feedback: "Aquesta frase indica que altres persones li donen confiança."
+      }
+    ];
+
+    function renderEvidence() {
+      renderSelectExercise("evidence-exercise", evidenceData, [
+        "Em preocupa molt el futur.",
+        "M’agrada pensar en les oportunitats que vindran.",
+        "Encara no sé exactament què vull estudiar.",
+        "Vull prendre les meves pròpies decisions.",
+        "Hauré de treballar molt per aconseguir els meus objectius.",
+        "El suport dels altres m’ajuda."
+      ]);
+    }
+
+    function checkEvidence() { checkSelectExercise("evidence-exercise", evidenceData, "evidence-score"); }
+    function showEvidence() { showSelectExercise("evidence-exercise", evidenceData, "evidence-score"); }
+    function resetEvidence() { resetSelectExercise("evidence-exercise", evidenceData, "evidence-score"); }
+
+    /* EXERCISE 6 */
+    const adviceData = [
+      { text: "Hauries de parlar amb persones que et puguin orientar.", correct: true, feedback: "És adequat perquè ell té dubtes i el suport l’ajuda." },
+      { text: "No hauries de pensar mai en el futur.", correct: false, feedback: "No és útil: ell necessita pensar-hi, però sense bloquejar-se." },
+      { text: "Podries informar-te sobre diferents estudis abans de decidir.", correct: true, feedback: "És un bon consell perquè encara no sap què estudiar." },
+      { text: "Hauries de prendre decisions impulsives.", correct: false, feedback: "Les decisions impulsives no responen bé als seus dubtes." },
+      { text: "Hauries de confiar una mica més en les teves possibilitats.", correct: true, feedback: "És coherent amb la seva por d’equivocar-se." },
+      { text: "No cal que treballis per aconseguir els teus objectius.", correct: false, feedback: "Contradiu el vídeo: ell sap que haurà de treballar molt." },
+      { text: "Podries marcar-te objectius petits i realistes.", correct: true, feedback: "És un consell pràctic per avançar sense sentir-se perdut." },
+      { text: "Hauries d’ignorar completament els consells dels altres.", correct: false, feedback: "No és adequat perquè el suport dels altres l’ajuda." }
+    ];
+
+    function renderAdvice() {
+      const container = document.getElementById("advice-exercise");
+      container.innerHTML = "";
+      adviceData.forEach((item, i) => {
+        container.innerHTML += `
+          <div class="question-block">
+            <p><strong>${i + 1}.</strong> ${item.text}</p>
+            <div class="buttons">
+              <button class="option-btn" onclick="selectAdvice(${i}, true, this)">Adequat</button>
+              <button class="option-btn" onclick="selectAdvice(${i}, false, this)">No adequat</button>
+            </div>
+            <div id="advice-fb-${i}" class="feedback-detail"></div>
+          </div>
+        `;
+      });
+    }
+
+    const adviceAnswers = {};
+
+    function selectAdvice(i, value, btn) {
+      adviceAnswers[i] = value;
+      btn.parentElement.querySelectorAll("button").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+    }
+
+    function checkAdvice() {
+      let score = 0;
+      adviceData.forEach((item, i) => {
+        const fb = document.getElementById("advice-fb-" + i);
+        const selected = adviceAnswers[i];
+        const ok = selected === item.correct;
+        if (ok) score++;
+        fb.style.display = "block";
+        fb.textContent = ok ? "Correcte. " + item.feedback : "No exactament. " + item.feedback;
+      });
+      const out = document.getElementById("advice-score");
+      out.textContent = "Resultat: " + score + "/" + adviceData.length;
+      out.className = "feedback " + (score >= 6 ? "correct" : "incorrect");
+    }
+
+    function showAdvice() {
+      adviceData.forEach((item, i) => {
+        const block = document.getElementById("advice-exercise").children[i];
+        const buttons = block.querySelectorAll("button");
+        buttons.forEach(b => b.classList.remove("selected"));
+        buttons[item.correct ? 0 : 1].classList.add("selected");
+        const fb = document.getElementById("advice-fb-" + i);
+        fb.style.display = "block";
+        fb.textContent = (item.correct ? "Adequat. " : "No adequat. ") + item.feedback;
+      });
+      const out = document.getElementById("advice-score");
+      out.textContent = "Respostes mostrades.";
+      out.className = "feedback correct";
+    }
+
+    function resetAdvice() {
+      Object.keys(adviceAnswers).forEach(k => delete adviceAnswers[k]);
+      renderAdvice();
+      document.getElementById("advice-score").textContent = "";
+      document.getElementById("advice-score").className = "feedback";
+    }
+
+    renderSelectExercise("says-exercise", saysData, ["Sí", "No", "No ho sabem"]);
+    renderInference();
+    renderEvidence();
+    renderAdvice();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · La cartera perduda</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #222;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-logo {
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      to bottom,
+      #f7c600 0%, #f7c600 20%,
+      #d71920 20%, #d71920 32%,
+      #f7c600 32%, #f7c600 44%,
+      #d71920 44%, #d71920 56%,
+      #f7c600 56%, #f7c600 68%,
+      #d71920 68%, #d71920 80%,
+      #f7c600 80%, #f7c600 100%
+    );
+  border: 2px solid rgba(255,255,255,0.75);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.home-btn {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 18px;
+  align-items: start;
+}
+
+.left-column {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+}
+
+.video-card,
+.content-card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-note {
+  margin: 8px 2px 0;
+  font-size: .85rem;
+  color: #555;
+}
+
+.exercise-title {
+  margin: 0 0 10px;
+  color: #8B4513;
+  font-size: 1.35rem;
+}
+
+.instructions {
+  background: #fff6cc;
+  border-left: 6px solid #ffcc00;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.section-title {
+  color: #8B4513;
+  border-bottom: 2px solid #ffcc00;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  font-size: 1.05rem;
+}
+
+.button {
+  background: #ffcc00;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 4px;
+}
+
+.q,
+.gap-wrap,
+.feedback-box {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(255,204,0,.85);
+  box-shadow: 0 2px 4px rgba(0,0,0,.06);
+  padding: 12px;
+  margin: 10px 0;
+}
+
+.q-title {
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.q-sentence {
+  margin-top: 6px;
+  line-height: 1.7;
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.opt {
+  background: #FFF8E1;
+  border: 1px solid rgba(255,204,0,.6);
+  border-radius: 10px;
+  padding: 9px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.opt.correct {
+  border: 2px solid #4CAF50;
+  background: #E8F5E9;
+}
+
+.opt.wrong {
+  border: 2px solid #F44336;
+  background: #FFEBEE;
+}
+
+.per-q-feedback {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: .9rem;
+  line-height: 1.5;
+  display: none;
+}
+
+.per-q-feedback.correct {
+  background: #E8F5E9;
+  border: 1px solid #4CAF50;
+}
+
+.per-q-feedback.wrong {
+  background: #FFEBEE;
+  border: 1px solid #F44336;
+}
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.feedback-line {
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.pill {
+  display: inline-block;
+  background: #FFF8E1;
+  border: 1px solid #ffcc00;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin: 5px 6px 0 0;
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.word-bank span {
+  background: #FFF8E1;
+  border: 1px solid #ffcc00;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.gap-text {
+  line-height: 2.1;
+}
+
+.gap-input {
+  width: 120px;
+  border: 2px solid rgba(255,204,0,.45);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-family: inherit;
+  text-align: center;
+  font-weight: 700;
+}
+
+.gap-input.correct {
+  border-color: #4CAF50;
+  background: #E8F5E9;
+}
+
+.gap-input.wrong {
+  border-color: #F44336;
+  background: #FFEBEE;
+}
+
+@media(max-width:850px) {
+  .banner h1 {
+    font-size: 1rem;
+  }
+
+  .page {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .video-card {
+    padding: 8px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-note {
+    display: none;
+  }
+
+  .content-card {
+    padding: 12px;
+  }
+
+  .instructions {
+    font-size: .9rem;
+    padding: 10px;
+  }
+
+  .opts {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="banner-logo"></div>
+    <h1>VIDCATALA · La cartera perduda</h1>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left-column">
+  <div class="video-card">
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="cARTERA.MP4" type="video/mp4">
+        El teu navegador no pot reproduir aquest vídeo.
+      </video>
+    </div>
+    <p class="video-note">Mira el vídeo i completa els exercicis.</p>
+  </div>
+</section>
+
+<section class="content-card">
+
+<h1 class="exercise-title">La cartera perduda</h1>
+
+<div class="instructions">
+  <strong>Fes dos exercicis:</strong> primer marca si les afirmacions són verdaderes o falses; després completa el text amb les paraules del requadre.
+</div>
+
+<h3 class="section-title">Exercici 1 · Verdader o fals?</h3>
+<div id="tfQuiz"></div>
+
+<div class="actions-row">
+  <button class="button" onclick="checkQuiz('tf')"><i class="fa-solid fa-check"></i> Comprova</button>
+  <button class="button" onclick="showAnswers('tf')"><i class="fa-solid fa-lightbulb"></i> Mostra respostes</button>
+  <button class="button" onclick="resetQuiz('tf')"><i class="fa-solid fa-rotate-left"></i> Reinicia</button>
+</div>
+
+<div class="feedback-box" id="tfBox">
+  <p class="feedback-line" id="tfMsg"><strong>Feedback:</strong> Tria una opció a cada pregunta i prem “Comprova”.</p>
+  <span class="pill" id="tfScore">Puntuació: 0/8</span>
+  <span class="pill" id="tfPercent">Percentatge: 0%</span>
+</div>
+
+<h3 class="section-title">Exercici 2 · Omple els buits</h3>
+
+<div class="gap-wrap">
+  <div class="word-bank" id="wordBank"></div>
+  <div class="gap-text" id="gapTextContainer"></div>
+</div>
+
+<div class="actions-row">
+  <button class="button" onclick="checkGapFill()"><i class="fa-solid fa-check"></i> Comprova</button>
+  <button class="button" onclick="showGapAnswers()"><i class="fa-solid fa-lightbulb"></i> Mostra respostes</button>
+  <button class="button" onclick="resetGapFill()"><i class="fa-solid fa-rotate-left"></i> Reinicia</button>
+</div>
+
+<div class="feedback-box" id="gapBox">
+  <p class="feedback-line" id="gapMsg"><strong>Feedback:</strong> Completa tots els espais i prem “Comprova”.</p>
+  <span class="pill" id="gapScore">Puntuació: 0/12</span>
+  <span class="pill" id="gapPercent">Percentatge: 0%</span>
+</div>
+
+</section>
+</main>
+
+<script>
+function esc(s){
+  return (s || "").replace(/[&<>"]/g, c => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;'
+  }[c]));
+}
+
+const quizzes = {
+  tf: [
+    {
+      id:"t1",
+      title:"1. El moment de la pèrdua",
+      sentence:"El narrador es va adonar de la pèrdua mentre encara era molt a prop del lloc on havia perdut la cartera.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. El text diu «al cap d’una estona», per tant no se’n va adonar immediatament.",
+      feedbackWrong:"No és correcte. El text diu «al cap d’una estona», de manera que no se’n va adonar de seguida."
+    },
+    {
+      id:"t2",
+      title:"2. El recorregut",
+      sentence:"Quan va tornar enrere, no recordava gaire bé per on havia passat.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. Va buscar pels carrers per on havia passat, així que sí que recordava el recorregut.",
+      feedbackWrong:"No. El text indica que va buscar pels carrers per on havia passat, així que sí que recordava el camí."
+    },
+    {
+      id:"t3",
+      title:"3. La cafeteria",
+      sentence:"A la cafeteria, el problema es va solucionar immediatament.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. A la cafeteria ningú no havia vist la cartera, així que encara no es va resoldre res.",
+      feedbackWrong:"No és correcte. A la cafeteria ningú no havia vist la cartera, així que el problema no es va resoldre allí."
+    },
+    {
+      id:"t4",
+      title:"4. El cambrer",
+      sentence:"El cambrer no havia vist la cartera personalment, però tenia informació útil.",
+      options:["Verdader", "Fals"],
+      correct:0,
+      feedbackCorrect:"Correcte. El cambrer li va donar una pista important, encara que no tenia la cartera.",
+      feedbackWrong:"No. Aquesta afirmació és verdadera: el cambrer no tenia la cartera, però sí una informació útil."
+    },
+    {
+      id:"t5",
+      title:"5. L’adreça",
+      sentence:"L’adreça que li van donar el va portar directament a la persona que encara tenia la cartera.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. A l’adreça hi havia una dona, però ella ja l’havia donada a un repartidor.",
+      feedbackWrong:"No és correcte. L’adreça no el va portar directament a la persona final que tenia la cartera."
+    },
+    {
+      id:"t6",
+      title:"6. La dona",
+      sentence:"La dona havia trobat la cartera ella mateixa al carrer.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. El text no diu això; només explica que la dona l’havia donada a un repartidor.",
+      feedbackWrong:"No. El text no diu que la dona la trobés al carrer; només diu que la va donar a un repartidor."
+    },
+    {
+      id:"t7",
+      title:"7. El recorregut de la cartera",
+      sentence:"La cartera va passar per més d’una persona abans de tornar al seu propietari.",
+      options:["Verdader", "Fals"],
+      correct:0,
+      feedbackCorrect:"Correcte. Primer algú la troba, després passa per una dona i després per un repartidor.",
+      feedbackWrong:"No. Aquesta afirmació és verdadera: la cartera va passar per diverses mans abans de tornar al propietari."
+    },
+    {
+      id:"t8",
+      title:"8. El final",
+      sentence:"El narrador va recuperar la cartera sense haver de dedicar-hi gaire temps.",
+      options:["Verdader", "Fals"],
+      correct:1,
+      feedbackCorrect:"Correcte. El text diu «després de molta estona buscant», així que va trigar bastant.",
+      feedbackWrong:"No és correcte. El text diu «després de molta estona buscant», així que no va ser ràpid."
+    }
+  ]
+};
+
+const gapWords = [
+  "trobat", "nerviós", "donada", "cartera", "cafeteria", "recuperar",
+  "vista", "adreça", "carrers", "estona", "enrere", "estona"
+];
+
+const gapTextTemplate = `Ahir vaig perdre la __________ pel centre de la ciutat. No me’n vaig adonar fins al cap d’una __________ i em vaig posar molt __________. Vaig tornar __________ i la vaig buscar pels __________ per on havia passat. Primer vaig entrar en una __________, però ningú no l’havia __________. Després, un cambrer em va dir que algú n’havia __________ una. Em va donar una __________ i hi vaig anar ràpidament. Allà, una dona em va explicar que l’havia __________ a un repartidor. Finalment, després de molta __________ buscant, el vaig trobar i vaig __________ la cartera.`;
+
+const expectedAnswers = [
+  "cartera", "estona", "nerviós", "enrere", "carrers", "cafeteria",
+  "vista", "trobat", "adreça", "donada", "estona", "recuperar"
+];
+
+let gapInputs = [];
+
+function renderQuiz(kind){
+  const wrap = document.getElementById(kind + "Quiz");
+  const items = quizzes[kind];
+  wrap.innerHTML = "";
+
+  items.forEach((q) => {
+    const qId = `${kind}_${q.id}`;
+
+    const card = document.createElement("div");
+    card.className = "q";
+    card.dataset.kind = kind;
+    card.dataset.qid = q.id;
+    card.dataset.correct = q.correct;
+    card.dataset.feedbackCorrect = q.feedbackCorrect;
+    card.dataset.feedbackWrong = q.feedbackWrong;
+
+    const title = document.createElement("div");
+    title.className = "q-title";
+    title.textContent = q.title;
+
+    const sentence = document.createElement("div");
+    sentence.className = "q-sentence";
+    sentence.innerHTML = esc(q.sentence);
+
+    const opts = document.createElement("div");
+    opts.className = "opts";
+
+    q.options.forEach((opt, oi) => {
+      const owrap = document.createElement("div");
+      owrap.className = "opt";
+      owrap.dataset.oi = oi;
+
+      const inp = document.createElement("input");
+      inp.type = "radio";
+      inp.name = qId;
+      inp.id = `${qId}_${oi}`;
+      inp.value = oi;
+
+      const lab = document.createElement("label");
+      lab.htmlFor = inp.id;
+      lab.textContent = opt;
+
+      owrap.appendChild(inp);
+      owrap.appendChild(lab);
+      opts.appendChild(owrap);
+    });
+
+    const feedback = document.createElement("div");
+    feedback.className = "per-q-feedback";
+
+    card.appendChild(title);
+    card.appendChild(sentence);
+    card.appendChild(opts);
+    card.appendChild(feedback);
+    wrap.appendChild(card);
+  });
+}
+
+function clearMarks(kind){
+  document.querySelectorAll(`[data-kind="${kind}"] .opt`).forEach(o => {
+    o.classList.remove("correct", "wrong");
+  });
+
+  document.querySelectorAll(`[data-kind="${kind}"] .per-q-feedback`).forEach(fb => {
+    fb.style.display = "none";
+    fb.classList.remove("correct", "wrong");
+    fb.innerHTML = "";
+  });
+}
+
+function setBox(kind, score, total, stats){
+  const pct = Math.round((score / total) * 100);
+
+  document.getElementById(kind + "Score").textContent = `Puntuació: ${score}/${total}`;
+  document.getElementById(kind + "Percent").textContent = `Percentatge: ${pct}%`;
+
+  const answered = stats?.answered ?? 0;
+  const blanks = total - answered;
+  const wrong = stats?.wrong ?? 0;
+
+  let msg = `Has encertat <strong>${score}</strong> de <strong>${total}</strong>.`;
+  msg += ` Has respost <strong>${answered}</strong> i n’has deixat <strong>${blanks}</strong> en blanc.`;
+
+  if (score === total) msg = `✅ <strong>Perfecte!</strong> ${msg}`;
+  else if (score >= total - 1) msg = `👍 <strong>Molt bé!</strong> ${msg}`;
+  else if (score >= Math.ceil(total * 0.6)) msg = `🙂 <strong>Bona feina!</strong> ${msg}`;
+  else msg = `💡 <strong>Continua!</strong> ${msg}`;
+
+  if (wrong > 0) msg += ` Errors: <strong>${wrong}</strong>.`;
+
+  document.getElementById(kind + "Msg").innerHTML = `<strong>Feedback:</strong> ${msg}`;
+}
+
+function checkQuiz(kind){
+  const cards = Array.from(document.querySelectorAll(`[data-kind="${kind}"]`));
+  let score = 0;
+  let answered = 0;
+  let wrong = 0;
+
+  clearMarks(kind);
+
+  cards.forEach(card => {
+    const correct = parseInt(card.dataset.correct, 10);
+    const groupName = `${kind}_${card.dataset.qid}`;
+    const chosen = document.querySelector(`input[name="${groupName}"]:checked`);
+    const opts = Array.from(card.querySelectorAll(".opt"));
+    const fb = card.querySelector(".per-q-feedback");
+
+    opts.forEach(o => {
+      if (parseInt(o.dataset.oi, 10) === correct) o.classList.add("correct");
+    });
+
+    if (chosen) {
+      answered++;
+      const val = parseInt(chosen.value, 10);
+      fb.style.display = "block";
+
+      if (val === correct) {
+        score++;
+        fb.classList.add("correct");
+        fb.innerHTML = `<strong>Correcte.</strong> ${esc(card.dataset.feedbackCorrect)}`;
+      } else {
+        wrong++;
+        const wrongWrap = opts.find(o => parseInt(o.dataset.oi, 10) === val);
+        if (wrongWrap) wrongWrap.classList.add("wrong");
+        fb.classList.add("wrong");
+        fb.innerHTML = `<strong>Revisa-ho.</strong> ${esc(card.dataset.feedbackWrong)}`;
+      }
+    }
+  });
+
+  setBox(kind, score, cards.length, { answered, wrong });
+}
+
+function showAnswers(kind){
+  document.querySelectorAll(`[data-kind="${kind}"]`).forEach(card => {
+    const correct = parseInt(card.dataset.correct, 10);
+    const groupName = `${kind}_${card.dataset.qid}`;
+    const inp = document.querySelector(`input[name="${groupName}"][value="${correct}"]`);
+    if (inp) inp.checked = true;
+  });
+
+  checkQuiz(kind);
+}
+
+function resetQuiz(kind){
+  document.querySelectorAll(`[data-kind="${kind}"] input[type="radio"]`).forEach(i => i.checked = false);
+
+  clearMarks(kind);
+
+  const total = quizzes[kind].length;
+
+  document.getElementById(kind + "Score").textContent = `Puntuació: 0/${total}`;
+  document.getElementById(kind + "Percent").textContent = `Percentatge: 0%`;
+  document.getElementById(kind + "Msg").innerHTML =
+    `<strong>Feedback:</strong> Tria una opció a cada pregunta i prem “Comprova”.`;
+}
+
+function renderGapFill(){
+  const container = document.getElementById("gapTextContainer");
+  const bank = document.getElementById("wordBank");
+
+  bank.innerHTML = gapWords.map(word => `<span>${esc(word)}</span>`).join("");
+
+  let i = 0;
+  const html = gapTextTemplate.replace(/__________/g, () => {
+    const n = i++;
+    return `<input type="text" class="gap-input" id="gap_${n}" maxlength="30">`;
+  });
+
+  container.innerHTML = html;
+  gapInputs = Array.from(document.querySelectorAll(".gap-input"));
+}
+
+function normAnswer(s){
+  return (s || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function clearGapMarks(){
+  gapInputs.forEach(inp => inp.classList.remove("correct", "wrong"));
+}
+
+function setGapBox(score, total, stats){
+  const pct = Math.round((score / total) * 100);
+
+  document.getElementById("gapScore").textContent = `Puntuació: ${score}/${total}`;
+  document.getElementById("gapPercent").textContent = `Percentatge: ${pct}%`;
+
+  const answered = stats?.answered ?? 0;
+  const blanks = total - answered;
+  const wrong = stats?.wrong ?? 0;
+
+  let msg = `Has encertat <strong>${score}</strong> de <strong>${total}</strong>.`;
+  msg += ` Has completat <strong>${answered}</strong> espais i n’has deixat <strong>${blanks}</strong> en blanc.`;
+
+  if (score === total) msg = `✅ <strong>Perfecte!</strong> ${msg}`;
+  else if (score >= total - 1) msg = `👍 <strong>Molt bé!</strong> ${msg}`;
+  else if (score >= Math.ceil(total * 0.6)) msg = `🙂 <strong>Bona feina!</strong> ${msg}`;
+  else msg = `💡 <strong>Continua!</strong> ${msg}`;
+
+  if (wrong > 0) msg += ` Errors: <strong>${wrong}</strong>.`;
+
+  document.getElementById("gapMsg").innerHTML = `<strong>Feedback:</strong> ${msg}`;
+}
+
+function checkGapFill(){
+  let score = 0;
+  let answered = 0;
+  let wrong = 0;
+
+  clearGapMarks();
+
+  gapInputs.forEach((inp, i) => {
+    const user = normAnswer(inp.value);
+    const correct = normAnswer(expectedAnswers[i]);
+
+    if (user) {
+      answered++;
+      if (user === correct) {
+        score++;
+        inp.classList.add("correct");
+      } else {
+        wrong++;
+        inp.classList.add("wrong");
+      }
+    }
+  });
+
+  setGapBox(score, expectedAnswers.length, { answered, wrong });
+}
+
+function showGapAnswers(){
+  gapInputs.forEach((inp, i) => {
+    inp.value = expectedAnswers[i];
+  });
+
+  checkGapFill();
+}
+
+function resetGapFill(){
+  gapInputs.forEach(inp => {
+    inp.value = "";
+    inp.classList.remove("correct", "wrong");
+  });
+
+  document.getElementById("gapScore").textContent = `Puntuació: 0/${expectedAnswers.length}`;
+  document.getElementById("gapPercent").textContent = `Percentatge: 0%`;
+  document.getElementById("gapMsg").innerHTML =
+    `<strong>Feedback:</strong> Completa tots els espais i prem “Comprova”.`;
+}
+
+renderQuiz("tf");
+renderGapFill();
+</script>
+
+</body>
+</html>

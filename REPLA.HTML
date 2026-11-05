@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDCATALA · Els veïns del replà</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      background: #fff;
+      color: #222;
+    }
+
+    .banner {
+      background: #ffcc00;
+      color: #222;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .banner img {
+      width: 52px;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .banner-title {
+      font-size: 1.7em;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .home-button {
+      color: #fff;
+      font-size: 1.55em;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .home-button:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 28px;
+      max-width: 1400px;
+      margin: 20px auto 28px;
+      padding: 0 20px;
+      align-items: start;
+    }
+
+    .left-column {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 20;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .right-column::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .right-column::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 10px;
+    }
+
+    .right-column::-webkit-scrollbar-thumb {
+      background: #ffcc00;
+      border-radius: 10px;
+    }
+
+    .card {
+      background: #fffdf8;
+      border: 1px solid #ecdca8;
+      border-radius: 14px;
+      padding: 15px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .video-card {
+      padding: 10px;
+    }
+
+    .video-wrapper {
+      width: 390px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .exercise-title {
+      margin: 0 0 8px;
+      font-size: 1.23em;
+      color: #7a5200;
+    }
+
+    .instructions {
+      margin: 0 0 14px;
+      color: #555;
+      line-height: 1.5;
+      font-size: 0.98em;
+    }
+
+    .question-block {
+      margin-bottom: 14px;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid #f0e1b2;
+      border-radius: 10px;
+    }
+
+    .question-block p {
+      margin: 0 0 8px;
+      font-size: 1.01em;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button.option-btn,
+    button.check-btn,
+    button.reset-btn {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.97em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button.option-btn {
+      background: #efefef;
+      color: #222;
+      padding: 7px 13px;
+    }
+
+    button.option-btn:hover {
+      background: #e4e4e4;
+    }
+
+    button.option-btn.selected {
+      background: #ffd84d;
+      font-weight: 700;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    button.check-btn,
+    button.reset-btn {
+      padding: 9px 15px;
+    }
+
+    button.check-btn {
+      background: #7a5200;
+      color: #fff;
+    }
+
+    button.check-btn:hover {
+      background: #5f3f00;
+    }
+
+    button.reset-btn {
+      background: #d8d8d8;
+      color: #222;
+    }
+
+    button.reset-btn:hover {
+      background: #c9c9c9;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .feedback.correct {
+      color: #1f8a3b;
+    }
+
+    .feedback.incorrect {
+      color: #c62828;
+    }
+
+    .feedback-detail {
+      margin-top: 7px;
+      padding: 7px 9px;
+      font-size: 0.95em;
+      line-height: 1.45;
+      background: #faf6e8;
+      border-radius: 7px;
+      color: #555;
+      display: none;
+    }
+
+    .gap-word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .gap-word-bank span {
+      background: #fff3bf;
+      border: 1px solid #efd36b;
+      border-radius: 18px;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .gap-text {
+      font-size: 1.01em;
+      line-height: 2.15;
+    }
+
+    .gap-text input {
+      width: 108px;
+      max-width: 100%;
+      padding: 5px 7px;
+      border: 1px solid #c8c8c8;
+      border-radius: 7px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1em;
+      margin: 0 3px;
+    }
+
+    .gap-text input.correct {
+      border: 2px solid #1f8a3b;
+      background: #edf9f0;
+      color: #1f8a3b;
+    }
+
+    .gap-text input.incorrect {
+      border: 2px solid #c62828;
+      background: #fff0f0;
+      color: #c62828;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 0;
+      }
+
+      .left-column {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        padding: 8px 0;
+      }
+
+      .right-column {
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      .video-wrapper {
+        width: min(94vw, 520px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .banner {
+        padding: 14px 16px;
+      }
+
+      .banner-title {
+        font-size: 1.4em;
+      }
+
+      .banner img {
+        width: 46px;
+      }
+
+      .container {
+        padding: 0 12px;
+      }
+
+      .card {
+        padding: 13px;
+      }
+
+      .video-card {
+        padding: 8px;
+      }
+
+      .gap-text input {
+        width: 96px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+<div class="banner-title">VIDCATALA · Els veïns del replà</div>
+
+  <a class='home-button' href='/'>
+    <i class="fas fa-home"></i>
+  </a>
+</header>
+
+<main class="container">
+
+  <section class="left-column">
+    <div class="card video-card">
+      <div class="video-wrapper">
+        <video controls>
+          <source src="veins.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="right-column">
+
+    <div class="card">
+      <h2 class="exercise-title">Exercici 1 · Sí o no</h2>
+
+      <p class="instructions">
+        Decideix si les afirmacions reflecteixen correctament el sentit i el to del text. Algunes preguntes exigeixen interpretar actituds i matisos.
+      </p>
+
+      <div id="true-false-exercise"></div>
+
+      <div class="button-row">
+        <button class="check-btn" onclick="checkTF()">Comprova</button>
+        <button class="reset-btn" onclick="resetTF()">Reinicia</button>
+      </div>
+
+      <div id="tf-score" class="feedback"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="exercise-title">Exercici 2 · Omple els buits</h2>
+
+      <p class="instructions">
+        Completa el resum amb una paraula adequada del requadre.
+      </p>
+
+      <div class="gap-word-bank">
+        <span>respecte</span>
+        <span>gosset</span>
+        <span>notícies</span>
+        <span>barret</span>
+        <span>escala</span>
+        <span>somriure</span>
+        <span>pis</span>
+        <span>perdó</span>
+        <span>sorollosos</span>
+        <span>convivència</span>
+      </div>
+
+      <div class="gap-text">
+        1. Viure en un <input id="g1" type="text"> pot ser agradable, però també complicat.<br>
+
+        2. El narrador diu que la <input id="g2" type="text"> no sempre és fàcil.<br>
+
+        3. El senyor Joan sempre porta un <input id="g3" type="text">.<br>
+
+        4. El veí sovint el saluda amb un <input id="g4" type="text">.<br>
+
+        5. A vegades escolta les <input id="g5" type="text"> amb el volum massa alt.<br>
+
+        6. A la porta B hi viu una parella amb un <input id="g6" type="text">.<br>
+
+        7. El narrador diu que són una mica <input id="g7" type="text">.<br>
+
+        8. Quan fan massa soroll, demanen <input id="g8" type="text"> ràpidament.<br>
+
+        9. El text destaca la importància del <input id="g9" type="text">.<br>
+
+        10. També és important saludar-se quan ens trobem a l’<input id="g10" type="text">.
+      </div>
+
+      <div class="button-row">
+        <button class="check-btn" onclick="checkGap()">Comprova</button>
+        <button class="reset-btn" onclick="resetGap()">Reinicia</button>
+      </div>
+
+      <div id="gap-score" class="feedback"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+const questions = [
+  [
+    "El narrador presenta la convivència al bloc com una experiència completament negativa.",
+    "No",
+    "El text és molt més matisat. El narrador reconeix petites molèsties i diferències entre veïns, però en general transmet una visió bastant positiva de la vida al bloc."
+  ],
+  [
+    "Quan parla del senyor Joan, el narrador sembla mostrar afecte i comprensió cap a ell.",
+    "Sí",
+    "La manera com el descriu —amb detalls tranquils i humans, com el somriure o el costum de mirar les notícies— crea una imatge propera i afectuosa."
+  ],
+  [
+    "El text suggereix que els conflictes entre veïns sovint neixen més de petits hàbits quotidians que no pas de problemes greus.",
+    "Sí",
+    "Els exemples del text fan referència sobretot a sorolls, televisió alta o sopars tardans. No apareixen conflictes seriosos ni situacions extremes."
+  ],
+  [
+    "El narrador dona a entendre que prefereix evitar qualsevol relació amb els altres veïns.",
+    "No",
+    "De fet, el text mostra el contrari. El narrador valora els petits gestos de cordialitat i considera important saludar-se i mantenir una relació respectuosa."
+  ],
+  [
+    "La descripció de la parella jove combina una petita crítica amb una valoració general positiva.",
+    "Sí",
+    "El narrador admet que poden ser sorollosos, però immediatament afegeix que són molt macos. Això mostra una actitud equilibrada i tolerant."
+  ],
+  [
+    "El text fa pensar que el narrador espera un silenci absolut i constant dins l’edifici.",
+    "No",
+    "El narrador sembla bastant flexible. Accepta que viure amb altres persones implica certs sorolls i només espera una actitud respectuosa."
+  ],
+  [
+    "Quan els veïns demanen perdó després de fer soroll, el text reforça la idea que la bona convivència depèn sobretot de l’actitud de les persones.",
+    "Sí",
+    "El problema no és només el soroll, sinó la manera de reaccionar. El fet que demanin perdó de seguida transmet respecte i voluntat d’entendre’s."
+  ],
+  [
+    "El narrador descriu tots els seus veïns com si tinguessin personalitats molt semblants.",
+    "No",
+    "Precisament al final destaca que tots són diferents. El text insisteix que la convivència és possible encara que les persones tinguin hàbits i caràcters diversos."
+  ],
+  [
+    "El missatge final del text suggereix que els petits gestos quotidians poden millorar molt l’ambient d’un edifici.",
+    "Sí",
+    "El narrador dona importància a coses senzilles com saludar, parlar bé o mostrar respecte. El text defensa una convivència basada en petits gestos humans."
+  ],
+  [
+    "El to general del narrador es pot considerar agressiu i ple de queixes.",
+    "No",
+    "El to és tranquil, reflexiu i bastant tolerant. Encara que menciona inconvenients, el narrador evita exagerar-los i manté una actitud comprensiva."
+  ]
+];
+
+const tfDiv = document.getElementById("true-false-exercise");
+let answers = {};
+
+function renderTF() {
+  tfDiv.innerHTML = "";
+
+  questions.forEach((q, i) => {
+    tfDiv.innerHTML += `
+      <div class="question-block">
+        <p><strong>${i + 1}.</strong> ${q[0]}</p>
+
+        <div class="buttons">
+          <button class="option-btn" onclick="sel(${i}, 'Sí', this)">Sí</button>
+          <button class="option-btn" onclick="sel(${i}, 'No', this)">No</button>
+        </div>
+
+        <div id="fb${i}" class="feedback"></div>
+        <div id="exp${i}" class="feedback-detail"></div>
+      </div>
+    `;
+  });
+}
+
+function sel(i, a, b) {
+  answers[i] = a;
+
+  b.parentElement.querySelectorAll("button").forEach(x =>
+    x.classList.remove("selected")
+  );
+
+  b.classList.add("selected");
+}
+
+function checkTF() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    const fb = document.getElementById("fb" + i);
+    const exp = document.getElementById("exp" + i);
+
+    if (answers[i] === q[1]) {
+      fb.textContent = "Correcte.";
+      fb.className = "feedback correct";
+      score++;
+    } else if (answers[i]) {
+      fb.textContent = "Incorrecte. Resposta correcta: " + q[1] + ".";
+      fb.className = "feedback incorrect";
+    } else {
+      fb.textContent = "No has triat cap resposta.";
+      fb.className = "feedback incorrect";
+    }
+
+    exp.textContent = q[2];
+    exp.style.display = "block";
+  });
+
+  const tfScore = document.getElementById("tf-score");
+
+  tfScore.textContent = "Resultat: " + score + "/" + questions.length;
+  tfScore.className = "feedback " + (score >= 7 ? "correct" : "incorrect");
+}
+
+function resetTF() {
+  answers = {};
+  renderTF();
+  document.getElementById("tf-score").textContent = "";
+}
+
+const gapAns = [
+  "pis",
+  "convivencia",
+  "barret",
+  "somriure",
+  "noticies",
+  "gosset",
+  "sorollosos",
+  "perdo",
+  "respecte",
+  "escala"
+];
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function checkGap() {
+  let score = 0;
+
+  gapAns.forEach((a, i) => {
+    const el = document.getElementById("g" + (i + 1));
+    const val = normalizeText(el.value);
+
+    el.classList.remove("correct", "incorrect");
+
+    if (val === normalizeText(a)) {
+      el.classList.add("correct");
+      score++;
+    } else {
+      el.classList.add("incorrect");
+    }
+  });
+
+  const gapScore = document.getElementById("gap-score");
+
+  gapScore.textContent = "Resultat: " + score + "/" + gapAns.length;
+  gapScore.className = "feedback " + (score >= 8 ? "correct" : "incorrect");
+}
+
+function resetGap() {
+  gapAns.forEach((a, i) => {
+    const el = document.getElementById("g" + (i + 1));
+    el.value = "";
+    el.classList.remove("correct", "incorrect");
+  });
+
+  document.getElementById("gap-score").textContent = "";
+}
+
+renderTF();
+</script>
+
+</body>
+</html>
