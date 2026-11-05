@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bon dia, amic meu · VidCatalà</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f6f2; color: #292a26; font: 15px/1.5 Quicksand, Arial, sans-serif; }
+header { background: #fc0; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+header strong { font-size: 21px; }
+header a { color: inherit; font-weight: 700; }
+main { max-width: 650px; margin: auto; padding: 18px 14px 32px; }
+h1 { font-size: clamp(24px, 4vw, 33px); margin: 0 0 4px; }
+p { margin: 0 0 14px; }
+.card { background: white; border: 1px solid #e4e1d7; border-radius: 16px; padding: 14px; }
+video { display: block; width: min(100%, 50vh); aspect-ratio: 1; object-fit: contain; margin: auto; background: #171717; border-radius: 12px; }
+h2 { font-size: 15px; margin: 12px 0 6px; }
+#lyrics { min-height: 75px; padding: 9px 12px; border-radius: 10px; background: #fff4bb; white-space: pre-line; font-size: 13px; }
+</style>
+</head>
+<body>
+<header><strong>VidCatalà</strong><a href="tots.html#cancons">← Cançons</a></header>
+<main>
+  <h1>Bon dia, amic meu</h1>
+  <p>Escolta la cançó i segueix la lletra.</p>
+  <section class="card" aria-labelledby="lyrics-heading">
+    <video controls playsinline preload="metadata" poster="assets/bon-dia-amic-meu.jpg">
+      <source src="assets/bon-dia-amic-meu.mp4" type="video/mp4">
+      El teu navegador no pot reproduir aquest vídeo.
+    </video>
+    <h2 id="lyrics-heading">Lletra sincronitzada</h2>
+    <div id="lyrics">Prem el botó de reproducció per començar.</div>
+  </section>
+</main>
+<script>
+const cues = [[0.0, 20.2, "♪"], [20.2, 25.25, "♪ Hola bon dia amic\nCom va tot avui ♪"], [25.25, 30.3, "♪ Hola bon dia amic\nCom va tot avui\nJo estic molt content ♪"], [30.3, 35.35, "♪ Com va tot avui\nJo estic molt content\nI tu com estàs ♪"], [35.35, 40.4, "♪ Jo estic molt content\nI tu com estàs\nHola bona tarda amic ♪"], [40.4, 45.45, "♪ I tu com estàs\nHola bona tarda amic\nCom va tot ara ♪"], [45.45, 50.5, "♪ Hola bona tarda amic\nCom va tot ara\nJo estic molt feliç ♪"], [50.5, 55.55, "♪ Com va tot ara\nJo estic molt feliç\nI tu com estàs ♪"], [55.55, 60.6, "♪ Jo estic molt feliç\nI tu com estàs\nHola i adéu ♪"], [60.6, 65.65, "♪ I tu com estàs\nHola i adéu\nBé o malament ♪"], [65.65, 70.7, "♪ Hola i adéu\nBé o malament\nCom estàs tu ♪"], [70.7, 75.75, "♪ Bé o malament\nCom estàs tu\nDigues ara sí ♪"], [75.75, 80.8, "♪ Com estàs tu\nDigues ara sí\nEm dic Pau i tu ♪"], [80.8, 85.862, "♪ Digues ara sí\nEm dic Pau i tu\nCom estàs avui ♪"], [85.862, 90.925, "♪ Em dic Pau i tu\nCom estàs avui\nNo estic gaire bé ♪"], [90.925, 95.987, "♪ Com estàs avui\nNo estic gaire bé\nTinc una mica de mal ♪"], [95.987, 101.05, "♪ No estic gaire bé\nTinc una mica de mal\nEm dic Anna i tu ♪"], [101.05, 106.112, "♪ Tinc una mica de mal\nEm dic Anna i tu\nCom estàs ara ♪"], [106.112, 111.175, "♪ Em dic Anna i tu\nCom estàs ara\nJo estic regular ♪"], [111.175, 116.237, "♪ Com estàs ara\nJo estic regular\nI tu com estàs ♪"], [116.237, 121.3, "♪ Jo estic regular\nI tu com estàs\nHola i adéu ♪"], [121.3, 126.35, "♪ I tu com estàs\nHola i adéu\nBé o malament ♪"], [126.35, 131.4, "♪ Hola i adéu\nBé o malament\nCom estàs tu ♪"], [131.4, 136.45, "♪ Bé o malament\nCom estàs tu\nDigues ara sí ♪"], [136.45, 141.5, "♪ Com estàs tu\nDigues ara sí\nFins aviat amic ♪"], [141.5, 146.625, "♪ Digues ara sí\nFins aviat amic\nMolt bona nit ♪"], [146.625, 151.75, "♪ Fins aviat amic\nMolt bona nit\nFins ara adéu ♪"], [151.75, 156.875, "♪ Molt bona nit\nFins ara adéu\nAdéu amic meu ♪"], [156.875, 162.0, "♪ Fins ara adéu\nAdéu amic meu ♪"]];
+const video = document.querySelector('video');
+const lyrics = document.querySelector('#lyrics');
+
+function updateLyrics() {
+  const cue = cues.find(([start, end]) => start <= video.currentTime && video.currentTime < end);
+  const text = cue ? cue[2] : '♪';
+  if (lyrics.textContent !== text) lyrics.textContent = text;
+}
+
+video.addEventListener('play', updateLyrics);
+video.addEventListener('timeupdate', updateLyrics);
+video.addEventListener('seeking', updateLyrics);
+</script>
+</body>
+</html>
