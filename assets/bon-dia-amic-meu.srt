@@ -1,0 +1,170 @@
+1
+00:00:00,000 --> 00:00:20,200
+♪
+
+2
+00:00:20,200 --> 00:00:25,250
+♪ Hola bon dia amic
+Com va tot avui ♪
+
+3
+00:00:25,250 --> 00:00:30,300
+♪ Hola bon dia amic
+Com va tot avui
+Jo estic molt content ♪
+
+4
+00:00:30,300 --> 00:00:35,350
+♪ Com va tot avui
+Jo estic molt content
+I tu com estàs ♪
+
+5
+00:00:35,350 --> 00:00:40,400
+♪ Jo estic molt content
+I tu com estàs
+Hola bona tarda amic ♪
+
+6
+00:00:40,400 --> 00:00:45,450
+♪ I tu com estàs
+Hola bona tarda amic
+Com va tot ara ♪
+
+7
+00:00:45,450 --> 00:00:50,500
+♪ Hola bona tarda amic
+Com va tot ara
+Jo estic molt feliç ♪
+
+8
+00:00:50,500 --> 00:00:55,550
+♪ Com va tot ara
+Jo estic molt feliç
+I tu com estàs ♪
+
+9
+00:00:55,550 --> 00:01:00,600
+♪ Jo estic molt feliç
+I tu com estàs
+Hola i adéu ♪
+
+10
+00:01:00,600 --> 00:01:05,650
+♪ I tu com estàs
+Hola i adéu
+Bé o malament ♪
+
+11
+00:01:05,650 --> 00:01:10,700
+♪ Hola i adéu
+Bé o malament
+Com estàs tu ♪
+
+12
+00:01:10,700 --> 00:01:15,750
+♪ Bé o malament
+Com estàs tu
+Digues ara sí ♪
+
+13
+00:01:15,750 --> 00:01:20,800
+♪ Com estàs tu
+Digues ara sí
+Em dic Pau i tu ♪
+
+14
+00:01:20,800 --> 00:01:25,862
+♪ Digues ara sí
+Em dic Pau i tu
+Com estàs avui ♪
+
+15
+00:01:25,862 --> 00:01:30,925
+♪ Em dic Pau i tu
+Com estàs avui
+No estic gaire bé ♪
+
+16
+00:01:30,925 --> 00:01:35,987
+♪ Com estàs avui
+No estic gaire bé
+Tinc una mica de mal ♪
+
+17
+00:01:35,987 --> 00:01:41,050
+♪ No estic gaire bé
+Tinc una mica de mal
+Em dic Anna i tu ♪
+
+18
+00:01:41,050 --> 00:01:46,112
+♪ Tinc una mica de mal
+Em dic Anna i tu
+Com estàs ara ♪
+
+19
+00:01:46,112 --> 00:01:51,175
+♪ Em dic Anna i tu
+Com estàs ara
+Jo estic regular ♪
+
+20
+00:01:51,175 --> 00:01:56,237
+♪ Com estàs ara
+Jo estic regular
+I tu com estàs ♪
+
+21
+00:01:56,237 --> 00:02:01,300
+♪ Jo estic regular
+I tu com estàs
+Hola i adéu ♪
+
+22
+00:02:01,300 --> 00:02:06,350
+♪ I tu com estàs
+Hola i adéu
+Bé o malament ♪
+
+23
+00:02:06,350 --> 00:02:11,400
+♪ Hola i adéu
+Bé o malament
+Com estàs tu ♪
+
+24
+00:02:11,400 --> 00:02:16,450
+♪ Bé o malament
+Com estàs tu
+Digues ara sí ♪
+
+25
+00:02:16,450 --> 00:02:21,500
+♪ Com estàs tu
+Digues ara sí
+Fins aviat amic ♪
+
+26
+00:02:21,500 --> 00:02:26,625
+♪ Digues ara sí
+Fins aviat amic
+Molt bona nit ♪
+
+27
+00:02:26,625 --> 00:02:31,750
+♪ Fins aviat amic
+Molt bona nit
+Fins ara adéu ♪
+
+28
+00:02:31,750 --> 00:02:36,875
+♪ Molt bona nit
+Fins ara adéu
+Adéu amic meu ♪
+
+29
+00:02:36,875 --> 00:02:42,000
+♪ Fins ara adéu
+Adéu amic meu ♪
+
