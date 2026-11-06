@@ -39,174 +39,49 @@ body {
   font-weight: 700;
 }
 
-.intro {
-  max-width: 850px;
-  margin: 16px auto 8px;
-  padding: 0 18px;
-  text-align: center;
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 60px) 18px;
 }
 
-.intro h2 {
-  margin: 0 0 5px;
-  font-size: 1.12rem;
-}
-
-.intro p {
-  margin: 0;
-  color: #555;
-  line-height: 1.45;
-  font-size: 0.86rem;
-}
-
-.intro .small-intro {
-  margin-top: 8px;
-  font-size: 0.76rem;
-  line-height: 1.42;
-  color: #666;
-}
+.intro { margin-bottom: 24px; }
+.intro h2 { font-size: clamp(1.5rem, 4vw, 2.35rem); margin: 0 0 8px; }
+.intro p { margin: 0; line-height: 1.55; color: #555; }
 
 .category-grid {
-  max-width: 1180px;
-  margin: 0 auto 18px;
-  padding: 14px 18px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: 3fr 2fr;
+  gap: 16px;
 }
 
 .category-card {
-  background: #fffdf8;
-  border-radius: 16px;
-  padding: 15px 16px;
-  text-decoration: none;
-  color: inherit;
-  min-height: 118px;
-  box-shadow: 0 4px 11px rgba(0,0,0,0.08);
-  transition: all 0.22s ease;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-}
-
-.category-card:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 9px 20px rgba(0,0,0,0.12),
-    0 0 0 3px rgba(255,204,0,0.42);
-}
-
-.category-icon {
-  font-size: 1.85rem;
-  line-height: 1;
-  flex: 0 0 auto;
-}
-
-.category-card h2 {
-  margin: 0 0 5px;
-  font-size: 1rem;
-  line-height: 1.2;
-}
-
-.category-card p {
-  margin: 0;
-  color: #5a5a5a;
-  font-size: 0.79rem;
-  line-height: 1.32;
-}
-
-.all-button-wrap {
-  text-align: center;
-  margin: 2px 0 28px;
-}
-
-.all-button {
-  display: inline-block;
-  background: #ffcc00;
-  color: #2f2f2f;
+  justify-content: center;
+  gap: 9px;
+  min-height: 210px;
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid #e3dccb;
+  border-radius: 18px;
+  background: #fffdf8;
+  color: inherit;
   text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-.all-button:hover {
-  background: #ffd633;
-  transform: translateY(-2px);
-}
+.category-card:hover, .category-card:focus-visible { outline: 3px solid #8b6500; }
+.category-card.primary { background: #ffcc00; border-color: #e0ab00; }
+.category-card h2, .category-card p { margin: 0; }
+.category-card h2 { font-size: 1.55rem; }
+.category-card p { line-height: 1.45; }
+.category-icon { font-size: 1.7rem; }
+.category-action { font-weight: 700; margin-top: 4px; }
 
-}
-
-@media (max-width: 980px) {
-  .category-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 880px;
-  }
-}
-
-@media (max-width: 760px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 720px;
-  }
-
-  .category-card {
-    min-height: 112px;
-  }
-}
-
-@media (max-width: 560px) {
-  .banner {
-    padding: 9px 13px;
-  }
-
-  .banner img {
-    width: 36px;
-  }
-
-  .banner h1 {
-    font-size: 1.12rem;
-  }
-
-  .intro {
-    margin-top: 13px;
-  }
-
-  .intro p {
-    font-size: 0.8rem;
-  }
-
-  .intro .small-intro {
-    font-size: 0.72rem;
-  }
-
-  .category-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 12px 14px;
-  }
-
-  .category-card {
-    min-height: auto;
-    padding: 13px 14px;
-  }
-
-  .category-icon {
-    font-size: 1.6rem;
-  }
-
-  .category-card h2 {
-    font-size: 0.96rem;
-  }
-
-  .category-card p {
-    font-size: 0.76rem;
-  }
-
-  
-  }
+@media (max-width: 620px) {
+  .category-grid { grid-template-columns: 1fr; }
+  .category-card { min-height: 0; }
 }
 </style>
 </head>
@@ -218,84 +93,26 @@ body {
   <h1>VIDCATALA</h1>
 </div>
 
-<div class="intro">
-  <h2>Escolta i entén el català real</h2>
-  <p>
-    Tria una secció per practicar amb vídeos curts, activitats interactives i vocabulari útil.
-  </p>
-  <p class="small-intro">
-    Cada activitat combina un vídeo en català amb una sèrie d'exercicis interactius dissenyats per reforçar la comprensió, el vocabulari i la gramàtica. Els exercicis t'ajuden a entendre millor allò que has escoltat i a incorporar el català de manera natural al teu propi ús de la llengua.
-  </p>
-</div>
+<main>
+  <div class="intro">
+    <h2>Escolta i practica el català</h2>
+    <p>Segueix la lletra de les cançons o treballa la comprensió amb vídeos curts.</p>
+  </div>
 
-<div class="category-grid">
-
-  <a class='category-card' href='/tots#vida'>
-    <div class="category-icon">🛒</div>
-    <div>
-      <h2>Vida quotidiana</h2>
-      <p>Compres, família, aniversaris, propines i situacions del dia a dia.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#ciutat'>
-    <div class="category-icon">🏙️</div>
-    <div>
-      <h2>Ciutat i serveis</h2>
-      <p>Transport, policia, trànsit, emergències i incidents urbans.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#aprendre'>
-    <div class="category-icon">📚</div>
-    <div>
-      <h2>Aprendre català</h2>
-      <p>Recursos, universitat, lectorats i estratègies d’aprenentatge.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#llengua'>
-    <div class="category-icon">💬</div>
-    <div>
-      <h2>Expressions i llengua</h2>
-      <p>Expressions habituals, connectors, matisos i usos naturals.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#esport'>
-    <div class="category-icon">⚽</div>
-    <div>
-      <h2>Esport i lleure</h2>
-      <p>Esport, aficions, activitats de temps lliure, Aitana Bonmatí i Barcelona olímpica.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#histories'>
-    <div class="category-icon">⭐</div>
-    <div>
-      <h2>Històries personals</h2>
-      <p>Records, identitat, projectes de vida i personatges inspiradors.</p>
-    </div>
-  </a>
-
-  <a class='category-card' href='/tots#dialegs'>
-    <div class="category-icon">👥</div>
-    <div>
-      <h2>Diàlegs professionals</h2>
-      <p>Converses en contextos professionals, d’ajuda o d’atenció.</p>
-    </div>
-  </a>
-<a class='category-card' href='/tots#cancons'>
-    <div class="category-icon">🎵</div>
-    <div><h2>Cançons</h2><p>Escolta, segueix la lletra i practica el català amb música.</p></div>
-  </a>
-
-</div>
-
-<div class="all-button-wrap">
-  <a class='all-button' href='/tots'>Veure totes les activitats</a>
-</div>
-
-
+  <nav class="category-grid" aria-label="Activitats de VidCatalà">
+    <a class="category-card primary" href="/tots#cancons">
+      <span class="category-icon" aria-hidden="true">♫</span>
+      <h2>Cançons</h2>
+      <p>Escolta la música i segueix la lletra al ritme de cada cançó.</p>
+      <span class="category-action">Explora les cançons →</span>
+    </a>
+    <a class="category-card" href="/tots#videos">
+      <span class="category-icon" aria-hidden="true">▶</span>
+      <h2>Vídeos</h2>
+      <p>Mira situacions quotidianes i practica amb activitats de comprensió.</p>
+      <span class="category-action">Explora els vídeos →</span>
+    </a>
+  </nav>
+</main>
 </body>
 </html>
