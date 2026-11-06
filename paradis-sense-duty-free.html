@@ -22,26 +22,24 @@ h2 { font-size: 15px; margin: 12px 0 6px; }
 #lyrics { min-height: 59px; white-space: pre-line; font-size: 13px; }
 main { max-width: 1030px; }
 .lesson { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 16px; }
-.practice h2 { font-size: 1rem; margin-top: 0; }
-.practice form + form { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e4e1d7; }
-.practice label { display: block; margin: 9px 0; }
-.practice input, .practice select, .practice button { font: inherit; padding: 5px 8px; max-width: 100%; }
-.practice input { width: 9em; }
-.practice button { background: #fc0; color: #292a26; border: 1px solid #9a7900; border-radius: 8px; cursor: pointer; font-weight: 700; }
-.practice [aria-invalid="true"] { outline: 2px solid #b32424; }
-.practice output { display: block; margin-top: 8px; }
-mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; font-weight: 700; }
-@media (max-width: 700px) { .lesson { grid-template-columns: 1fr; } }
-#lyrics span { display: block; color: #51492f; }
-#lyrics mark { display: block; padding: 2px 5px; }
-.practice article + article { border-top: 1px solid #e4e1d7; padding-top: 14px; margin-top: 14px; }
-.practice textarea { width: 100%; min-height: 64px; font: inherit; padding: 6px; }
-.practice summary { cursor: pointer; font-weight: 700; }
-.practice details p { margin: 8px 0 0; }
-.practice .words { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; min-height: 35px; }
-.practice .assembled { background: #f7f6f2; border-radius: 7px; padding: 6px; }
-.practice .words button { background: #fff4bb; }
+#lyrics { height: 8rem; overflow-y: auto; overscroll-behavior: contain; }
+.lyric-line { margin: 0; padding: 3px 6px; border-radius: 5px; }
+.lyric-line[aria-current] { background: #fc0; font-weight: 700; }
+.practice h2 { font-size: 1.05rem; margin: 0 0 8px; }
+.practice section + section { border-top: 1px solid #e4e1d7; margin-top: 20px; padding-top: 18px; }
 .practice fieldset { border: 1px solid #e4e1d7; border-radius: 8px; margin: 12px 0; min-width: 0; }
+.practice legend { font-weight: 700; padding: 0 4px; }
+.practice label { display: block; margin: 8px 0; }
+.practice select, .practice button { font: inherit; max-width: 100%; }
+.practice select { display: block; width: 100%; padding: 5px; margin-top: 3px; }
+.practice button { padding: 5px 8px; background: #fc0; color: #292a26; border: 1px solid #9a7900; border-radius: 7px; cursor: pointer; }
+.practice output { display: block; margin-top: 6px; }
+.practice [aria-invalid="true"] { outline: 2px solid #b32424; }
+.words { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.words button { background: #fff4bb; }
+.assembled { min-height: 42px; background: #f7f6f2; padding: 6px; border-radius: 7px; }
+.assembled:empty::before { content: 'La frase apareixerà aquí.'; color: #5b584f; }
+@media (max-width: 700px) { .lesson { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -58,56 +56,220 @@ mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; fon
     </video>
     <div class="lyrics-box">
       <h2 id="lyrics-heading">Lletra sincronitzada</h2>
-      <div id="lyrics">Prem el botó de reproducció per començar.</div>
+      <div id="lyrics" tabindex="0" role="region" aria-labelledby="lyrics-heading">Prem el botó de reproducció per començar.</div>
     </div>
   </section>
   <section class="card practice" aria-label="Activitats de comprensió i llengua">
-<h2>Comprensió i interpretació</h2><p>Justifica les respostes amb detalls del rap. Després, compara la teva lectura amb una resposta possible.</p><article><label for="response-1"><strong>1. Quina imatge de les Illes es ven al visitant i què queda fora d’aquesta imatge? Contrasta dues imatges concretes del rap.</strong></label><textarea id="response-1"></textarea><details><summary>Mostra una resposta possible</summary><p>La bandera blava i els clubs VIP projecten una imatge atractiva i exclusiva. La pobresa i les petjades en sorres robades introdueixen la desigualtat i el cost d’aquesta imatge.</p></details></article><article><label for="response-2"><strong>2. Quin argument construeix el contrast entre l’aigua escassa i les piscines plenes? A qui beneficia aquesta distribució i a qui pot perjudicar?</strong></label><textarea id="response-2"></textarea><details><summary>Mostra una resposta possible</summary><p>El contrast fa visible que un recurs limitat es destina a sostenir l’oferta turística. Se’n beneficien els establiments i els seus clients, mentre que els residents i els ecosistemes poden patir les conseqüències de l’escassetat.</p></details></article><article><label for="response-3"><strong>3. Com matisen les parets de pedra i les oliveres antigues la crítica del rap? Relaciona aquestes imatges amb la idea de resistència local.</strong></label><textarea id="response-3"></textarea><details><summary>Mostra una resposta possible</summary><p>Les imatges evoquen la memòria i la continuïtat d’un paisatge treballat durant generacions. Al costat de la denúncia, suggereixen que les illes conserven una identitat pròpia i capacitat de resistir.</p></details></article><article><label for="response-4"><strong>4. Com reinterpreta el rap l’expressió duty free? Quins costos posa sobre la taula i per què importa qui els assumeix?</strong></label><textarea id="response-4"></textarea><details><summary>Mostra una resposta possible</summary><p>El joc amb la franquícia fiscal qüestiona la idea d’un paradís sense cost. El rap apunta a l’escassetat d’aigua, les emissions i la precarietat laboral. La qüestió és que els beneficis i els costos poden recaure sobre persones diferents.</p></details></article><article><h2>Reconstrueix les frases</h2><p>Clica els fragments en ordre. Per treure’n un, clica’l a la frase que estàs construint.</p><fieldset class="jumble" data-answer="La imatge del paradís amaga els costos que qüestionen aquesta promesa."><legend>Frase 1</legend><div class="words bank" aria-label="Fragments disponibles"><button type="button">que qüestionen</button><button type="button">La imatge del paradís</button><button type="button">els costos</button><button type="button">amaga</button><button type="button">aquesta promesa.</button></div><div class="words assembled" aria-label="Frase que has construït"></div><button type="button" class="check">Comprova</button> <button type="button" class="reset">Torna a començar</button><output aria-live="polite"></output></fieldset><fieldset class="jumble" data-answer="Si l’aigua escasseja, cal preguntar-se qui n’assumeix el cost."><legend>Frase 2</legend><div class="words bank" aria-label="Fragments disponibles"><button type="button">qui n’assumeix</button><button type="button">Si l’aigua escasseja,</button><button type="button">el cost.</button><button type="button">cal preguntar-se</button></div><div class="words assembled" aria-label="Frase que has construït"></div><button type="button" class="check">Comprova</button> <button type="button" class="reset">Torna a començar</button><output aria-live="polite"></output></fieldset></article>
+    <section aria-labelledby="jumble-title">
+      <h2 id="jumble-title">1. Reconstrueix tres frases</h2>
+      <p>Clica els fragments en ordre. Pots treure qualsevol fragment de la frase, desfer l’últim pas o tornar a començar.</p>
+      <fieldset class="jumble" data-order="1 3 4 0 2">
+        <legend>Frase 1</legend>
+        <div class="words bank" role="group" aria-label="Fragments disponibles">
+          <button type="button" data-fragment="0">en un producte</button>
+          <button type="button" data-fragment="1">El rap qüestiona</button>
+          <button type="button" data-fragment="2">per a visitants.</button>
+          <button type="button" data-fragment="3">que es converteixi</button>
+          <button type="button" data-fragment="4">el paisatge</button>
+        </div>
+        <div class="words assembled" role="group" aria-label="Frase que has construït"></div>
+        <button type="button" class="check">Comprova</button>
+        <button type="button" class="undo" disabled>Desfés</button>
+        <button type="button" class="reset">Torna a començar</button>
+        <output aria-live="polite"></output>
+      </fieldset>
+      <fieldset class="jumble" data-order="2 4 3 0 1">
+        <legend>Frase 2</legend>
+        <div class="words bank" role="group" aria-label="Fragments disponibles">
+          <button type="button" data-fragment="0">revela un conflicte</button>
+          <button type="button" data-fragment="1">entre els usos de l’aigua.</button>
+          <button type="button" data-fragment="2">El contrast</button>
+          <button type="button" data-fragment="3">i les piscines plenes</button>
+          <button type="button" data-fragment="4">entre l’escassetat</button>
+        </div>
+        <div class="words assembled" role="group" aria-label="Frase que has construït"></div>
+        <button type="button" class="check">Comprova</button>
+        <button type="button" class="undo" disabled>Desfés</button>
+        <button type="button" class="reset">Torna a començar</button>
+        <output aria-live="polite"></output>
+      </fieldset>
+      <fieldset class="jumble" data-order="1 3 0 2">
+        <legend>Frase 3</legend>
+        <div class="words bank" role="group" aria-label="Fragments disponibles">
+          <button type="button" data-fragment="0">una memòria col·lectiva</button>
+          <button type="button" data-fragment="1">Les oliveres antigues</button>
+          <button type="button" data-fragment="2">que encara perdura.</button>
+          <button type="button" data-fragment="3">evoquen</button>
+        </div>
+        <div class="words assembled" role="group" aria-label="Frase que has construït"></div>
+        <button type="button" class="check">Comprova</button>
+        <button type="button" class="undo" disabled>Desfés</button>
+        <button type="button" class="reset">Torna a començar</button>
+        <output aria-live="polite"></output>
+      </fieldset>
+    </section>
+    <section aria-labelledby="match-title">
+      <h2 id="match-title">2. Relaciona la lletra amb les idees</h2>
+      <p>Relaciona cada fragment del rap amb la interpretació que li correspon. Fes servir cada interpretació una vegada.</p>
+      <form id="matching">
+        <label>«Venedors de paradís, bandera blava, oblida la pobresa.»
+          <select required data-answer="0"><option value="">Tria una interpretació</option><option value="3">El lleure turístic competeix per un recurs limitat.</option><option value="1">Les illes tenen una història d’intercanvis i de contactes.</option><option value="4">La capacitat de resistir perdura sota el soroll de la festa.</option><option value="0">La promoció turística pot tapar la desigualtat.</option><option value="2">El poder dels qui arriben contrasta amb les reivindicacions de qui hi viu.</option></select>
+        </label>
+        <label>«Illes: cruïlles, ports moriscos.»
+          <select required data-answer="1"><option value="">Tria una interpretació</option><option value="3">El lleure turístic competeix per un recurs limitat.</option><option value="1">Les illes tenen una història d’intercanvis i de contactes.</option><option value="4">La capacitat de resistir perdura sota el soroll de la festa.</option><option value="0">La promoció turística pot tapar la desigualtat.</option><option value="2">El poder dels qui arriben contrasta amb les reivindicacions de qui hi viu.</option></select>
+        </label>
+        <label>«Elit global, lluita local.»
+          <select required data-answer="2"><option value="">Tria una interpretació</option><option value="3">El lleure turístic competeix per un recurs limitat.</option><option value="1">Les illes tenen una història d’intercanvis i de contactes.</option><option value="4">La capacitat de resistir perdura sota el soroll de la festa.</option><option value="0">La promoció turística pot tapar la desigualtat.</option><option value="2">El poder dels qui arriben contrasta amb les reivindicacions de qui hi viu.</option></select>
+        </label>
+        <label>«Aigua escassa, piscines plenes.»
+          <select required data-answer="3"><option value="">Tria una interpretació</option><option value="3">El lleure turístic competeix per un recurs limitat.</option><option value="1">Les illes tenen una història d’intercanvis i de contactes.</option><option value="4">La capacitat de resistir perdura sota el soroll de la festa.</option><option value="0">La promoció turística pot tapar la desigualtat.</option><option value="2">El poder dels qui arriben contrasta amb les reivindicacions de qui hi viu.</option></select>
+        </label>
+        <label>«Però sota els baixos, esperit resilient.»
+          <select required data-answer="4"><option value="">Tria una interpretació</option><option value="3">El lleure turístic competeix per un recurs limitat.</option><option value="1">Les illes tenen una història d’intercanvis i de contactes.</option><option value="4">La capacitat de resistir perdura sota el soroll de la festa.</option><option value="0">La promoció turística pot tapar la desigualtat.</option><option value="2">El poder dels qui arriben contrasta amb les reivindicacions de qui hi viu.</option></select>
+        </label>
+        <button>Comprova les parelles</button>
+        <output aria-live="polite"></output>
+      </form>
+    </section>
+    <section aria-labelledby="choice-title">
+      <h2 id="choice-title">3. Interpreta el missatge del rap</h2>
+      <p>Tria la lectura que es pot defensar millor amb el conjunt de la lletra.</p>
+      <form id="choices">
+        <fieldset data-answer="0">
+          <legend>Què aporta «Mira el mapa» al desenvolupament del rap?</legend>
+          <label><input type="radio" name="question-0" value="0" required> Desplaça la mirada del circuit de l’oci cap a les històries i les relacions de poder del territori.</label>
+          <label><input type="radio" name="question-0" value="1" required> Contraposa les rutes antigues i les actuals per defensar que el turisme ha interromput tota forma d’intercanvi.</label>
+          <label><input type="radio" name="question-0" value="2" required> Proposa repartir els visitants per les illes per reduir la pressió sobre les zones de festa.</label>
+          <p class="feedback" hidden>La invitació a mirar més enllà dels clubs obre pas a les petjades, la història i la mercantilització del paisatge.</p>
+        </fieldset>
+        <fieldset data-answer="2">
+          <legend>Quina lectura encaixa millor amb el contrast entre els baixos i les oliveres antigues?</legend>
+          <label><input type="radio" name="question-1" value="0" required> La festa representa una identitat nova que ha substituït la memòria local.</label>
+          <label><input type="radio" name="question-1" value="1" required> El paisatge antic esdevé el principal reclam amb què la indústria ven la festa.</label>
+          <label><input type="radio" name="question-1" value="2" required> La vida i la memòria locals persisteixen en un espai dominat per la imatge de la festa.</label>
+          <p class="feedback" hidden>La referència a un esperit resilient enllaça la crítica de la festa amb la continuïtat del paisatge i de la memòria.</p>
+        </fieldset>
+        <fieldset data-answer="1">
+          <legend>Quina implicació té el joc amb l’expressió «duty free»?</legend>
+          <label><input type="radio" name="question-2" value="0" required> La promoció de les illes com un luxe exclusiu deixa de funcionar quan els preus pugen.</label>
+          <label><input type="radio" name="question-2" value="1" required> El paradís té costos socials i ambientals, encara que l’experiència de qui el consumeix els faci invisibles.</label>
+          <label><input type="radio" name="question-2" value="2" required> La metàfora apunta sobretot a la pèrdua d’ingressos públics en els destins turístics.</label>
+          <p class="feedback" hidden>El rap associa la imatge de paradís amb l’escassetat, la precarietat i el cost ecològic. L’expressió anglesa amplia la crítica més enllà del seu sentit fiscal.</p>
+        </fieldset>
+        <button>Comprova les respostes</button>
+        <output aria-live="polite"></output>
+      </form>
+    </section>
   </section>
   </div>
 </main>
 <script>
 const video = document.querySelector('video');
-const track = video.textTracks[0];
+const trackElement = video.querySelector('track');
+const track = trackElement.track;
 const lyrics = document.querySelector('#lyrics');
-track.mode = 'hidden';
-track.addEventListener('cuechange', () => {
-  const cue = track.activeCues[0];
-  if (!cue || cue.text === '♪') {
-    lyrics.textContent = '♪';
-    return;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const rows = new Map();
+let highlighted;
+
+function followLyrics() {
+  const cue = track.activeCues?.[0];
+  const row = rows.get(cue);
+  if (!row || row === highlighted) return;
+  highlighted?.removeAttribute('aria-current');
+  row.setAttribute('aria-current', 'true');
+  highlighted = row;
+  const distance = row.getBoundingClientRect().top - lyrics.getBoundingClientRect().top;
+  lyrics.scrollTo({
+    top: lyrics.scrollTop + distance - (lyrics.clientHeight - row.offsetHeight) / 2,
+    behavior: reducedMotion.matches || video.seeking ? 'instant' : 'smooth'
+  });
+}
+
+function loadLyrics() {
+  rows.clear();
+  for (const cue of track.cues ?? []) {
+    const row = document.createElement('p');
+    row.className = 'lyric-line';
+    row.textContent = cue.text;
+    rows.set(cue, row);
   }
-  const cues = Array.from(track.cues);
-  const index = cues.indexOf(cue);
-  const context = [cues[index - 1], cue, cues[index + 1]];
-  lyrics.replaceChildren(...context.filter(Boolean).map(line => {
-    const row = document.createElement(line === cue ? 'mark' : 'span');
-    row.textContent = line.text;
-    return row;
-  }));
-});
+  if (rows.size) lyrics.replaceChildren(...rows.values());
+  followLyrics();
+}
+
+trackElement.addEventListener('load', loadLyrics);
+track.addEventListener('cuechange', followLyrics);
+video.addEventListener('seeked', followLyrics);
+track.mode = 'hidden';
+if (trackElement.readyState === 2) loadLyrics();
 
 for (const task of document.querySelectorAll('.jumble')) {
   const bank = task.querySelector('.bank');
   const assembled = task.querySelector('.assembled');
   const output = task.querySelector('output');
+  const undo = task.querySelector('.undo');
   const fragments = [...bank.children];
+
+  function clearFeedback() {
+    output.textContent = '';
+    undo.disabled = !assembled.children.length;
+  }
+
   for (const fragment of fragments) {
     fragment.addEventListener('click', () => {
-      (fragment.parentElement === bank ? assembled : bank).append(fragment);
-      fragment.focus();
-      output.textContent = '';
+      if (fragment.parentElement === bank) assembled.append(fragment);
+      else bank.append(fragment);
+      fragment.focus({preventScroll: true});
+      clearFeedback();
     });
   }
+
+  undo.addEventListener('click', () => {
+    const fragment = assembled.lastElementChild;
+    if (!fragment) return;
+    bank.append(fragment);
+    fragment.focus({preventScroll: true});
+    clearFeedback();
+  });
+
   task.querySelector('.reset').addEventListener('click', () => {
     bank.append(...fragments);
-    output.textContent = '';
+    clearFeedback();
   });
+
   task.querySelector('.check').addEventListener('click', () => {
-    const answer = [...assembled.children].map(part => part.textContent).join(' ');
+    const order = [...assembled.children].map(fragment => fragment.dataset.fragment).join(' ');
     output.textContent = bank.children.length ? 'Falten fragments per col·locar.'
-      : answer === task.dataset.answer ? 'Molt bé! La frase és correcta.'
+      : order === task.dataset.order ? 'Molt bé! La frase és correcta.'
       : 'Revisa l’ordre dels fragments i torna-ho a provar.';
+  });
+}
+
+for (const form of document.querySelectorAll('.practice form')) {
+  const items = [...form.querySelectorAll('[data-answer]')];
+  const output = form.querySelector('output');
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    let score = 0;
+    for (const item of items) {
+      const choice = item.querySelector('input:checked');
+      const correct = (choice?.value ?? item.value) === item.dataset.answer;
+      item.setAttribute('aria-invalid', String(!correct));
+      const explanation = item.querySelector('.feedback');
+      if (explanation) explanation.hidden = !correct;
+      if (correct) score++;
+    }
+    output.textContent = score === items.length ? 'Molt bé! Tot correcte.'
+      : score + ' de ' + items.length + ' correctes. Revisa les respostes marcades.';
+  });
+  form.addEventListener('change', event => {
+    const item = event.target.closest('[data-answer]');
+    item?.removeAttribute('aria-invalid');
+    const explanation = item?.querySelector('.feedback');
+    if (explanation) explanation.hidden = true;
+    output.textContent = '';
   });
 }
 </script>
