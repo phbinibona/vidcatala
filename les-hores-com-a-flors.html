@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les hores com a flors · VidCatalà</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f6f2; color: #292a26; font: 15px/1.5 Quicksand, Arial, sans-serif; }
+header { background: #fc0; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+header strong { font-size: 21px; }
+header a { color: inherit; font-weight: 700; }
+main { max-width: 650px; margin: auto; padding: 18px 14px 32px; }
+h1 { font-size: clamp(24px, 4vw, 33px); margin: 0 0 4px; }
+p { margin: 0 0 14px; }
+.card { background: white; border: 1px solid #e4e1d7; border-radius: 16px; padding: 14px; }
+video { display: block; width: min(100%, 50vh); aspect-ratio: 1; object-fit: contain; margin: auto; background: #171717; border-radius: 12px; }
+h2 { font-size: 15px; margin: 12px 0 6px; }
+.lyrics-box { margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: #fff4bb; }
+.lyrics-box h2 { margin: 0 0 4px; }
+#lyrics { min-height: 59px; white-space: pre-line; font-size: 13px; }
+main { max-width: 1030px; }
+.lesson { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 16px; }
+.practice h2 { font-size: 1rem; margin-top: 0; }
+.practice form + form { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e4e1d7; }
+.practice label { display: block; margin: 9px 0; }
+.practice input, .practice select, .practice button { font: inherit; padding: 5px 8px; max-width: 100%; }
+.practice input { width: 9em; }
+.practice button { background: #fc0; color: #292a26; border: 1px solid #9a7900; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.practice [aria-invalid="true"] { outline: 2px solid #b32424; }
+.practice output { display: block; margin-top: 8px; }
+mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; font-weight: 700; }
+@media (max-width: 700px) { .lesson { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header><strong>VidCatalà</strong><a href="/tots#cancons">← Cançons</a></header>
+<main>
+  <h1>Les hores com a flors</h1>
+  <p>Escolta la cançó i fixa’t en els verbs en imperfet destacats.</p>
+  <div class="lesson">
+  <section class="card" aria-labelledby="lyrics-heading">
+    <video controls playsinline preload="metadata" poster="assets/les-hores-com-a-flors.jpg">
+      <source src="assets/les-hores-com-a-flors.mp4" type="video/mp4">
+      <track kind="subtitles" src="assets/les-hores-com-a-flors.vtt" srclang="ca" label="Català">
+      El teu navegador no pot reproduir aquest vídeo.
+    </video>
+    <div class="lyrics-box">
+      <h2 id="lyrics-heading">Lletra sincronitzada</h2>
+      <div id="lyrics">Prem el botó de reproducció per començar.</div>
+    </div>
+  </section>
+  <section class="card practice" aria-label="Exercicis de verbs">
+    <p>L’<strong>imperfet d’indicatiu</strong> serveix per parlar d’hàbits i descriure situacions del passat. A la cançó, <em>cantava cada matí</em> expressa un hàbit i <em>érem joves</em> descriu una etapa de la vida.</p>
+    <form>
+      <h2>1. Reconeix l’imperfet</h2>
+      <p>Tria el verb en imperfet de cada grup.</p>
+      <label>cantar <select data-answer="cantava" required><option value="">Tria</option><option>canta</option><option>cantava</option><option>va cantar</option></select></label>
+      <label>riure <select data-answer="reies" required><option value="">Tria</option><option>reies</option><option>rius</option><option>vas riure</option></select></label>
+      <label>ser <select data-answer="érem" required><option value="">Tria</option><option>som</option><option>vam ser</option><option>érem</option></select></label>
+      <button>Comprova</button>
+      <output aria-live="polite"></output>
+    </form>
+    <form>
+      <h2>2. Completa els versos</h2>
+      <p>Escriu el verb entre parèntesis en imperfet.</p>
+      <label>Jo <input data-answer="cantava" required autocapitalize="none" spellcheck="false"> molt cada matí. (cantar)</label>
+      <label>Vosaltres <input data-answer="veníeu" required autocapitalize="none" spellcheck="false"> amb molt d’amor. (venir)</label>
+      <label>Ells <input data-answer="parlaven" required autocapitalize="none" spellcheck="false"> de temps molt passats. (parlar)</label>
+      <button>Comprova</button>
+      <output aria-live="polite"></output>
+    </form>
+    <form>
+      <h2>3. Canvia del present a l’imperfet</h2>
+      <p>Completa cada frase amb el mateix verb en imperfet. Fixa’t en el subjecte i en els accents.</p>
+      <label>Ara som joves. En aquell temps <input data-answer="érem" required autocapitalize="none" spellcheck="false"> joves.</label>
+      <label>Ara somiem molt. En aquell temps <input data-answer="somiàvem" required autocapitalize="none" spellcheck="false"> molt.</label>
+      <label>Ara jugam a prop del riu. En aquell temps <input data-answer="jugàvem" required autocapitalize="none" spellcheck="false"> a prop del riu.</label>
+      <button>Comprova</button>
+      <output aria-live="polite"></output>
+    </form>
+  </section>
+  </div>
+</main>
+<script>
+const video = document.querySelector('video');
+const track = video.textTracks[0];
+const lyrics = document.querySelector('#lyrics');
+const verbs = /(?<![\p{L}])(cantava|reies|reia|recordaves|miraves|era|donava|érem|somiàvem|queien|buscàvem|rèiem|anàvem|veníeu|parlaven|sabies|sentia|jugàvem|passava|estimava)(?![\p{L}])/giu;
+track.mode = 'hidden';
+track.addEventListener('cuechange', () => {
+  const text = track.activeCues[0]?.text ?? '♪';
+  const parts = text.split(verbs);
+  lyrics.replaceChildren(...parts.map((part, index) => {
+    if (index % 2 === 0) return document.createTextNode(part);
+    const mark = document.createElement('mark');
+    mark.textContent = part;
+    return mark;
+  }));
+});
+
+for (const form of document.querySelectorAll('.practice form')) {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const fields = [...form.querySelectorAll('[data-answer]')];
+    const correct = fields.filter(field => {
+      const matches = field.value.trim().toLowerCase() === field.dataset.answer;
+      field.setAttribute('aria-invalid', String(!matches));
+      return matches;
+    }).length;
+    form.querySelector('output').textContent = correct === fields.length
+      ? 'Molt bé! Totes les respostes són correctes.'
+      : correct + ' de ' + fields.length + ' respostes correctes. Revisa les caselles marcades.';
+  });
+}
+</script>
+</body>
+</html>
