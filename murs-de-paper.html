@@ -40,8 +40,9 @@ main { max-width: 1030px; }
 .assembled { min-height: 42px; background: #f7f6f2; padding: 6px; border-radius: 7px; }
 .assembled:empty::before { content: 'La frase apareixerà aquí.'; color: #5b584f; }
 @media (max-width: 700px) { .lesson { grid-template-columns: 1fr; } }
-#introduction { width: 100%; aspect-ratio: 16/9; }
-#song { width: min(100%, 46vh); }
+ .media-column { position: sticky; top: 12px; align-self: start; }
+.media-column h2 { margin: 0 0 8px; }
+#song { width: 100%; max-height: calc(100dvh - 235px); object-fit: contain; }
 textarea { display: block; width: 100%; min-height: 110px; font: inherit; padding: 8px; margin: 8px 0; }
 details { margin: 12px 0; }
 summary { cursor: pointer; font-weight: 700; }
@@ -49,6 +50,12 @@ details p { margin: 8px 0; }
 .self-check { display: block; font-size: .9em; }
 .source { font-size: .85em; }
 @media (min-width: 701px) { .lesson { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); } }
+@media (max-width: 700px) {
+  .media-column { top: 0; z-index: 2; box-shadow: 0 5px 12px rgba(0,0,0,.12); padding: 9px; }
+  #song { max-height: 28dvh; }
+  .media-column #lyrics { height: 5rem; }
+  .media-column h2 { margin-bottom: 4px; font-size: .85rem; }
+}
 </style>
 </head>
 <body>
@@ -57,16 +64,11 @@ details p { margin: 8px 0; }
   <h1>Murs de paper</h1>
   <p>B2–C1 · Llengua, memòria i fronteres. Escolta, interpreta i defensa la teva lectura de la cançó.</p>
   <div class="lesson">
-  <section class="card" aria-label="Introducció i cançó">
-    <h2>Abans d’escoltar · Introducció parlada</h2>
-    <video id="introduction" controls playsinline preload="metadata" poster="assets/frontera.jpg">
-      <source src="assets/frontera.mp4" type="video/mp4">
-      El teu navegador no pot reproduir aquest vídeo.
-    </video>
-    <h2>Escolta la cançó · Murs de paper</h2>
-    <video id="song" controls playsinline preload="metadata" poster="assets/murs-de-paper.jpg">
-      <source src="assets/murs-de-paper.mp4" type="video/mp4">
-      <track kind="subtitles" src="assets/murs-de-paper.vtt" srclang="ca" label="Català">
+  <section class="card media-column" aria-label="Introducció i cançó">
+    <h2>Introducció parlada i cançó</h2>
+    <video id="song" controls playsinline preload="metadata" poster="assets/frontera.jpg">
+      <source src="assets/murs-de-paper-complet.mp4" type="video/mp4">
+      <track kind="subtitles" src="assets/murs-de-paper-complet.vtt" srclang="ca" label="Català">
       El teu navegador no pot reproduir aquest vídeo.
     </video>
     <div class="lyrics-box">
@@ -126,9 +128,6 @@ details p { margin: 8px 0; }
 </main>
 <script>
 const video = document.querySelector('#song');
-const introduction = document.querySelector('#introduction');
-introduction.addEventListener('play', () => video.pause());
-video.addEventListener('play', () => introduction.pause());
 const trackElement = video.querySelector('track');
 const track = trackElement.track;
 const lyrics = document.querySelector('#lyrics');
