@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murs de paper · VidCatalà</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f6f2; color: #292a26; font: 15px/1.5 Quicksand, Arial, sans-serif; }
+header { background: #fc0; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+header strong { font-size: 21px; }
+header a { color: inherit; font-weight: 700; }
+main { max-width: 650px; margin: auto; padding: 18px 14px 32px; }
+h1 { font-size: clamp(24px, 4vw, 33px); margin: 0 0 4px; }
+p { margin: 0 0 14px; }
+.card { background: white; border: 1px solid #e4e1d7; border-radius: 16px; padding: 14px; }
+video { display: block; width: min(100%, 50vh); aspect-ratio: 1; object-fit: contain; margin: auto; background: #171717; border-radius: 12px; }
+h2 { font-size: 15px; margin: 12px 0 6px; }
+.lyrics-box { margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: #fff4bb; }
+.lyrics-box h2 { margin: 0 0 4px; }
+#lyrics { min-height: 59px; white-space: pre-line; font-size: 13px; }
+main { max-width: 1030px; }
+.lesson { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 16px; }
+#lyrics { height: 8rem; overflow-y: auto; overscroll-behavior: contain; }
+.lyric-line { margin: 0; padding: 3px 6px; border-radius: 5px; }
+.lyric-line[aria-current] { background: #fc0; font-weight: 700; }
+.practice h2 { font-size: 1.05rem; margin: 0 0 8px; }
+.practice section + section { border-top: 1px solid #e4e1d7; margin-top: 20px; padding-top: 18px; }
+.practice fieldset { border: 1px solid #e4e1d7; border-radius: 8px; margin: 12px 0; min-width: 0; }
+.practice legend { font-weight: 700; padding: 0 4px; }
+.practice label { display: block; margin: 8px 0; }
+.practice select, .practice button { font: inherit; max-width: 100%; }
+.practice select { display: block; width: 100%; padding: 5px; margin-top: 3px; }
+.practice button { padding: 5px 8px; background: #fc0; color: #292a26; border: 1px solid #9a7900; border-radius: 7px; cursor: pointer; }
+.practice output { display: block; margin-top: 6px; }
+.practice [aria-invalid="true"] { outline: 2px solid #b32424; }
+.words { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.words button { background: #fff4bb; }
+.assembled { min-height: 42px; background: #f7f6f2; padding: 6px; border-radius: 7px; }
+.assembled:empty::before { content: 'La frase apareixerà aquí.'; color: #5b584f; }
+@media (max-width: 700px) { .lesson { grid-template-columns: 1fr; } }
+#introduction { width: 100%; aspect-ratio: 16/9; }
+#song { width: min(100%, 46vh); }
+textarea { display: block; width: 100%; min-height: 110px; font: inherit; padding: 8px; margin: 8px 0; }
+details { margin: 12px 0; }
+summary { cursor: pointer; font-weight: 700; }
+details p { margin: 8px 0; }
+.self-check { display: block; font-size: .9em; }
+.source { font-size: .85em; }
+@media (min-width: 701px) { .lesson { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); } }
+</style>
+</head>
+<body>
+<header><strong>VidCatalà</strong><a href="/tots#cancons">← Cançons</a></header>
+<main>
+  <h1>Murs de paper</h1>
+  <p>B2–C1 · Llengua, memòria i fronteres. Escolta, interpreta i defensa la teva lectura de la cançó.</p>
+  <div class="lesson">
+  <section class="card" aria-label="Introducció i cançó">
+    <h2>Abans d’escoltar · Introducció parlada</h2>
+    <video id="introduction" controls playsinline preload="metadata" poster="assets/frontera.jpg">
+      <source src="assets/frontera.mp4" type="video/mp4">
+      El teu navegador no pot reproduir aquest vídeo.
+    </video>
+    <h2>Escolta la cançó · Murs de paper</h2>
+    <video id="song" controls playsinline preload="metadata" poster="assets/murs-de-paper.jpg">
+      <source src="assets/murs-de-paper.mp4" type="video/mp4">
+      <track kind="subtitles" src="assets/murs-de-paper.vtt" srclang="ca" label="Català">
+      El teu navegador no pot reproduir aquest vídeo.
+    </video>
+    <div class="lyrics-box">
+      <h2 id="lyrics-heading">Lletra sincronitzada</h2>
+      <div id="lyrics" tabindex="0" role="region" aria-labelledby="lyrics-heading">Prem el botó de reproducció per començar.</div>
+    </div>
+  </section>
+  <section class="card practice" aria-label="Activitats de comprensió i llengua">
+    <details>
+      <summary>Context per situar la cançó</summary>
+      <p>El Tractat dels Pirineus de 1659 va comportar la cessió a França del Rosselló, amb el Conflent, el Vallespir i el Capcir, i d’una part de la Cerdanya. La cançó parteix d’aquest canvi històric per construir una reflexió sobre la llengua, la memòria i la pertinença. Llegeix expressions com «mur fals» des del punt de vista de la veu poètica.</p>
+      <p class="source"><a href="https://www.enciclopedia.cat/gran-enciclopedia-catalana/tractat-dels-pirineus" target="_blank" rel="noopener">Context històric · Gran Enciclopèdia Catalana</a></p>
+      <p><strong>Nota de llengua.</strong> La gravació diu «Vento del Nord». La forma habitual en català és «vent del nord». La lletra de la cançó conserva la forma que s’hi sent.</p>
+    </details>
+    <section aria-labelledby="match-title">
+      <h2 id="match-title">1. Interpreta les imatges</h2>
+      <p>Relaciona cada fragment amb la interpretació més precisa. Fes servir cada interpretació una vegada.</p>
+      <form id="matching">
+<label>«Pells esquinçades per tractats de paper net»<select required data-answer="0"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La memòria manté vincles que no es poden dibuixar sobre un mapa.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
+<label>«La muntanya guarda el nostre vell secret»<select required data-answer="1"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La memòria manté vincles que no es poden dibuixar sobre un mapa.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
+<label>«Vallespir és batec que mai no s’apaga»<select required data-answer="2"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La memòria manté vincles que no es poden dibuixar sobre un mapa.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
+<label>«Mil sis-cents cinquanta-nou és un mur fals»<select required data-answer="3"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La memòria manté vincles que no es poden dibuixar sobre un mapa.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
+<label>«Queda el record com un fil invisible»<select required data-answer="4"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La memòria manté vincles que no es poden dibuixar sobre un mapa.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
+<button>Comprova les parelles</button><output aria-live="polite"></output></form></section>
+    <section aria-labelledby="choice-title">
+      <h2 id="choice-title">2. Llegeix entre línies</h2>
+      <p>Tria la lectura que es pot defensar millor amb el conjunt de la lletra.</p><form id="choices">
+<fieldset data-answer="0"><legend>Què pressuposa la invitació «Esborrem la frontera de la ment»?</legend><label><input type="radio" name="question-0" value="0" required> Que la separació pot haver condicionat la manera com les comunitats es perceben mútuament.</label><label><input type="radio" name="question-0" value="1" required> Que els vincles culturals es recuperaran automàticament si s’elimina la frontera administrativa.</label><label><input type="radio" name="question-0" value="2" required> Que la distància entre les comunitats depèn sobretot de les dificultats del relleu.</label><p class="feedback" hidden>La metàfora desplaça la frontera a l’àmbit de la percepció. Suggereix una separació interioritzada que es pot qüestionar a través del coneixement i la memòria.</p></fieldset>
+<fieldset data-answer="1"><legend>Quina funció té el contrast entre les «pells esquinçades» i l’«arrel» que no es pot partir?</legend><label><input type="radio" name="question-1" value="0" required> Presenta la ferida com una etapa ja superada perquè els seus efectes han desaparegut.</label><label><input type="radio" name="question-1" value="1" required> Transforma el record de la ruptura en una imatge de continuïtat que persisteix malgrat la separació.</label><label><input type="radio" name="question-1" value="2" required> Substitueix el conflicte col·lectiu per un record íntim deslligat de la història.</label><p class="feedback" hidden>La ferida expressa la ruptura, mentre que l’arrel suggereix un vincle profund i persistent. El contrast permet presentar la identitat com una continuïtat que resisteix la separació.</p></fieldset>
+<fieldset data-answer="2"><legend>Quin efecte produeix el «nosaltres» de «Som el mateix poble»?</legend><label><input type="radio" name="question-2" value="0" required> Informa sobre el grau d’acord dels habitants actuals amb la identitat descrita.</label><label><input type="radio" name="question-2" value="1" required> Identifica un grup tancat format exclusivament pels habitants del Vallespir.</label><label><input type="radio" name="question-2" value="2" required> Construeix una veu col·lectiva i convida l’oient a compartir una determinada idea de pertinença.</label><p class="feedback" hidden>La primera persona del plural crea comunitat dins del discurs. És una estratègia de la veu poètica i expressa un posicionament sobre la pertinença.</p></fieldset>
+<fieldset data-answer="0"><legend>Com s’ha d’interpretar l’expressió «mur fals» en relació amb 1659?</legend><label><input type="radio" name="question-3" value="0" required> Com un qüestionament del poder de la frontera per trencar els vincles culturals.</label><label><input type="radio" name="question-3" value="1" required> Com la proposta que el tractat no va arribar a entrar en vigor.</label><label><input type="radio" name="question-3" value="2" required> Com una explicació segons la qual la frontera només era una barrera física.</label><p class="feedback" hidden>La data remet a un canvi històric real. L’adjectiu «fals» expressa la valoració de la veu poètica sobre el sentit cultural d’aquella divisió.</p></fieldset>
+<button>Comprova les respostes</button><output aria-live="polite"></output></form></section>
+    <section aria-labelledby="reflection-title">
+      <h2 id="reflection-title">3. Defensa la teva interpretació</h2>
+      <p>Escriu entre 60 i 90 paraules per resposta. Cita dos detalls de la lletra i explica com donen suport a la teva lectura. Després, compara-la amb una resposta possible.</p>
+<fieldset><legend>1. Una frontera real i una metàfora</legend><label for="reflection-1">Explica com pot ser real una frontera administrativa i, alhora, ser presentada com un «mur fals». Relaciona la teva resposta amb dos fragments de la cançó.</label>
+<textarea id="reflection-1" placeholder="Escriu la teva interpretació…"></textarea>
+<details><summary>Compara amb una resposta possible</summary><p>El tractat de 1659 va comportar un canvi de sobirania, però «mur fals» qüestiona que aquesta divisió sigui suficient per definir la identitat cultural. La «frontera de la ment» trasllada el debat a la percepció, i la imatge de l’«arrel» suggereix vincles que persisteixen. La cançó interpreta les conseqüències del canvi històric des d’una idea de continuïtat.</p></details>
+<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
+<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
+</fieldset>
+<fieldset><legend>2. Qui parla i qui queda fora?</legend><label for="reflection-2">Analitza a qui pot incloure el «nosaltres» de la cançó. Quina experiència d’identitat podria quedar menys representada? Justifica la resposta sense atribuir una mateixa opinió a tots els habitants.</label>
+<textarea id="reflection-2" placeholder="Escriu la teva interpretació…"></textarea>
+<details><summary>Compara amb una resposta possible</summary><p>La veu poètica pot incloure persones que se senten vinculades per la llengua i la memòria. La repetició de «mateix» reforça aquesta comunitat, però deixa menys espai a identitats múltiples o a persones que viuen la frontera d’una altra manera. És una proposta de pertinença que el text construeix, i es pot analitzar sense suposar que tothom la comparteix.</p></details>
+<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
+<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
+</fieldset>
+<fieldset><legend>3. Dues lectures de la muntanya</legend><label for="reflection-3">La muntanya pot ser una barrera física i un espai de memòria. Com treballa la cançó aquesta tensió? Compara la imatge de la muntanya amb la del paper.</label>
+<textarea id="reflection-3" placeholder="Escriu la teva interpretació…"></textarea>
+<details><summary>Compara amb una resposta possible</summary><p>La muntanya podria separar físicament dos territoris, però la cançó la personifica com a guardiana d’un secret compartit. El paper dels tractats, en canvi, es vincula amb la ruptura. El contrast atribueix permanència i memòria al paisatge, mentre presenta la decisió escrita com un acte capaç de ferir. Aquesta oposició dona forma al posicionament emocional del text.</p></details>
+<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
+<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
+</fieldset>
+</section>
+  </section>
+  </div>
+</main>
+<script>
+const video = document.querySelector('#song');
+const introduction = document.querySelector('#introduction');
+introduction.addEventListener('play', () => video.pause());
+video.addEventListener('play', () => introduction.pause());
+const trackElement = video.querySelector('track');
+const track = trackElement.track;
+const lyrics = document.querySelector('#lyrics');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const rows = new Map();
+let highlighted;
+
+function followLyrics() {
+  const cue = track.activeCues?.[0];
+  const row = rows.get(cue);
+  if (!row || row === highlighted) return;
+  highlighted?.removeAttribute('aria-current');
+  row.setAttribute('aria-current', 'true');
+  highlighted = row;
+  const distance = row.getBoundingClientRect().top - lyrics.getBoundingClientRect().top;
+  lyrics.scrollTo({
+    top: lyrics.scrollTop + distance - (lyrics.clientHeight - row.offsetHeight) / 2,
+    behavior: reducedMotion.matches || video.seeking ? 'instant' : 'smooth'
+  });
+}
+
+function loadLyrics() {
+  rows.clear();
+  for (const cue of track.cues ?? []) {
+    const row = document.createElement('p');
+    row.className = 'lyric-line';
+    row.textContent = cue.text;
+    rows.set(cue, row);
+  }
+  if (rows.size) lyrics.replaceChildren(...rows.values());
+  followLyrics();
+}
+
+trackElement.addEventListener('load', loadLyrics);
+track.addEventListener('cuechange', followLyrics);
+video.addEventListener('seeked', followLyrics);
+track.mode = 'hidden';
+if (trackElement.readyState === 2) loadLyrics();
+
+for (const form of document.querySelectorAll('.practice form')) {
+  const items = [...form.querySelectorAll('[data-answer]')];
+  const output = form.querySelector('output');
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    let score = 0;
+    for (const item of items) {
+      const choice = item.querySelector('input:checked');
+      const correct = (choice?.value ?? item.value) === item.dataset.answer;
+      item.setAttribute('aria-invalid', String(!correct));
+      const explanation = item.querySelector('.feedback');
+      if (explanation) explanation.hidden = !correct;
+      if (correct) score++;
+    }
+    output.textContent = score === items.length ? 'Molt bé! Tot correcte.'
+      : score + ' de ' + items.length + ' correctes. Revisa les respostes marcades.';
+  });
+  form.addEventListener('change', event => {
+    const item = event.target.closest('[data-answer]');
+    item?.removeAttribute('aria-invalid');
+    const explanation = item?.querySelector('.feedback');
+    if (explanation) explanation.hidden = true;
+    output.textContent = '';
+  });
+}
+</script>
+</body>
+</html>
