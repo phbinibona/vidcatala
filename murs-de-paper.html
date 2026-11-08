@@ -43,11 +43,9 @@ main { max-width: 1030px; }
  .media-column { position: sticky; top: 12px; align-self: start; }
 .media-column h2 { margin: 0 0 8px; }
 #song { width: 100%; max-height: calc(100dvh - 235px); object-fit: contain; }
-textarea { display: block; width: 100%; min-height: 110px; font: inherit; padding: 8px; margin: 8px 0; }
 details { margin: 12px 0; }
 summary { cursor: pointer; font-weight: 700; }
 details p { margin: 8px 0; }
-.self-check { display: block; font-size: .9em; }
 .source { font-size: .85em; }
 @media (min-width: 701px) { .lesson { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); } }
 @media (max-width: 700px) {
@@ -83,8 +81,34 @@ details p { margin: 8px 0; }
       <p class="source"><a href="https://www.enciclopedia.cat/gran-enciclopedia-catalana/tractat-dels-pirineus" target="_blank" rel="noopener">Context històric · Gran Enciclopèdia Catalana</a></p>
       <p><strong>Nota de llengua.</strong> La gravació diu «Vento del Nord». La forma habitual en català és «vent del nord». La lletra de la cançó conserva la forma que s’hi sent.</p>
     </details>
+    <section aria-labelledby="vocabulary-title">
+      <h2 id="vocabulary-title">1. Relaciona les paraules amb les definicions</h2>
+      <p>Tria la definició de cada paraula. Fes servir cada definició una vegada. En l’exercici següent exploraràs el sentit figurat d’algunes d’aquestes paraules.</p>
+      <form id="vocabulary">
+        <label><strong>esquinçades</strong>
+          <select required data-answer="0"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <label><strong>tractats</strong>
+          <select required data-answer="1"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <label><strong>batec</strong>
+          <select required data-answer="2"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <label><strong>arrel</strong>
+          <select required data-answer="3"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <label><strong>cims</strong>
+          <select required data-answer="4"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <label><strong>oblit</strong>
+          <select required data-answer="5"><option value="">Tria una definició</option><option value="3">Part d’una planta que la fixa a terra.</option><option value="0">Estripades o trencades violentament.</option><option value="5">Pèrdua o absència del record.</option><option value="2">Moviment regular del cor.</option><option value="1">Acords formals entre estats.</option><option value="4">Punts més alts de les muntanyes.</option></select>
+        </label>
+        <button>Comprova el vocabulari</button>
+        <output aria-live="polite"></output>
+      </form>
+    </section>
     <section aria-labelledby="match-title">
-      <h2 id="match-title">1. Interpreta les imatges</h2>
+      <h2 id="match-title">2. Interpreta les imatges</h2>
       <p>Relaciona cada fragment amb la interpretació més precisa. Fes servir cada interpretació una vegada.</p>
       <form id="matching">
 <label>«Pells esquinçades per tractats de paper net»<select required data-answer="0"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La metàfora presenta els vincles d’origen com una continuïtat que resisteix la ruptura.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
@@ -94,35 +118,45 @@ details p { margin: 8px 0; }
 <label>«Cap línia de sang pot partir l’arrel»<select required data-answer="4"><option value="">Tria una interpretació</option><option value="3">La veu poètica qüestiona que una divisió històrica defineixi la pertinença cultural.</option><option value="0">El llenguatge formal dels acords contrasta amb el patiment que poden provocar.</option><option value="4">La metàfora presenta els vincles d’origen com una continuïtat que resisteix la ruptura.</option><option value="1">El paisatge es converteix en dipositari d’una memòria compartida.</option><option value="2">La identitat del lloc es presenta com una presència viva i persistent.</option></select></label>
 <button>Comprova les parelles</button><output aria-live="polite"></output></form></section>
     <section aria-labelledby="choice-title">
-      <h2 id="choice-title">2. Llegeix entre línies</h2>
+      <h2 id="choice-title">3. Llegeix entre línies</h2>
       <p>Tria la lectura que es pot defensar millor amb el conjunt de la lletra.</p><form id="choices">
 <fieldset data-answer="0"><legend>Què pressuposa la invitació «Esborrem la frontera de la ment»?</legend><label><input type="radio" name="question-0" value="0" required> Que la separació pot haver condicionat la manera com les comunitats es perceben mútuament.</label><label><input type="radio" name="question-0" value="1" required> Que els vincles culturals es recuperaran automàticament si s’elimina la frontera administrativa.</label><label><input type="radio" name="question-0" value="2" required> Que la distància entre les comunitats depèn sobretot de les dificultats del relleu.</label><p class="feedback" hidden>La metàfora desplaça la frontera a l’àmbit de la percepció. Suggereix una separació interioritzada que es pot qüestionar a través del coneixement i la memòria.</p></fieldset>
 <fieldset data-answer="1"><legend>Quina funció té el contrast entre les «pells esquinçades» i l’«arrel» que no es pot partir?</legend><label><input type="radio" name="question-1" value="0" required> Presenta la ferida com una etapa ja superada perquè els seus efectes han desaparegut.</label><label><input type="radio" name="question-1" value="1" required> Transforma el record de la ruptura en una imatge de continuïtat que persisteix malgrat la separació.</label><label><input type="radio" name="question-1" value="2" required> Substitueix el conflicte col·lectiu per un record íntim deslligat de la història.</label><p class="feedback" hidden>La ferida expressa la ruptura, mentre que l’arrel suggereix un vincle profund i persistent. El contrast permet presentar la identitat com una continuïtat que resisteix la separació.</p></fieldset>
 <fieldset data-answer="2"><legend>Quin efecte produeix el «nosaltres» de «Som el mateix poble»?</legend><label><input type="radio" name="question-2" value="0" required> Informa sobre el grau d’acord dels habitants actuals amb la identitat descrita.</label><label><input type="radio" name="question-2" value="1" required> Identifica un grup tancat format exclusivament pels habitants del Vallespir.</label><label><input type="radio" name="question-2" value="2" required> Construeix una veu col·lectiva i convida l’oient a compartir una determinada idea de pertinença.</label><p class="feedback" hidden>La primera persona del plural crea comunitat dins del discurs. És una estratègia de la veu poètica i expressa un posicionament sobre la pertinença.</p></fieldset>
 <fieldset data-answer="0"><legend>Com s’ha d’interpretar l’expressió «mur fals» en relació amb 1659?</legend><label><input type="radio" name="question-3" value="0" required> Com un qüestionament del poder de la frontera per trencar els vincles culturals.</label><label><input type="radio" name="question-3" value="1" required> Com la proposta que el tractat no va arribar a entrar en vigor.</label><label><input type="radio" name="question-3" value="2" required> Com una explicació segons la qual la frontera només era una barrera física.</label><p class="feedback" hidden>La data remet a un canvi històric real. L’adjectiu «fals» expressa la valoració de la veu poètica sobre el sentit cultural d’aquella divisió.</p></fieldset>
 <button>Comprova les respostes</button><output aria-live="polite"></output></form></section>
-    <section aria-labelledby="reflection-title">
-      <h2 id="reflection-title">3. Defensa la teva interpretació</h2>
-      <p>Escriu entre 60 i 90 paraules per resposta. Cita dos detalls de la lletra i explica com donen suport a la teva lectura. Després, compara-la amb una resposta possible.</p>
-<fieldset><legend>1. Una frontera real i una metàfora</legend><label for="reflection-1">Explica com pot ser real una frontera administrativa i, alhora, ser presentada com un «mur fals». Relaciona la teva resposta amb dos fragments de la cançó.</label>
-<textarea id="reflection-1" placeholder="Escriu la teva interpretació…"></textarea>
-<details><summary>Compara amb una resposta possible</summary><p>El tractat de 1659 va comportar un canvi de sobirania, però «mur fals» qüestiona que aquesta divisió sigui suficient per definir la identitat cultural. La «frontera de la ment» trasllada el debat a la percepció, i la imatge de l’«arrel» suggereix vincles que persisteixen. La cançó interpreta les conseqüències del canvi històric des d’una idea de continuïtat.</p></details>
-<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
-<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
-</fieldset>
-<fieldset><legend>2. Qui parla i qui queda fora?</legend><label for="reflection-2">Analitza a qui pot incloure el «nosaltres» de la cançó. Quina experiència d’identitat podria quedar menys representada? Justifica la resposta sense atribuir una mateixa opinió a tots els habitants.</label>
-<textarea id="reflection-2" placeholder="Escriu la teva interpretació…"></textarea>
-<details><summary>Compara amb una resposta possible</summary><p>La veu poètica pot incloure persones que se senten vinculades per la llengua i la memòria. La repetició de «mateix» reforça aquesta comunitat, però deixa menys espai a identitats múltiples o a persones que viuen la frontera d’una altra manera. És una proposta de pertinença que el text construeix, i es pot analitzar sense suposar que tothom la comparteix.</p></details>
-<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
-<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
-</fieldset>
-<fieldset><legend>3. Dues lectures de la muntanya</legend><label for="reflection-3">La muntanya pot ser una barrera física i un espai de memòria. Com treballa la cançó aquesta tensió? Compara la imatge de la muntanya amb la del paper.</label>
-<textarea id="reflection-3" placeholder="Escriu la teva interpretació…"></textarea>
-<details><summary>Compara amb una resposta possible</summary><p>La muntanya podria separar físicament dos territoris, però la cançó la personifica com a guardiana d’un secret compartit. El paper dels tractats, en canvi, es vincula amb la ruptura. El contrast atribueix permanència i memòria al paisatge, mentre presenta la decisió escrita com un acte capaç de ferir. Aquesta oposició dona forma al posicionament emocional del text.</p></details>
-<label class="self-check"><input type="checkbox"> He fet servir detalls de la lletra i he explicat la relació amb la meva interpretació.</label>
-<label class="self-check"><input type="checkbox"> He distingit els fets històrics del punt de vista de la veu poètica.</label>
-</fieldset>
-</section>
+    <section aria-labelledby="evidence-title">
+      <h2 id="evidence-title">4. Tria la prova que sosté l’anàlisi</h2>
+      <p>Llegeix cada interpretació i tria el fragment que la sosté de manera més precisa.</p>
+      <form id="evidence">
+        <fieldset data-answer="1">
+          <legend>1. Una frontera real i una metàfora</legend>
+          <p>El tractat de 1659 va comportar un canvi de sobirania. La cançó presenta aquesta divisió com un «mur fals» perquè qüestiona que una frontera administrativa defineixi tota la pertinença cultural.</p>
+          <label>Quin fragment sosté millor aquesta anàlisi?
+            <select required><option value="">Tria el fragment</option><option value="0">«Mil sis-cents cinquanta-nou és un mur fals»</option><option value="1">«Cap línia de sang pot partir l’arrel»</option><option value="2">«Llums de cançó brillen encara als cims»</option></select>
+          </label>
+          <p class="feedback" hidden>L’arrel que resisteix la ruptura concreta la idea de continuïtat cultural. La cita de la data formula el judici que s’ha d’explicar, mentre que la dels cims situa la imatge en el paisatge.</p>
+        </fieldset>
+        <fieldset data-answer="2">
+          <legend>2. La construcció d’una veu col·lectiva</legend>
+          <p>La cançó proposa una comunitat unida per la memòria i la llengua. La veu poètica convida l’oient a sentir-se part d’aquest «nosaltres», tot i que les experiències d’identitat dels habitants poden ser diverses.</p>
+          <label>Quin fragment sosté millor aquesta anàlisi?
+            <select required><option value="">Tria el fragment</option><option value="0">«On el Conflent plora cançons de terra»</option><option value="1">«Fills de l’oblit que no coneixen límits»</option><option value="2">«Som el mateix poble sota el mateix cel»</option></select>
+          </label>
+          <p class="feedback" hidden>La primera persona del plural i la repetició de «mateix» construeixen explícitament una pertinença compartida. La frase expressa el punt de vista de la cançó.</p>
+        </fieldset>
+        <fieldset data-answer="0">
+          <legend>3. El paisatge com a memòria</legend>
+          <p>La muntanya també podria funcionar com una barrera física. La cançó, però, la converteix en guardiana d’una continuïtat compartida, en contrast amb el paper dels tractats, associat a la ferida.</p>
+          <label>Quin fragment sosté millor aquesta anàlisi?
+            <select required><option value="">Tria el fragment</option><option value="0">«Però la muntanya guarda el nostre vell secret»</option><option value="1">«Vallespir és batec que mai no s’apaga»</option><option value="2">«Cantem la unió que no tem els mals»</option></select>
+          </label>
+          <p class="feedback" hidden>El verb «guarda» atribueix a la muntanya una funció de protecció de la memòria. El secret compartit reforça la idea de continuïtat.</p>
+        </fieldset>
+        <button>Comprova les proves</button>
+        <output aria-live="polite"></output>
+      </form>
+    </section>
   </section>
   </div>
 </main>
@@ -176,7 +210,7 @@ for (const form of document.querySelectorAll('.practice form')) {
     let score = 0;
     for (const item of items) {
       const choice = item.querySelector('input:checked');
-      const correct = (choice?.value ?? item.value) === item.dataset.answer;
+      const correct = (choice?.value ?? item.querySelector('select')?.value ?? item.value) === item.dataset.answer;
       item.setAttribute('aria-invalid', String(!correct));
       const explanation = item.querySelector('.feedback');
       if (explanation) explanation.hidden = !correct;
