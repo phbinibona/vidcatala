@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VIDCATALA · Expressions de dubte</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #f7f6f2;
+      color: #2f2f2f;
+    }
+
+    .banner {
+      background: #ffcc00;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .banner h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .home {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+    }
+
+    .left {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      color: #8B4513;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: #8B4513;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .video-wrap .vidcat-vimeo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-text {
+      background: #fff8e7;
+      border-left: 5px solid #ffcc00;
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .phrase-card {
+      background: #f7f6f2;
+      border-radius: 14px;
+      padding: 12px;
+      border-left: 4px solid #ffcc00;
+    }
+
+    .phrase-card h4 {
+      color: #8B4513;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .phrase-card p {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 0;
+    }
+
+    .exercise {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+    }
+
+    select,
+    input[type="text"] {
+      font-family: inherit;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+      min-width: 180px;
+    }
+
+    .gap-row {
+      margin: 12px 0;
+      line-height: 1.7;
+    }
+
+    .mcq-option {
+      display: block;
+      background: #f7f6f2;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin: 8px 0;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .mcq-option input {
+      margin-right: 8px;
+    }
+
+    .word-bank-builder {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px;
+      background: #fff8e7;
+      border: 2px dashed #d7c28a;
+      border-radius: 16px;
+      margin: 14px 0;
+      min-height: 90px;
+    }
+
+    .word {
+      background: #ffcc00;
+      color: #2f2f2f;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+      font-size: 0.95rem;
+    }
+
+    .word:hover {
+      transform: scale(1.05);
+      background: #f2bd00;
+    }
+
+    .sentence-builder {
+      background: #f0ede6;
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+      min-height: 60px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .hint-box {
+      background: #fff8e7;
+      border-left: 5px solid #ffcc00;
+      padding: 12px;
+      border-radius: 14px;
+      margin: 12px 0;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #ffcc00;
+    }
+
+    .btn-success {
+      background: #35a853;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e8e8e8;
+    }
+
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .feedback-box.ok {
+      display: block;
+      background: #e9f8ef;
+      border-left: 5px solid #35a853;
+    }
+
+    .feedback-box.bad {
+      display: block;
+      background: #fff0f0;
+      border-left: 5px solid #cc3d3d;
+    }
+
+    .feedback-box.info {
+      display: block;
+      background: #fff8d7;
+      border-left: 5px solid #f1d45c;
+    }
+
+    .answer-list {
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .answer-item {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 760px;
+      max-height: 85vh;
+      overflow-y: auto;
+      margin: 40px auto;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      line-height: 1.7;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #555;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+      }
+
+      .left {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .left .card {
+        border-radius: 0 0 18px 18px;
+        margin-bottom: 14px;
+      }
+    }
+  </style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <h1>VIDCATALA · Expressions de dubte</h1>
+  <a class='home' href='/'><i class="fa-solid fa-house"></i></a>
+</header>
+
+<main class="page">
+
+  <section class="left">
+    <div class="card">
+      <div class="video-wrap">
+        <iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268285?dnt=1" title="VIDCATALA · Expressions de dubte" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="right">
+
+    <div class="card">
+      <h2>Introducció</h2>
+
+      <div class="intro-text">
+        <p>
+          En aquesta activitat treballaràs expressions molt útils per expressar dubte en català.
+          No totes tenen exactament la mateixa força: algunes són directes, altres són més suaus,
+          i algunes expressen sorpresa davant d’una possibilitat poc probable.
+        </p>
+
+        <button class="btn btn-primary" onclick="openTranscript()">Mostra el text del vídeo</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Expressions clau</h2>
+
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <h4>Ho dubto</h4>
+          <p>Resposta directa. Vol dir: I doubt it.</p>
+        </div>
+
+        <div class="phrase-card">
+          <h4>No ho creuria</h4>
+          <p>Quan una cosa et sembla molt poc probable.</p>
+        </div>
+
+        <div class="phrase-card">
+          <h4>M’estranyaria</h4>
+          <p>Molt natural per dir que una cosa et sorprendria.</p>
+        </div>
+
+        <div class="phrase-card">
+          <h4>No m’ho sembla</h4>
+          <p>Resposta més suau: I don’t think so.</p>
+        </div>
+
+        <div class="phrase-card">
+          <h4>Jo crec que no</h4>
+          <p>Forma informal i molt comuna.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Exercici 1 · Tria l’expressió adequada</h2>
+      <p>Completa cada diàleg amb l’expressió que encaixa millor.</p>
+
+      <div class="exercise">
+        <div class="gap-row">
+          1. — Creus que demà farà bon temps per anar a la platja?<br>
+          — <select id="gap1">
+            <option value="">Tria una opció</option>
+            <option>Ho dubto</option>
+            <option>No ho creuria</option>
+            <option>M’estranyaria</option>
+            <option>No m’ho sembla</option>
+          </select>, les previsions diuen que plourà tot el dia.
+        </div>
+
+        <div class="gap-row">
+          2. <select id="gap2">
+            <option value="">Tria una opció</option>
+            <option>Ho dubto</option>
+            <option>No ho creuria</option>
+            <option>M’estranyaria</option>
+            <option>No m’ho sembla</option>
+          </select> molt que la botiga estigués oberta avui, perquè és un dia festiu.
+        </div>
+
+        <div class="gap-row">
+          3. Si em diguessis que en Joan s’ha comprat un cotxe de luxe,
+          <select id="gap3">
+            <option value="">Tria una opció</option>
+            <option>ho dubto</option>
+            <option>no ho creuria</option>
+            <option>m’estranyaria</option>
+            <option>no m’ho sembla</option>
+          </select> mai.
+        </div>
+
+        <div class="gap-row">
+          4. — Estàs enfadat?<br>
+          — No,
+          <select id="gap4">
+            <option value="">Tria una opció</option>
+            <option>ho dubto</option>
+            <option>no ho creuria</option>
+            <option>m’estranyaria</option>
+            <option>no m’ho sembla</option>
+          </select>, simplement estic una mica distret.
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-success" onclick="checkGaps()">Comprova</button>
+          <button class="btn btn-secondary" onclick="showGapAnswers()">Mostra respostes</button>
+          <button class="btn btn-secondary" onclick="resetGaps()">Reinicia</button>
+        </div>
+
+        <div id="gapFeedback" class="feedback-box"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Exercici 2 · Matís i registre</h2>
+      <p>Tria la millor resposta segons la situació.</p>
+
+      <div class="exercise" id="mcqExercise">
+        <p><strong>1.</strong> El teu amic pregunta si un professor molt estricte deixarà sortir la classe abans d’hora. Tu ho veus molt improbable.</p>
+
+        <label class="mcq-option">
+          <input type="radio" name="q1" value="a"> No m’ho sembla
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q1" value="b"> M’estranyaria molt
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q1" value="c"> Jo crec que no
+        </label>
+
+        <p><strong>2.</strong> Algú et diu que una persona molt estalviadora s’ha comprat un cotxe de luxe. Tu no t’ho acabes de creure.</p>
+
+        <label class="mcq-option">
+          <input type="radio" name="q2" value="a"> No ho creuria
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q2" value="b"> No m’ho sembla
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q2" value="c"> Ho dubto
+        </label>
+
+        <p><strong>3.</strong> Vols donar una resposta ràpida i directa a una predicció que no et sembla probable.</p>
+
+        <label class="mcq-option">
+          <input type="radio" name="q3" value="a"> Ho dubto
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q3" value="b"> No ho creuria mai
+        </label>
+
+        <label class="mcq-option">
+          <input type="radio" name="q3" value="c"> M’estranyaria moltíssim
+        </label>
+
+        <div class="btn-group">
+          <button class="btn btn-success" onclick="checkMCQ()">Comprova</button>
+          <button class="btn btn-secondary" onclick="resetMCQ()">Reinicia</button>
+        </div>
+
+        <div id="mcqFeedback" class="feedback-box"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Exercici 3 · Construcció de frases</h2>
+
+      <p>
+        Clica les paraules per construir frases naturals amb expressions de dubte.
+        Hi ha moltes combinacions possibles. Intenta trobar-ne tantes com puguis.
+      </p>
+
+      <div class="hint-box">
+        Pots construir frases amb <strong>Ho dubto</strong>, <strong>No ho creuria</strong>,
+        <strong>M’estranyaria</strong>, <strong>No m’ho sembla</strong> i
+        <strong>Jo crec que no</strong>. Algunes frases són curtes; altres porten
+        <strong>que</strong> i subjuntiu.
+      </div>
+
+      <div class="word-bank-builder" id="wordBankBuilder"></div>
+
+      <div class="sentence-builder" id="sentenceDisplay">
+        Tria paraules per construir una frase
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="checkSentence()">Comprova</button>
+        <button class="btn btn-secondary" onclick="clearSentence()">Neteja frase</button>
+        <button class="btn btn-secondary" onclick="resetBuilder()">Reinicia</button>
+        <button class="btn btn-secondary" onclick="showAllAnswers()">Mostra frases possibles</button>
+      </div>
+
+      <div id="builderFeedback" class="feedback-box"></div>
+    </div>
+
+    <div class="card">
+      <h2>Frases correctes trobades</h2>
+      <div id="correctList" class="answer-list">
+        <p style="color:#999;">Encara no hi ha cap frase.</p>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<div id="transcriptModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeTranscript()">&times;</span>
+
+    <h2>Text del vídeo</h2>
+
+    <p>
+      Hola! Avui aprendrem cinc maneres molt naturals d’expressar dubte en català.
+      En anglès pots dir I doubt it, I don’t think so o I wouldn’t have thought so,
+      però en català tenim diverses opcions segons el context i la força del dubte.
+    </p>
+
+    <p>
+      La forma més directa és ho dubto. Per exemple: Creus que demà farà bon temps?
+      Ho dubto, perquè les previsions diuen que plourà.
+    </p>
+
+    <p>
+      Si una cosa et sembla molt poc probable, pots dir no ho creuria. Per exemple:
+      Si em diguessis que en Joan s’ha comprat un cotxe de luxe, no ho creuria mai.
+    </p>
+
+    <p>
+      Una expressió molt natural és m’estranyaria. Vol dir que una cosa et sorprendria.
+      Per exemple: M’estranyaria molt que la botiga estigués oberta avui, perquè és un dia festiu.
+    </p>
+
+    <p>
+      Si vols respondre d’una manera més suau, pots dir no m’ho sembla.
+      I si vols una resposta més informal i senzilla, pots dir jo crec que no.
+    </p>
+
+    <p>
+      En aquesta activitat practicaràs aquestes expressions en diàlegs, situacions i frases barrejades.
+      Fixa’t no només en el significat, sinó també en el grau de dubte que expressa cada frase.
+    </p>
+  </div>
+</div>
+
+<script>
+  function openTranscript() {
+    document.getElementById("transcriptModal").style.display = "block";
+  }
+
+  function closeTranscript() {
+    document.getElementById("transcriptModal").style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("transcriptModal");
+    if (event.target === modal) closeTranscript();
+  };
+
+  function showFeedback(id, message, type) {
+    const box = document.getElementById(id);
+    box.textContent = message;
+    box.className = "feedback-box " + type;
+  }
+
+  function checkGaps() {
+    const answers = {
+      gap1: "Ho dubto",
+      gap2: "M’estranyaria",
+      gap3: "no ho creuria",
+      gap4: "no m’ho sembla"
+    };
+
+    let score = 0;
+
+    Object.keys(answers).forEach(id => {
+      const el = document.getElementById(id);
+      if (el.value === answers[id]) {
+        el.style.border = "2px solid #35a853";
+        score++;
+      } else {
+        el.style.border = "2px solid #cc3d3d";
+      }
+    });
+
+    if (score === 4) {
+      showFeedback("gapFeedback", "✅ Molt bé! Has triat totes les expressions adequades.", "ok");
+    } else {
+      showFeedback("gapFeedback", "Has encertat " + score + " de 4. Revisa el matís de cada expressió.", "bad");
+    }
+  }
+
+  function showGapAnswers() {
+    document.getElementById("gap1").value = "Ho dubto";
+    document.getElementById("gap2").value = "M’estranyaria";
+    document.getElementById("gap3").value = "no ho creuria";
+    document.getElementById("gap4").value = "no m’ho sembla";
+    showFeedback("gapFeedback", "Respostes mostrades.", "info");
+  }
+
+  function resetGaps() {
+    ["gap1", "gap2", "gap3", "gap4"].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = "";
+      el.style.border = "1px solid #ccc";
+    });
+    document.getElementById("gapFeedback").className = "feedback-box";
+  }
+
+  function checkMCQ() {
+    const correct = { q1: "b", q2: "a", q3: "a" };
+    let score = 0;
+
+    Object.keys(correct).forEach(q => {
+      const selected = document.querySelector(`input[name="${q}"]:checked`);
+      if (selected && selected.value === correct[q]) score++;
+    });
+
+    if (score === 3) {
+      showFeedback("mcqFeedback", "✅ Perfecte! Has entès molt bé el matís de les expressions.", "ok");
+    } else {
+      showFeedback("mcqFeedback", "Has encertat " + score + " de 3. Torna a mirar quin grau de dubte expressa cada frase.", "bad");
+    }
+  }
+
+  function resetMCQ() {
+    document.querySelectorAll('#mcqExercise input[type="radio"]').forEach(input => {
+      input.checked = false;
+    });
+    document.getElementById("mcqFeedback").className = "feedback-box";
+  }
+
+  const wordBank = [
+    "Ho", "dubto",
+    "No", "ho", "creuria", "mai",
+    "M’estranyaria", "molt",
+    "No", "m’ho", "sembla",
+    "Jo", "crec", "que", "no",
+    "gaire", "probable",
+    "gens", "clar",
+    "això",
+    "que",
+    "demà", "avui",
+    "plogui", "vingui", "arribi", "sigui", "funcioni",
+    "la", "botiga", "estigui", "oberta",
+    "el", "tren", "surti", "puntual",
+    "la", "reunió", "acabi", "aviat",
+    "en", "Joan", "hagi", "comprat", "un", "cotxe", "de", "luxe"
+  ];
+
+  const validSentences = [
+    ["Ho", "dubto"],
+    ["Ho", "dubto", "molt"],
+    ["Ho", "dubto", "això"],
+    ["Ho", "dubto", "molt", "això"],
+    ["Ho", "dubto", "que", "demà", "plogui"],
+    ["Ho", "dubto", "que", "plogui", "demà"],
+    ["Ho", "dubto", "que", "avui", "vingui"],
+    ["Ho", "dubto", "que", "vingui", "avui"],
+    ["Ho", "dubto", "que", "arribi", "avui"],
+    ["Ho", "dubto", "que", "avui", "arribi"],
+    ["Ho", "dubto", "que", "funcioni"],
+    ["Ho", "dubto", "que", "sigui", "clar"],
+    ["Ho", "dubto", "que", "el", "tren", "surti", "puntual"],
+    ["Ho", "dubto", "que", "la", "reunió", "acabi", "aviat"],
+
+    ["No", "ho", "creuria"],
+    ["No", "ho", "creuria", "mai"],
+    ["No", "ho", "creuria", "això"],
+    ["No", "ho", "creuria", "mai", "això"],
+    ["No", "ho", "creuria", "gens"],
+    ["No", "ho", "creuria", "que", "en", "Joan", "hagi", "comprat", "un", "cotxe", "de", "luxe"],
+
+    ["M’estranyaria"],
+    ["M’estranyaria", "molt"],
+    ["M’estranyaria", "molt", "això"],
+    ["M’estranyaria", "que", "demà", "plogui"],
+    ["M’estranyaria", "que", "plogui", "demà"],
+    ["M’estranyaria", "que", "avui", "vingui"],
+    ["M’estranyaria", "que", "vingui", "avui"],
+    ["M’estranyaria", "molt", "que", "avui", "vingui"],
+    ["M’estranyaria", "molt", "que", "vingui", "avui"],
+    ["M’estranyaria", "molt", "que", "la", "botiga", "estigui", "oberta"],
+    ["M’estranyaria", "que", "la", "botiga", "estigui", "oberta"],
+    ["M’estranyaria", "molt", "que", "el", "tren", "surti", "puntual"],
+    ["M’estranyaria", "que", "el", "tren", "surti", "puntual"],
+    ["M’estranyaria", "que", "la", "reunió", "acabi", "aviat"],
+
+    ["No", "m’ho", "sembla"],
+    ["No", "m’ho", "sembla", "gaire"],
+    ["No", "m’ho", "sembla", "probable"],
+    ["No", "m’ho", "sembla", "gaire", "probable"],
+    ["No", "m’ho", "sembla", "gens", "clar"],
+    ["No", "m’ho", "sembla", "que", "sigui", "clar"],
+    ["No", "m’ho", "sembla", "que", "sigui", "gaire", "probable"],
+
+    ["Jo", "crec", "que", "no"],
+    ["Jo", "crec", "que", "no", "avui"],
+    ["Jo", "crec", "que", "no", "demà"],
+    ["Jo", "crec", "que", "no", "gaire"],
+    ["Jo", "crec", "que", "no", "això"],
+
+    ["No", "crec", "que", "demà", "plogui"],
+    ["No", "crec", "que", "plogui", "demà"],
+    ["No", "crec", "que", "avui", "vingui"],
+    ["No", "crec", "que", "vingui", "avui"],
+    ["No", "crec", "que", "sigui", "clar"],
+    ["No", "crec", "que", "sigui", "gaire", "probable"],
+    ["No", "crec", "que", "el", "tren", "surti", "puntual"],
+    ["No", "crec", "que", "la", "reunió", "acabi", "aviat"]
+  ];
+
+  let availableTokens = [];
+  let sentenceTokens = [];
+  let correctSentences = [];
+
+  const builder = document.getElementById("wordBankBuilder");
+  const sentenceDisplay = document.getElementById("sentenceDisplay");
+  const correctList = document.getElementById("correctList");
+
+  function makeTokens() {
+    availableTokens = wordBank.map((word, index) => ({
+      id: "w" + index,
+      text: word
+    }));
+  }
+
+  function shuffle(array) {
+    const copy = [...array];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function renderBuilder() {
+    builder.innerHTML = "";
+    shuffle(availableTokens).forEach(token => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = token.text;
+      span.onclick = () => addWord(token.id);
+      builder.appendChild(span);
+    });
+  }
+
+  function addWord(id) {
+    const token = availableTokens.find(item => item.id === id);
+    if (!token) return;
+
+    sentenceTokens.push(token);
+    availableTokens = availableTokens.filter(item => item.id !== id);
+
+    renderBuilder();
+    updateSentence();
+    document.getElementById("builderFeedback").className = "feedback-box";
+  }
+
+  function updateSentence() {
+    sentenceDisplay.textContent =
+      sentenceTokens.length === 0
+        ? "Tria paraules per construir una frase"
+        : sentenceTokens.map(token => token.text).join(" ");
+  }
+
+  function normaliseText(text) {
+    return text.trim().toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’']/g, "'")
+      .replace(/[.,!?;:]/g, "")
+      .replace(/\s+/g, " ");
+  }
+
+  function normaliseTokens(tokens) {
+    return normaliseText(tokens.join(" "));
+  }
+
+  function checkSentence() {
+    if (sentenceTokens.length === 0) {
+      showFeedback("builderFeedback", "Primer has de construir una frase.", "info");
+      return;
+    }
+
+    const current = sentenceTokens.map(token => token.text);
+    const currentText = current.join(" ");
+    const currentNormalised = normaliseTokens(current);
+
+    const isCorrect = validSentences.some(sentence =>
+      normaliseTokens(sentence) === currentNormalised
+    );
+
+    if (isCorrect) {
+      if (!correctSentences.some(sentence => normaliseText(sentence) === normaliseText(currentText))) {
+        correctSentences.push(currentText);
+        updateCorrectList();
+        showFeedback("builderFeedback", "✅ Correcte: " + currentText, "ok");
+      } else {
+        showFeedback("builderFeedback", "Ja havies trobat aquesta frase.", "info");
+      }
+
+      sentenceTokens = [];
+      makeTokens();
+      renderBuilder();
+      updateSentence();
+    } else {
+      showFeedback("builderFeedback", "❌ Aquesta combinació no és una de les frases admeses. Prova una altra combinació natural.", "bad");
+    }
+  }
+
+  function clearSentence() {
+    availableTokens = availableTokens.concat(sentenceTokens);
+    sentenceTokens = [];
+    renderBuilder();
+    updateSentence();
+    document.getElementById("builderFeedback").className = "feedback-box";
+  }
+
+  function resetBuilder() {
+    sentenceTokens = [];
+    correctSentences = [];
+    makeTokens();
+    renderBuilder();
+    updateSentence();
+    updateCorrectList();
+    document.getElementById("builderFeedback").className = "feedback-box";
+  }
+
+  function updateCorrectList() {
+    if (correctSentences.length === 0) {
+      correctList.innerHTML = '<p style="color:#999;">Encara no hi ha cap frase.</p>';
+      return;
+    }
+
+    correctList.innerHTML = correctSentences
+      .map(sentence => `<div class="answer-item">✓ ${sentence}</div>`)
+      .join("");
+  }
+
+  function showAllAnswers() {
+    correctList.innerHTML = validSentences
+      .map(sentence => `<div class="answer-item">✓ ${sentence.join(" ")}</div>`)
+      .join("");
+
+    showFeedback(
+      "builderFeedback",
+      "S’han mostrat totes les frases admeses en aquesta versió de l’exercici.",
+      "info"
+    );
+  }
+
+  makeTokens();
+  renderBuilder();
+  updateSentence();
+</script>
+
+</body>
+</html>Sdubto8.htm

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Recursos per aprendre català</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+/* BANNER */
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner img {
+  width: 46px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.banner-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2f2f2f;
+}
+
+.home-link {
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+/* LAYOUT */
+
+.page {
+  display: grid;
+  grid-template-columns: 36% 64%;
+  min-height: calc(100vh - 60px);
+}
+
+/* LEFT COLUMN */
+
+.left-column {
+  padding: 10px;
+  background: #fff8d6;
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+
+.media-card {
+  position: sticky;
+  top: 66px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.media-card h1 {
+  margin: 0 0 8px;
+  color: #8B4513;
+  font-size: 1.2rem;
+}
+
+.media-card p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* LANDSCAPE VIDEO */
+
+.video-wrap {
+  width: 100%;
+  margin: 0;
+}
+
+.vidcat-vimeo {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: black;
+  border-radius: 16px;
+  display: block;
+}
+
+.quick-links {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-links a {
+  background: #ffcc00;
+  color: #2f2f2f;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* RIGHT COLUMN */
+
+.right-column {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.07);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #8B4513;
+  font-size: 1.25rem;
+}
+
+.card p,
+.card li {
+  line-height: 1.6;
+}
+
+/* TRANSCRIPT */
+
+.transcript-card {
+  display: none;
+}
+
+.transcript-card.open {
+  display: block;
+}
+
+.reveal-btn {
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.transcript {
+  background: #fffdf3;
+  border-left: 5px solid #ffcc00;
+  padding: 14px;
+  border-radius: 12px;
+  line-height: 1.65;
+}
+
+/* RESOURCE GRID */
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+}
+
+.resource {
+  border: 1px solid #eee0a8;
+  background: #fffdf3;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.resource a {
+  color: #8B4513;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.resource small {
+  display: block;
+  margin-top: 5px;
+  color: #555;
+}
+
+/* EXERCISES */
+
+.question {
+  border-top: 1px solid #eee;
+  padding: 14px 0;
+}
+
+.question:first-of-type {
+  border-top: none;
+}
+
+.question strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.options button,
+.check-btn,
+.reset-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.options button {
+  background: #f1ead2;
+}
+
+.options button.selected {
+  background: #ffcc00;
+}
+
+.check-btn {
+  background: #8B4513;
+  color: white;
+  margin-top: 12px;
+}
+
+.reset-btn {
+  background: #ddd;
+  margin-top: 12px;
+  margin-left: 8px;
+}
+
+.feedback {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.correct {
+  color: #1f7a3a;
+}
+
+.incorrect {
+  color: #b23b3b;
+}
+
+.gap-input {
+  width: 150px;
+  max-width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.score {
+  font-weight: 700;
+  color: #8B4513;
+  margin-top: 10px;
+}
+
+/* TEXTAREA */
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+  .page {
+    display: block;
+  }
+
+  .left-column {
+    position: sticky;
+    top: 58px;
+    z-index: 90;
+    padding: 0;
+    background: #fff8d6;
+    border-right: none;
+  }
+
+  .media-card {
+    position: static;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .video-wrap {
+    margin: 0;
+  }
+
+  .vidcat-vimeo {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+  }
+
+  .right-column {
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+
+  .banner-title {
+    font-size: 0.95rem;
+  }
+
+  .banner {
+    padding: 10px 12px;
+  }
+
+  .banner img {
+    width: 40px;
+    height: 28px;
+  }
+}
+
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <div class="banner-title">
+      VIDCATALA · Recursos per aprendre català
+    </div>
+  </div>
+
+  <a class='home-link' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+
+</header>
+
+<main class="page">
+
+<!-- LEFT -->
+
+<section class="left-column">
+
+  <div class="media-card">
+
+    <div class="video-wrap">
+
+      <iframe class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268282?dnt=1" title="VIDCATALA · Recursos per aprendre català" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- RIGHT -->
+
+<section class="right-column">
+
+  <button class="reveal-btn" onclick="toggleTranscript()">
+    Mostra / amaga la transcripció
+  </button>
+
+  <!-- INTRO -->
+
+  <div class="card">
+
+    <h2>Introducció</h2>
+
+    <p>
+      Aquest vídeo presenta diferents maneres de practicar el català
+      fora de classe. La idea és utilitzar la televisió, la ràdio
+      i els continguts locals per escoltar català natural i acostumar-se
+      a accents diversos.
+    </p>
+
+    <p>
+      També trobaràs una llista de recursos útils i diverses activitats
+      interactives per treballar la comprensió oral i el vocabulari.
+    </p>
+
+  </div>
+
+  <!-- TRANSCRIPT -->
+
+  <div class="card transcript-card" id="transcripcio">
+
+    <h2>Transcripció</h2>
+
+    <div class="transcript">
+
+      <p>
+        Hola a tots! Sé que molts de nosaltres busquem maneres de practicar el català cada dia.
+      </p>
+
+      <p>
+        Doncs aquest cap de setmana he estat investigant i he trobat opcions molt bones
+        per mirar la tele i escoltar la ràdio en català.
+      </p>
+
+      <p>
+        Primer de tot, us heu de descarregar l’aplicació de 3Cat.
+        És gratuïta i té un munt de sèries, concursos i programes
+        amb subtítols en català.
+      </p>
+
+      <p>
+        Per al nostre nivell, els subtítols van genial!
+      </p>
+
+      <p>
+        Jo us recomano especialment el concurs Atrapa’m si pots,
+        perquè hi parlen molt clar i és bastant fàcil de seguir.
+      </p>
+
+      <p>
+        Però el millor de tot és que no només tenim la tele de Barcelona.
+        També podem mirar IB3, la televisió de les Illes Balears.
+      </p>
+
+      <p>
+        Els informatius o els programes de cuina són perfectes per
+        desconnectar una estona i, al mateix temps, acostumar l’oïda
+        a l’accent balear.
+      </p>
+
+      <p>
+        Ah, i si voleu continguts encara més propers,
+        descarregueu-vos La Xarxa+.
+      </p>
+
+      <p>
+        És una plataforma gratuïta que connecta televisions locals
+        de tot Catalunya.
+      </p>
+
+      <p>
+        Hi podeu veure festes majors, castells o esports de poble.
+      </p>
+
+      <p>
+        I com que és televisió local, la gent parla d’una manera
+        molt natural i tranquil·la.
+      </p>
+
+      <p>
+        Això ajuda moltíssim a entendre el català real del dia a dia.
+      </p>
+
+      <p>
+        Per tant, deixem els llibres de gramàtica per un dia...
+        i mirem la tele en català!
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RESOURCES -->
+
+  <div class="card" id="recursos">
+
+    <h2>Recursos recomanats</h2>
+
+    <div class="resource-grid">
+
+      <div class="resource">
+        <a href="https://www.3cat.cat/" target="_blank">3Cat</a>
+        <small>Televisió, ràdio, sèries i concursos amb subtítols.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.3cat.cat/catradio/" target="_blank">Catalunya Ràdio</a>
+        <small>Informatius, entrevistes i podcasts.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.ib3.org/" target="_blank">IB3</a>
+        <small>Televisió i ràdio balear.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.laxarxames.cat/" target="_blank">La Xarxa+</a>
+        <small>Televisions locals de Catalunya.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.rac1.cat/" target="_blank">RAC1</a>
+        <small>Ràdio molt popular amb català espontani.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://beteve.cat/" target="_blank">betevé</a>
+        <small>Notícies i programes de Barcelona.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.rtve.es/catalunya/" target="_blank">RTVE Catalunya</a>
+        <small>Continguts i programes en català.</small>
+      </div>
+
+      <div class="resource">
+        <a href="https://www.3cat.cat/catradio/icat/" target="_blank">iCat</a>
+        <small>Música i cultura en català.</small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EX 1 -->
+
+  <div class="card" id="ex1">
+
+    <h2>Exercici 1 · Comprensió</h2>
+
+    <div class="question mc" data-answer="b">
+
+      <strong>1. Quin és el tema principal del vídeo?</strong>
+
+      <div class="options">
+        <button data-choice="a">Fer exàmens oficials</button>
+        <button data-choice="b">Practicar català amb televisió i ràdio</button>
+        <button data-choice="c">Aprendre gramàtica avançada</button>
+      </div>
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question mc" data-answer="c">
+
+      <strong>2. Per què recomana 3Cat?</strong>
+
+      <div class="options">
+        <button data-choice="a">Perquè és una ràdio internacional</button>
+        <button data-choice="b">Perquè només té esports</button>
+        <button data-choice="c">Perquè ofereix subtítols en català</button>
+      </div>
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question mc" data-answer="a">
+
+      <strong>3. Què ajuda a fer IB3?</strong>
+
+      <div class="options">
+        <button data-choice="a">Acostumar-se a l’accent balear</button>
+        <button data-choice="b">Aprendre francès</button>
+        <button data-choice="c">Fer exercicis de gramàtica</button>
+      </div>
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <button class="check-btn" onclick="checkMC()">
+      Comprova
+    </button>
+
+    <button class="reset-btn" onclick="resetMC()">
+      Reinicia
+    </button>
+
+    <div class="score" id="mcScore">
+      Puntuació: 0/3
+    </div>
+
+  </div>
+
+  <!-- EX 2 -->
+
+  <div class="card" id="ex2">
+
+    <h2>Exercici 2 · Omple els buits</h2>
+
+    <p>
+      Paraules:
+      <strong>
+        subtítols · balear · gratuïta · ràdio · natural · locals
+      </strong>
+    </p>
+
+    <div class="question gap" data-answer="ràdio">
+
+      1. Podem mirar la tele i escoltar la
+      <input class="gap-input" type="text">
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question gap" data-answer="gratuïta">
+
+      2. L’aplicació de 3Cat és
+      <input class="gap-input" type="text">
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question gap" data-answer="subtítols">
+
+      3. Els
+      <input class="gap-input" type="text">
+      van molt bé per als estudiants.
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question gap" data-answer="balear">
+
+      4. IB3 ajuda a entendre millor l’accent
+      <input class="gap-input" type="text">
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question gap" data-answer="locals">
+
+      5. La Xarxa+ connecta televisions
+      <input class="gap-input" type="text">
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <div class="question gap" data-answer="natural">
+
+      6. La gent parla d’una manera molt
+      <input class="gap-input" type="text">
+
+      <div class="feedback"></div>
+
+    </div>
+
+    <button class="check-btn" onclick="checkGaps()">
+      Comprova
+    </button>
+
+    <button class="reset-btn" onclick="resetGaps()">
+      Reinicia
+    </button>
+
+    <div class="score" id="gapScore">
+      Puntuació: 0/6
+    </div>
+
+  </div>
+
+  <!-- QUESTIONNAIRE -->
+
+  <div class="card" id="questionari">
+
+    <h2>Questionari</h2>
+
+    <p>
+      Escriu els noms d’altres recursos en català
+      que has provat o que vols provar.
+    </p>
+
+    <textarea
+      id="learnerResources"
+      placeholder="Exemple: He escoltat RAC1 i he mirat un programa d’IB3..."
+    ></textarea>
+
+    <button class="check-btn" onclick="saveReflection()">
+      Desa la resposta
+    </button>
+
+    <button class="reset-btn" onclick="clearReflection()">
+      Esborra
+    </button>
+
+    <div class="feedback" id="reflectionFeedback"></div>
+
+  </div>
+
+</section>
+
+</main>
+
+<script>
+
+/* TRANSCRIPT */
+
+function toggleTranscript() {
+  document.getElementById('transcripcio').classList.toggle('open');
+}
+
+/* MULTIPLE CHOICE */
+
+document.querySelectorAll('.mc .options button').forEach(button => {
+
+  button.addEventListener('click', () => {
+
+    const parent = button.closest('.options');
+
+    parent.querySelectorAll('button').forEach(b => {
+      b.classList.remove('selected');
+    });
+
+    button.classList.add('selected');
+
+  });
+
+});
+
+function checkMC() {
+
+  let score = 0;
+
+  const questions = document.querySelectorAll('.mc');
+
+  questions.forEach(q => {
+
+    const answer = q.dataset.answer;
+
+    const selected = q.querySelector('button.selected');
+
+    const feedback = q.querySelector('.feedback');
+
+    if (!selected) {
+
+      feedback.textContent = 'Tria una resposta.';
+      feedback.className = 'feedback incorrect';
+      return;
+
+    }
+
+    if (selected.dataset.choice === answer) {
+
+      score++;
+      feedback.textContent = 'Correcte.';
+      feedback.className = 'feedback correct';
+
+    } else {
+
+      feedback.textContent = 'Revisa el vídeo.';
+      feedback.className = 'feedback incorrect';
+
+    }
+
+  });
+
+  document.getElementById('mcScore').textContent =
+    `Puntuació: ${score}/3`;
+
+}
+
+function resetMC() {
+
+  document.querySelectorAll('.mc button').forEach(b => {
+    b.classList.remove('selected');
+  });
+
+  document.querySelectorAll('.mc .feedback').forEach(f => {
+    f.textContent = '';
+    f.className = 'feedback';
+  });
+
+  document.getElementById('mcScore').textContent =
+    'Puntuació: 0/3';
+
+}
+
+/* GAP FILL */
+
+function normalize(text) {
+  return text.trim().toLowerCase();
+}
+
+function checkGaps() {
+
+  let score = 0;
+
+  const gaps = document.querySelectorAll('.gap');
+
+  gaps.forEach(gap => {
+
+    const answer = normalize(gap.dataset.answer);
+
+    const input = gap.querySelector('input');
+
+    const user = normalize(input.value);
+
+    const feedback = gap.querySelector('.feedback');
+
+    if (user === answer) {
+
+      score++;
+      feedback.textContent = 'Correcte.';
+      feedback.className = 'feedback correct';
+
+    } else {
+
+      feedback.textContent =
+        `Resposta correcta: ${gap.dataset.answer}`;
+
+      feedback.className = 'feedback incorrect';
+
+    }
+
+  });
+
+  document.getElementById('gapScore').textContent =
+    `Puntuació: ${score}/6`;
+
+}
+
+function resetGaps() {
+
+  document.querySelectorAll('.gap input').forEach(i => {
+    i.value = '';
+  });
+
+  document.querySelectorAll('.gap .feedback').forEach(f => {
+    f.textContent = '';
+    f.className = 'feedback';
+  });
+
+  document.getElementById('gapScore').textContent =
+    'Puntuació: 0/6';
+
+}
+
+/* QUESTIONNAIRE */
+
+function saveReflection() {
+
+  const text =
+    document.getElementById('learnerResources').value.trim();
+
+  const feedback =
+    document.getElementById('reflectionFeedback');
+
+  if (text.length < 10) {
+
+    feedback.textContent =
+      'Escriu una resposta més completa.';
+
+    feedback.className = 'feedback incorrect';
+
+  } else {
+
+    localStorage.setItem(
+      'vidcatala_resources',
+      text
+    );
+
+    feedback.textContent =
+      'Resposta desada.';
+
+    feedback.className = 'feedback correct';
+
+  }
+
+}
+
+function clearReflection() {
+
+  document.getElementById('learnerResources').value = '';
+
+  localStorage.removeItem('vidcatala_resources');
+
+  const feedback =
+    document.getElementById('reflectionFeedback');
+
+  feedback.textContent = '';
+  feedback.className = 'feedback';
+
+}
+
+window.addEventListener('load', () => {
+
+  const saved =
+    localStorage.getItem('vidcatala_resources');
+
+  if (saved) {
+
+    document.getElementById('learnerResources').value =
+      saved;
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

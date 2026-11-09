@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · La vida quan tenia deu anys</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner img {
+  width: 46px;
+  height: 31px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.home {
+  color: white;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 16px;
+}
+
+.video-card,
+.intro-card,
+.exercise-card,
+.verb-card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.video-card p,
+.intro-card p,
+.exercise-card p,
+.verb-card p {
+  margin: 0 0 12px;
+  line-height: 1.45;
+  font-size: .95rem;
+  color: #555;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  color: #8B4513;
+}
+
+.video-wrap {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.vidcat-vimeo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #111;
+}
+
+.focus {
+  margin-top: 12px;
+  background: #fff6cf;
+  border-left: 5px solid #ffcc00;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: .9rem;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.item {
+  background: white;
+  border-radius: 18px;
+  padding: 13px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.08);
+  border: 2px solid transparent;
+}
+
+.item.active {
+  border-color: #ffcc00;
+  background: #fffdf3;
+}
+
+.thumb-wrap {
+  position: relative;
+}
+
+.thumb {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pause-corner {
+  position: absolute;
+  right: 8px;
+  bottom: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0,0,0,0.46);
+  color: white;
+  font-size: .78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  opacity: .82;
+  z-index: 2;
+}
+
+.pause-corner:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.66);
+}
+
+.sentence,
+.verb-text {
+  line-height: 1.8;
+  font-size: .96rem;
+  margin: 0;
+}
+
+input.gap,
+input.verb-gap {
+  width: 118px;
+  border: 2px solid #e2d28d;
+  border-radius: 10px;
+  padding: 6px 8px;
+  font-family: inherit;
+  font-weight: 600;
+  background: #fffdf5;
+}
+
+input.verb-gap {
+  width: 132px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 15px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.check {
+  background: #ffcc00;
+  color: #2f2f2f;
+}
+
+.show {
+  background: #efe6c6;
+  color: #3a300d;
+}
+
+.reset {
+  background: #e9e9e9;
+  color: #333;
+}
+
+.feedback,
+.item-feedback,
+.verb-feedback {
+  display: none;
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+.feedback.ok,
+.item-feedback.ok,
+.verb-feedback.ok {
+  display: block;
+  background: #e8f7e8;
+  border-left: 5px solid #35a853;
+  color: #1d5d2c;
+}
+
+.feedback.partial,
+.item-feedback.partial,
+.verb-feedback.partial {
+  display: block;
+  background: #fff4d4;
+  border-left: 5px solid #ffcc00;
+  color: #5f4800;
+}
+
+.feedback.bad,
+.item-feedback.bad,
+.verb-feedback.bad {
+  display: block;
+  background: #ffe8e8;
+  border-left: 5px solid #cc3d3d;
+  color: #7b1f1f;
+}
+
+.score {
+  font-weight: 700;
+  background: #2f2f2f;
+  color: white;
+  border-radius: 999px;
+  padding: 8px 13px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.mc-question {
+  margin: 16px 0;
+  padding: 14px;
+  background: #fffdf3;
+  border-radius: 15px;
+  border-left: 5px solid #ffcc00;
+}
+
+.mc-question label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 2px solid #e2d28d;
+  font-family: inherit;
+  background: white;
+  font-weight: 600;
+}
+
+.mc-feedback {
+  margin-top: 8px;
+  font-size: .92rem;
+  display: none;
+}
+
+.mc-feedback.ok {
+  display: block;
+  color: #1d5d2c;
+}
+
+.mc-feedback.bad {
+  display: block;
+  color: #7b1f1f;
+}
+
+.verb-bank {
+  background: #fff6cf;
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 10px 0 14px;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+.verb-card.present {
+  border-left: 6px solid #ffcc00;
+}
+
+.verb-card.imperfect {
+  border-left: 6px solid #d59b2d;
+}
+
+.verb-card.future {
+  border-left: 6px solid #8B4513;
+}
+
+@media (max-width: 900px) {
+  .page {
+    display: block;
+    padding: 10px;
+  }
+
+  .left {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #f7f6f2;
+    padding: 8px 0 10px;
+    margin: 0 0 12px;
+  }
+
+  .video-card {
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .right {
+    margin-top: 12px;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+  }
+
+  .focus {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .banner h1 {
+    font-size: 1.05rem;
+  }
+
+  .video-wrap {
+    width: 100%;
+  }
+
+  .thumb {
+    height: 170px;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <h1>VIDCATALA · La vida quan tenia deu anys</h1>
+  </div>
+  <a class='home' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="page">
+
+<section class="left">
+  <div class="video-card">
+    <div class="video-wrap">
+      <iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268393?dnt=1" title="VIDCATALA · La vida quan tenia deu anys" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="focus">
+      <strong>Focus:</strong> infància, records, escola, família, tecnologia i contrast amb l’actualitat.
+    </div>
+  </div>
+</section>
+
+<section class="right">
+
+  <div class="intro-card">
+    <h2>La vida quan tenia deu anys</h2>
+    <p>
+      En aquest relat, una dona recorda com era la seva infància i la compara amb la vida
+      dels joves d’avui.
+    </p>
+    <p>
+      <strong>Focus:</strong> infància, records, escola, família, tecnologia i contrast amb l’actualitat.
+    </p>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Exercici 1 · Completa els records</h2>
+    <p>
+      Les imatges estan barrejades. Prem el botó de cada imatge per escoltar el fragment corresponent.
+      El mateix botó serveix per pausar i continuar el fragment.
+      Pots comprovar cada imatge per separat.
+    </p>
+    <span class="score" id="score1">Puntuació total: 0/30</span>
+  </div>
+
+  <div class="image-grid">
+
+    <div class="item" data-start="15" data-end="28">
+      <div class="thumb-wrap">
+        <img class="thumb" src="jugavem.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        Recordo que després de l'escola anava al
+        <input class="gap" data-answer="carrer">
+        a jugar fins que es feia
+        <input class="gap" data-answer="fosc">.
+        Ens ho inventàvem tot:
+        <input class="gap" data-answer="amagar">,
+        saltar a
+        <input class="gap" data-answer="corda">
+        o simplement seure al banc de la plaça a explicar-nos
+        <input class="gap" data-answer="secrets">.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+    <div class="item" data-start="5" data-end="16">
+      <div class="thumb-wrap">
+        <img class="thumb" src="lineafix.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        No teníem
+        <input class="gap" data-answer="mòbils">,
+        ni
+        <input class="gap" data-answer="tauletes">,
+        ni ordinadors a casa. Trucàvem al telèfon
+        <input class="gap" data-answer="fix">
+        de la línia de
+        <input class="gap" data-answer="casa">,
+        i si no hi era ningú, ja trucàvem més
+        <input class="gap" data-answer="tard">.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+    <div class="item" data-start="28" data-end="37">
+      <div class="thumb-wrap">
+        <img class="thumb" src="avia.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        La meva àvia vivia a l'
+        <input class="gap" data-answer="últim">
+        pis i no tenia
+        <input class="gap" data-answer="ascensor">.
+        Cada
+        <input class="gap" data-answer="diumenge">
+        li pujàvem la
+        <input class="gap" data-answer="compra">
+        i ella ens rebia amb galetes
+        <input class="gap" data-answer="casolanes">.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+    <div class="item" data-start="47" data-end="57">
+      <div class="thumb-wrap">
+        <img class="thumb" src="teledoscanals.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        La televisió només tenia dos
+        <input class="gap" data-answer="canals">
+        i els dibuixos
+        <input class="gap" data-answer="animats">
+        només els veien a la
+        <input class="gap" data-answer="tarda">.
+        Quan començava el
+        <input class="gap" data-answer="temps">,
+        ja sabíem que s'havia acabat la
+        <input class="gap" data-answer="diversió">.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+    <div class="item" data-start="37" data-end="47">
+      <div class="thumb-wrap">
+        <img class="thumb" src="mapamundi.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        A classe teníem una
+        <input class="gap" data-answer="enciclopèdia">
+        i un
+        <input class="gap" data-answer="mapamundi">
+        penjat a la
+        <input class="gap" data-answer="paret">.
+        Si volíem saber alguna cosa, havíem de buscar en un
+        <input class="gap" data-answer="llibre">
+        o preguntar a la
+        <input class="gap" data-answer="mestra">.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+    <div class="item" data-start="57" data-end="66">
+      <div class="thumb-wrap">
+        <img class="thumb" src="ropa.png" alt="">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+      <p class="sentence">
+        La roba la compraven els
+        <input class="gap" data-answer="pares">
+        i les
+        <input class="gap" data-answer="sabates">
+        havien de durar tot
+        <input class="gap" data-answer="l'any">.
+        Em feia
+        <input class="gap" data-answer="vergonya">
+        dur aquelles vambes
+        <input class="gap" data-answer="negres">
+        d'escola.
+      </p>
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+      <div class="item-feedback"></div>
+    </div>
+
+  </div>
+
+  <div class="exercise-card">
+    <h2>Exercici 2 · Contrast entre abans i ara</h2>
+    <p>
+      Torna a escoltar el vídeo complet abans de respondre. Aquest exercici pregunta pel contrast global
+      entre la infància d’abans i la vida actual.
+    </p>
+
+    <span class="score" id="score2">Puntuació: 0/10</span>
+
+    <div class="mc-question">
+      <label>1. Quin contrast estableix sobretot la dona que parla?</label>
+      <select class="mc" data-answer="B" data-feedback="El text associa la infància d’abans amb menys tecnologia, però també amb més autonomia.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Abans hi havia més tecnologia, però menys llibertat.</option>
+        <option value="B">B. Abans hi havia menys tecnologia i més autonomia.</option>
+        <option value="C">C. Abans hi havia menys amistat entre els nens.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>2. Quan diu que “ens ho inventàvem tot”, què suggereix?</label>
+      <select class="mc" data-answer="C" data-feedback="La frase suggereix creativitat i capacitat de jugar amb pocs recursos.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Que no tenien cap joguina.</option>
+        <option value="B">B. Que sempre necessitaven adults.</option>
+        <option value="C">C. Que desenvolupaven creativitat sense recursos digitals.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>3. Què representa el telèfon fix dins del relat?</label>
+      <select class="mc" data-answer="B" data-feedback="El telèfon fix mostra una comunicació menys immediata.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Una comunicació més ràpida que la d’ara.</option>
+        <option value="B">B. Una comunicació amb menys immediatesa.</option>
+        <option value="C">C. Una obligació escolar.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>4. Quin paper té la televisió en el record?</label>
+      <select class="mc" data-answer="B" data-feedback="La televisió tenia límits clars: pocs canals i poca programació infantil.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Era una font il·limitada d’entreteniment.</option>
+        <option value="B">B. Marcava límits temporals a l’oci.</option>
+        <option value="C">C. Substituïa completament el joc al carrer.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>5. Com és el to quan parla de les vambes negres?</label>
+      <select class="mc" data-answer="C" data-feedback="Recorda la vergonya que sentia de petita, però ara ho mira amb distància.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Molt crític.</option>
+        <option value="B">B. Indiferent.</option>
+        <option value="C">C. Nostàlgic, amb distància emocional.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>6. Quina actitud mostra cap a la tecnologia actual?</label>
+      <select class="mc" data-answer="B" data-feedback="No rebutja la tecnologia: la valora, però també enyora algunes coses del passat.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Rebuig total.</option>
+        <option value="B">B. Acceptació amb matisos.</option>
+        <option value="C">C. Entusiasme absolut.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>7. Quan diu que “els nens d’ara s’ho perden una mica”, què vol dir?</label>
+      <select class="mc" data-answer="B" data-feedback="Vol dir que algunes experiències d’abans ara es viuen menys o d’una altra manera.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Que la seva infància era perfecta.</option>
+        <option value="B">B. Que hi ha experiències que ara es viuen menys.</option>
+        <option value="C">C. Que els nens d’ara són pitjors.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>8. Quin és el contrast principal en l’aprenentatge?</label>
+      <select class="mc" data-answer="B" data-feedback="Abans calia buscar en llibres o preguntar; ara la informació és accessible digitalment.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Abans s’aprenia sempre més ràpid.</option>
+        <option value="B">B. Abans es depenia de fonts físiques; ara, de fonts digitals.</option>
+        <option value="C">C. Ara els nens no aprenen res.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>9. Què es presenta com una necessitat que no canvia?</label>
+      <select class="mc" data-answer="C" data-feedback="No canvia la necessitat de sentir-se estimat, riure amb els amics i tenir un lloc propi.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. La tecnologia.</option>
+        <option value="B">B. Els canals de televisió.</option>
+        <option value="C">C. Les necessitats emocionals.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>10. Quin efecte tenen les preguntes finals?</label>
+      <select class="mc" data-answer="B" data-feedback="Conviden l’oient a comparar la seva pròpia infància amb la de la dona.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Donen una conclusió tancada.</option>
+        <option value="B">B. Inviten a una reflexió personal.</option>
+        <option value="C">C. Canvien completament de tema.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="controls">
+      <button class="check" onclick="checkEx2()">Comprova</button>
+      <button class="show" onclick="showEx2()">Mostra respostes</button>
+      <button class="reset" onclick="resetEx2()">Reinicia</button>
+    </div>
+
+    <div id="feedback2" class="feedback"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Exercici 3 · Present, imperfet i futur</h2>
+    <p>
+      Completa les formes verbals. Cada text té un temps principal, però hi apareixen diverses persones:
+      jo, tu, ell/ella, nosaltres, vosaltres i ells/elles.
+    </p>
+  </div>
+
+  <div class="verb-card present">
+    <h2>3A · Present: com vivim ara</h2>
+    <div class="verb-bank">
+      <strong>Infinitius:</strong> treballar · arribar · dir · escoltar · viure · trucar · intentar · passar · necessitar · sentir
+    </div>
+
+    <p class="verb-text">
+      Ara jo <input class="verb-gap present-gap" data-answer="treballo"> moltes hores i sovint
+      <input class="verb-gap present-gap" data-answer="arribo"> cansada a casa.
+      Tu em <input class="verb-gap present-gap" data-answer="dius"> que hauria de descansar més,
+      però jo gairebé mai t’<input class="verb-gap present-gap" data-answer="escolto">.
+      La meva germana <input class="verb-gap present-gap" data-answer="viu"> lluny i sempre
+      <input class="verb-gap present-gap" data-answer="truca"> els diumenges.
+      Nosaltres <input class="verb-gap present-gap" data-answer="intentem"> sopar junts almenys una vegada per setmana.
+      Vosaltres <input class="verb-gap present-gap" data-answer="passeu"> massa temps mirant el mòbil?
+      Els meus fills encara <input class="verb-gap present-gap" data-answer="necessiten"> que els expliqui històries,
+      i jo em <input class="verb-gap present-gap" data-answer="sento"> feliç quan m’escolten.
+    </p>
+
+    <span class="score" id="presentScore">Puntuació: 0/10</span>
+
+    <div class="controls">
+      <button class="check" onclick="checkVerbSet('present')">Comprova</button>
+      <button class="show" onclick="showVerbSet('present')">Mostra respostes</button>
+      <button class="reset" onclick="resetVerbSet('present')">Reinicia</button>
+    </div>
+
+    <div id="presentFeedback" class="verb-feedback"></div>
+  </div>
+
+  <div class="verb-card imperfect">
+    <h2>3B · Imperfet: quan tenia deu anys</h2>
+    <div class="verb-bank">
+      <strong>Infinitius:</strong> passar · arribar · dir · viure · jugar · venir · conèixer · saludar · sentir · somiar
+    </div>
+
+    <p class="verb-text">
+      Quan tenia deu anys, jo <input class="verb-gap imperfect-gap" data-answer="passava"> moltes hores al carrer.
+      Tu sempre <input class="verb-gap imperfect-gap" data-answer="arribaves"> tard a escola i els mestres
+      <input class="verb-gap imperfect-gap" data-answer="deien"> que havíem de ser més responsables.
+      El meu avi <input class="verb-gap imperfect-gap" data-answer="deia"> que abans la gent
+      <input class="verb-gap imperfect-gap" data-answer="vivia"> amb menys presses.
+      Nosaltres <input class="verb-gap imperfect-gap" data-answer="jugàvem"> a la plaça fins que es feia fosc.
+      Vosaltres <input class="verb-gap imperfect-gap" data-answer="veníeu"> sovint a casa a berenar.
+      Els veïns <input class="verb-gap imperfect-gap" data-answer="coneixien"> tothom i
+      <input class="verb-gap imperfect-gap" data-answer="saludaven"> cada matí.
+      Jo em <input class="verb-gap imperfect-gap" data-answer="sentia"> lliure, encara que a vegades
+      <input class="verb-gap imperfect-gap" data-answer="somiava"> amb tenir coses noves.
+    </p>
+
+    <span class="score" id="imperfectScore">Puntuació: 0/11</span>
+
+    <div class="controls">
+      <button class="check" onclick="checkVerbSet('imperfect')">Comprova</button>
+      <button class="show" onclick="showVerbSet('imperfect')">Mostra respostes</button>
+      <button class="reset" onclick="resetVerbSet('imperfect')">Reinicia</button>
+    </div>
+
+    <div id="imperfectFeedback" class="verb-feedback"></div>
+  </div>
+
+  <div class="verb-card future">
+    <h2>3C · Futur: com imaginam el que vindrà</h2>
+    <div class="verb-bank">
+      <strong>Infinitius:</strong> viure · continuar · treballar · tenir · venir · recordar · aprendre · sentir · guardar
+    </div>
+
+    <p class="verb-text">
+      D’aquí uns anys jo <input class="verb-gap future-gap" data-answer="viuré"> en un lloc més tranquil,
+      prop de la mar. Tu <input class="verb-gap future-gap" data-answer="continuaràs"> fent bromes
+      quan estiguis nerviós, i això encara em farà riure.
+      La meva germana probablement <input class="verb-gap future-gap" data-answer="treballarà"> a un altre país.
+      Nosaltres <input class="verb-gap future-gap" data-answer="tindrem"> més temps per veure’ns,
+      encara que tots estarem més grans.
+      Vosaltres <input class="verb-gap future-gap" data-answer="vindreu"> a visitar-nos durant l’estiu?
+      Els meus fills <input class="verb-gap future-gap" data-answer="recordaran"> aquestes converses
+      i potser <input class="verb-gap future-gap" data-answer="aprendran"> a valorar les coses senzilles.
+      Jo em <input class="verb-gap future-gap" data-answer="sentiré"> agraïda i
+      <input class="verb-gap future-gap" data-answer="guardaré"> aquests records com un petit tresor.
+    </p>
+
+    <span class="score" id="futureScore">Puntuació: 0/9</span>
+
+    <div class="controls">
+      <button class="check" onclick="checkVerbSet('future')">Comprova</button>
+      <button class="show" onclick="showVerbSet('future')">Mostra respostes</button>
+      <button class="reset" onclick="resetVerbSet('future')">Reinicia</button>
+    </div>
+
+    <div id="futureFeedback" class="verb-feedback"></div>
+  </div>
+
+</section>
+</main>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="/assets/vidcatala-vimeo.js"></script>
+<script>
+const video = createVidcatVimeoPlayer(document.getElementById("mainVideo"));
+const score1 = document.getElementById("score1");
+const feedback2 = document.getElementById("feedback2");
+const score2 = document.getElementById("score2");
+
+let currentItem = null;
+let currentEnd = null;
+
+function normalise(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function setAllCornerButtonsToPlay() {
+  document.querySelectorAll(".pause-corner i").forEach(icon => {
+    icon.classList.remove("fa-pause");
+    icon.classList.add("fa-play");
+  });
+}
+
+function setButtonToPause(button) {
+  const icon = button.querySelector("i");
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+}
+
+function toggleExtract(button) {
+  const item = button.closest(".item");
+  const start = Number(item.dataset.start);
+  const end = Number(item.dataset.end);
+
+  if (currentItem === item && !video.paused) {
+    video.pause();
+    setAllCornerButtonsToPlay();
+    return;
+  }
+
+  if (currentItem === item && video.paused && currentEnd !== null && video.currentTime < currentEnd) {
+    video.play();
+    setAllCornerButtonsToPlay();
+    setButtonToPause(button);
+    return;
+  }
+
+  currentItem = item;
+  currentEnd = end;
+
+  document.querySelectorAll(".item").forEach(el => el.classList.remove("active"));
+  item.classList.add("active");
+
+  setAllCornerButtonsToPlay();
+  setButtonToPause(button);
+
+  video.currentTime = start;
+  video.play();
+}
+
+video.addEventListener("timeupdate", function() {
+  if (currentEnd !== null && video.currentTime >= currentEnd) {
+    video.pause();
+    setAllCornerButtonsToPlay();
+
+    if (currentItem) {
+      currentItem.classList.remove("active");
+    }
+
+    currentItem = null;
+    currentEnd = null;
+  }
+});
+
+video.addEventListener("pause", function() {
+  setAllCornerButtonsToPlay();
+});
+
+function updateTotalScore() {
+  const inputs = document.querySelectorAll(".gap");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    if (normalise(input.value) === normalise(input.dataset.answer)) {
+      correct++;
+    }
+  });
+
+  score1.textContent = `Puntuació total: ${correct}/${inputs.length}`;
+}
+
+function checkItem(btn) {
+  const item = btn.closest(".item");
+  const inputs = item.querySelectorAll(".gap");
+  const fb = item.querySelector(".item-feedback");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    const user = normalise(input.value);
+    const answer = normalise(input.dataset.answer);
+
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+
+    if (!user) {
+      input.style.background = "#fff8df";
+      input.style.borderColor = "#d59b2d";
+    } else if (user === answer) {
+      correct++;
+      input.style.background = "#f0fff2";
+      input.style.borderColor = "#35a853";
+    } else {
+      input.style.background = "#fff0f0";
+      input.style.borderColor = "#cc3d3d";
+    }
+  });
+
+  fb.className = "item-feedback";
+
+  if (correct === inputs.length) {
+    fb.classList.add("ok");
+    fb.innerHTML = `<strong>Molt bé.</strong> Has completat correctament aquest fragment.`;
+  } else if (correct >= Math.ceil(inputs.length / 2)) {
+    fb.classList.add("partial");
+    fb.innerHTML = `<strong>Bona feina: ${correct}/${inputs.length}.</strong> Revisa els buits marcats i torna a escoltar aquest fragment.`;
+  } else {
+    fb.classList.add("bad");
+    fb.innerHTML = `<strong>Cal tornar-hi: ${correct}/${inputs.length}.</strong> Prem el botó de la imatge i escolta el fragment una altra vegada.`;
+  }
+
+  updateTotalScore();
+}
+
+function showItem(btn) {
+  const item = btn.closest(".item");
+  const inputs = item.querySelectorAll(".gap");
+  const fb = item.querySelector(".item-feedback");
+
+  inputs.forEach(input => {
+    input.value = input.dataset.answer;
+    input.style.background = "#f0fff2";
+    input.style.borderColor = "#35a853";
+  });
+
+  fb.className = "item-feedback ok";
+  fb.innerHTML = `<strong>Respostes mostrades.</strong> Torna a escoltar el fragment i fixa’t en les paraules dins la frase.`;
+
+  updateTotalScore();
+}
+
+function resetItem(btn) {
+  const item = btn.closest(".item");
+  const inputs = item.querySelectorAll(".gap");
+  const fb = item.querySelector(".item-feedback");
+
+  inputs.forEach(input => {
+    input.value = "";
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+  });
+
+  fb.className = "item-feedback";
+  fb.innerHTML = "";
+  item.classList.remove("active");
+
+  updateTotalScore();
+}
+
+function checkEx2() {
+  const selects = document.querySelectorAll(".mc");
+  let correct = 0;
+
+  selects.forEach(select => {
+    const fb = select.nextElementSibling;
+    const selected = select.value;
+    const answer = select.dataset.answer;
+
+    select.style.background = "white";
+    select.style.borderColor = "#e2d28d";
+    fb.className = "mc-feedback";
+
+    if (!selected) {
+      select.style.background = "#fff8df";
+      select.style.borderColor = "#d59b2d";
+      fb.classList.add("bad");
+      fb.textContent = "Tria una resposta.";
+    } else if (selected === answer) {
+      correct++;
+      select.style.background = "#f0fff2";
+      select.style.borderColor = "#35a853";
+      fb.classList.add("ok");
+      fb.textContent = "Correcte. " + select.dataset.feedback;
+    } else {
+      select.style.background = "#fff0f0";
+      select.style.borderColor = "#cc3d3d";
+      fb.classList.add("bad");
+      fb.textContent = "No exactament. " + select.dataset.feedback;
+    }
+  });
+
+  score2.textContent = `Puntuació: ${correct}/${selects.length}`;
+  feedback2.className = "feedback";
+
+  if (correct === selects.length) {
+    feedback2.classList.add("ok");
+    feedback2.innerHTML =
+      `<strong>Excel·lent.</strong> Has entès el contrast global entre abans i ara.`;
+  } else if (correct >= 6) {
+    feedback2.classList.add("partial");
+    feedback2.innerHTML =
+      `<strong>Bona feina.</strong> Has entès bastants idees importants del relat.`;
+  } else {
+    feedback2.classList.add("bad");
+    feedback2.innerHTML =
+      `<strong>Torna a escoltar el vídeo.</strong> Intenta fixar-te millor en el contrast entre passat i present.`;
+  }
+}
+
+function showEx2() {
+  document.querySelectorAll(".mc").forEach(select => {
+    select.value = select.dataset.answer;
+
+    const fb = select.nextElementSibling;
+
+    select.style.background = "#f0fff2";
+    select.style.borderColor = "#35a853";
+
+    fb.className = "mc-feedback ok";
+    fb.textContent = select.dataset.feedback;
+  });
+
+  score2.textContent = "Puntuació: 10/10";
+  feedback2.className = "feedback ok";
+  feedback2.innerHTML = `<strong>Respostes mostrades.</strong>`;
+}
+
+function resetEx2() {
+  document.querySelectorAll(".mc").forEach(select => {
+    select.value = "";
+
+    select.style.background = "white";
+    select.style.borderColor = "#e2d28d";
+
+    const fb = select.nextElementSibling;
+    fb.className = "mc-feedback";
+    fb.textContent = "";
+  });
+
+  score2.textContent = "Puntuació: 0/10";
+
+  feedback2.className = "feedback";
+  feedback2.innerHTML = "";
+}
+
+function checkVerbSet(setName) {
+  const inputs = document.querySelectorAll("." + setName + "-gap");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    const user = normalise(input.value);
+    const answer = normalise(input.dataset.answer);
+
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+
+    if (!user) {
+      input.style.background = "#fff8df";
+      input.style.borderColor = "#d59b2d";
+    } else if (user === answer) {
+      correct++;
+
+      input.style.background = "#f0fff2";
+      input.style.borderColor = "#35a853";
+    } else {
+      input.style.background = "#fff0f0";
+      input.style.borderColor = "#cc3d3d";
+    }
+  });
+
+  document.getElementById(setName + "Score").textContent =
+    `Puntuació: ${correct}/${inputs.length}`;
+
+  const fb = document.getElementById(setName + "Feedback");
+
+  fb.className = "verb-feedback";
+
+  if (correct === inputs.length) {
+    fb.classList.add("ok");
+    fb.innerHTML =
+      "<strong>Molt bé.</strong> Has completat totes les formes correctament.";
+  } else if (correct >= Math.ceil(inputs.length / 2)) {
+    fb.classList.add("partial");
+    fb.innerHTML =
+      "<strong>Bona feina.</strong> Revisa algunes formes verbals.";
+  } else {
+    fb.classList.add("bad");
+    fb.innerHTML =
+      "<strong>Torna-ho a provar.</strong> Fixa’t en el temps verbal.";
+  }
+}
+
+function showVerbSet(setName) {
+  const inputs = document.querySelectorAll("." + setName + "-gap");
+
+  inputs.forEach(input => {
+    input.value = input.dataset.answer;
+
+    input.style.background = "#f0fff2";
+    input.style.borderColor = "#35a853";
+  });
+
+  document.getElementById(setName + "Score").textContent =
+    `Puntuació: ${inputs.length}/${inputs.length}`;
+
+  const fb = document.getElementById(setName + "Feedback");
+  fb.className = "verb-feedback ok";
+  fb.innerHTML = "<strong>Respostes mostrades.</strong>";
+}
+
+function resetVerbSet(setName) {
+  const inputs = document.querySelectorAll("." + setName + "-gap");
+
+  inputs.forEach(input => {
+    input.value = "";
+
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+  });
+
+  document.getElementById(setName + "Score").textContent =
+    "Puntuació: 0/" + inputs.length;
+
+  const fb = document.getElementById(setName + "Feedback");
+
+  fb.className = "verb-feedback";
+  fb.innerHTML = "";
+}
+</script>
+
+</body>
+</html>

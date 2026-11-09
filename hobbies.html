@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Esport, lleure i aficions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  background:#f7f6f2;
+  color:#2f2f2f;
+}
+
+.banner{
+  background:#ffcc00;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.banner-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.banner img{
+  width:46px;
+  height:31px;
+  border-radius:4px;
+  object-fit:cover;
+}
+
+.banner h1{
+  margin:0;
+  font-size:1.3rem;
+  font-weight:700;
+}
+
+.home{
+  color:white;
+  text-decoration:none;
+  font-size:1.2rem;
+}
+
+.page{
+  max-width:1380px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:420px 1fr;
+  gap:24px;
+}
+
+.left{
+  position:sticky;
+  top:16px;
+  align-self:start;
+}
+
+.video-card,
+.exercise-card{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+}
+
+.video-card{
+  padding:10px;
+}
+
+.exercise-card p{
+  line-height:1.55;
+  font-size:.95rem;
+}
+
+.video-wrap{
+  width:100%;
+  max-width:390px;
+  margin:0 auto;
+  aspect-ratio:4/3;
+  background:#111;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.vidcat-vimeo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.right{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.exercise-card h2{
+  margin-top:0;
+  color:#8B4513;
+}
+
+.exercise-card h3{
+  color:#8B4513;
+  margin-top:22px;
+}
+
+.transcript{
+  display:none;
+  background:#fffdf3;
+  border-left:5px solid #ffcc00;
+  border-radius:14px;
+  padding:14px;
+  line-height:1.65;
+}
+
+.transcript.showing{
+  display:block;
+}
+
+.grammar-note{
+  background:#eef7ff;
+  border-left:5px solid #4c8ed9;
+  border-radius:14px;
+  padding:12px 14px;
+  line-height:1.55;
+  margin-top:12px;
+}
+
+.gap{
+  width:135px;
+  padding:6px 8px;
+  border-radius:10px;
+  border:2px solid #e2d28d;
+  font-family:inherit;
+  font-weight:600;
+  background:#fffdf5;
+}
+
+.gap.long{
+  width:190px;
+}
+
+.gap.correct,
+select.correct{
+  border-color:#35a853;
+  background:#eefcf1;
+}
+
+.gap.incorrect,
+select.incorrect{
+  border-color:#cc3d3d;
+  background:#fff0f0;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+
+button.action{
+  border:none;
+  border-radius:999px;
+  padding:9px 15px;
+  font-family:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.check{ background:#ffcc00; }
+.show{ background:#efe6c6; }
+.reset{ background:#e8e8e8; }
+
+.feedback{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  display:none;
+  line-height:1.5;
+}
+
+.feedback.ok{
+  display:block;
+  background:#e9f8ef;
+  border-left:5px solid #35a853;
+}
+
+.feedback.partial{
+  display:block;
+  background:#fff4d4;
+  border-left:5px solid #ffcc00;
+}
+
+.feedback.bad{
+  display:block;
+  background:#fff0f0;
+  border-left:5px solid #cc3d3d;
+}
+
+.mcq{
+  background:#fffdf3;
+  border-left:5px solid #ffcc00;
+  border-radius:14px;
+  padding:14px;
+  margin:14px 0;
+}
+
+.mcq p{
+  margin:0 0 8px;
+  font-weight:700;
+}
+
+.mcq label{
+  display:block;
+  margin:8px 0;
+  line-height:1.45;
+}
+
+.score{
+  display:inline-block;
+  background:#2f2f2f;
+  color:white;
+  padding:8px 13px;
+  border-radius:999px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.small-feedback{
+  display:none;
+  margin-top:8px;
+  font-size:.92rem;
+  line-height:1.45;
+}
+
+.small-feedback.ok{
+  display:block;
+  color:#1d5d2c;
+}
+
+.small-feedback.bad{
+  display:block;
+  color:#7b1f1f;
+}
+
+.subj-row{
+  background:#fffdf3;
+  border-left:5px solid #ffcc00;
+  border-radius:14px;
+  padding:12px 14px;
+  margin:12px 0;
+  line-height:1.55;
+}
+
+.subj-row label{
+  display:block;
+  cursor:pointer;
+}
+
+.subj-row.correct,
+.subj-row.incorrect{
+  background:#fffdf3;
+  border-left-color:#ffcc00;
+}
+
+.subj-verb{
+  font-weight:500;
+  color:inherit;
+  padding:1px 4px;
+  border-radius:6px;
+  transition:.2s ease;
+}
+
+.subj-verb.verb-correct{
+  font-weight:800;
+  color:#1d7f37;
+  background:#dff5e5;
+}
+
+.subj-verb.verb-incorrect{
+  font-weight:800;
+  color:#b3261e;
+  background:#ffe1df;
+}
+
+.score-box{
+  background:#fff8d7;
+  border:1px solid #f1d45c;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:700;
+  margin:14px 0 18px;
+}
+
+.place-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.place-drop{
+  background:#f7f6f2;
+  border:2px dashed #d7c28a;
+  border-radius:14px;
+  padding:14px;
+  font-weight:700;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.place-drop:hover{
+  background:#fff3b3;
+  transform:translateY(-1px);
+}
+
+.place-drop.flash-correct{
+  background:#d8f5dc;
+  border-color:#3fa34d;
+}
+
+.place-drop.flash-wrong{
+  background:#ffe0e0;
+  border-color:#d9534f;
+}
+
+.word-bank-vocab{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.vocab-item{
+  border:none;
+  background:#ffcc00;
+  color:#2f2f2f;
+  border-radius:999px;
+  padding:9px 14px;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.vocab-item:hover{
+  transform:scale(1.04);
+  background:#f2bd00;
+}
+
+.vocab-item.selected{
+  background:#8B4513;
+  color:white;
+}
+
+.vocab-item.correct{
+  background:#3fa34d;
+  color:white;
+  cursor:default;
+  opacity:.85;
+}
+
+.feedback-box{
+  margin-top:18px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#f2f2f2;
+  font-weight:600;
+}
+
+.feedback-box.ok{
+  background:#d8f5dc;
+  color:#1f6b2b;
+}
+
+.feedback-box.bad{
+  background:#ffe0e0;
+  color:#9b1c1c;
+}
+
+.reset-btn{
+  margin-top:16px;
+  background:#8B4513;
+  color:white;
+  border:none;
+  border-radius:999px;
+  padding:10px 18px;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+}
+
+@media(max-width:900px){
+  .page{
+    grid-template-columns:1fr;
+    padding:0 14px 14px;
+    gap:14px;
+  }
+
+  .left{
+    position:sticky;
+    top:0;
+    z-index:50;
+    align-self:start;
+    background:#f7f6f2;
+    padding-top:0;
+  }
+
+  .video-card{
+    border-radius:0 0 16px 16px;
+    padding:8px;
+  }
+
+  .video-wrap{
+    width:100%;
+    max-width:520px;
+    margin:0 auto;
+    aspect-ratio:4/3;
+    border-radius:12px;
+  }
+
+  .place-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+  .banner h1{
+    font-size:1rem;
+  }
+
+  .exercise-card{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .gap{
+    width:105px;
+    font-size:.82rem;
+  }
+
+  .gap.long{
+    width:135px;
+  }
+
+  .video-wrap{
+    max-width:100%;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <h1>VIDCATALA · Esport, lleure i aficions</h1>
+  </div>
+
+  <a class='home' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="page">
+
+<section class="left">
+<div class="video-card">
+<div class="video-wrap">
+<iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268344?dnt=1" title="VIDCATALA · Esport, lleure i aficions" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+</section>
+
+<section class="right">
+
+<div class="exercise-card">
+<h2>Introducció</h2>
+<p>
+En aquest vídeo parlem de les activitats que fem quan tenim temps lliure: esports, aficions tranquil·les, activitats a l’aire lliure i maneres de desconnectar de la rutina.
+</p>
+
+<div class="grammar-note">
+<strong>Punt de gramàtica:</strong> el vídeo exemplifica l’ús del <strong>present de subjuntiu</strong> després d’expressions de recomanació, necessitat, emoció o preferència.
+</div>
+
+<div class="controls">
+<button type="button" class="action show" onclick="toggleTranscript()">Mostra / amaga la transcripció</button>
+</div>
+
+<div id="transcript" class="transcript">
+<p>Hola a tothom!</p>
+
+<p>
+Avui us vull parlar de les aficions i de la importància que tenen en la nostra vida. Tots tenim obligacions: feina, estudis, compres i mil coses més. Per això crec que és important que cadascú trobi una activitat que li agradi de debò.
+</p>
+
+<p>
+En el meu cas, m'encanta sortir a caminar per la muntanya. Quan arriba el cap de setmana, sempre intento trobar una estona perquè pugui respirar aire fresc i desconnectar una mica. També m'agrada que els meus amics m'acompanyin de tant en tant. Quan compartim una excursió, l'experiència és molt més divertida.
+</p>
+
+<p>
+Conec gent que prefereix que les seves activitats siguin més tranquil·les. Alguns llegeixen novel·les, fan mots encreuats o juguen a escacs. Altres prefereixen que les seves aficions siguin més actives i practiquen ciclisme, natació o tennis.
+</p>
+
+<p>
+Una amiga meva juga a voleibol. Sempre diu que és essencial que els membres de l'equip confiïn els uns en els altres. També creu que és millor que els joves practiquin algun esport regularment perquè aprenen disciplina i treball en equip.
+</p>
+
+<p>
+Jo no sóc gaire competitiu. El que realment m'interessa és que les activitats em facin sentir bé. Em sorprèn que algunes persones passin tot el seu temps lliure davant d'una pantalla. Evidentment, mirar una sèrie o jugar a videojocs també pot ser divertit, però crec que cal que trobem un equilibri.
+</p>
+
+<p>
+Una altra afició que m'agrada molt és la fotografia. Quan viatjo, sempre duc la càmera amb mi. M'encanta que una fotografia sigui capaç de recordar-me un moment especial molts anys després.
+</p>
+
+<p>
+Al final, no importa quina afició triïs. El més important és que et faci feliç, que et permeti descansar i que t'ajudi a mantenir una vida equilibrada. Per això recomano que tothom provi activitats diferents fins que trobi la que realment li agrada.
+</p>
+
+<p>
+I vosaltres? Quines aficions teniu? Hi ha alguna activitat que us agradaria començar aquest any?
+</p>
+</div>
+</div>
+
+<div class="exercise-card" id="gapExercise">
+<h2>Exercici 1 · Escolta i completa</h2>
+
+<p>
+Completa el resum amb paraules del vídeo.
+</p>
+
+<p>
+El vídeo parla de les
+<input class="gap" data-answer="aficions">
+i de la importància de tenir temps per
+<input class="gap long" data-answer="desconnectar">.
+El parlant diu que és important que cada persona
+<input class="gap" data-answer="trobi">
+una activitat que li
+<input class="gap" data-answer="agradi">.
+A ell li encanta caminar per la
+<input class="gap" data-answer="muntanya">
+i respirar aire
+<input class="gap" data-answer="fresc">.
+També parla d’activitats tranquil·les, com fer mots
+<input class="gap long" data-answer="encreuats">
+o jugar a
+<input class="gap" data-answer="escacs">.
+Segons el vídeo, és bo que els joves
+<input class="gap" data-answer="practiquin">
+algun esport perquè aprenen disciplina i treball en
+<input class="gap" data-answer="equip">.
+Finalment, recomana que tothom
+<input class="gap" data-answer="provi">
+activitats diferents fins que trobi una afició que li agradi.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkGaps()">Comprova</button>
+<button type="button" class="action show" onclick="showGaps()">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetGaps()">Reinicia</button>
+</div>
+
+<div id="gapFeedback" class="feedback"></div>
+</div>
+
+<div class="exercise-card">
+<h2>Exercici 2 · Comprensió</h2>
+
+<span class="score" id="score2">Puntuació: 0/8</span>
+
+<div class="mcq" data-answer="b" data-feedback="El vídeo presenta activitats de lleure i explica per què poden ser importants.">
+<p>1. Quin és el tema principal del vídeo?</p>
+<label><input type="radio" name="q1" value="a"> Les obligacions de la feina.</label>
+<label><input type="radio" name="q1" value="b"> Les aficions i el temps lliure.</label>
+<label><input type="radio" name="q1" value="c"> Les compres al mercat.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="El parlant diu que caminar per la muntanya li permet respirar aire fresc i desconnectar.">
+<p>2. Per què li agrada caminar per la muntanya?</p>
+<label><input type="radio" name="q2" value="a"> Perquè vol competir amb altres persones.</label>
+<label><input type="radio" name="q2" value="b"> Perquè no li agrada estar amb amics.</label>
+<label><input type="radio" name="q2" value="c"> Perquè pot respirar aire fresc i desconnectar.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="a" data-feedback="El vídeo dona exemples d’aficions tranquil·les: llegir, fer mots encreuats i jugar a escacs.">
+<p>3. Quina activitat es presenta com una afició tranquil·la?</p>
+<label><input type="radio" name="q3" value="a"> Fer mots encreuats.</label>
+<label><input type="radio" name="q3" value="b"> Jugar a voleibol.</label>
+<label><input type="radio" name="q3" value="c"> Practicar ciclisme.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="b" data-feedback="El voleibol apareix com una activitat d’equip on la confiança és important.">
+<p>4. Què aprenen els joves quan practiquen un esport d’equip?</p>
+<label><input type="radio" name="q4" value="a"> A evitar qualsevol esforç.</label>
+<label><input type="radio" name="q4" value="b"> Disciplina i treball en equip.</label>
+<label><input type="radio" name="q4" value="c"> A passar tot el dia davant d’una pantalla.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="El parlant no rebutja les pantalles, però defensa l’equilibri.">
+<p>5. Què diu sobre les pantalles?</p>
+<label><input type="radio" name="q5" value="a"> Que sempre són dolentes.</label>
+<label><input type="radio" name="q5" value="b"> Que són l’única manera bona de divertir-se.</label>
+<label><input type="radio" name="q5" value="c"> Que poden ser divertides, però cal trobar un equilibri.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="a" data-feedback="La fotografia li serveix per recordar moments especials.">
+<p>6. Per què li agrada la fotografia?</p>
+<label><input type="radio" name="q6" value="a"> Perquè una foto pot recordar-li un moment especial.</label>
+<label><input type="radio" name="q6" value="b"> Perquè només li interessen les càmeres cares.</label>
+<label><input type="radio" name="q6" value="c"> Perquè no li agrada viatjar.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="b" data-feedback="La recomanació final és provar activitats diferents fins a trobar la que agrada realment.">
+<p>7. Què recomana al final?</p>
+<label><input type="radio" name="q7" value="a"> No començar cap activitat nova.</label>
+<label><input type="radio" name="q7" value="b"> Provar activitats diferents.</label>
+<label><input type="radio" name="q7" value="c"> Fer sempre la mateixa afició.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="El to és proper, positiu i motivador.">
+<p>8. Quin és el to general del vídeo?</p>
+<label><input type="radio" name="q8" value="a"> Enfadat i crític.</label>
+<label><input type="radio" name="q8" value="b"> Fred i impersonal.</label>
+<label><input type="radio" name="q8" value="c"> Positiu i motivador.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkMCQ()">Comprova</button>
+<button type="button" class="action show" onclick="showMCQ()">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetMCQ()">Reinicia</button>
+</div>
+
+<div id="fb2" class="feedback"></div>
+</div>
+
+<div class="exercise-card" id="subjExercise">
+<h2>Exercici 3 · Detecta el subjuntiu</h2>
+
+<p>
+Marca només les frases que contenen una forma verbal en <strong>subjuntiu</strong>.
+Quan premis <strong>Comprova</strong>, el verb de les frases que hagis marcat es posarà en verd o en vermell.
+</p>
+
+<span class="score" id="subjScore">Puntuació: 0/8</span>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> És important que cadascú <span class="subj-verb">trobi</span> una activitat.</label>
+</div>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> M’agrada que els meus amics m’<span class="subj-verb">acompanyin</span>.</label>
+</div>
+
+<div class="subj-row" data-correct="false">
+<label><input type="checkbox"> Alguns <span class="subj-verb">llegeixen</span> novel·les i juguen a escacs.</label>
+</div>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> És essencial que els membres de l’equip <span class="subj-verb">confiïn</span> els uns en els altres.</label>
+</div>
+
+<div class="subj-row" data-correct="false">
+<label><input type="checkbox"> Una amiga meva <span class="subj-verb">juga</span> a voleibol.</label>
+</div>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> Cal que <span class="subj-verb">trobem</span> un equilibri.</label>
+</div>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> M’encanta que una fotografia <span class="subj-verb">sigui</span> capaç de recordar-me un moment.</label>
+</div>
+
+<div class="subj-row" data-correct="true">
+<label><input type="checkbox"> Recomano que tothom <span class="subj-verb">provi</span> activitats diferents.</label>
+</div>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkSubj()">Comprova</button>
+<button type="button" class="action show" onclick="showSubj()">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetSubj()">Reinicia</button>
+</div>
+
+<div id="subjFeedback" class="feedback"></div>
+</div>
+
+<div class="exercise-card" id="ex4-activities">
+<h2>Exercici 4 · On ho faries?</h2>
+
+<p>
+Fes clic en una activitat i després fes clic en el lloc on normalment la faries.
+Si la resposta és correcta, l’activitat queda marcada en verd.
+</p>
+
+<div class="score-box">
+Puntuació: <span id="activityScore">0</span>/24
+</div>
+
+<div class="place-grid">
+<div class="place-drop" data-place="piscina">🏊 La piscina</div>
+<div class="place-drop" data-place="gimnas">🏋️ El gimnàs</div>
+<div class="place-drop" data-place="camp">⚽ El camp d’esports</div>
+<div class="place-drop" data-place="muntanya">🥾 La muntanya</div>
+<div class="place-drop" data-place="mar">🌊 La mar</div>
+<div class="place-drop" data-place="casa">🎲 A casa</div>
+</div>
+
+<h3>Activitats</h3>
+
+<div class="word-bank-vocab" id="activityWords">
+<button type="button" class="vocab-item" data-answer="piscina">nedar d’esquena</button>
+<button type="button" class="vocab-item" data-answer="piscina">fer aquagim</button>
+<button type="button" class="vocab-item" data-answer="piscina">tirar-se de cap</button>
+<button type="button" class="vocab-item" data-answer="piscina">fer llargades</button>
+
+<button type="button" class="vocab-item" data-answer="gimnas">aixecar peses</button>
+<button type="button" class="vocab-item" data-answer="gimnas">fer estiraments</button>
+<button type="button" class="vocab-item" data-answer="gimnas">córrer a la cinta</button>
+<button type="button" class="vocab-item" data-answer="gimnas">fer abdominals</button>
+
+<button type="button" class="vocab-item" data-answer="camp">xutar a porteria</button>
+<button type="button" class="vocab-item" data-answer="camp">fer un partit</button>
+<button type="button" class="vocab-item" data-answer="camp">entrenar amb l’equip</button>
+<button type="button" class="vocab-item" data-answer="camp">marcar un gol</button>
+
+<button type="button" class="vocab-item" data-answer="muntanya">fer senderisme</button>
+<button type="button" class="vocab-item" data-answer="muntanya">pujar un cim</button>
+<button type="button" class="vocab-item" data-answer="muntanya">seguir un camí</button>
+<button type="button" class="vocab-item" data-answer="muntanya">acampar</button>
+
+<button type="button" class="vocab-item" data-answer="mar">fer caiac</button>
+<button type="button" class="vocab-item" data-answer="mar">anar amb vela</button>
+<button type="button" class="vocab-item" data-answer="mar">bussejar</button>
+<button type="button" class="vocab-item" data-answer="mar">fer surf de rem</button>
+
+<button type="button" class="vocab-item" data-answer="casa">jugar a cartes</button>
+<button type="button" class="vocab-item" data-answer="casa">fer mots encreuats</button>
+<button type="button" class="vocab-item" data-answer="casa">jugar a escacs</button>
+<button type="button" class="vocab-item" data-answer="casa">fer un trencaclosques</button>
+</div>
+
+<div id="activityFeedback" class="feedback-box">
+Tria primer una activitat.
+</div>
+
+<button type="button" class="reset-btn" onclick="resetActivityExercise()">Reinicia</button>
+</div>
+
+</section>
+</main>
+
+<script>
+function normalize(t){
+  return t
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[’‘`´]/g,"'")
+    .replace(/\s+/g," ");
+}
+
+function toggleTranscript(){
+  document.getElementById("transcript").classList.toggle("showing");
+}
+
+function checkGaps(){
+  const gaps = document.querySelectorAll("#gapExercise .gap");
+  const fb = document.getElementById("gapFeedback");
+  let ok = 0;
+
+  gaps.forEach(g=>{
+    if(normalize(g.value) === normalize(g.dataset.answer)){
+      g.classList.add("correct");
+      g.classList.remove("incorrect");
+      ok++;
+    }else{
+      g.classList.add("incorrect");
+      g.classList.remove("correct");
+    }
+  });
+
+  fb.className = "feedback " + (ok === gaps.length ? "ok" : ok >= Math.ceil(gaps.length/2) ? "partial" : "bad");
+
+  fb.innerHTML =
+    ok === gaps.length
+    ? "<strong>Molt bé!</strong> Has completat tot el resum correctament."
+    : ok >= Math.ceil(gaps.length/2)
+    ? "<strong>Bona feina.</strong> Has encertat " + ok + " de " + gaps.length + ". Revisa els buits marcats."
+    : "<strong>Cal tornar-hi.</strong> Has encertat " + ok + " de " + gaps.length + ". Mira el vídeo una altra vegada.";
+}
+
+function showGaps(){
+  const gaps = document.querySelectorAll("#gapExercise .gap");
+
+  gaps.forEach(g=>{
+    g.value = g.dataset.answer;
+    g.classList.add("correct");
+    g.classList.remove("incorrect");
+  });
+
+  const fb = document.getElementById("gapFeedback");
+  fb.className = "feedback ok";
+  fb.innerHTML = "<strong>Respostes mostrades.</strong>";
+}
+
+function resetGaps(){
+  const gaps = document.querySelectorAll("#gapExercise .gap");
+
+  gaps.forEach(g=>{
+    g.value = "";
+    g.classList.remove("correct","incorrect");
+  });
+
+  const fb = document.getElementById("gapFeedback");
+  fb.className = "feedback";
+  fb.innerHTML = "";
+}
+
+function checkMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+  let score = 0;
+
+  qs.forEach(q=>{
+    const ans = q.dataset.answer;
+    const checked = q.querySelector("input:checked");
+    const fb = q.querySelector(".small-feedback");
+
+    q.style.background = "#fffdf3";
+    q.style.borderLeftColor = "#ffcc00";
+
+    if(checked && checked.value === ans){
+      score++;
+      q.style.background = "#eefcf1";
+      q.style.borderLeftColor = "#35a853";
+      fb.className = "small-feedback ok";
+      fb.textContent = "Correcte. " + q.dataset.feedback;
+    }else{
+      q.style.background = "#fff0f0";
+      q.style.borderLeftColor = "#cc3d3d";
+      fb.className = "small-feedback bad";
+      fb.textContent = checked ? "No exactament. " + q.dataset.feedback : "Tria una resposta.";
+    }
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: " + score + "/" + qs.length;
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback " + (score === qs.length ? "ok" : score >= 5 ? "partial" : "bad");
+
+  fb2.innerHTML =
+    score === qs.length
+    ? "<strong>Excel·lent.</strong> Has entès molt bé el vídeo."
+    : score >= 5
+    ? "<strong>Bona comprensió.</strong> Revisa les preguntes marcades."
+    : "<strong>Torna a escoltar el vídeo.</strong> Fixa’t en les activitats i en les idees principals.";
+}
+
+function showMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+
+  qs.forEach(q=>{
+    const ans = q.dataset.answer;
+    const input = q.querySelector("input[value='" + ans + "']");
+    const fb = q.querySelector(".small-feedback");
+
+    input.checked = true;
+    q.style.background = "#eefcf1";
+    q.style.borderLeftColor = "#35a853";
+    fb.className = "small-feedback ok";
+    fb.textContent = "Resposta correcta. " + q.dataset.feedback;
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: " + qs.length + "/" + qs.length;
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback ok";
+  fb2.innerHTML = "<strong>Respostes mostrades.</strong>";
+}
+
+function resetMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+
+  qs.forEach(q=>{
+    q.style.background = "#fffdf3";
+    q.style.borderLeftColor = "#ffcc00";
+    q.querySelectorAll("input").forEach(i=>i.checked=false);
+    const fb = q.querySelector(".small-feedback");
+    fb.className = "small-feedback";
+    fb.textContent = "";
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: 0/8";
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback";
+  fb2.innerHTML = "";
+}
+
+function clearSubjVerbFeedback(row){
+  row.querySelectorAll(".subj-verb").forEach(v=>{
+    v.classList.remove("verb-correct","verb-incorrect");
+  });
+}
+
+function markSubjVerb(row, isCorrect){
+  const verb = row.querySelector(".subj-verb");
+  if(!verb) return;
+
+  verb.classList.remove("verb-correct","verb-incorrect");
+  verb.classList.add(isCorrect ? "verb-correct" : "verb-incorrect");
+}
+
+function checkSubj(){
+  const rows = document.querySelectorAll("#subjExercise .subj-row");
+  let score = 0;
+
+  rows.forEach(row=>{
+    const shouldBeChecked = row.dataset.correct === "true";
+    const input = row.querySelector("input");
+    const isChecked = input.checked;
+
+    row.classList.remove("correct","incorrect");
+    clearSubjVerbFeedback(row);
+
+    if(isChecked === shouldBeChecked){
+      score++;
+    }
+
+    if(isChecked){
+      markSubjVerb(row, shouldBeChecked);
+    }
+  });
+
+  document.getElementById("subjScore").textContent = "Puntuació: " + score + "/" + rows.length;
+
+  const fb = document.getElementById("subjFeedback");
+  fb.className = "feedback " + (score === rows.length ? "ok" : score >= 5 ? "partial" : "bad");
+
+  fb.innerHTML =
+    score === rows.length
+    ? "<strong>Excel·lent.</strong> Has identificat totes les formes de subjuntiu."
+    : score >= 5
+    ? "<strong>Bona feina.</strong> Els verbs marcats en verd són correctes; els marcats en vermell no són subjuntiu."
+    : "<strong>Cal revisar.</strong> Recorda que el subjuntiu apareix sovint després d’expressions com <em>és important que</em>, <em>cal que</em> o <em>recomano que</em>.";
+}
+
+function showSubj(){
+  const rows = document.querySelectorAll("#subjExercise .subj-row");
+
+  rows.forEach(row=>{
+    const input = row.querySelector("input");
+    const correct = row.dataset.correct === "true";
+
+    input.checked = correct;
+    row.classList.remove("correct","incorrect");
+    clearSubjVerbFeedback(row);
+
+    if(correct){
+      markSubjVerb(row, true);
+    }
+  });
+
+  document.getElementById("subjScore").textContent = "Puntuació: " + rows.length + "/" + rows.length;
+
+  const fb = document.getElementById("subjFeedback");
+  fb.className = "feedback ok";
+  fb.innerHTML = "<strong>Respostes mostrades.</strong>";
+}
+
+function resetSubj(){
+  const rows = document.querySelectorAll("#subjExercise .subj-row");
+
+  rows.forEach(row=>{
+    row.classList.remove("correct","incorrect");
+    row.querySelector("input").checked = false;
+    clearSubjVerbFeedback(row);
+  });
+
+  document.getElementById("subjScore").textContent = "Puntuació: 0/8";
+
+  const fb = document.getElementById("subjFeedback");
+  fb.className = "feedback";
+  fb.innerHTML = "";
+}
+
+let selectedActivityItem = null;
+let activityScore = 0;
+
+const activityFeedbackMessages = {
+  piscina: "Aquesta activitat normalment es fa a la piscina.",
+  gimnas: "Aquesta activitat normalment es fa al gimnàs.",
+  camp: "Aquesta activitat normalment es fa al camp d’esports.",
+  muntanya: "Aquesta activitat normalment es fa a la muntanya.",
+  mar: "Aquesta activitat normalment es fa a la mar.",
+  casa: "Aquesta activitat normalment es fa a casa."
+};
+
+document.querySelectorAll("#ex4-activities .vocab-item").forEach(item => {
+  item.addEventListener("click", () => {
+    if(item.classList.contains("correct")) return;
+
+    document.querySelectorAll("#ex4-activities .vocab-item").forEach(btn => {
+      btn.classList.remove("selected");
+    });
+
+    selectedActivityItem = item;
+    item.classList.add("selected");
+
+    const feedback = document.getElementById("activityFeedback");
+    feedback.className = "feedback-box";
+    feedback.textContent = "Ara tria el lloc correcte per a: “" + item.textContent + "”.";
+  });
+});
+
+document.querySelectorAll("#ex4-activities .place-drop").forEach(place => {
+  place.addEventListener("click", () => {
+    const feedback = document.getElementById("activityFeedback");
+
+    if(!selectedActivityItem){
+      feedback.className = "feedback-box bad";
+      feedback.textContent = "Primer has de triar una activitat.";
+      return;
+    }
+
+    const correctPlace = selectedActivityItem.dataset.answer;
+    const chosenPlace = place.dataset.place;
+
+    if(correctPlace === chosenPlace){
+      selectedActivityItem.classList.remove("selected");
+      selectedActivityItem.classList.add("correct");
+      selectedActivityItem.disabled = true;
+
+      activityScore++;
+      document.getElementById("activityScore").textContent = activityScore;
+
+      feedback.className = "feedback-box ok";
+      feedback.textContent = "Correcte! “" + selectedActivityItem.textContent + "” correspon a aquest lloc.";
+
+      place.classList.add("flash-correct");
+      setTimeout(() => place.classList.remove("flash-correct"), 700);
+
+      selectedActivityItem = null;
+    }else{
+      feedback.className = "feedback-box bad";
+      feedback.textContent = "No exactament. " + activityFeedbackMessages[correctPlace];
+
+      place.classList.add("flash-wrong");
+      setTimeout(() => place.classList.remove("flash-wrong"), 700);
+    }
+  });
+});
+
+function resetActivityExercise(){
+  activityScore = 0;
+  selectedActivityItem = null;
+
+  document.getElementById("activityScore").textContent = "0";
+
+  document.querySelectorAll("#ex4-activities .vocab-item").forEach(item => {
+    item.classList.remove("selected","correct");
+    item.disabled = false;
+  });
+
+  const feedback = document.getElementById("activityFeedback");
+  feedback.className = "feedback-box";
+  feedback.textContent = "Tria primer una activitat.";
+}
+</script>
+
+</body>
+</html>

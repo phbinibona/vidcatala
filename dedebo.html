@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>VIDCATALA · De debò</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  background:#f7f6f2;
+  color:#2f2f2f;
+}
+
+.banner{
+  background:#ffcc00;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.banner-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.banner-left img{
+  width:42px;
+  height:42px;
+  object-fit:cover;
+  border-radius:50%;
+}
+
+.banner-title{
+  font-size:1.45rem;
+  font-weight:700;
+  color:#8B4513;
+}
+
+.home-btn{
+  color:white;
+  font-size:1.5rem;
+  text-decoration:none;
+}
+
+.container{
+  display:flex;
+  gap:24px;
+  padding:24px;
+  align-items:flex-start;
+}
+
+.left-column{
+  width:34%;
+  position:sticky;
+  top:86px;
+}
+
+.right-column{
+  width:66%;
+}
+
+.video-card{
+  background:white;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.vidcat-vimeo{
+  width:220px;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  border-radius:18px;
+  display:block;
+  margin:0 auto;
+  background:black;
+}
+
+.exercise{
+  background:white;
+  border-radius:22px;
+  padding:24px;
+  margin-bottom:26px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.exercise h2{
+  margin-top:0;
+  color:#8B4513;
+}
+
+.intro-box{
+  background:#fff6d8;
+  border-left:6px solid #ffcc00;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:20px;
+  line-height:1.7;
+}
+
+.comic{
+  width:100%;
+  border-radius:18px;
+  display:block;
+  box-shadow:0 4px 10px rgba(0,0,0,0.12);
+}
+
+.instructions{
+  background:#fff6d8;
+  border-left:6px solid #ffcc00;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:18px;
+  line-height:1.5;
+}
+
+.word-bank{
+  background:#f3efe3;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:18px;
+  line-height:2;
+}
+
+.word-bank span{
+  background:white;
+  padding:6px 10px;
+  border-radius:10px;
+  margin:5px;
+  display:inline-block;
+  font-weight:600;
+}
+
+.gap{
+  width:140px;
+  padding:8px;
+  border-radius:10px;
+  border:2px solid #ddd;
+  font-family:'Quicksand',sans-serif;
+  font-size:1rem;
+}
+
+button{
+  background:#ffcc00;
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:12px;
+  margin-right:10px;
+  font-family:'Quicksand',sans-serif;
+}
+
+button:hover{
+  background:#f0c000;
+}
+
+.feedback{
+  margin-top:14px;
+  font-weight:700;
+}
+
+.question{
+  margin-bottom:20px;
+  padding:16px;
+  background:#faf8f1;
+  border-radius:14px;
+}
+
+.question p{
+  margin-top:0;
+}
+
+.option{
+  display:block;
+  margin:8px 0;
+}
+
+.tick-item{
+  margin-bottom:16px;
+  padding:14px;
+  background:#faf8f1;
+  border-radius:14px;
+  line-height:1.6;
+}
+
+.tick-item label{
+  cursor:pointer;
+  font-weight:600;
+}
+
+.debo-insert{
+  display:none;
+  font-weight:800;
+  color:#8B4513;
+  background:#ffcc00;
+  padding:3px 8px;
+  border-radius:999px;
+  margin:0 4px;
+  animation:pop 0.25s ease-in-out;
+}
+
+@keyframes pop{
+  0%{transform:scale(0.8);}
+  100%{transform:scale(1);}
+}
+
+.good{
+  border:2px solid #58a55c;
+}
+
+.bad{
+  border:2px solid #c0392b;
+}
+
+.transcript{
+  display:none;
+  background:#f8f5ea;
+  padding:18px;
+  border-radius:16px;
+  line-height:1.8;
+  margin-top:20px;
+}
+
+@media(max-width:900px){
+
+  .container{
+    flex-direction:column;
+  }
+
+  .left-column,
+  .right-column{
+    width:100%;
+  }
+
+  .left-column{
+    position:relative;
+    top:0;
+  }
+
+  .vidcat-vimeo{
+    width:200px;
+  }
+
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<div class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <div class="banner-title">VIDCATALA · De debò</div>
+  </div>
+
+  <a class='home-btn' href='/'>
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="container">
+
+<div class="left-column">
+  <div class="video-card">
+    <iframe class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268342?dnt=1" title="VIDCATALA · De debò" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div class="right-column">
+
+<div class="exercise">
+  <div class="intro-box">
+    Aquest monòleg presenta una de les expressions més útils i naturals
+    del català col·loquial: <strong>“de debò”</strong>. La sentiràs en situacions
+    de sorpresa, sinceritat, emoció i intensitat.
+  </div>
+
+  <img src="dedebo.jpg" alt="De debò" class="comic">
+</div>
+
+<div class="exercise">
+
+<h2>Exercici 1 · Omple els buits</h2>
+
+<div class="instructions">
+Escolta el monòleg i completa els espais amb les paraules correctes.
+</div>
+
+<div class="word-bank">
+<span>embuts</span>
+<span>autèntic</span>
+<span>xafarderia</span>
+<span>dubtes</span>
+<span>mudança</span>
+<span>brisa</span>
+<span>feinada</span>
+<span>nadius</span>
+<span>robotitzats</span>
+<span>confirmació</span>
+</div>
+
+<p>M’estan dient que encara hi ha gent que fa servir traductors automàtics <input class="gap" id="g1"> per parlar de sentiments?</p>
+
+<p>Us ho dic de debò, sense <input class="gap" id="g2">.</p>
+
+<p>Si voleu parlar un català <input class="gap" id="g3">, heu de dominar aquesta expressió.</p>
+
+<p>Ve un amic i et deixa anar la <input class="gap" id="g4"> de l’any.</p>
+
+<p>I pum, ja tens la <input class="gap" id="g5"> que estaves buscant.</p>
+
+<p>Aquí ja no hi ha <input class="gap" id="g6">, no hi ha jocs.</p>
+
+<p>Els amics de debò venen a ajudar-te a fer la <input class="gap" id="g7">.</p>
+
+<p>S’està girant una <input class="gap" id="g8">...</p>
+
+<p>Us farà sonar com uns autèntics <input class="gap" id="g9">.</p>
+
+<p>Tinc una <input class="gap" id="g10"> de debò!</p>
+
+<button onclick="checkGaps()">Comprova</button>
+<button onclick="showAnswers()">Mostra respostes</button>
+<button onclick="resetGaps()">Reinicia</button>
+
+<div id="gapFeedback" class="feedback"></div>
+
+</div>
+
+<div class="exercise">
+
+<h2>Exercici 2 · Quin significat té “de debò”?</h2>
+
+<div class="instructions">
+Tria el significat més adequat segons el context.
+</div>
+
+<div class="question">
+<p>1. “De debò?! No m’ho puc creure!”</p>
+<label class="option"><input type="radio" name="q1"> Està enfadat</label>
+<label class="option"><input type="radio" name="q1" data-correct="true"> Expressa sorpresa</label>
+<label class="option"><input type="radio" name="q1"> Vol acabar la conversa</label>
+</div>
+
+<div class="question">
+<p>2. “T’estimo de debò.”</p>
+<label class="option"><input type="radio" name="q2"> Ho diu en broma</label>
+<label class="option"><input type="radio" name="q2"> Ho diu amb ironia</label>
+<label class="option"><input type="radio" name="q2" data-correct="true"> Ho diu sincerament</label>
+</div>
+
+<div class="question">
+<p>3. “Avui fa un fred de debò.”</p>
+<label class="option"><input type="radio" name="q3" data-correct="true"> El fred és molt intens</label>
+<label class="option"><input type="radio" name="q3"> Té una mica de fresca</label>
+<label class="option"><input type="radio" name="q3"> Vol anar a la platja</label>
+</div>
+
+<div class="question">
+<p>4. “Amics de debò.”</p>
+<label class="option"><input type="radio" name="q4"> Amics divertits</label>
+<label class="option"><input type="radio" name="q4" data-correct="true"> Amics autèntics i fidels</label>
+<label class="option"><input type="radio" name="q4"> Amics famosos</label>
+</div>
+
+<div class="question">
+<p>5. “Ho dic de debò.”</p>
+<label class="option"><input type="radio" name="q5"> Està improvisant</label>
+<label class="option"><input type="radio" name="q5"> Està cantant</label>
+<label class="option"><input type="radio" name="q5" data-correct="true"> Parla seriosament</label>
+</div>
+
+<button onclick="checkQuiz()">Comprova</button>
+
+<div id="quizFeedback" class="feedback"></div>
+
+</div>
+
+<div class="exercise">
+
+<h2>Exercici 3 · On podem afegir “de debò”?</h2>
+
+<div class="instructions">
+Marca només les frases on <strong>de debò</strong> sona natural. Si la resposta és correcta, l’expressió apareixerà dins la frase.
+</div>
+
+<div class="tick-item" id="item1">
+<label>
+<input type="checkbox" onchange="checkTick(this, true, 1)">
+Aquest és un problema <span class="debo-insert" id="insert1">de debò</span>: no podem continuar així.
+</label>
+</div>
+
+<div class="tick-item" id="item2">
+<label>
+<input type="checkbox" onchange="checkTick(this, false, 2)">
+Demà aniré al supermercat a comprar llet.
+</label>
+</div>
+
+<div class="tick-item" id="item3">
+<label>
+<input type="checkbox" onchange="checkTick(this, true, 3)">
+Quan m’ho va contar, li vaig dir: “<span class="debo-insert" id="insert3">De debò</span>? No pot ser!”
+</label>
+</div>
+
+<div class="tick-item" id="item4">
+<label>
+<input type="checkbox" onchange="checkTick(this, false, 4)">
+La cadira és al costat de la finestra.
+</label>
+</div>
+
+<div class="tick-item" id="item5">
+<label>
+<input type="checkbox" onchange="checkTick(this, true, 5)">
+Aquest cap de setmana tinc una feinada <span class="debo-insert" id="insert5">de debò</span>.
+</label>
+</div>
+
+<div class="tick-item" id="item6">
+<label>
+<input type="checkbox" onchange="checkTick(this, false, 6)">
+El bolígraf blau és damunt la taula.
+</label>
+</div>
+
+<div class="tick-item" id="item7">
+<label>
+<input type="checkbox" onchange="checkTick(this, true, 7)">
+No és només un conegut; és un amic <span class="debo-insert" id="insert7">de debò</span>.
+</label>
+</div>
+
+<div class="tick-item" id="item8">
+<label>
+<input type="checkbox" onchange="checkTick(this, false, 8)">
+A les set i mitja surt el tren cap a Manacor.
+</label>
+</div>
+
+<div class="tick-item" id="item9">
+<label>
+<input type="checkbox" onchange="checkTick(this, true, 9)">
+T’ho dic <span class="debo-insert" id="insert9">de debò</span>: no vull tornar a passar per això.
+</label>
+</div>
+
+<div class="tick-item" id="item10">
+<label>
+<input type="checkbox" onchange="checkTick(this, false, 10)">
+He deixat les claus dins el calaix de la cuina.
+</label>
+</div>
+
+<button onclick="scoreTicks()">Comprova puntuació</button>
+<button onclick="resetTicks()">Reinicia</button>
+
+<div id="tickFeedback" class="feedback"></div>
+
+</div>
+
+<div class="exercise">
+
+<button onclick="toggleTranscript()">Mostra / amaga el text</button>
+
+<div class="transcript" id="transcript">
+
+<p><strong>De debò?!</strong> No m'ho puc creure. M'estan dient que encara hi ha gent que fa servir traductors automàtics robotitzats per parlar de sentiments? <strong>De debò?!</strong></p>
+
+<p>Mireu, us ho dic <strong>de debò</strong>, sense embuts. Si voleu parlar un català autèntic, dels que es parlen al carrer i no a un diccionari del segle passat, heu de dominar aquesta expressió. No és cap broma, ho dic <strong>de debò</strong>!</p>
+
+<p>Imagina't la situació. Ve un amic i et deixa anar la xafarderia de l'any: “Escolta, que en Joan i la Marta s'han casat en secret a Las Vegas!”. Tu què fas? No li dius “Ah, sí? Certament?”. No, home, no! T'hi tires a sobre i li preguntes: “Però què dius?! <strong>De debò?!</strong>”. I pum, ja tens la confirmació que estaves buscant.</p>
+
+<p>Però és que, a més, té un punt de veritat que arriba al cor. Si tu li dius a algú “T'estimo”, està bé, d'acord. Però si li mires als ulls i li dius: “Escolta'm, t'estimo <strong>de debò</strong>”, canvia completament. Aquí ja no hi ha dubtes, no hi ha jocs. És la veritat absoluta.</p>
+
+<p>I el millor de tot és quan vols descriure la realitat tal com és. Perquè a la vida hi ha problemes... i després hi ha <strong>problemes de debò</strong>. D'aquells que et fan rumiar a la nit. Igual que hi ha coneguts de festa... i <strong>amics de debò</strong>, dels que venen a ajudar-te a fer la mudança un diumenge a les vuit del matí. Això sí que és un favor <strong>de debò</strong>!</p>
+
+<p>Ostres, de fet... s'està girant una brisa... avui fa un fred <strong>de debò</strong>, eh? Més vale que vagi acabant.</p>
+
+<p>Així que ja ho sabeu. Comenceu a fer servir el “de debò” a partir d'ara mateix. Us farà sonar com uns autèntics nadius. Apa, us deixo, que tinc una feinada <strong>de debò</strong>! Adéu!</p>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+const gapAnswers = {
+  g1:"robotitzats",
+  g2:"embuts",
+  g3:"autèntic",
+  g4:"xafarderia",
+  g5:"confirmació",
+  g6:"dubtes",
+  g7:"mudança",
+  g8:"brisa",
+  g9:"nadius",
+  g10:"feinada"
+};
+
+function checkGaps(){
+  let score = 0;
+
+  for(let id in gapAnswers){
+    let input = document.getElementById(id);
+    if(input.value.trim().toLowerCase() === gapAnswers[id]){
+      input.style.borderColor = "green";
+      score++;
+    }else{
+      input.style.borderColor = "#c0392b";
+    }
+  }
+
+  document.getElementById("gapFeedback").innerHTML = "Puntuació: " + score + "/10";
+}
+
+function showAnswers(){
+  for(let id in gapAnswers){
+    document.getElementById(id).value = gapAnswers[id];
+    document.getElementById(id).style.borderColor = "green";
+  }
+  document.getElementById("gapFeedback").innerHTML = "Respostes mostrades.";
+}
+
+function resetGaps(){
+  for(let id in gapAnswers){
+    let input = document.getElementById(id);
+    input.value = "";
+    input.style.borderColor = "#ddd";
+  }
+  document.getElementById("gapFeedback").innerHTML = "";
+}
+
+function checkQuiz(){
+  let total = 5;
+  let score = 0;
+
+  for(let i=1;i<=5;i++){
+    let answers = document.getElementsByName("q"+i);
+    answers.forEach(a=>{
+      if(a.checked && a.dataset.correct==="true"){
+        score++;
+      }
+    });
+  }
+
+  document.getElementById("quizFeedback").innerHTML = "Puntuació: " + score + "/" + total;
+}
+
+function checkTick(box, isCorrect, number){
+  const item = document.getElementById("item" + number);
+  const insert = document.getElementById("insert" + number);
+
+  item.classList.remove("good","bad");
+
+  if(box.checked){
+    if(isCorrect){
+      item.classList.add("good");
+      if(insert){ insert.style.display = "inline-block"; }
+    }else{
+      item.classList.add("bad");
+    }
+  }else{
+    if(insert){ insert.style.display = "none"; }
+  }
+}
+
+function scoreTicks(){
+  const correctItems = [1,3,5,7,9];
+  const wrongItems = [2,4,6,8,10];
+  let score = 0;
+
+  correctItems.forEach(n=>{
+    if(document.querySelector("#item"+n+" input").checked){
+      score++;
+    }
+  });
+
+  wrongItems.forEach(n=>{
+    if(!document.querySelector("#item"+n+" input").checked){
+      score++;
+    }
+  });
+
+  document.getElementById("tickFeedback").innerHTML =
+    "Puntuació: " + score + "/10";
+}
+
+function resetTicks(){
+  for(let i=1;i<=10;i++){
+    const item = document.getElementById("item"+i);
+    const box = document.querySelector("#item"+i+" input");
+    const insert = document.getElementById("insert"+i);
+
+    box.checked = false;
+    item.classList.remove("good","bad");
+
+    if(insert){
+      insert.style.display = "none";
+    }
+  }
+
+  document.getElementById("tickFeedback").innerHTML = "";
+}
+
+function toggleTranscript(){
+  const transcript = document.getElementById("transcript");
+  transcript.style.display = transcript.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

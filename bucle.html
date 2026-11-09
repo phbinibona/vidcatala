@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Trencar el bucle infinit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flag {
+  width: 44px;
+  height: 30px;
+  background: repeating-linear-gradient(to bottom, #ffcc00 0 4px, #d62020 4px 8px);
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.home-btn {
+  background: #2f2f2f;
+  color: white;
+  padding: 8px 13px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px 20px;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 20px;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 20;
+}
+
+.video-card,
+.section {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.video-card {
+  padding: 8px;
+}
+
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;
+}
+
+.vidcat-vimeo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #111;
+}
+
+.footer-note {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 8px 4px 0;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.btn {
+  background: #ffcc00;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+  font-family: inherit;
+}
+
+.btn.dark {
+  background: #2f2f2f;
+  color: white;
+}
+
+.feedback {
+  margin-top: 12px;
+}
+
+.correct {
+  color: #248232;
+  font-weight: 700;
+}
+
+.wrong {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 7px;
+  border-radius: 9px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+}
+
+.question {
+  padding: 13px;
+  border-left: 5px solid #ffcc00;
+  background: #fff9db;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+.options label {
+  display: block;
+  margin: 7px 0;
+}
+
+.transcript {
+  display: none;
+  background: #fff8d6;
+  border-radius: 14px;
+  padding: 15px;
+  line-height: 1.65;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.time {
+  font-weight: 700;
+  color: #8a6d00;
+}
+
+.match-row {
+  margin: 10px 0;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+@media (max-width: 850px) {
+  .page {
+    grid-template-columns: 1fr;
+    padding: 0 10px 15px;
+    gap: 10px;
+  }
+
+  .left {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .video-card {
+    padding: 6px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .footer-note {
+    display: none;
+  }
+
+  .banner {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <div class="flag"></div>
+    <h1>VIDCATALA · Trencar el bucle infinit</h1>
+  </div>
+  <a class='home-btn' href='/'><i class="fa-solid fa-house"></i> Inici</a>
+</header>
+
+<main class="page">
+
+<section class="left">
+  <div class="video-card">
+    <div class="video-wrap">
+      <iframe id="video" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268345?dnt=1" title="VIDCATALA · Trencar el bucle infinit" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <p class="footer-note">
+      Mira el vídeo primer sense llegir la transcripció. Després fes els exercicis.
+    </p>
+  </div>
+</section>
+
+<section class="right">
+
+<div class="section">
+  <h2>Introducció</h2>
+  <p>
+    En aquest vídeo, l’orador compara la rutina quotidiana amb un <strong>bucle infinit</strong>:
+    una repetició automàtica que pot donar seguretat, però que també pot limitar
+    la creativitat, l’atenció i la capacitat de canvi.
+  </p>
+
+  <button class="btn dark" onclick="toggleTranscript()">Mostra / amaga la transcripció</button>
+
+  <div id="transcript" class="transcript">
+    <p><span class="time">00:00</span> Hola a tots!</p>
+    <p><span class="time">00:01</span> Avui us vull parlar d'un concepte que els programadors informàtics coneixen molt bé.</p>
+    <p><span class="time">00:06</span> El bucle infinit.</p>
+    <p><span class="time">00:08</span> Això passa quan un codi es repeteix una vegada i una altra, sense parar, perquè ningú li ha dit com aturar-se.</p>
+    <p><span class="time">00:15</span> El sistema es col·lapsa.</p>
+    <p><span class="time">00:17</span> Si ho pensem bé, de vegades la nostra vida s'assembla molt a un bucle infinit.</p>
+    <p><span class="time">00:22</span> Ens llevem a la mateixa hora, fem el mateix camí per anar a estudiar o a treballar, mengem el mateix, mirem les mateixes sèries i parlem dels mateixos temes.</p>
+    <p><span class="time">00:32</span> Vivim en mode copiar i enganxar.</p>
+    <p><span class="time">00:35</span> La rutina ens dona seguretat, és clar, però la repetició constant ens adorm el cervell.</p>
+    <p><span class="time">00:41</span> El gran secret digital per evitar la repetició a la vida és introduir el que en programació s'anomena una funció d'interrupció.</p>
+    <p><span class="time">00:49</span> No es tracta de canviar de vida radicalment d'un dia per l'altre, sinó de modificar petites línies del nostre codi diari.</p>
+    <p><span class="time">00:57</span> Com ho podem fer?</p>
+    <p><span class="time">00:58</span> Començant per les coses més senzilles.</p>
+    <p><span class="time">01:01</span> Demà, quan sortiu de classe, no agafeu el camí de sempre.</p>
+    <p><span class="time">01:05</span> Canvieu de carrer.</p>
+    <p><span class="time">01:06</span> Entreu a una cafeteria on no hàgiu estat mai.</p>
+    <p><span class="time">01:10</span> Escolteu un gènere de música completament diferent al vostre estil habitual.</p>
+    <p><span class="time">01:15</span> Quan canvieu un petit hàbit, el vostre cervell s'activa instantàniament.</p>
+    <p><span class="time">01:19</span> S'ha de fixar en els detalls, ha de processar informació nova, ha de reiniciar l'atenció.</p>
+    <p><span class="time">01:25</span> Evitar la repetició significa actualitzar el nostre programari personal.</p>
+    <p><span class="time">01:30</span> Si no canviem mai de rutina, ens quedem obsolets.</p>
+    <p><span class="time">01:33</span> Ens convertim en un sistema operatiu vell que ja no accepta aplicacions noves.</p>
+    <p><span class="time">01:38</span> Fer coses diferents ens obre la ment, ens fa més creatius i ens ajuda a resoldre problemes de maneres que mai haguéssim imaginat.</p>
+    <p><span class="time">01:46</span> Així que el meu consell d'avui és aquest.</p>
+    <p><span class="time">01:49</span> Identifiqueu el vostre bucle infinit i sintonitzeu una altra freqüència.</p>
+    <p><span class="time">01:54</span> Introduïu una petita novetat cada dia.</p>
+    <p><span class="time">01:56</span> Trenqueu el patró.</p>
+    <p><span class="time">01:58</span> Deixeu de repetir el passat i comenceu a dissenyar el vostre futur.</p>
+    <p><span class="time">02:02</span> Moltes gràcies.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Exercici 1 · Comprensió inferencial</h2>
+  <p>Tria la resposta més precisa. Algunes opcions són possibles parcialment, però només una reflecteix millor el sentit del vídeo.</p>
+  <div id="quiz1"></div>
+  <button class="btn" onclick="checkQuiz1()">Comprova</button>
+  <button class="btn dark" onclick="resetQuiz1()">Reinicia</button>
+  <div id="fb1" class="feedback"></div>
+</div>
+
+<div class="section">
+  <h2>Exercici 2 · La metàfora informàtica</h2>
+  <p>Relaciona cada expressió del vídeo amb el seu significat dins del discurs.</p>
+  <div id="matchExercise"></div>
+  <button class="btn" onclick="checkMatch()">Comprova</button>
+  <button class="btn dark" onclick="showMatch()">Mostra respostes</button>
+  <button class="btn dark" onclick="resetMatch()">Reinicia</button>
+  <div id="fb2" class="feedback"></div>
+</div>
+
+<div class="section">
+  <h2>Exercici 3 · Connectors i precisió discursiva</h2>
+  <p>Completa les frases amb el connector més adequat.</p>
+  <div id="connectorExercise"></div>
+  <button class="btn" onclick="checkConnectors()">Comprova</button>
+  <button class="btn dark" onclick="showConnectors()">Mostra respostes</button>
+  <button class="btn dark" onclick="resetConnectors()">Reinicia</button>
+  <div id="fb3" class="feedback"></div>
+</div>
+
+</section>
+</main>
+
+<script>
+function toggleTranscript() {
+  const t = document.getElementById("transcript");
+  t.style.display = t.style.display === "block" ? "none" : "block";
+}
+
+const quiz1Data = [
+  {
+    q: "Quina és la funció principal de la metàfora del bucle infinit?",
+    options: [
+      "Explicar un concepte tècnic de programació sense cap relació amb la vida quotidiana.",
+      "Mostrar que la repetició pot convertir-se en una forma d’automatisme vital.",
+      "Defensar que totes les rutines són negatives i s’han d’eliminar.",
+      "Comparar la vida humana amb una màquina que sempre funciona millor."
+    ],
+    answer: 1
+  },
+  {
+    q: "Segons el discurs, per què la rutina pot ser ambivalent?",
+    options: [
+      "Perquè dona seguretat, però també pot reduir l’atenció i la creativitat.",
+      "Perquè sempre provoca col·lapse emocional.",
+      "Perquè només és útil per als programadors.",
+      "Perquè impedeix completament qualsevol forma d’aprenentatge."
+    ],
+    answer: 0
+  },
+  {
+    q: "Quina idea expressa millor la funció d’interrupció?",
+    options: [
+      "Abandonar totes les responsabilitats diàries.",
+      "Introduir petits canvis que trenquin l’automatisme.",
+      "Treballar més hores per evitar l’avorriment.",
+      "Eliminar qualsevol activitat repetida."
+    ],
+    answer: 1
+  },
+  {
+    q: "Què vol dir actualitzar el nostre programari personal?",
+    options: [
+      "Comprar dispositius digitals més moderns.",
+      "Aprendre programació avançada.",
+      "Renovar hàbits, perspectives i formes de resposta.",
+      "Fer servir més aplicacions cada dia."
+    ],
+    answer: 2
+  },
+  {
+    q: "Quin to té el final del discurs?",
+    options: [
+      "Fatalista i resignat.",
+      "Irònic i distant.",
+      "Motivador i orientat a l’acció.",
+      "Tècnic i impersonal."
+    ],
+    answer: 2
+  }
+];
+
+function renderQuiz1() {
+  const container = document.getElementById("quiz1");
+  container.innerHTML = "";
+
+  quiz1Data.forEach((item, i) => {
+    let html = `<div class="question"><p><strong>${i+1}. ${item.q}</strong></p><div class="options">`;
+
+    item.options.forEach((op, j) => {
+      html += `<label><input type="radio" name="q${i}" value="${j}"> ${op}</label>`;
+    });
+
+    html += `</div></div>`;
+    container.innerHTML += html;
+  });
+}
+
+function checkQuiz1() {
+  let score = 0;
+  let feedback = "";
+
+  quiz1Data.forEach((item, i) => {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+
+    if (!selected) {
+      feedback += `
+        <div class="question">
+          <strong>Pregunta ${i+1}:</strong>
+          <span class="wrong">No contestada.</span><br>
+          <strong>Resposta correcta:</strong> ${item.options[item.answer]}
+        </div>`;
+      return;
+    }
+
+    const chosen = Number(selected.value);
+
+    if (chosen === item.answer) {
+      score++;
+      feedback += `
+        <div class="question">
+          <span class="correct">✔ Pregunta ${i+1}: Correcte</span><br>
+          <strong>Resposta:</strong> ${item.options[item.answer]}
+        </div>`;
+    } else {
+      feedback += `
+        <div class="question">
+          <span class="wrong">✘ Pregunta ${i+1}: Incorrecte</span><br>
+          <strong>La teva resposta:</strong> ${item.options[chosen]}<br><br>
+          <strong>Resposta correcta:</strong> ${item.options[item.answer]}
+        </div>`;
+    }
+  });
+
+  document.getElementById("fb1").innerHTML =
+    `<h3>Resultat: ${score}/${quiz1Data.length}</h3>` + feedback;
+}
+
+function resetQuiz1() {
+  renderQuiz1();
+  document.getElementById("fb1").innerHTML = "";
+}
+
+const matchData = [
+  ["bucle infinit", "una repetició sense sortida"],
+  ["mode copiar i enganxar", "vida automàtica i poc conscient"],
+  ["funció d’interrupció", "petit canvi que trenca el patró"],
+  ["programari personal", "manera d’actuar, pensar i adaptar-se"],
+  ["sistema operatiu vell", "persona que ha perdut flexibilitat"]
+];
+
+const meanings = [
+  "petit canvi que trenca el patró",
+  "persona que ha perdut flexibilitat",
+  "vida automàtica i poc conscient",
+  "una repetició sense sortida",
+  "manera d’actuar, pensar i adaptar-se"
+];
+
+function renderMatch() {
+  const container = document.getElementById("matchExercise");
+  container.innerHTML = "";
+
+  matchData.forEach((row, i) => {
+    let html = `<div class="match-row"><strong>${row[0]}</strong><br><select id="match${i}"><option value="">-- Tria --</option>`;
+    meanings.forEach(m => html += `<option value="${m}">${m}</option>`);
+    html += `</select></div>`;
+    container.innerHTML += html;
+  });
+}
+
+function checkMatch() {
+  let score = 0;
+  matchData.forEach((row, i) => {
+    if (document.getElementById(`match${i}`).value === row[1]) score++;
+  });
+  document.getElementById("fb2").innerHTML = `Resultat: ${score}/${matchData.length}`;
+}
+
+function showMatch() {
+  matchData.forEach((row, i) => {
+    document.getElementById(`match${i}`).value = row[1];
+  });
+}
+
+function resetMatch() {
+  renderMatch();
+  document.getElementById("fb2").innerHTML = "";
+}
+
+const connectorData = [
+  {
+    text: "La rutina ens dona seguretat; ________, si es repeteix massa, pot limitar-nos.",
+    answer: "tanmateix"
+  },
+  {
+    text: "No cal transformar-ho tot de cop; ________, podem començar amb petits gestos.",
+    answer: "més aviat"
+  },
+  {
+    text: "Canviar de camí sembla insignificant; ________, pot activar la nostra atenció.",
+    answer: "no obstant això"
+  },
+  {
+    text: "El cervell necessita novetat; ________, la repetició excessiva el pot adormir.",
+    answer: "per això"
+  },
+  {
+    text: "El discurs no rebutja la rutina; ________, en qüestiona l’excés.",
+    answer: "sinó que"
+  }
+];
+
+const connectorOptions = ["tanmateix", "per això", "sinó que", "més aviat", "no obstant això"];
+
+function renderConnectors() {
+  const container = document.getElementById("connectorExercise");
+  container.innerHTML = "";
+
+  connectorData.forEach((item, i) => {
+    let html = `<div class="question"><p>${i+1}. ${item.text}</p><select id="conn${i}"><option value="">-- Tria --</option>`;
+    connectorOptions.forEach(op => html += `<option value="${op}">${op}</option>`);
+    html += `</select></div>`;
+    container.innerHTML += html;
+  });
+}
+
+function checkConnectors() {
+  let score = 0;
+  connectorData.forEach((item, i) => {
+    if (document.getElementById(`conn${i}`).value === item.answer) score++;
+  });
+  document.getElementById("fb3").innerHTML = `Resultat: ${score}/${connectorData.length}`;
+}
+
+function showConnectors() {
+  connectorData.forEach((item, i) => {
+    document.getElementById(`conn${i}`).value = item.answer;
+  });
+}
+
+function resetConnectors() {
+  renderConnectors();
+  document.getElementById("fb3").innerHTML = "";
+}
+
+renderQuiz1();
+renderMatch();
+renderConnectors();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Un conductor de bus admirable a Palma</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.banner img {
+  width: 48px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.banner-title {
+  font-size: 1.28rem;
+  font-weight: 700;
+}
+
+.home-icon {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 22px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+.left-col {
+  position: sticky;
+  top: 18px;
+  align-self: start;
+}
+
+.media-card,
+.exercise-card {
+  background: #fffdf7;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.exercise-card {
+  margin-bottom: 20px;
+}
+
+.video-wrap {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.vidcat-vimeo {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.exercise-card h2 {
+  margin-top: 0;
+  color: #8B4513;
+  font-size: 1.28rem;
+}
+
+.scene {
+  border-top: 1px solid #eee0bd;
+  padding-top: 18px;
+  margin-top: 18px;
+}
+
+.scene:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.scene-layout {
+  display: grid;
+  grid-template-columns: 219px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.scene-media {
+  position: relative;
+}
+
+.thumb-wrap {
+  position: relative;
+  width: 219px;
+  height: 219px;
+}
+
+.scene-media img {
+  width: 219px;
+  height: 219px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid #ffcc00;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+  display: block;
+}
+
+.pause-corner {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0,0,0,0.48);
+  color: white;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.86;
+}
+
+.pause-corner:hover {
+  background: rgba(0,0,0,0.68);
+}
+
+.scene-media small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: #8B4513;
+  font-weight: 700;
+  text-align: center;
+}
+
+.scene-text {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.scene-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gap-input {
+  display: inline-block;
+  min-width: 105px;
+  max-width: 175px;
+  padding: 5px 7px;
+  border: 2px solid #e2d2a3;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  margin: 2px 3px;
+}
+
+.gap-input.correct {
+  border-color: #2e9d59;
+  background: #e9f8ef;
+}
+
+.gap-input.incorrect {
+  border-color: #c84d4d;
+  background: #fff0f0;
+}
+
+button {
+  background: #ffcc00;
+  color: #3b2b00;
+  border: none;
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.97);
+}
+
+.feedback {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  display: none;
+  font-weight: 600;
+}
+
+.feedback.ok {
+  display: block;
+  background: #e9f8ef;
+  color: #236b3d;
+}
+
+.feedback.bad {
+  display: block;
+  background: #fff0f0;
+  color: #8b2f2f;
+}
+
+.mcq {
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: #fff9e8;
+  border: 1px solid #f1dfaa;
+}
+
+.mcq p {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.mcq label {
+  display: block;
+  margin: 7px 0;
+  cursor: pointer;
+}
+
+.adjective-list {
+  background: #fff0b3;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.write-box {
+  width: 100%;
+  min-height: 120px;
+  border: 2px solid #e2d2a3;
+  border-radius: 14px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .page {
+    display: block;
+    padding: 12px;
+  }
+
+  .left-col {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin-bottom: 14px;
+  }
+
+  .media-card {
+    padding: 8px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .video-wrap {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 14px;
+  }
+
+  .exercise-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .scene-layout {
+    grid-template-columns: 136px 1fr;
+    gap: 10px;
+  }
+
+  .thumb-wrap,
+  .scene-media img {
+    width: 136px;
+    height: 136px;
+  }
+
+  .scene-media img {
+    border-radius: 14px;
+  }
+
+  .pause-corner {
+    width: 29px;
+    height: 29px;
+    font-size: 0.7rem;
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .scene-media small {
+    font-size: 0.68rem;
+  }
+
+  .scene-text {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  .gap-input {
+    min-width: 72px;
+    max-width: 118px;
+    font-size: 0.78rem;
+    padding: 4px 5px;
+  }
+
+  .scene-actions {
+    margin-top: 8px;
+    gap: 6px;
+  }
+
+  .scene-actions button {
+    font-size: 0.74rem;
+    padding: 7px 9px;
+  }
+
+  .banner-title {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .banner img {
+    width: 42px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .banner {
+    padding: 10px 12px;
+  }
+
+  .banner-title {
+    font-size: 0.88rem;
+  }
+
+  .scene-layout {
+    grid-template-columns: 113px 1fr;
+    gap: 8px;
+  }
+
+  .thumb-wrap,
+  .scene-media img {
+    width: 113px;
+    height: 113px;
+  }
+
+  .scene-text {
+    font-size: 0.76rem;
+  }
+
+  .gap-input {
+    min-width: 62px;
+    max-width: 100px;
+    font-size: 0.74rem;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <div class="banner-title">VIDCATALA · Un conductor de bus admirable a Palma</div>
+  </div>
+
+  <a class='home-icon' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="page">
+
+<section class="left-col">
+  <div class="media-card">
+    <div class="video-wrap">
+      <iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268283?dnt=1" title="VIDCATALA · Un conductor de bus admirable a Palma" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="right-col">
+
+<div class="exercise-card">
+  <h2>Exercici 1 · Omple els buits</h2>
+  <p>Prem el botó de cada imatge per escoltar l’escena.</p>
+
+  <div class="scene" id="scene1">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="1bus.png" alt="Escena 1">
+          <button class="pause-corner" onclick="toggleSegment(this,1,0,18)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          El primer viatge d’aquest matí, un home ha pujat sense
+          <input class="gap-input" data-answer="targeta">
+          ni diners. S’ha posat vermell i ha començat a demanar
+          <input class="gap-input" data-answer="disculpes">.
+          Li he dit que no passava res i l’he deixat
+          <input class="gap-input" data-answer="viatjar igual">.
+          Ell m’ha donat les gràcies i s’ha
+          <input class="gap-input" data-answer="assegut">
+          al final. De vegades un petit
+          <input class="gap-input" data-answer="gest">
+          ho canvia tot.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene1')">Comprova</button>
+          <button onclick="showSceneAnswers('scene1')">Mostra</button>
+          <button onclick="resetScene('scene1')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene2">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="2bus.jpeg" alt="Escena 2">
+          <button class="pause-corner" onclick="toggleSegment(this,2,18,37)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          A la
+          <input class="gap-input" data-answer="parada">
+          del mercat, una dona ha
+          <input class="gap-input" data-answer="baixat">
+          corrent i ha deixat la bossa a sobre del
+          <input class="gap-input" data-answer="seient">.
+          Quan me n’he adonat, ja era lluny. He guardat la bossa
+          <input class="gap-input" data-answer="darrere">
+          meu. Al cap de dues parades,
+          <input class="gap-input" data-answer="ha tornat">
+          a pujar, tota nerviosa.
+          <input class="gap-input" data-answer="li he tornat">
+          la bossa i s’ha posat a plorar d’agraïment.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene2')">Comprova</button>
+          <button onclick="showSceneAnswers('scene2')">Mostra</button>
+          <button onclick="resetScene('scene2')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene3">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="3bus.jpg" alt="Escena 3">
+          <button class="pause-corner" onclick="toggleSegment(this,3,37,54)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          Dos allots estrangers
+          <input class="gap-input" data-answer="han pujat">
+          i m’han preguntat com arribar al museu.
+          No
+          <input class="gap-input" data-answer="parlaven gaire">
+          català, però ho he entès. Els hi he explicat que
+          <input class="gap-input" data-answer="baixessin">
+          a la tercera parada i després
+          <input class="gap-input" data-answer="seguissin|cedissin">
+          el riu. M’han
+          <input class="gap-input" data-answer="somrigut">
+          i m’han dit gràcies.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene3')">Comprova</button>
+          <button onclick="showSceneAnswers('scene3')">Mostra</button>
+          <button onclick="resetScene('scene3')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene4">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="4bus.png" alt="Escena 4">
+          <button class="pause-corner" onclick="toggleSegment(this,4,54,73)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          A l’hora punta, l’autobús anava ple de gom a gom.
+          La gent
+          <input class="gap-input" data-answer="s'amuntegava|s’amuntegava">
+          a la porta
+          <input class="gap-input" data-answer="davantera">
+          i no podien pujar més. Els he cridat:
+          “Per favor,
+          <input class="gap-input" data-answer="moveu-vos">
+          cap al fons”. M’han fet cas
+          <input class="gap-input" data-answer="de seguida">.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene4')">Comprova</button>
+          <button onclick="showSceneAnswers('scene4')">Mostra</button>
+          <button onclick="resetScene('scene4')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene5">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="5bus.png" alt="Escena 5">
+          <button class="pause-corner" onclick="toggleSegment(this,5,73,95)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          Un grup de nins ha pujat al
+          <input class="gap-input" data-answer="darrere">
+          i han començat a córrer cridant.
+          <input class="gap-input" data-answer="m'he girat|m’he girat">
+          i els he dit en veu
+          <input class="gap-input" data-answer="ferma">:
+          “Nois, aquí no es juga. Asseguts i en
+          <input class="gap-input" data-answer="silenci">”.
+          Els passatgers m’han donat les gràcies amb la
+          <input class="gap-input" data-answer="mirada">.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene5')">Comprova</button>
+          <button onclick="showSceneAnswers('scene5')">Mostra</button>
+          <button onclick="resetScene('scene5')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="scene6">
+    <div class="scene-layout">
+      <div class="scene-media">
+        <div class="thumb-wrap">
+          <img src="6bus.png" alt="Escena 6">
+          <button class="pause-corner" onclick="toggleSegment(this,6,95,118)">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <small>Prem el botó</small>
+      </div>
+
+      <div>
+        <p class="scene-text">
+          He vist per l’espill
+          <input class="gap-input" data-answer="retrovisor">
+          que un home tenia els peus bruts
+          <input class="gap-input" data-answer="damunt del">
+          seient. He parat l’autobús i
+          <input class="gap-input" data-answer="m'he aixecat|m’he aixecat">.
+          Li he dit: “Els seients són per
+          <input class="gap-input" data-answer="seure">”.
+          Ell ha posat mala
+          <input class="gap-input" data-answer="cara">,
+          però ho ha fet.
+        </p>
+
+        <div class="scene-actions">
+          <button onclick="checkScene('scene6')">Comprova</button>
+          <button onclick="showSceneAnswers('scene6')">Mostra</button>
+          <button onclick="resetScene('scene6')">Reinicia</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="exercise-card">
+  <h2>Exercici 2 · Les reaccions del conductor</h2>
+
+  <div class="mcq" data-answer="b">
+    <p>1. Què fa el conductor quan l’home no té diners?</p>
+    <label><input type="radio" name="q1" value="a"> Li diu que baixi.</label>
+    <label><input type="radio" name="q1" value="b"> El deixa viatjar igual.</label>
+    <label><input type="radio" name="q1" value="c"> El fa esperar.</label>
+  </div>
+
+  <div class="mcq" data-answer="c">
+    <p>2. Què fa amb la bossa oblidada?</p>
+    <label><input type="radio" name="q2" value="a"> La deixa al seient.</label>
+    <label><input type="radio" name="q2" value="b"> La llença.</label>
+    <label><input type="radio" name="q2" value="c"> La guarda darrere seu.</label>
+  </div>
+
+  <div class="mcq" data-answer="b">
+    <p>3. Com ajuda els turistes?</p>
+    <label><input type="radio" name="q3" value="a"> Els ignora.</label>
+    <label><input type="radio" name="q3" value="b"> Els explica el camí.</label>
+    <label><input type="radio" name="q3" value="c"> Els acompanya.</label>
+  </div>
+
+  <div class="mcq" data-answer="a">
+    <p>4. Per què utilitza l’altaveu?</p>
+    <label><input type="radio" name="q4" value="a"> Per moure la gent cap al fons.</label>
+    <label><input type="radio" name="q4" value="b"> Per anunciar una avaria.</label>
+    <label><input type="radio" name="q4" value="c"> Per saludar.</label>
+  </div>
+
+  <div class="mcq" data-answer="c">
+    <p>5. Quin to utilitza amb els nens?</p>
+    <label><input type="radio" name="q5" value="a"> Nerviós.</label>
+    <label><input type="radio" name="q5" value="b"> Divertit.</label>
+    <label><input type="radio" name="q5" value="c"> Ferm.</label>
+  </div>
+
+  <div class="mcq" data-answer="b">
+    <p>6. Què fa quan veu els peus damunt del seient?</p>
+    <label><input type="radio" name="q6" value="a"> No diu res.</label>
+    <label><input type="radio" name="q6" value="b"> S’aixeca i intervé.</label>
+    <label><input type="radio" name="q6" value="c"> Baixa del bus.</label>
+  </div>
+
+  <div class="mcq" data-answer="a">
+    <p>7. Com reaccionen els passatgers?</p>
+    <label><input type="radio" name="q7" value="a"> Aplaudeixen.</label>
+    <label><input type="radio" name="q7" value="b"> Criden.</label>
+    <label><input type="radio" name="q7" value="c"> Se’n van.</label>
+  </div>
+
+  <div class="mcq" data-answer="c">
+    <p>8. Quin adjectiu descriu millor el conductor?</p>
+    <label><input type="radio" name="q8" value="a"> Impacient.</label>
+    <label><input type="radio" name="q8" value="b"> Desordenat.</label>
+    <label><input type="radio" name="q8" value="c"> Responsable.</label>
+  </div>
+
+  <button onclick="checkMCQ()">Comprova</button>
+  <button onclick="resetMCQ()">Reinicia</button>
+  <div id="fb2" class="feedback"></div>
+</div>
+
+<div class="exercise-card">
+  <h2>Exercici 3 · Viatjar en autobús</h2>
+
+  <p>Escriu la forma correcta dels adjectius. Cada adjectiu només es pot utilitzar una vegada.</p>
+
+  <div class="adjective-list">
+    respectuós · tranquil · educat · incòmode · pacient · difícil · bon
+  </div>
+
+  <p class="scene-text">
+    Viatjar cada dia en autobús és més agradable quan els passatgers són
+    <input class="gap-input ex3" data-answer="respectuosos|respectuoses" data-adj="respectuós">
+    i pensen en els altres. Els conductors han de ser persones
+    <input class="gap-input ex3" data-answer="pacients" data-adj="pacient">
+    perquè sovint han de resoldre situacions difícils. Quan hi ha crits o molt soroll, el trajecte pot resultar
+    <input class="gap-input ex3" data-answer="incòmode|incòmoda" data-adj="incòmode">
+    per a tothom. També és important parlar de manera
+    <input class="gap-input ex3" data-answer="educada|educat" data-adj="educat">
+    i mantenir un ambient
+    <input class="gap-input ex3" data-answer="tranquil" data-adj="tranquil">
+    dins del vehicle.
+  </p>
+
+  <p class="scene-text">
+    Un
+    <input class="gap-input ex3" data-answer="bon" data-adj="bon">
+    conductor sap reaccionar amb calma i prendre decisions ràpides quan hi ha situacions
+    <input class="gap-input ex3" data-answer="difícils" data-adj="difícil">
+    dins del bus.
+  </p>
+
+  <button onclick="checkAdjectives()">Comprova</button>
+  <button onclick="resetGaps('ex3','fb3')">Reinicia</button>
+  <div id="fb3" class="feedback"></div>
+
+  <h3>Expressió escrita</h3>
+  <p>Creus que és difícil treballar de conductor d’autobús? Explica com s’haurien de comportar els passatgers.</p>
+
+  <textarea class="write-box"></textarea>
+</div>
+
+</section>
+</main>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="/assets/vidcatala-vimeo.js"></script>
+<script>
+let segmentEnd = null;
+let activeSegment = null;
+const video = createVidcatVimeoPlayer(document.getElementById("mainVideo"));
+
+function setAllCornerButtonsToPlay() {
+  document.querySelectorAll(".pause-corner i").forEach(icon => {
+    icon.classList.remove("fa-pause");
+    icon.classList.add("fa-play");
+  });
+}
+
+function setButtonToPause(button) {
+  const icon = button.querySelector("i");
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+}
+
+function toggleSegment(button, segmentNumber, start, end) {
+  if (activeSegment === segmentNumber && !video.paused) {
+    video.pause();
+    setAllCornerButtonsToPlay();
+    return;
+  }
+
+  if (activeSegment === segmentNumber && video.paused && segmentEnd !== null && video.currentTime < segmentEnd) {
+    video.play().then(() => {
+      setAllCornerButtonsToPlay();
+      setButtonToPause(button);
+    });
+    return;
+  }
+
+  activeSegment = segmentNumber;
+  segmentEnd = end;
+  setAllCornerButtonsToPlay();
+  setButtonToPause(button);
+  video.currentTime = start;
+  video.play().catch(() => {
+    setAllCornerButtonsToPlay();
+  });
+}
+
+video.addEventListener("timeupdate", function() {
+  if (segmentEnd !== null && video.currentTime >= segmentEnd) {
+    video.pause();
+    segmentEnd = null;
+    activeSegment = null;
+    setAllCornerButtonsToPlay();
+  }
+});
+
+video.addEventListener("pause", setAllCornerButtonsToPlay);
+
+function normalizeText(text) {
+  return text.trim().toLowerCase().replace(/[’‘`´]/g, "'").replace(/\s+/g, " ");
+}
+
+function getFirstAnswer(input) {
+  return input.dataset.answer.split("|")[0];
+}
+
+function checkScene(sceneId) {
+  const scene = document.getElementById(sceneId);
+  const inputs = scene.querySelectorAll(".gap-input");
+  const fb = scene.querySelector(".feedback");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    const user = normalizeText(input.value);
+    const answers = input.dataset.answer.split("|").map(a => normalizeText(a));
+
+    if (answers.includes(user)) {
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      correct++;
+    } else {
+      input.classList.add("incorrect");
+      input.classList.remove("correct");
+    }
+  });
+
+  fb.className = "feedback " + (correct === inputs.length ? "ok" : "bad");
+  fb.textContent = correct === inputs.length
+    ? "Molt bé! Totes les respostes d’aquesta escena són correctes."
+    : "Has encertat " + correct + " de " + inputs.length + " en aquesta escena.";
+}
+
+function showSceneAnswers(sceneId) {
+  const scene = document.getElementById(sceneId);
+  const inputs = scene.querySelectorAll(".gap-input");
+  const fb = scene.querySelector(".feedback");
+
+  inputs.forEach(input => {
+    input.value = getFirstAnswer(input);
+    input.classList.add("correct");
+    input.classList.remove("incorrect");
+  });
+
+  fb.className = "feedback ok";
+  fb.textContent = "Aquí tens les respostes d’aquesta escena.";
+}
+
+function resetScene(sceneId) {
+  const scene = document.getElementById(sceneId);
+  const inputs = scene.querySelectorAll(".gap-input");
+  const fb = scene.querySelector(".feedback");
+
+  inputs.forEach(input => {
+    input.value = "";
+    input.classList.remove("correct", "incorrect");
+  });
+
+  fb.className = "feedback";
+  fb.textContent = "";
+}
+
+function resetGaps(className, feedbackId) {
+  document.querySelectorAll("." + className).forEach(input => {
+    input.value = "";
+    input.classList.remove("correct", "incorrect");
+  });
+
+  const fb = document.getElementById(feedbackId);
+  fb.className = "feedback";
+  fb.textContent = "";
+}
+
+function checkMCQ() {
+  const questions = document.querySelectorAll(".mcq");
+  let correct = 0;
+
+  questions.forEach(q => {
+    const selected = q.querySelector("input:checked");
+
+    if (selected && selected.value === q.dataset.answer) {
+      q.style.borderColor = "#2e9d59";
+      q.style.background = "#e9f8ef";
+      correct++;
+    } else {
+      q.style.borderColor = "#c84d4d";
+      q.style.background = "#fff0f0";
+    }
+  });
+
+  const fb = document.getElementById("fb2");
+  fb.className = "feedback " + (correct === questions.length ? "ok" : "bad");
+  fb.textContent = correct === questions.length
+    ? "Perfecte!"
+    : "Has encertat " + correct + " de " + questions.length + ".";
+}
+
+function resetMCQ() {
+  document.querySelectorAll(".mcq").forEach(q => {
+    q.style.borderColor = "#f1dfaa";
+    q.style.background = "#fff9e8";
+    q.querySelectorAll("input").forEach(input => input.checked = false);
+  });
+
+  const fb = document.getElementById("fb2");
+  fb.className = "feedback";
+  fb.textContent = "";
+}
+
+function checkAdjectives() {
+  const inputs = document.querySelectorAll(".ex3");
+  const used = new Set();
+  let correct = 0;
+  let repeated = false;
+
+  inputs.forEach(input => {
+    const user = normalizeText(input.value);
+    const answers = input.dataset.answer.split("|").map(a => normalizeText(a));
+    const adj = input.dataset.adj;
+
+    if (answers.includes(user) && !used.has(adj)) {
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      used.add(adj);
+      correct++;
+    } else {
+      if (used.has(adj) && answers.includes(user)) repeated = true;
+      input.classList.add("incorrect");
+      input.classList.remove("correct");
+    }
+  });
+
+  const fb = document.getElementById("fb3");
+  fb.className = "feedback " + (correct === inputs.length ? "ok" : "bad");
+
+  if (correct === inputs.length) {
+    fb.textContent = "Excel·lent!";
+  } else if (repeated) {
+    fb.textContent = "Has repetit un adjectiu.";
+  } else {
+    fb.textContent = "Revisa les formes dels adjectius.";
+  }
+}
+</script>
+
+</body>
+</html>

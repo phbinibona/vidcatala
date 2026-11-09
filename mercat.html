@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Un matí de compres</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  background:#f7f6f2;
+  color:#2f2f2f;
+}
+
+.banner{
+  background:#ffcc00;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.banner-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.banner img{
+  width:46px;
+  height:31px;
+  border-radius:4px;
+  object-fit:cover;
+}
+
+.banner h1{
+  margin:0;
+  font-size:1.3rem;
+  font-weight:700;
+}
+
+.home{
+  color:white;
+  text-decoration:none;
+  font-size:1.2rem;
+}
+
+.page{
+  max-width:1380px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:330px 1fr;
+  gap:24px;
+}
+
+.left{
+  position:sticky;
+  top:16px;
+  align-self:start;
+}
+
+.video-card,
+.exercise-card{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+}
+
+/* ----- VIDEO LANDSCAPE (16:9) ----- */
+.video-wrap{
+  width:100%;
+  margin:0 auto;
+  aspect-ratio:16 / 9;
+  background:#111;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.vidcat-vimeo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ---- left column sticky video only ---- */
+.left .video-card{
+  padding:12px;
+}
+
+.right{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.exercise-card h2{
+  margin-top:0;
+  color:#8B4513;
+}
+
+.exercise-card h3{
+  color:#8B4513;
+  margin-top:22px;
+}
+
+.scene{
+  border-top:1px solid #eee0bd;
+  padding-top:18px;
+  margin-top:18px;
+}
+
+.scene:first-of-type{
+  border-top:none;
+  margin-top:0;
+  padding-top:0;
+}
+
+.scene-layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+/* THUMBNAIL IMAGE + PLAY BUTTON */
+.thumb-wrap{
+  position:relative;
+  display:block;
+  width:260px;
+  height:260px;
+  flex:0 0 260px;
+  overflow:hidden;
+  border-radius:18px;
+  border:3px solid #ffcc00;
+  background:#111;
+}
+
+.thumb{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border:none;
+  border-radius:0;
+}
+
+.pause-corner{
+  position:absolute;
+  z-index:50;
+  right:10px;
+  bottom:10px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:999px;
+  background:rgba(0,0,0,0.68);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 3px 10px rgba(0,0,0,0.35);
+  touch-action:manipulation;
+}
+
+.pause-corner i{
+  pointer-events:none;
+  font-size:1rem;
+}
+
+.pause-corner:hover{
+  background:rgba(0,0,0,0.82);
+}
+
+.scene-text{
+  line-height:1.9;
+  font-size:.97rem;
+}
+
+.gap{
+  width:125px;
+  padding:6px 8px;
+  border-radius:10px;
+  border:2px solid #e2d28d;
+  font-family:inherit;
+  font-weight:600;
+  background:#fffdf5;
+}
+
+.gap.long{
+  width:170px;
+}
+
+.gap.correct,
+select.correct{
+  border-color:#35a853;
+  background:#eefcf1;
+}
+
+.gap.incorrect,
+select.incorrect{
+  border-color:#cc3d3d;
+  background:#fff0f0;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+
+button.action{
+  border:none;
+  border-radius:999px;
+  padding:9px 15px;
+  font-family:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.check{ background:#ffcc00; }
+.show{ background:#efe6c6; }
+.reset{ background:#e8e8e8; }
+
+.feedback{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  display:none;
+  line-height:1.5;
+}
+
+.feedback.ok{
+  display:block;
+  background:#e9f8ef;
+  border-left:5px solid #35a853;
+}
+
+.feedback.partial{
+  display:block;
+  background:#fff4d4;
+  border-left:5px solid #ffcc00;
+}
+
+.feedback.bad{
+  display:block;
+  background:#fff0f0;
+  border-left:5px solid #cc3d3d;
+}
+
+.score{
+  display:inline-block;
+  background:#2f2f2f;
+  color:white;
+  padding:8px 13px;
+  border-radius:999px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.mcq{
+  background:#fffdf3;
+  border-left:5px solid #ffcc00;
+  border-radius:14px;
+  padding:14px;
+  margin:14px 0;
+}
+
+.mcq p{
+  margin:0 0 8px;
+  font-weight:700;
+}
+
+.mcq label{
+  display:block;
+  margin:8px 0;
+  line-height:1.45;
+}
+
+.small-feedback{
+  display:none;
+  margin-top:8px;
+  font-size:.92rem;
+  line-height:1.45;
+}
+
+.small-feedback.ok{
+  display:block;
+  color:#1d5d2c;
+}
+
+.small-feedback.bad{
+  display:block;
+  color:#7b1f1f;
+}
+
+/* EXERCISE 3 */
+.score-box{
+  background:#fff8d7;
+  border:1px solid #f1d45c;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:700;
+  margin:14px 0 18px;
+}
+
+.shop-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.shop-drop{
+  background:#f7f6f2;
+  border:2px dashed #d7c28a;
+  border-radius:14px;
+  padding:14px;
+  font-weight:700;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.shop-drop:hover{
+  background:#fff3b3;
+  transform:translateY(-1px);
+}
+
+.shop-drop.flash-correct{
+  background:#d8f5dc;
+  border-color:#3fa34d;
+}
+
+.shop-drop.flash-wrong{
+  background:#ffe0e0;
+  border-color:#d9534f;
+}
+
+.word-bank-vocab{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.vocab-item{
+  border:none;
+  background:#ffcc00;
+  color:#2f2f2f;
+  border-radius:999px;
+  padding:9px 14px;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.vocab-item:hover{
+  transform:scale(1.04);
+  background:#f2bd00;
+}
+
+.vocab-item.selected{
+  background:#8B4513;
+  color:white;
+}
+
+.vocab-item.correct{
+  background:#3fa34d;
+  color:white;
+  cursor:default;
+  opacity:.85;
+}
+
+.feedback-box{
+  margin-top:18px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#f2f2f2;
+  font-weight:600;
+}
+
+.feedback-box.ok{
+  background:#d8f5dc;
+  color:#1f6b2b;
+}
+
+.feedback-box.bad{
+  background:#ffe0e0;
+  color:#9b1c1c;
+}
+
+.reset-btn{
+  margin-top:16px;
+  background:#8B4513;
+  color:white;
+  border:none;
+  border-radius:999px;
+  padding:10px 18px;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.reset-btn:hover{
+  background:#6f3510;
+}
+
+/* TABLET AND MOBILE */
+
+@media(max-width:900px){
+  .page{
+    grid-template-columns:1fr;
+    padding:14px;
+  }
+
+  .left{
+    display:block;
+    position:static;
+  }
+
+
+  .scene-layout{
+    grid-template-columns:150px 1fr;
+    gap:12px;
+    align-items:start;
+  }
+
+  .thumb-wrap{
+    width:150px;
+    height:150px;
+    flex:0 0 150px;
+  }
+
+  .pause-corner{
+    width:40px;
+    height:40px;
+    right:8px;
+    bottom:8px;
+  }
+
+  .scene-text{
+    font-size:.82rem;
+    line-height:1.75;
+  }
+
+  .gap{
+    width:86px;
+    font-size:.78rem;
+  }
+
+  .gap.long{
+    width:115px;
+  }
+
+  .shop-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vocab-item{
+    font-size:.92rem;
+  }
+}
+
+@media(max-width:560px){
+  .banner{
+    padding:10px 12px;
+  }
+
+  .banner h1{
+    font-size:1rem;
+  }
+
+  .banner img{
+    width:38px;
+    height:26px;
+  }
+
+  .exercise-card,
+  .video-card{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .scene-layout{
+    grid-template-columns:130px 1fr;
+    gap:10px;
+  }
+
+  .thumb-wrap{
+    width:130px;
+    height:130px;
+    flex:0 0 130px;
+  }
+
+  .pause-corner{
+    width:38px;
+    height:38px;
+    right:7px;
+    bottom:7px;
+  }
+
+  .scene-text{
+    font-size:.78rem;
+  }
+
+  .gap{
+    width:78px;
+    padding:5px 6px;
+  }
+}
+
+@media(max-width:420px){
+  .scene-layout{
+    grid-template-columns:1fr;
+  }
+
+  .thumb-wrap{
+    width:100%;
+    height:auto;
+    aspect-ratio:1/1;
+    max-width:260px;
+  }
+
+  .scene-text{
+    font-size:.86rem;
+  }
+
+  .gap{
+    width:92px;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <h1>VIDCATALA · Un matí de compres</h1>
+  </div>
+
+  <a class='home' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="page">
+
+<section class="left">
+<div class="video-card">
+  <div class="video-wrap" id="videoContainerLeft">
+    <iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268161?dnt=1" title="VIDCATALA · Un matí de compres" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+</section>
+
+<section class="right">
+
+<div class="exercise-card">
+<h2>Exercici 1 · Escolta i completa tot el relat</h2>
+<p>
+El relat està dividit en sis fragments. Prem el botó de cada imatge, escolta i completa els buits.
+</p>
+
+<div class="scene" id="scene1">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat1.png" alt="Forn">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,0,25)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+Bon dia. Avui fa un matí de
+<input class="gap" data-answer="primavera">
+perfecte. La meva primera
+<input class="gap" data-answer="aturada">
+sempre és al
+<input class="gap" data-answer="forn">.
+Mireu quina vista. Aquests arcs antics de
+<input class="gap" data-answer="pedra">
+són preciosos. L’olor de pa de
+<input class="gap" data-answer="pagès">
+calent que surt del forn és
+<input class="gap" data-answer="irresistible">.
+Faig quatre paraules amb el
+<input class="gap" data-answer="forner">
+i ja tenc el meu pa acabat de fer.
+Ara sí, el dia ja ha
+<input class="gap" data-answer="començat">.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene1')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene1')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene1')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+<div class="scene" id="scene2">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat2.png" alt="Ferreteria">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,25,46)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+Després vaig cap a la
+<input class="gap" data-answer="ferreteria">,
+amagada en un
+<input class="gap" data-answer="carreró">
+estret. És una botiga petita, una mica
+<input class="gap" data-answer="caòtica">,
+però plena de
+<input class="gap" data-answer="tresors">.
+Només necessitava un
+<input class="gap" data-answer="baldó">
+petit per a la porta de l’hort de la
+<input class="gap" data-answer="cuina">,
+però sempre m’entretenc mirant els
+<input class="gap" data-answer="cossiols">
+antics de
+<input class="gap" data-answer="terrissa">
+que tenen a fora. Entrar-hi és com tornar enrere en el
+<input class="gap" data-answer="temps">.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene2')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene2')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene2')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+<div class="scene" id="scene3">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat3.png" alt="Parada de verdures">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,46,68)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+Ara toca anar al mercat
+<input class="gap" data-answer="principal">.
+Avui, el mercat cobert és ple de
+<input class="gap" data-answer="vida">.
+Vaig directament a la meva parada de
+<input class="gap" data-answer="verdures">
+preferida. Mireu aquests
+<input class="gap" data-answer="colors">!
+Espàrrecs verds de primavera,
+<input class="gap" data-answer="tomàtigues">
+vermelles i brillants... Tot és
+<input class="gap" data-answer="fresquíssim">,
+encara amb la frescor de l’aire del
+<input class="gap" data-answer="matí">.
+La venedora sempre em tria el
+<input class="gap" data-answer="millor">.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene3')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene3')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene3')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+<div class="scene" id="scene4">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat4.png" alt="Cafè a la plaça">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,68,89)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+Una petita pausa és
+<input class="gap" data-answer="obligatòria">.
+M’assec en un
+<input class="gap" data-answer="cafè">
+petit, amb taules que surten cap a la
+<input class="gap" data-answer="plaça">.
+Amb aquest sol suau de primavera, prenc un cafè amb
+<input class="gap" data-answer="llet">
+i una ensaïmada
+<input class="gap" data-answer="lleugera">,
+amb una mica de sucre en
+<input class="gap" data-answer="pols">.
+Aquest és el moment de
+<input class="gap" data-answer="respirar">,
+aturar-me i veure com el poble es
+<input class="gap" data-answer="desperta">.
+És una felicitat senzilla i
+<input class="gap" data-answer="perfecta">.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene4')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene4')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene4')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+<div class="scene" id="scene5">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat5.png" alt="Supermercat">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,89,109)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+Després faig una entrada ràpida al
+<input class="gap" data-answer="supermercat">
+del barri. És petit, només una botiga de tota la
+<input class="gap" data-answer="vida">,
+però hi ha de
+<input class="gap" data-answer="tot">.
+Agafo oli d’
+<input class="gap" data-answer="oliva">,
+potser una botella de vi blanc
+<input class="gap" data-answer="local">
+i algunes coses
+<input class="gap" data-answer="bàsiques">.
+El botiguer coneix tothom pel
+<input class="gap" data-answer="nom">
+i sempre hi ha temps per a una conversa
+<input class="gap" data-answer="amable">.
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene5')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene5')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene5')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+<div class="scene" id="scene6">
+<div class="scene-layout">
+<div class="thumb-wrap">
+<img class="thumb" src="mercat6.png" alt="Peixateria">
+<button type="button" class="pause-corner" onclick="toggleSegment(this,109,126)" aria-label="Reprodueix o pausa aquest fragment">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+
+<div>
+<p class="scene-text">
+La darrera aturada és la
+<input class="gap" data-answer="peixateria">.
+El taulell fa
+<input class="gap" data-answer="goig">:
+sardines
+<input class="gap" data-answer="platejades">
+i peix fresc de la Mediterrània damunt d’un
+<input class="gap" data-answer="llit">
+de gel
+<input class="gap" data-answer="picat">.
+Trio una cosa senzilla per
+<input class="gap" data-answer="dinar">.
+A aquesta hora sembla que tot el poble passi per aquí, comentant
+<input class="gap" data-answer="receptes">
+i saludant-se. Missió
+<input class="gap" data-answer="complerta">!
+</p>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkScene('scene6')">Comprova</button>
+<button type="button" class="action show" onclick="showScene('scene6')">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetScene('scene6')">Reinicia</button>
+</div>
+<div class="feedback"></div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="exercise-card">
+<h2>Exercici 2 · Comprensió</h2>
+<p>
+Ara respon preguntes sobre el sentit global del relat, el to i la intenció de la narradora.
+</p>
+
+<span class="score" id="score2">Puntuació: 0/10</span>
+
+<div class="mcq" data-answer="b" data-feedback="El relat presenta una rutina agradable, però també mostra una manera de viure: comerç local, conversa i ritme pausat.">
+<p>1. Quina idea general transmet el relat?</p>
+<label><input type="radio" name="q1" value="a"> Que anar a comprar és una obligació pesada.</label>
+<label><input type="radio" name="q1" value="b"> Que les compres quotidianes poden formar part d’una vida local rica i agradable.</label>
+<label><input type="radio" name="q1" value="c"> Que els mercats tradicionals han desaparegut.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="La narradora no compra només productes: observa, parla i gaudeix dels espais.">
+<p>2. Per què el relat no és simplement una llista de compres?</p>
+<label><input type="radio" name="q2" value="a"> Perquè no diu cap producte concret.</label>
+<label><input type="radio" name="q2" value="b"> Perquè només parla de preus.</label>
+<label><input type="radio" name="q2" value="c"> Perquè descriu sensacions, llocs i relacions humanes.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="a" data-feedback="El forn representa el començament ritual del dia: pa calent, conversa breu i sensació d’inici.">
+<p>3. Quina funció té el forn dins el relat?</p>
+<label><input type="radio" name="q3" value="a"> Marca l’inici del dia i dona un to càlid al relat.</label>
+<label><input type="radio" name="q3" value="b"> És el lloc més problemàtic del matí.</label>
+<label><input type="radio" name="q3" value="c"> Serveix per criticar el comerç antic.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="b" data-feedback="La ferreteria apareix com un lloc caòtic però ple d’encant i memòria.">
+<p>4. Per què la ferreteria sembla especial per a la narradora?</p>
+<label><input type="radio" name="q4" value="a"> Perquè és gran i moderna.</label>
+<label><input type="radio" name="q4" value="b"> Perquè conserva objectes i un ambient que semblen d’un altre temps.</label>
+<label><input type="radio" name="q4" value="c"> Perquè hi compra menjar fresc.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="El mercat es descriu a través dels colors, la frescor i la confiança amb la venedora.">
+<p>5. Com es presenta la parada de verdures?</p>
+<label><input type="radio" name="q5" value="a"> Com un lloc fred i impersonal.</label>
+<label><input type="radio" name="q5" value="b"> Com un lloc desordenat i desagradable.</label>
+<label><input type="radio" name="q5" value="c"> Com un espai viu, fresc i de confiança.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="a" data-feedback="La pausa al cafè permet aturar-se i observar com el poble es desperta.">
+<p>6. Què representa la pausa del cafè?</p>
+<label><input type="radio" name="q6" value="a"> Un moment de calma i observació.</label>
+<label><input type="radio" name="q6" value="b"> Una interrupció molesta.</label>
+<label><input type="radio" name="q6" value="c"> Una escena sense importància.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="b" data-feedback="El supermercat és petit però humà: el botiguer coneix la gent i hi ha conversa.">
+<p>7. Com es diferencia aquest supermercat d’un gran supermercat anònim?</p>
+<label><input type="radio" name="q7" value="a"> Té més productes internacionals.</label>
+<label><input type="radio" name="q7" value="b"> Manté una relació personal amb els clients.</label>
+<label><input type="radio" name="q7" value="c"> No hi ha ningú que atengui.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="c" data-feedback="La peixateria apareix com un punt de trobada social, no només com una botiga.">
+<p>8. Què suggereix la frase “tot el poble passi per aquí”?</p>
+<label><input type="radio" name="q8" value="a"> Que la peixateria és buida.</label>
+<label><input type="radio" name="q8" value="b"> Que només hi van els turistes.</label>
+<label><input type="radio" name="q8" value="c"> Que és un lloc de trobada i conversa.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="a" data-feedback="Hi ha un to afectuós, tranquil i una mica nostàlgic envers el comerç local.">
+<p>9. Quin és el to dominant del relat?</p>
+<label><input type="radio" name="q9" value="a"> Afectuós, tranquil i observador.</label>
+<label><input type="radio" name="q9" value="b"> Enfadat i crític.</label>
+<label><input type="radio" name="q9" value="c"> Fred i distant.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="mcq" data-answer="b" data-feedback="La narradora valora les petites rutines perquè creen identitat, confiança i plaer quotidià.">
+<p>10. Què aprenem sobre la narradora?</p>
+<label><input type="radio" name="q10" value="a"> Que vol acabar les compres tan ràpid com pugui.</label>
+<label><input type="radio" name="q10" value="b"> Que valora els petits rituals i el contacte amb la gent del poble.</label>
+<label><input type="radio" name="q10" value="c"> Que prefereix comprar sempre per internet.</label>
+<div class="small-feedback"></div>
+</div>
+
+<div class="controls">
+<button type="button" class="action check" onclick="checkMCQ()">Comprova</button>
+<button type="button" class="action show" onclick="showMCQ()">Mostra respostes</button>
+<button type="button" class="action reset" onclick="resetMCQ()">Reinicia</button>
+</div>
+
+<div id="fb2" class="feedback"></div>
+</div>
+
+<div class="exercise-card" id="ex3-vocab">
+<h2>Exercici 3 · A quina botiga ho compraries?</h2>
+
+<p>
+Fes clic en un producte i després fes clic en la botiga on normalment el compraries.
+Si la resposta és correcta, el producte queda marcat en verd.
+</p>
+
+<div class="score-box">
+Puntuació: <span id="shopScore">0</span>/25
+</div>
+
+<div class="shop-grid">
+<div class="shop-drop" data-shop="carnisseria">🥩 La carnisseria</div>
+<div class="shop-drop" data-shop="peixateria">🐟 La peixateria</div>
+<div class="shop-drop" data-shop="ferreteria">🔧 La ferreteria</div>
+<div class="shop-drop" data-shop="fleca">🥖 La fleca / el forn</div>
+<div class="shop-drop" data-shop="fruiteria">🥬 La fruiteria</div>
+<div class="shop-drop" data-shop="lleteria">🧀 La lleteria</div>
+</div>
+
+<h3>Productes</h3>
+
+<div class="word-bank-vocab" id="vocabWords">
+<button type="button" class="vocab-item" data-answer="peixateria">lluç</button>
+<button type="button" class="vocab-item" data-answer="fruiteria">julivert</button>
+<button type="button" class="vocab-item" data-answer="fleca">llevat fresc</button>
+<button type="button" class="vocab-item" data-answer="ferreteria">clau anglesa</button>
+<button type="button" class="vocab-item" data-answer="lleteria">mató</button>
+
+<button type="button" class="vocab-item" data-answer="fruiteria">xirivia</button>
+<button type="button" class="vocab-item" data-answer="peixateria">escórpora</button>
+<button type="button" class="vocab-item" data-answer="ferreteria">taps de suro</button>
+<button type="button" class="vocab-item" data-answer="peixateria">arengada</button>
+<button type="button" class="vocab-item" data-answer="ferreteria">batedor manual</button>
+
+<button type="button" class="vocab-item" data-answer="fleca">coca de trempó</button>
+<button type="button" class="vocab-item" data-answer="fruiteria">fonoll</button>
+<button type="button" class="vocab-item" data-answer="ferreteria">tornavís</button>
+<button type="button" class="vocab-item" data-answer="peixateria">sèpia</button>
+<button type="button" class="vocab-item" data-answer="fruiteria">moniato</button>
+
+<button type="button" class="vocab-item" data-answer="lleteria">formatge tendre</button>
+<button type="button" class="vocab-item" data-answer="ferreteria">llevataps</button>
+<button type="button" class="vocab-item" data-answer="fruiteria">gingebre</button>
+<button type="button" class="vocab-item" data-answer="fleca">pa de sègol</button>
+<button type="button" class="vocab-item" data-answer="carnisseria">botifarró</button>
+
+<button type="button" class="vocab-item" data-answer="lleteria">nata líquida</button>
+<button type="button" class="vocab-item" data-answer="peixateria">orada</button>
+<button type="button" class="vocab-item" data-answer="carnisseria">fuet</button>
+<button type="button" class="vocab-item" data-answer="carnisseria">llom adobat</button>
+<button type="button" class="vocab-item" data-answer="fleca">ensaïmada</button>
+</div>
+
+<div id="shopFeedback" class="feedback-box">
+Tria primer un producte.
+</div>
+
+<button type="button" class="reset-btn" onclick="resetShopExercise()">Reinicia</button>
+</div>
+
+</section>
+</main>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="/assets/vidcatala-vimeo.js"></script>
+<script>
+// ------------------------------------------------------------
+const videoEl = createVidcatVimeoPlayer(document.getElementById("mainVideo"));
+
+let currentEnd = null;
+let currentButton = null;
+
+function setButtonsPlay(){
+  document.querySelectorAll(".pause-corner i").forEach(icon=>{
+    icon.classList.remove("fa-pause");
+    icon.classList.add("fa-play");
+  });
+}
+
+function setButtonPause(button){
+  const icon = button.querySelector("i");
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+}
+
+function toggleSegment(button,start,end){
+  if(currentButton === button && !videoEl.paused){
+    videoEl.pause();
+    setButtonsPlay();
+    return;
+  }
+
+  if(currentButton === button && videoEl.paused && currentEnd !== null && videoEl.currentTime < currentEnd){
+    videoEl.play();
+    setButtonsPlay();
+    setButtonPause(button);
+    return;
+  }
+
+  setButtonsPlay();
+  currentButton = button;
+  currentEnd = end;
+  videoEl.currentTime = start;
+  videoEl.play();
+  setButtonPause(button);
+}
+
+videoEl.addEventListener("timeupdate",function(){
+  if(currentEnd !== null && videoEl.currentTime >= currentEnd){
+    videoEl.pause();
+    setButtonsPlay();
+    currentEnd = null;
+    currentButton = null;
+  }
+});
+
+videoEl.addEventListener("pause",function(){
+  setButtonsPlay();
+});
+
+// ------------------------------------------------------------
+// EXERCISE FUNCTIONS (unchanged)
+// ------------------------------------------------------------
+function normalize(t){
+  return t
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[’‘`´]/g,"'")
+    .replace(/\s+/g," ");
+}
+
+function checkScene(id){
+  const scene = document.getElementById(id);
+  const gaps = scene.querySelectorAll(".gap");
+  const fb = scene.querySelector(".feedback");
+  let ok = 0;
+
+  gaps.forEach(g=>{
+    if(normalize(g.value) === normalize(g.dataset.answer)){
+      g.classList.add("correct");
+      g.classList.remove("incorrect");
+      ok++;
+    }else{
+      g.classList.add("incorrect");
+      g.classList.remove("correct");
+    }
+  });
+
+  fb.className = "feedback " + (ok === gaps.length ? "ok" : ok >= Math.ceil(gaps.length/2) ? "partial" : "bad");
+
+  fb.innerHTML =
+    ok === gaps.length
+    ? "<strong>Molt bé!</strong> Has completat tot aquest fragment correctament."
+    : ok >= Math.ceil(gaps.length/2)
+    ? "<strong>Bona feina.</strong> Has encertat " + ok + " de " + gaps.length + ". Torna a escoltar i revisa els buits marcats."
+    : "<strong>Cal tornar-hi.</strong> Has encertat " + ok + " de " + gaps.length + ". Prem el botó i escolta aquest fragment una altra vegada.";
+}
+
+function showScene(id){
+  const scene = document.getElementById(id);
+
+  scene.querySelectorAll(".gap").forEach(g=>{
+    g.value = g.dataset.answer;
+    g.classList.add("correct");
+    g.classList.remove("incorrect");
+  });
+
+  const fb = scene.querySelector(".feedback");
+  fb.className = "feedback ok";
+  fb.innerHTML = "<strong>Respostes mostrades.</strong> Torna a escoltar el fragment i fixa’t en la pronunciació.";
+}
+
+function resetScene(id){
+  const scene = document.getElementById(id);
+
+  scene.querySelectorAll(".gap").forEach(g=>{
+    g.value = "";
+    g.classList.remove("correct","incorrect");
+  });
+
+  const fb = scene.querySelector(".feedback");
+  fb.className = "feedback";
+  fb.innerHTML = "";
+}
+
+function checkMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+  let score = 0;
+
+  qs.forEach(q=>{
+    const ans = q.dataset.answer;
+    const checked = q.querySelector("input:checked");
+    const fb = q.querySelector(".small-feedback");
+
+    q.style.background = "#fffdf3";
+    q.style.borderLeftColor = "#ffcc00";
+
+    if(checked && checked.value === ans){
+      score++;
+      q.style.background = "#eefcf1";
+      q.style.borderLeftColor = "#35a853";
+      fb.className = "small-feedback ok";
+      fb.textContent = "Correcte. " + q.dataset.feedback;
+    }else{
+      q.style.background = "#fff0f0";
+      q.style.borderLeftColor = "#cc3d3d";
+      fb.className = "small-feedback bad";
+      fb.textContent = checked ? "No exactament. " + q.dataset.feedback : "Tria una resposta.";
+    }
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: " + score + "/" + qs.length;
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback " + (score === qs.length ? "ok" : score >= 6 ? "partial" : "bad");
+
+  fb2.innerHTML =
+    score === qs.length
+    ? "<strong>Excel·lent.</strong> Has entès el sentit profund del relat."
+    : score >= 6
+    ? "<strong>Bona comprensió.</strong> Has captat moltes idees, però revisa les preguntes interpretatives."
+    : "<strong>Torna a escoltar el vídeo.</strong> Fixa’t en el to, les relacions humanes i la funció de cada lloc.";
+}
+
+function showMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+
+  qs.forEach(q=>{
+    const ans = q.dataset.answer;
+    const input = q.querySelector("input[value='" + ans + "']");
+    const fb = q.querySelector(".small-feedback");
+
+    input.checked = true;
+    q.style.background = "#eefcf1";
+    q.style.borderLeftColor = "#35a853";
+    fb.className = "small-feedback ok";
+    fb.textContent = "Resposta correcta. " + q.dataset.feedback;
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: " + qs.length + "/" + qs.length;
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback ok";
+  fb2.innerHTML = "<strong>Respostes mostrades.</strong>";
+}
+
+function resetMCQ(){
+  const qs = document.querySelectorAll(".mcq");
+
+  qs.forEach(q=>{
+    q.style.background = "#fffdf3";
+    q.style.borderLeftColor = "#ffcc00";
+    q.querySelectorAll("input").forEach(i=>i.checked=false);
+    const fb = q.querySelector(".small-feedback");
+    fb.className = "small-feedback";
+    fb.textContent = "";
+  });
+
+  document.getElementById("score2").textContent = "Puntuació: 0/10";
+
+  const fb2 = document.getElementById("fb2");
+  fb2.className = "feedback";
+  fb2.innerHTML = "";
+}
+
+// EXERCISE 3 (unchanged)
+let selectedVocabItem = null;
+let shopScore = 0;
+
+const feedbackMessages = {
+  carnisseria: "Això normalment es compra a la carnisseria.",
+  peixateria: "Això normalment es compra a la peixateria.",
+  ferreteria: "Això normalment es compra a la ferreteria.",
+  fleca: "Això normalment es compra a la fleca o al forn.",
+  fruiteria: "Això normalment es compra a la fruiteria.",
+  lleteria: "Això normalment es compra a la lleteria."
+};
+
+document.querySelectorAll(".vocab-item").forEach(item => {
+  item.addEventListener("click", () => {
+    if(item.classList.contains("correct")) return;
+
+    document.querySelectorAll(".vocab-item").forEach(btn => {
+      btn.classList.remove("selected");
+    });
+
+    selectedVocabItem = item;
+    item.classList.add("selected");
+
+    const feedback = document.getElementById("shopFeedback");
+    feedback.className = "feedback-box";
+    feedback.textContent = "Ara tria la botiga correcta per a: “" + item.textContent + "”.";
+  });
+});
+
+document.querySelectorAll(".shop-drop").forEach(shop => {
+  shop.addEventListener("click", () => {
+    const feedback = document.getElementById("shopFeedback");
+
+    if(!selectedVocabItem){
+      feedback.className = "feedback-box bad";
+      feedback.textContent = "Primer has de triar un producte.";
+      return;
+    }
+
+    const correctShop = selectedVocabItem.dataset.answer;
+    const chosenShop = shop.dataset.shop;
+
+    if(correctShop === chosenShop){
+      selectedVocabItem.classList.remove("selected");
+      selectedVocabItem.classList.add("correct");
+      selectedVocabItem.disabled = true;
+
+      shopScore++;
+      document.getElementById("shopScore").textContent = shopScore;
+
+      feedback.className = "feedback-box ok";
+      feedback.textContent = "Correcte! “" + selectedVocabItem.textContent + "” correspon a aquesta botiga.";
+
+      shop.classList.add("flash-correct");
+      setTimeout(() => shop.classList.remove("flash-correct"), 700);
+
+      selectedVocabItem = null;
+    }else{
+      feedback.className = "feedback-box bad";
+      feedback.textContent = "No exactament. " + feedbackMessages[correctShop];
+
+      shop.classList.add("flash-wrong");
+      setTimeout(() => shop.classList.remove("flash-wrong"), 700);
+    }
+  });
+});
+
+function resetShopExercise(){
+  shopScore = 0;
+  selectedVocabItem = null;
+
+  document.getElementById("shopScore").textContent = "0";
+
+  document.querySelectorAll(".vocab-item").forEach(item => {
+    item.classList.remove("selected","correct");
+    item.disabled = false;
+  });
+
+  const feedback = document.getElementById("shopFeedback");
+  feedback.className = "feedback-box";
+  feedback.textContent = "Tria primer un producte.";
+}
+</script>
+
+</body>
+</html>

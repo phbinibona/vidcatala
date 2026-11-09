@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIDCATALA · Un torn de policia local</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f6f2;
+  color: #2f2f2f;
+}
+
+.banner {
+  background: #ffcc00;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner img {
+  width: 46px;
+  height: 31px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.home {
+  color: white;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 16px;
+}
+
+.video-card,
+.exercise-card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.video-card p,
+.exercise-card p {
+  margin: 0 0 12px;
+  line-height: 1.45;
+  font-size: .95rem;
+  color: #555;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  color: #8B4513;
+}
+
+.video-wrap {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+.vidcat-vimeo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.focus {
+  margin-top: 12px;
+  background: #fff6cf;
+  border-left: 5px solid #ffcc00;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.item {
+  background: white;
+  border-radius: 18px;
+  padding: 13px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.08);
+  border: 2px solid transparent;
+}
+
+.item.active {
+  border-color: #ffcc00;
+  background: #fffdf3;
+}
+
+.thumb-wrap {
+  position: relative;
+}
+
+.thumb {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+  background: #f7f6f2;
+  border-radius: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pause-corner {
+  position: absolute;
+  right: 8px;
+  bottom: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0,0,0,0.46);
+  color: white;
+  font-size: .78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  opacity: .82;
+  z-index: 2;
+}
+
+.pause-corner:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.66);
+}
+
+.sentence {
+  line-height: 1.9;
+  font-size: .95rem;
+  margin: 0;
+}
+
+input.gap {
+  width: 128px;
+  border: 2px solid #e2d28d;
+  border-radius: 10px;
+  padding: 6px 8px;
+  font-family: inherit;
+  font-weight: 600;
+  background: #fffdf5;
+}
+
+input.gap3 {
+  width: 145px;
+}
+
+input.gap:focus,
+select:focus {
+  outline: none;
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 3px rgba(255,204,0,0.22);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 15px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .18s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.check {
+  background: #ffcc00;
+  color: #2f2f2f;
+}
+
+.show {
+  background: #efe6c6;
+  color: #3a300d;
+}
+
+.reset {
+  background: #e9e9e9;
+  color: #333;
+}
+
+.feedback {
+  display: none;
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+.feedback.ok {
+  display: block;
+  background: #e8f7e8;
+  border-left: 5px solid #35a853;
+  color: #1d5d2c;
+}
+
+.feedback.partial {
+  display: block;
+  background: #fff4d4;
+  border-left: 5px solid #ffcc00;
+  color: #5f4800;
+}
+
+.feedback.bad {
+  display: block;
+  background: #ffe8e8;
+  border-left: 5px solid #cc3d3d;
+  color: #7b1f1f;
+}
+
+.score {
+  font-weight: 700;
+  background: #2f2f2f;
+  color: white;
+  border-radius: 999px;
+  padding: 8px 13px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.mc-question {
+  margin: 16px 0;
+  padding: 14px;
+  background: #fffdf3;
+  border-radius: 15px;
+  border-left: 5px solid #ffcc00;
+}
+
+.mc-question label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 9px;
+  line-height: 1.45;
+}
+
+select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 2px solid #e2d28d;
+  font-family: inherit;
+  background: white;
+  font-weight: 600;
+}
+
+.mc-feedback {
+  margin-top: 8px;
+  font-size: .92rem;
+  line-height: 1.45;
+  display: none;
+}
+
+.mc-feedback.ok {
+  display: block;
+  color: #1d5d2c;
+}
+
+.mc-feedback.bad {
+  display: block;
+  color: #7b1f1f;
+}
+
+.word-bank-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 18px;
+}
+
+.word-bank {
+  background: #fff6cf;
+  border: 2px solid #ffcc00;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .92rem;
+}
+
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+    padding: 0 14px 18px;
+    gap: 14px;
+  }
+
+  .left {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #f7f6f2;
+    padding-top: 10px;
+    padding-bottom: 8px;
+  }
+
+  .video-card {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .banner {
+    padding: 10px 12px;
+  }
+
+  .banner h1 {
+    font-size: 1.05rem;
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .thumb {
+    height: 190px;
+  }
+}
+</style>
+<style>
+.vidcat-vimeo { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+</style>
+</head>
+
+<body>
+
+<header class="banner">
+  <div class="banner-left">
+    <img src="bandera.png" alt="Bandera catalana">
+    <h1>VIDCATALA · Un torn de policia local</h1>
+  </div>
+
+  <a class='home' href='/'>
+    <i class="fa-solid fa-house"></i>
+  </a>
+</header>
+
+<main class="page">
+
+<section class="left">
+  <div class="video-card">
+    <div class="video-wrap">
+      <iframe id="mainVideo" class="vidcat-vimeo" src="https://player.vimeo.com/video/1245268281?dnt=1" title="VIDCATALA · Un torn de policia local" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="right">
+
+  <div class="exercise-card">
+    <h2>Exercici 1 · Completa les incidències</h2>
+    <p>
+      Prem el botó de cada imatge per escoltar el fragment corresponent.
+      El mateix botó serveix per pausar i continuar el fragment.
+      Cada imatge té el seu propi botó de correcció.
+    </p>
+  </div>
+
+  <div class="image-grid">
+
+    <div class="item" data-start="0" data-end="16">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia1.png" alt="Accident amb cotxe i moto">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        Quan he començat el
+        <input class="gap gap1" data-answer="torn">,
+        m'han trucat per un
+        <input class="gap gap1" data-answer="accident">.
+        Un cotxe ha tocat una moto
+        <input class="gap gap1" data-answer="aparcada">.
+        No hi ha hagut
+        <input class="gap gap1" data-answer="ferits">.
+        He identificat els
+        <input class="gap gap1" data-answer="conductors">
+        i he fet l'informe.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+    <div class="item" data-start="17" data-end="31">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia2.png" alt="Nen trobat prop del quiosc">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        Després una dona ha vingut
+        <input class="gap gap1" data-answer="corrent">.
+        El seu fill de quatre anys s'havia
+        <input class="gap gap1" data-answer="amagat">.
+        Hem buscat per les
+        <input class="gap gap1" data-answer="botigues">
+        i l'hem trobat darrere el
+        <input class="gap gap1" data-answer="quiosc">
+        mirant un
+        <input class="gap gap1" data-answer="gosset">.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+    <div class="item" data-start="34" data-end="52">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia3.png" alt="Música alta i queixa veïnal">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        A les onze, un
+        <input class="gap gap1" data-answer="veí">
+        s'ha queixat de música molt
+        <input class="gap gap1" data-answer="alta">.
+        Era un jove provant
+        <input class="gap gap1" data-answer="altaveus">
+        per a una festa. Li he explicat que la gent
+        <input class="gap gap1" data-answer="treballa">
+        o
+        <input class="gap gap1" data-answer="descansa">.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+    <div class="item" data-start="52" data-end="66">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia4.png" alt="Senyora gran a la farmàcia">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        Una farmàcia ha avisat que una senyora
+        <input class="gap gap1" data-answer="gran">
+        no sabia on
+        <input class="gap gap1" data-answer="vivia">.
+        Quan he arribat, plorava de
+        <input class="gap gap1" data-answer="por">.
+        He parlat amb ella fins que ha recordat el
+        <input class="gap gap1" data-answer="carrer">.
+        L'he acompanyada a
+        <input class="gap gap1" data-answer="casa">.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+    <div class="item" data-start="69" data-end="87">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia5.png" alt="Bicicleta recuperada">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        Un poc més tard, un noi ha denunciat que li havien pres la
+        <input class="gap gap1" data-answer="bicicleta">.
+        Mentre feia la
+        <input class="gap gap1" data-answer="ruta">,
+        n'he vista una d'abandonada darrere un
+        <input class="gap gap1" data-answer="contenidor">.
+        Era la seva
+        <input class="gap gap1" data-answer="mateixa">
+        i l'he
+        <input class="gap gap1" data-answer="tornada">.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+    <div class="item" data-start="87" data-end="102">
+      <div class="thumb-wrap">
+        <img class="thumb" src="policia6.png" alt="Contenidors cremats i carrer tallat">
+        <button class="pause-corner" onclick="toggleExtract(this)">
+          <i class="fa-solid fa-play"></i>
+        </button>
+      </div>
+
+      <p class="sentence">
+        Abans d'acabar el torn, hem rebut una
+        <input class="gap gap1" data-answer="trucada">.
+        Dos contenidors
+        <input class="gap gap1" data-answer="cremaven">.
+        Els bombers ja hi
+        <input class="gap gap1" data-answer="eren">.
+        He tallat el
+        <input class="gap gap1" data-answer="carrer">
+        fins que han apagat el
+        <input class="gap gap1" data-answer="foc">.
+      </p>
+
+      <div class="controls">
+        <button class="check" onclick="checkItem(this)">Comprova</button>
+        <button class="show" onclick="showItem(this)">Mostra respostes</button>
+        <button class="reset" onclick="resetItem(this)">Reinicia</button>
+      </div>
+
+      <div class="item-feedback feedback"></div>
+    </div>
+
+  </div>
+
+  <div class="exercise-card">
+    <h2>Exercici 2 · Comprensió del relat</h2>
+    <p>
+      Escolta el vídeo complet i respon. Algunes preguntes demanen interpretar la situació,
+      no només recordar una paraula exacta.
+    </p>
+
+    <span class="score" id="score2">Puntuació: 0/10</span>
+
+    <div class="mc-question">
+      <label>1. Quin tipus de dia descriu el policia?</label>
+      <select class="mc" data-answer="B" data-feedback="El relat presenta diverses incidències petites o mitjanes que formen un torn intens però satisfactori.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Un dia tranquil sense feina.</option>
+        <option value="B">B. Un torn amb moltes incidències diferents.</option>
+        <option value="C">C. Un dia dedicat només a accidents de trànsit.</option>
+        <option value="D">D. Un dia de formació a la comissaria.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>2. En l'accident inicial, què és important?</label>
+      <select class="mc" data-answer="C" data-feedback="Hi ha hagut un contacte entre un cotxe i una moto aparcada, però el text diu clarament que no hi ha hagut ferits.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Que hi havia molts ferits.</option>
+        <option value="B">B. Que la moto circulava massa ràpid.</option>
+        <option value="C">C. Que no hi ha hagut ferits.</option>
+        <option value="D">D. Que el policia no ha fet cap informe.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>3. Per què plora la mare del nen?</label>
+      <select class="mc" data-answer="B" data-feedback="La mare plora d’alegria perquè el nen apareix sa i estalvi darrere el quiosc.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Perquè el nen s'ha fet mal.</option>
+        <option value="B">B. Perquè han trobat el seu fill.</option>
+        <option value="C">C. Perquè ha perdut el gosset.</option>
+        <option value="D">D. Perquè no vol parlar amb el policia.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>4. Què mostra l'episodi de la música alta?</label>
+      <select class="mc" data-answer="B" data-feedback="El policia no castiga immediatament el jove; li explica el problema i el jove baixa el volum.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Que el jove es nega a escoltar.</option>
+        <option value="B">B. Que una explicació tranquil·la pot resoldre el conflicte.</option>
+        <option value="C">C. Que tots els veïns volien anar a la festa.</option>
+        <option value="D">D. Que el policia no entra a l'edifici.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>5. Quina qualitat destaca en l'ajuda a la senyora gran?</label>
+      <select class="mc" data-answer="C" data-feedback="El text diu explícitament: “De vegades, només cal paciència”.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. La pressa.</option>
+        <option value="B">B. La força física.</option>
+        <option value="C">C. La paciència.</option>
+        <option value="D">D. La indiferència.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>6. Com recupera el noi la bicicleta?</label>
+      <select class="mc" data-answer="A" data-feedback="El policia veu una bicicleta abandonada darrere un contenidor mentre fa la ruta, i resulta que és la del noi.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. El policia la troba abandonada darrere un contenidor.</option>
+        <option value="B">B. El noi la compra de nou.</option>
+        <option value="C">C. Els bombers la porten a la farmàcia.</option>
+        <option value="D">D. El jove de la música la torna.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>7. Quan diu “m'he sentit útil”, què expressa?</label>
+      <select class="mc" data-answer="B" data-feedback="El policia sent que la seva feina té valor perquè ha ajudat directament una persona.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Cansament i ràbia.</option>
+        <option value="B">B. Satisfacció professional i personal.</option>
+        <option value="C">C. Por de continuar treballant.</option>
+        <option value="D">D. Vergonya per haver trobat la bicicleta.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>8. Quin paper tenen els bombers en l'última incidència?</label>
+      <select class="mc" data-answer="C" data-feedback="Quan el policia arriba, els bombers ja hi són i apaguen el foc. El policia talla el carrer.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Arriben després que el foc s'hagi apagat.</option>
+        <option value="B">B. Busquen el nen perdut.</option>
+        <option value="C">C. Ja són al lloc i apaguen el foc.</option>
+        <option value="D">D. Fan l'informe de l'accident.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>9. Quina és la funció del policia en l'incendi dels contenidors?</label>
+      <select class="mc" data-answer="A" data-feedback="El policia talla el carrer fins que els bombers apaguen el foc.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Tallar el carrer.</option>
+        <option value="B">B. Entrar a la farmàcia.</option>
+        <option value="C">C. Reparar els contenidors.</option>
+        <option value="D">D. Buscar una bicicleta.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="mc-question">
+      <label>10. Quin és el to final del relat?</label>
+      <select class="mc" data-answer="B" data-feedback="El policia diu que ha estat un final intens, però satisfet: el to combina cansament, activitat i sensació de feina ben feta.">
+        <option value="">Tria una resposta</option>
+        <option value="A">A. Amarg i derrotat.</option>
+        <option value="B">B. Intens però positiu.</option>
+        <option value="C">C. Còmic i absurd.</option>
+        <option value="D">D. Fred i indiferent.</option>
+      </select>
+      <div class="mc-feedback"></div>
+    </div>
+
+    <div class="controls">
+      <button class="check" onclick="checkEx2()">Comprova</button>
+      <button class="show" onclick="showEx2()">Mostra respostes</button>
+      <button class="reset" onclick="resetEx2()">Reinicia</button>
+    </div>
+
+    <div id="feedback2" class="feedback"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Exercici 3 · Del perfet al passat perifràstic</h2>
+
+    <p>
+      Ara llegiràs un resum escrit l’endemà del torn. En el vídeo original, el policia explica
+      el que ha passat durant el seu torn i fa servir sobretot el <strong>pretèrit perfet</strong>:
+      <em>he arribat, hem rebut, ha plorat...</em>
+    </p>
+
+    <div class="focus">
+      <strong>Focus gramatical:</strong><br><br>
+      Quan expliquem fets molt recents o relacionats amb “avui”, en català sovint utilitzem el
+      <strong>pretèrit perfet</strong>: <em>he fet, hem trobat, ha avisat</em>.
+      <br><br>
+      Però aquest resum parla del que va passar <strong>ahir</strong>. Els fets es presenten com una
+      narració acabada. Per això els verbs passen al <strong>passat perifràstic</strong>:
+      <em>vaig fer, vam trobar, va avisar</em>.
+      <br><br>
+      Escriu la forma correcta del passat perifràstic a cada buit. Les pistes són infinitius i estan barrejades.
+    </div>
+
+    <p><strong>Infinitius disponibles:</strong></p>
+
+    <div class="word-bank-wrap">
+      <span class="word-bank">tallar</span>
+      <span class="word-bank">trobar</span>
+      <span class="word-bank">fer</span>
+      <span class="word-bank">abaixar</span>
+      <span class="word-bank">acompanyar</span>
+      <span class="word-bank">rebre</span>
+      <span class="word-bank">explicar</span>
+      <span class="word-bank">identificar</span>
+      <span class="word-bank">calmar</span>
+      <span class="word-bank">ser avisat</span>
+      <span class="word-bank">trobar</span>
+    </div>
+
+    <div class="mc-question">
+      <p class="sentence">
+        Al començament del torn, l’agent
+        <input class="gap gap3" data-answer="va ser avisat">
+        d’un accident entre un cotxe i una moto aparcada.
+      </p>
+
+      <p class="sentence">
+        Després,
+        <input class="gap gap3" data-answer="va identificar">
+        els conductors i
+        <input class="gap gap3" data-answer="va fer">
+        l’informe.
+      </p>
+
+      <p class="sentence">
+        També
+        <input class="gap gap3" data-answer="va calmar">
+        les persones implicades en l’accident.
+      </p>
+
+      <p class="sentence">
+        Més tard,
+        <input class="gap gap3" data-answer="van trobar">
+        el nen darrere un quiosc mirant un gosset.
+      </p>
+
+      <p class="sentence">
+        Quan un veí es va queixar de la música, l’agent
+        <input class="gap gap3" data-answer="va explicar">
+        la importància del descans veïnal.
+      </p>
+
+      <p class="sentence">
+        Finalment, el jove
+        <input class="gap gap3" data-answer="va abaixar">
+        el volum.
+      </p>
+
+      <p class="sentence">
+        En una altra incidència, l’agent
+        <input class="gap gap3" data-answer="va trobar">
+        una senyora gran desorientada i la
+        <input class="gap gap3" data-answer="va acompanyar">
+        a casa.
+      </p>
+
+      <p class="sentence">
+        Abans d’acabar el torn, l’agent
+        <input class="gap gap3" data-answer="va rebre">
+        una trucada per un incendi.
+      </p>
+
+      <p class="sentence">
+        Quan els bombers treballaven en el foc, l’agent
+        <input class="gap gap3" data-answer="va tallar">
+        el carrer.
+      </p>
+    </div>
+
+    <span class="score" id="score3">Puntuació: 0/11</span>
+
+    <div class="controls">
+      <button class="check" onclick="checkEx3()">Comprova</button>
+      <button class="show" onclick="showEx3()">Mostra respostes</button>
+      <button class="reset" onclick="resetEx3()">Reinicia</button>
+    </div>
+
+    <div id="feedback3" class="feedback"></div>
+  </div>
+
+</section>
+</main>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="/assets/vidcatala-vimeo.js"></script>
+<script>
+const video = createVidcatVimeoPlayer(document.getElementById("mainVideo"));
+
+let currentItem = null;
+let currentEnd = null;
+
+const feedback2 = document.getElementById("feedback2");
+const score2 = document.getElementById("score2");
+
+const feedback3 = document.getElementById("feedback3");
+const score3 = document.getElementById("score3");
+
+function normalise(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function setAllCornerButtonsToPlay() {
+  document.querySelectorAll(".pause-corner i").forEach(icon => {
+    icon.classList.remove("fa-pause");
+    icon.classList.add("fa-play");
+  });
+}
+
+function setButtonToPause(button) {
+  const icon = button.querySelector("i");
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+}
+
+function toggleExtract(button) {
+  const item = button.closest(".item");
+  const start = Number(item.dataset.start);
+  const end = Number(item.dataset.end);
+
+  if (currentItem === item && !video.paused) {
+    video.pause();
+    setAllCornerButtonsToPlay();
+    return;
+  }
+
+  if (currentItem === item && video.paused && currentEnd !== null && video.currentTime < currentEnd) {
+    video.play();
+    setAllCornerButtonsToPlay();
+    setButtonToPause(button);
+    return;
+  }
+
+  currentItem = item;
+  currentEnd = end;
+
+  document.querySelectorAll(".item").forEach(el => el.classList.remove("active"));
+  item.classList.add("active");
+
+  setAllCornerButtonsToPlay();
+  setButtonToPause(button);
+
+  video.currentTime = start;
+  video.play();
+}
+
+video.addEventListener("timeupdate", function() {
+  if (currentEnd !== null && video.currentTime >= currentEnd) {
+    video.pause();
+    setAllCornerButtonsToPlay();
+
+    if (currentItem) {
+      currentItem.classList.remove("active");
+    }
+
+    currentItem = null;
+    currentEnd = null;
+  }
+});
+
+video.addEventListener("pause", function() {
+  setAllCornerButtonsToPlay();
+});
+
+function checkItem(button) {
+  const item = button.closest(".item");
+  const inputs = item.querySelectorAll(".gap1");
+  const feedback = item.querySelector(".item-feedback");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    const user = normalise(input.value);
+    const answer = normalise(input.dataset.answer);
+
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+
+    if (!user) {
+      input.style.background = "#fff8df";
+      input.style.borderColor = "#d59b2d";
+    } else if (user === answer) {
+      correct++;
+      input.style.background = "#f0fff2";
+      input.style.borderColor = "#35a853";
+    } else {
+      input.style.background = "#fff0f0";
+      input.style.borderColor = "#cc3d3d";
+    }
+  });
+
+  feedback.className = "item-feedback feedback";
+
+  if (correct === inputs.length) {
+    feedback.classList.add("ok");
+    feedback.innerHTML = `<strong>Excel·lent.</strong> Has completat correctament aquest fragment: ${correct}/${inputs.length}.`;
+  } else if (correct >= Math.ceil(inputs.length / 2)) {
+    feedback.classList.add("partial");
+    feedback.innerHTML = `<strong>Bona feina: ${correct}/${inputs.length}.</strong> Revisa els buits marcats i torna a escoltar aquest fragment.`;
+  } else {
+    feedback.classList.add("bad");
+    feedback.innerHTML = `<strong>Cal tornar-hi: ${correct}/${inputs.length}.</strong> Prem el botó de la imatge i escolta de nou el fragment.`;
+  }
+}
+
+function showItem(button) {
+  const item = button.closest(".item");
+  const inputs = item.querySelectorAll(".gap1");
+  const feedback = item.querySelector(".item-feedback");
+
+  inputs.forEach(input => {
+    input.value = input.dataset.answer;
+    input.style.background = "#f0fff2";
+    input.style.borderColor = "#35a853";
+  });
+
+  feedback.className = "item-feedback feedback ok";
+  feedback.innerHTML = `<strong>Respostes mostrades.</strong> Torna a escoltar el fragment i fixa't en les paraules clau.`;
+}
+
+function resetItem(button) {
+  const item = button.closest(".item");
+  const inputs = item.querySelectorAll(".gap1");
+  const feedback = item.querySelector(".item-feedback");
+
+  inputs.forEach(input => {
+    input.value = "";
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+  });
+
+  feedback.className = "item-feedback feedback";
+  feedback.innerHTML = "";
+  item.classList.remove("active");
+}
+
+function checkEx2() {
+  const selects = document.querySelectorAll(".mc");
+  let correct = 0;
+
+  selects.forEach(select => {
+    const fb = select.nextElementSibling;
+    const selected = select.value;
+    const answer = select.dataset.answer;
+
+    select.style.background = "white";
+    select.style.borderColor = "#e2d28d";
+    fb.className = "mc-feedback";
+
+    if (!selected) {
+      select.style.background = "#fff8df";
+      select.style.borderColor = "#d59b2d";
+      fb.classList.add("bad");
+      fb.textContent = "Tria una resposta.";
+    } else if (selected === answer) {
+      correct++;
+      select.style.background = "#f0fff2";
+      select.style.borderColor = "#35a853";
+      fb.classList.add("ok");
+      fb.textContent = "Correcte. " + select.dataset.feedback;
+    } else {
+      select.style.background = "#fff0f0";
+      select.style.borderColor = "#cc3d3d";
+      fb.classList.add("bad");
+      fb.textContent = "No exactament. " + select.dataset.feedback;
+    }
+  });
+
+  score2.textContent = `Puntuació: ${correct}/${selects.length}`;
+  feedback2.className = "feedback";
+
+  if (correct === selects.length) {
+    feedback2.classList.add("ok");
+    feedback2.innerHTML = `<strong>Excel·lent.</strong> Has entès molt bé el fil narratiu, les incidències i el to final del policia.`;
+  } else if (correct >= 7) {
+    feedback2.classList.add("partial");
+    feedback2.innerHTML = `<strong>Bona comprensió: ${correct}/${selects.length}.</strong> Revisa sobretot les preguntes d'interpretació.`;
+  } else {
+    feedback2.classList.add("bad");
+    feedback2.innerHTML = `<strong>Cal tornar a escoltar el vídeo complet.</strong> Fixa't en l'ordre dels fets i en què fa el policia.`;
+  }
+}
+
+function showEx2() {
+  const selects = document.querySelectorAll(".mc");
+
+  selects.forEach(select => {
+    select.value = select.dataset.answer;
+    select.style.background = "#f0fff2";
+    select.style.borderColor = "#35a853";
+
+    const fb = select.nextElementSibling;
+    fb.className = "mc-feedback ok";
+    fb.textContent = "Resposta correcta. " + select.dataset.feedback;
+  });
+
+  score2.textContent = `Puntuació: ${selects.length}/${selects.length}`;
+  feedback2.className = "feedback ok";
+  feedback2.innerHTML = `<strong>Respostes mostrades.</strong>`;
+}
+
+function resetEx2() {
+  const selects = document.querySelectorAll(".mc");
+
+  selects.forEach(select => {
+    select.value = "";
+    select.style.background = "white";
+    select.style.borderColor = "#e2d28d";
+
+    const fb = select.nextElementSibling;
+    fb.className = "mc-feedback";
+    fb.textContent = "";
+  });
+
+  score2.textContent = "Puntuació: 0/10";
+  feedback2.className = "feedback";
+  feedback2.innerHTML = "";
+}
+
+function checkEx3() {
+  const inputs = document.querySelectorAll(".gap3");
+  let correct = 0;
+
+  inputs.forEach(input => {
+    const user = normalise(input.value);
+    const answer = normalise(input.dataset.answer);
+
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+
+    if (!user) {
+      input.style.background = "#fff8df";
+      input.style.borderColor = "#d59b2d";
+    } else if (user === answer) {
+      correct++;
+      input.style.background = "#f0fff2";
+      input.style.borderColor = "#35a853";
+    } else {
+      input.style.background = "#fff0f0";
+      input.style.borderColor = "#cc3d3d";
+    }
+  });
+
+  score3.textContent = `Puntuació: ${correct}/${inputs.length}`;
+  feedback3.className = "feedback";
+
+  if (correct === inputs.length) {
+    feedback3.classList.add("ok");
+    feedback3.innerHTML = `<strong>Excel·lent.</strong> Has passat correctament del perfet al passat perifràstic.`;
+  } else if (correct >= Math.ceil(inputs.length / 2)) {
+    feedback3.classList.add("partial");
+    feedback3.innerHTML = `<strong>Bona feina: ${correct}/${inputs.length}.</strong> Revisa les formes marcades.`;
+  } else {
+    feedback3.classList.add("bad");
+    feedback3.innerHTML = `<strong>Cal practicar més.</strong> Recorda l’estructura: vaig / vas / va / vam / vau / van + infinitiu.`;
+  }
+}
+
+function showEx3() {
+  const inputs = document.querySelectorAll(".gap3");
+
+  inputs.forEach(input => {
+    input.value = input.dataset.answer;
+    input.style.background = "#f0fff2";
+    input.style.borderColor = "#35a853";
+  });
+
+  score3.textContent = `Puntuació: ${inputs.length}/${inputs.length}`;
+  feedback3.className = "feedback ok";
+  feedback3.innerHTML = `<strong>Respostes mostrades.</strong> Llegeix el resum en veu alta i fixa't en el passat perifràstic.`;
+}
+
+function resetEx3() {
+  const inputs = document.querySelectorAll(".gap3");
+
+  inputs.forEach(input => {
+    input.value = "";
+    input.style.background = "#fffdf5";
+    input.style.borderColor = "#e2d28d";
+  });
+
+  score3.textContent = "Puntuació: 0/11";
+  feedback3.className = "feedback";
+  feedback3.innerHTML = "";
+}
+</script>
+
+</body>
+</html>
