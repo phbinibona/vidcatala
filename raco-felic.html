@@ -1,0 +1,65 @@
+<!doctype html><html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VidCatalà · Racó feliç · Revisió 09.11.2026</title><style>:root{font-family:Arial,sans-serif;color:#263445;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}header{background:#ffcc00;padding:15px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}header a{color:#243348;font-weight:700;text-decoration:none}h1{font-size:1.5rem;margin:0}main{max-width:1260px;margin:auto;padding:20px;display:grid;grid-template-columns:minmax(300px,44%) 1fr;gap:22px;align-items:start}.media{position:sticky;top:12px;background:white;border-radius:14px;padding:15px;box-shadow:0 3px 16px #0001}video{display:block;width:100%;aspect-ratio:1 / 1;object-fit:contain;border-radius:8px;background:#111}.lyrics{max-height:260px;overflow:auto;overscroll-behavior:contain;overflow-anchor:none;background:#f6f8fb;padding:12px;border-radius:9px;font-size:.91rem;line-height:1.5}.line{padding:5px 7px;border-radius:6px}.lyric-pair{display:block;width:100%;margin:0;padding:0;text-align:left;background:transparent;color:inherit;font-weight:normal;line-height:inherit}.lyric-pair .line{display:block}.lyric-pair.active .ca{background:#fff1ad}.lyric-pair.active .en{background:#dcecff}.ca{color:#174e8d;font-weight:650}.en{color:#555;font-style:italic}.si{background:#ffdf67;border-radius:3px;padding:0 3px}.card{background:white;border-radius:14px;padding:20px;margin-bottom:17px;box-shadow:0 3px 16px #0001}h2{font-size:1.13rem;color:#214d80;margin:0 0 12px}.hint{font-size:.91rem;color:#5b6570}.question{padding:10px 0;border-top:1px solid #e9edf2}select,button{font:inherit;border:1px solid #b9c4d0;border-radius:7px;padding:7px;background:white}button.sync{padding:4px 7px;margin:0 3px;font-size:.8rem}button{background:#ffcc00;border:none;font-weight:bold;cursor:pointer;margin-top:12px}.feedback{font-weight:bold;margin-top:10px}.correct{color:#15713b}.wrong{color:#a52c32}@media(max-width:800px){main{display:block;padding:10px}.media{position:sticky;top:0;z-index:2;padding:9px;margin-bottom:12px}.lyrics{max-height:120px}.card{padding:15px}}</style></head><body><header><a href="/tots#cancons">← Cançons</a><h1>Racó feliç</h1><span>Català · English · Revisió 09.11.2026</span></header><main><section class="media"><video id="video" controls playsinline preload="metadata"><source src="assets/raco-felic.mp4" type="video/mp4">El navegador no admet aquest vídeo.</video><p class="hint">La lletra segueix el vídeo. Es destaca la parella activa, amb el català en groc i l’anglès en blau. Fes clic en una parella per escoltar-la.</p><div class="lyrics" id="lyrics" aria-label="Lletra sincronitzada"></div></section><section><div class="card"><h2>GRAMÀTICA · Abans de començar: les frases amb «si»</h2><p>En català, les condicions hipotètiques solen expressar-se amb <b>si + imperfet de subjuntiu</b> (<i>si volguessis, si poguéssim</i>) i una conseqüència en <b>condicional</b> (<i>t'acompanyaria, ballaríem</i>). En anglès trobem una estructura paral·lela: <i>if you wanted … I would accompany you</i>.</p><p>Per a una possibilitat real de futur, fem servir <b>si + present d’indicatiu</b> i <b>futur</b> a la conseqüència: <i>Si vens, t’ajudaré</i> (If you come, I will help you). Per a una situació imaginada: <i>Si vinguessis, t’ajudaria</i> (If you came, I would help you). Després, la lletra també inclou <i>si fes</i> i <i>si tot fos possible</i>. Cal distingir-les de les formes de futur (<i>batejarà, quedarem, serà</i>) que també apareixen al vídeo: no totes les conseqüències segueixen el model canònic.</p></div><div class="card"><h2>1 · Les frases condicionals amb «si» · pràctica ampliada</h2><p>Observa el model: <b>Si tu volguessis</b> volar ben lluny, jo <b>t'acompanyaria</b>.</p><p class="hint">Completa les frases amb la forma verbal adequada. Fixa't en la combinació <b>si + imperfet de subjuntiu → condicional</b>.</p><div id="grammar"></div><button onclick="check('grammar')">Comprova</button><div id="grammar-feedback" class="feedback" aria-live="polite"></div></div><div class="card"><h2>2 · Condició real i hipotètica: present, futur i condicional</h2><p class="hint">Contrasta <b>si + present → futur</b> (possibilitat real) amb <b>si + imperfet de subjuntiu → condicional</b> (situació hipotètica). Tria la forma adequada.</p><div id="translation"></div><button onclick="check('translation')">Comprova</button><div id="translation-feedback" class="feedback" aria-live="polite"></div></div><div class="card"><h2>3 · Escolta i interpreta</h2><p class="hint">Escolta la cançó i tria la interpretació més adequada.</p><div id="meaning"></div><button onclick="check('meaning')">Comprova</button><div id="meaning-feedback" class="feedback" aria-live="polite"></div></div></section></main><script>
+const lines=[{"time": 9.1, "text": "Si tu volguessis volar ben lluny ara", "lang": "ca"}, {"time": 9.1, "text": "If you wanted to fly far away now", "lang": "en"}, {"time": 11.387, "text": "Jo t'acompanyaria fins al cel", "lang": "ca"}, {"time": 13.675, "text": "I'd accompany you to the sky", "lang": "en"}, {"time": 15.962, "text": "Si fes el pas definitiu del tot", "lang": "ca"}, {"time": 18.25, "text": "If you took the final step completely", "lang": "en"}, {"time": 20.537, "text": "El meu cor per tu sempre batejarà", "lang": "ca"}, {"time": 22.825, "text": "My heart for you would always beat", "lang": "en"}, {"time": 25.112, "text": "Si et decidissis a fer el salt", "lang": "ca"}, {"time": 27.4, "text": "If you decided to take the leap", "lang": "en"}, {"time": 29.7, "text": "Jo t'agafaria la mà i ballaríem", "lang": "ca"}, {"time": 32.0, "text": "I'd take your hand and we would dance", "lang": "en"}, {"time": 34.3, "text": "Si tu volguessis volar ben lluny ara", "lang": "ca"}, {"time": 36.6, "text": "If you wanted to fly far away now", "lang": "en"}, {"time": 38.888, "text": "Jo t'acompanyaria fins al cel", "lang": "ca"}, {"time": 41.175, "text": "I'd accompany you to the sky", "lang": "en"}, {"time": 43.462, "text": "Si fes el pas definitiu del tot", "lang": "ca"}, {"time": 45.75, "text": "If you took the final step completely", "lang": "en"}, {"time": 48.038, "text": "El meu cor per tu sempre batejarà", "lang": "ca"}, {"time": 50.325, "text": "My heart for you would always beat", "lang": "en"}, {"time": 52.612, "text": "Si poguéssim aturar el temps avui", "lang": "ca"}, {"time": 54.9, "text": "If we could stop time today", "lang": "en"}, {"time": 57.175, "text": "En aquest racó feliç ens quedarem", "lang": "ca"}, {"time": 59.45, "text": "In this happy corner we would stay", "lang": "en"}, {"time": 61.725, "text": "Si tu volguessis volar ben lluny ara", "lang": "ca"}, {"time": 64.0, "text": "If you wanted to fly far away now", "lang": "en"}, {"time": 66.287, "text": "Jo t'acompanyaria fins al cel", "lang": "ca"}, {"time": 68.575, "text": "I'd accompany you to the sky", "lang": "en"}, {"time": 70.862, "text": "Si fes el pas definitiu del tot", "lang": "ca"}, {"time": 73.15, "text": "If you took the final step completely", "lang": "en"}, {"time": 75.438, "text": "El meu cor per tu sempre batejarà", "lang": "ca"}, {"time": 77.725, "text": "My heart for you would always beat", "lang": "en"}, {"time": 80.012, "text": "I si tot fos possible viure així", "lang": "ca"}, {"time": 82.3, "text": "And if everything were possible to live like this", "lang": "en"}, {"time": 86.875, "text": "Quin regal serà nostre amor avui", "lang": "ca"}, {"time": 91.45, "text": "What a gift our love will be today", "lang": "en"}];
+const lyrics = document.getElementById('lyrics');
+const video = document.getElementById('video');
+const pairs = [];
+for (let index = 0; index < lines.length; index += 2) {
+  const catalan = lines[index];
+  const english = lines[index + 1];
+  const row = document.createElement('button');
+  row.type = 'button';
+  row.className = 'lyric-pair';
+
+  const original = document.createElement('span');
+  original.className = 'line ca';
+  catalan.text.split(/(\bsi\b)/gi).forEach((part, index) => {
+    if (index % 2 === 0) {
+      original.append(part);
+    } else {
+      const emphasis = document.createElement('span');
+      emphasis.className = 'si';
+      emphasis.textContent = part;
+      original.append(emphasis);
+    }
+  });
+
+  const translation = document.createElement('span');
+  translation.className = 'line en';
+  translation.lang = 'en';
+  translation.textContent = english.text;
+  row.append(original, translation);
+  lyrics.append(row);
+  pairs.push({start: catalan.time, row});
+
+  row.addEventListener('click', () => {
+    video.currentTime = catalan.time;
+    followLyrics();
+    video.play().catch(() => {});
+  });
+}
+
+let activeRow;
+function followLyrics() {
+  const nextRow = pairs.findLast(pair => pair.start <= video.currentTime)?.row;
+  if (nextRow === activeRow) return;
+
+  activeRow?.classList.remove('active');
+  activeRow?.removeAttribute('aria-current');
+  activeRow = nextRow;
+
+  if (!activeRow) {
+    lyrics.scrollTop = 0;
+    return;
+  }
+
+  activeRow.classList.add('active');
+  activeRow.setAttribute('aria-current', 'true');
+  const distance = activeRow.getBoundingClientRect().top - lyrics.getBoundingClientRect().top;
+  lyrics.scrollTop += distance - (lyrics.clientHeight - activeRow.offsetHeight) / 2;
+}
+
+for (const event of ['loadedmetadata', 'timeupdate', 'seeking', 'seeked']) {
+  video.addEventListener(event, followLyrics);
+}
+const data={grammar:[['Si tu ___ volar ben lluny, jo t’acompanyaria.','volguessis','vols','voldràs'],['Si ___ aturar el temps, ens quedaríem aquí.','poguéssim','podem','podrem'],['Si et decidissis, jo t’___ la mà.','agafaria','agafo','agafaré'],['Si tot ___ possible, viuríem així.','fos','és','serà'],['Si volguessis ballar, nosaltres ___.','ballaríem','ballem','ballarem'],['Si jo ___ més temps, vindria amb tu.','tingués','tinc','tindré'],['Si nosaltres ___ aquí, seríem feliços.','visquéssim','vivim','viurem'],['Si ella ho ___, t’ajudaria.','sabés','sap','sabrà'],['Si vosaltres ___ venir, us esperaríem.','poguéssiu','podeu','podreu']],translation:[['Si demà ___ bon temps, anirem a la platja.','fa','fes','farà'],['Si demà fa bon temps, nosaltres ___ a la platja.','anirem','aniríem','anem'],['Si demà ___ bon temps, aniríem a la platja.','fes','fa','farà'],['Si poguéssim aturar el temps, ens ___ aquí.','quedaríem','quedarem','quedem'],['Si em truques demà, et ___.','respondré','respondria','respongués'],['Si em ___ demà, et respondria.','truquessis','truques','trucaràs'],['If you come tomorrow, I will help you. → Si vens demà, t’___.','ajudaré','ajudaria','ajudés'],['If you came tomorrow, I would help you. → Si vinguessis demà, t’___.','ajudaria','ajudaré','ajudo']],meaning:[['Quina idea expressa «volar ben lluny»?','El desig de llibertat i d’aventura','Un viatge amb avió ja reservat','La por de les altures'],['Què suggereix «aturar el temps»?','Voler prolongar un moment feliç','Arribar tard a una cita','Oblidar una data'],['Quina funció té la repetició de «si»?','Imaginar possibilitats i situacions hipotètiques','Enumerar fets històrics','Donar ordres directes']]};Object.entries(data).forEach(([key,qs])=>{document.getElementById(key).innerHTML=qs.map((q,i)=>{let options=q.slice(1).map((v,j)=>({v,j})).sort((a,b)=>((i*3+a.j*7)%5)-((i*3+b.j*7)%5));return `<div class="question"><label>${i+1}. ${q[0]}<br><select data-answer="${q[1].replaceAll('"','&quot;')}"><option value="">— Tria una resposta —</option>${options.map(o=>`<option value="${o.v.replaceAll('"','&quot;')}">${o.v}</option>`).join('')}</select></label></div>`}).join('')});function check(key){let sel=[...document.querySelectorAll('#'+key+' select')],n=sel.filter(s=>s.value===s.dataset.answer).length;let f=document.getElementById(key+'-feedback');f.textContent=`${n} de ${sel.length} respostes correctes.`;f.className='feedback '+(n===sel.length?'correct':'wrong');sel.forEach(s=>s.style.borderColor=s.value===s.dataset.answer?'#23844b':'#c45353')}
+</script></body></html>
