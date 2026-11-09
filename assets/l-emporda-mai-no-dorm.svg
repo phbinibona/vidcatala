@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+<title id="title">L'Empordà mai no dorm</title><desc id="desc">Un arbre sotmès a la tramuntana davant d'un paisatge tempestuós</desc>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#17283e"/><stop offset=".75" stop-color="#4c5b68"/><stop offset="1" stop-color="#86929a"/></linearGradient>
+<linearGradient id="land" x2="0" y2="1"><stop stop-color="#645d4e"/><stop offset="1" stop-color="#2f332c"/></linearGradient></defs>
+<rect width="600" height="600" fill="url(#sky)"/>
+<path d="M0 365 Q120 330 195 370 Q300 320 410 365 Q500 335 600 350 L600 600 H0Z" fill="url(#land)"/>
+<g fill="none" stroke="#c5d0cf" stroke-width="3" opacity=".55"><path d="M350 125 Q410 118 530 90"/><path d="M375 190 Q460 173 586 149"/><path d="M290 220 Q405 211 565 191"/><path d="M320 277 Q435 258 591 251"/></g>
+<path d="M284 475 Q279 414 281 371 Q265 333 260 285 Q254 255 220 233 M281 370 Q300 328 307 280 Q309 250 358 219 M282 339 Q243 306 202 310 M308 279 Q332 256 362 260 M261 285 Q234 257 194 250 M250 300 Q239 273 216 258" fill="none" stroke="#463a29" stroke-width="28" stroke-linecap="round"/>
+<g fill="none" stroke="#607557" stroke-width="10" stroke-linecap="round"><path d="M218 224 Q181 190 130 193 M229 245 Q180 235 131 231 M305 249 Q360 212 422 211 M310 290 Q359 273 446 268 M190 252 Q143 246 112 253 M361 256 Q412 244 493 225"/></g>
+<g fill="none" stroke="#84976f" stroke-width="4"><path d="M140 193 l-22 -20 m25 21 l-25 6 m88 35 l-21 -21 m178 3 l23 -23 m-21 33 l31 -12 m-60 60 l31 -28 m-240 12 l-22 9 m-10 -25 l-17 -13"/></g>
+<rect x="25" y="25" width="550" height="75" rx="10" fill="#0b2032" opacity=".73"/>
+<text x="300" y="73" fill="#ffdf73" font-size="34" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">L’EMPORDÀ MAI NO DORM</text>
+<path d="M0 500 Q160 470 330 490 T600 474 L600 600 H0Z" fill="#3b3c32"/>
+</svg>
