@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VidCatalà · L’Empordà mai no dorm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{font:15px/1.55 Quicksand,Arial,sans-serif;color:#293749;background:#f5f5f1}
+*{box-sizing:border-box}body{margin:0}header{background:#ffcc00;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+header a{text-decoration:none;color:#2a2a2a;font-weight:700}header .back{font-size:.87rem;background:#fff8df;padding:8px 13px;border-radius:25px}
+.intro{max-width:1250px;margin:auto;padding:19px 16px 5px}.intro h1{font-size:clamp(1.35rem,3vw,2rem);color:#21486d;margin:0 0 5px}.intro p{color:#526170;margin:0;font-size:.92rem}.badge{color:#5a4800;background:#ffe797;border-radius:25px;padding:3px 10px;font-weight:700;font-size:.78rem;display:inline-block;margin-bottom:5px}
+main{max-width:1250px;margin:auto;padding:12px 15px 35px;display:grid;grid-template-columns:minmax(310px,43%) minmax(0,1fr);gap:18px;align-items:start}
+.media{position:sticky;top:10px;background:white;border-radius:13px;padding:13px;box-shadow:0 3px 14px #0001;min-width:0}
+.video-wrap{position:relative}video{width:min(100%,39dvh,340px);aspect-ratio:1/1;object-fit:contain;display:block;margin:auto;background:#152337;border-radius:8px}
+.video-warning{display:none;border-radius:9px;padding:12px;background:#fff2d1;color:#754c05;font-size:.84rem;margin:10px 0}
+.lyrics-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 1px 7px}
+.lyrics-title h2{font-size:.99rem;color:#234f7c;margin:0}.lyrics-title span{font-size:.76rem;color:#6b7686}
+.lyrics{height:clamp(155px,28vh,270px);overflow:auto;overscroll-behavior:contain;background:#f5f7fb;border:1px solid #dfe7ee;border-radius:8px;padding:5px;scroll-behavior:smooth}
+.line{border:0;border-bottom:1px solid #e1e6ee;background:transparent;color:#30496b;font:inherit;font-size:.83rem;text-align:left;display:block;width:100%;padding:6px 9px;line-height:1.38;cursor:pointer;border-radius:4px}
+.line:hover,.line:focus-visible{background:#e7f0fa}.line.active{background:#ffe48b;color:#3a3000;font-weight:700;outline:2px solid #d8b027;outline-offset:-2px}
+.line.active:before{content:"♪ ";color:#695200}.note{font-size:.77rem;color:#647084;margin:6px 1px 0}
+.card{background:white;border-radius:13px;padding:18px 20px;margin-bottom:16px;box-shadow:0 3px 14px #0001;border:1px solid #edf0f4}
+.card h2{font-size:1.13rem;color:#214e7b;margin:0 0 10px}.card p{margin:0 0 11px}
+.reading{background:#fbfdff}.reading p{font-size:.92rem;line-height:1.72}.reading strong{color:#17466e}
+.q{padding:10px 0;border-top:1px solid #e8edf3}.q label{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.q select{font:inherit;border:1px solid #b1c1d0;border-radius:7px;background:#fff;padding:8px;width:100%;color:#23384d;font-size:.88rem}
+.q.correct select{background:#eefbf3;border-color:#148454}.q.wrong select{background:#fff5e9;border-color:#bb773c}
+.answer{display:none;font-size:.83rem;color:#34648b;margin-top:5px}.q.wrong .answer{display:block}
+.check{background:#ffcc00;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;font:inherit;font-weight:700;margin-top:10px;color:#302a18}
+.feedback{min-height:16px;font-size:.86rem;font-weight:700;margin:9px 0 0}.feedback.good{color:#0b7952}.feedback.try{color:#a15e13}
+.small{font-size:.85rem;color:#657384}textarea{font:inherit;border:1px solid #bbcad8;border-radius:8px;width:100%;padding:10px;min-height:75px;resize:vertical}
+blockquote{border-left:4px solid #ffcc00;margin:9px 0 0;padding:9px 13px;background:#fff9e9;font-size:.88rem}
+footer{text-align:center;font-size:.82rem;color:#66717c;padding:10px 12px 27px}
+@media(max-width:850px){main{display:block;padding:8px 11px 25px}.intro{padding:12px 12px 5px}.media{position:sticky;top:0;z-index:5;padding:9px;margin-bottom:13px;box-shadow:0 5px 16px #0002}video{width:min(100%,29dvh,270px)}.lyrics{height:clamp(85px,18vh,140px)}.line{padding:5px 7px;font-size:.77rem}.card{padding:15px}}
+@media(max-width:410px){header{padding:9px 11px}header .back{font-size:.78rem;padding:7px}.intro p{font-size:.87rem}}
+</style></head>
+<body>
+<header><a href="/">VidCatalà</a><a class="back" href="/tots#cancons">← Totes les cançons</a></header>
+<div class="intro"><span class="badge">B1 · Cançons i cultura</span><h1>L’Empordà mai no dorm</h1><p>Una cançó sobre la tramuntana, el paisatge i la identitat empordanesa. Escolta-la i descobreix aquesta regió amb tres activitats.</p></div>
+<main>
+<aside class="media">
+<div class="video-wrap"><video id="song" controls playsinline preload="metadata" poster="assets/l-emporda-mai-no-dorm.svg" aria-label="Vídeo de L’Empordà mai no dorm"><source src="assets/l-emporda-mai-no-dorm.mp4" type="video/mp4">El teu navegador no admet vídeos.</video></div>
+<div class="video-warning" id="video-warning" role="status">El vídeo encara no s’ha carregat al lloc web. Mentrestant, pots llegir el text i fer els exercicis.</div>
+<div class="lyrics-title"><h2>♪ Lletra sincronitzada</h2><span id="status">Prem ▶ per escoltar</span></div>
+<div class="lyrics" id="lyrics" aria-label="Lletra de la cançó"></div>
+<p class="note">El vers actiu apareix ressaltat en groc. Fes clic en una línia per anar a aquell moment de la cançó.</p>
+</aside>
+<div class="right">
+<section class="card reading"><h2>Descobreix l’Empordà</h2>
+<p>L’<strong>Empordà</strong> és una regió del nord-est de Catalunya situada entre els Pirineus i la mar Mediterrània. Comprèn dues comarques: l’<strong>Alt Empordà</strong>, amb capital a Figueres, i el <strong>Baix Empordà</strong>, amb capital a la Bisbal d’Empordà. El paisatge és molt variat: planes obertes, camps de vinya, oliveres, boscos d’alzines, pobles de pedra i cales a la costa.</p>
+<p>Un dels grans protagonistes és la <strong>tramuntana</strong>, un vent del nord que pot bufar amb molta força. A vegades dificulta la vida quotidiana, però també ha deixat una empremta profunda en la cultura i en la manera de descriure el territori. A la cançó, el vent sembla tenir personalitat pròpia: sacseja els arbres, neteja el cel i es converteix en símbol de llibertat i de resistència.</p>
+<p>L’Empordà és també una terra relacionada amb l’art i la literatura. El pintor <strong>Salvador Dalí</strong> va néixer a Figueres; l’escriptor <strong>Josep Pla</strong>, famós sobretot per la seva prosa, estava vinculat a Palafrugell i a Llofriu. La comarca conserva una forta tradició de masos, petits pobles i activitats agrícoles.</p>
+<p>A la costa, el <strong>cap de Creus</strong> és conegut pels penya-segats i les formes de les roques. Més al sud, els <strong>Aiguamolls de l’Empordà</strong> són una zona humida d’una gran riquesa natural, especialment important per als ocells. Pedra, vent, mar i memòria: aquests són alguns dels elements que la cançó reuneix per crear una imatge molt intensa de la regió.</p>
+</section>
+<section class="card exercise" data-exercise="comprensio"><h2>1 · Què saps de l’Empordà?</h2><p class="small">Llegeix el text i tria l’opció correcta.</p>
+<div class="q" data-answer="b"><label for="q1">1. On es troba l’Empordà?</label><select id="q1"><option value="">Tria una resposta…</option><option value="a">A les Illes Balears</option><option value="b">Al nord-est de Catalunya</option><option value="c">Al sud del País Valencià</option></select><span class="answer">L’Empordà és al nord-est de Catalunya.</span></div>
+<div class="q" data-answer="c"><label for="q2">2. Com s’anomenen les dues comarques?</label><select id="q2"><option value="">Tria una resposta…</option><option value="a">Alt Urgell i Baix Camp</option><option value="b">Gironès i Garrotxa</option><option value="c">Alt Empordà i Baix Empordà</option></select><span class="answer">Són l’Alt Empordà i el Baix Empordà.</span></div>
+<div class="q" data-answer="a"><label for="q3">3. Què és la tramuntana?</label><select id="q3"><option value="">Tria una resposta…</option><option value="a">Un vent del nord</option><option value="b">Una muntanya</option><option value="c">Una mena de bosc</option></select><span class="answer">És un vent del nord, de vegades molt fort.</span></div>
+<div class="q" data-answer="b"><label for="q4">4. Quin artista va néixer a Figueres?</label><select id="q4"><option value="">Tria una resposta…</option><option value="a">Joan Miró</option><option value="b">Salvador Dalí</option><option value="c">Antoni Gaudí</option></select><span class="answer">Salvador Dalí va néixer a Figueres.</span></div>
+<div class="q" data-answer="c"><label for="q5">5. Per què són coneguts els Aiguamolls de l’Empordà?</label><select id="q5"><option value="">Tria una resposta…</option><option value="a">Per les pistes d’esquí</option><option value="b">Per les mines de carbó</option><option value="c">Per les zones humides i els ocells</option></select><span class="answer">Són una zona humida molt important per als ocells.</span></div>
+<button class="check" type="button">Comprova les respostes</button><p class="feedback" role="status"></p></section>
+<section class="card exercise" data-exercise="vocabulari"><h2>2 · El llenguatge del paisatge</h2><p class="small">Relaciona les paraules de la cançó amb les definicions.</p>
+<div class="q" data-answer="b"><label for="v1">1. Recer</label><select id="v1"><option value="">Tria una definició…</option><option value="a">Un camp amb ceps</option><option value="b">Un lloc on protegir-se del vent</option><option value="c">Una casa rural</option><option value="d">Una llum durant una tempesta</option></select><span class="answer">El recer és un lloc protegit.</span></div>
+<div class="q" data-answer="a"><label for="v2">2. Vinya</label><select id="v2"><option value="">Tria una definició…</option><option value="a">Un camp amb ceps</option><option value="b">Un lloc on protegir-se del vent</option><option value="c">Una casa rural</option><option value="d">Una llum durant una tempesta</option></select><span class="answer">A la vinya es cultiva raïm.</span></div>
+<div class="q" data-answer="c"><label for="v3">3. Mas</label><select id="v3"><option value="">Tria una definició…</option><option value="a">Un camp amb ceps</option><option value="b">Un lloc on protegir-se del vent</option><option value="c">Una casa rural</option><option value="d">Una llum durant una tempesta</option></select><span class="answer">Un mas és una casa rural.</span></div>
+<div class="q" data-answer="d"><label for="v4">4. Llamp</label><select id="v4"><option value="">Tria una definició…</option><option value="a">Un camp amb ceps</option><option value="b">Un lloc on protegir-se del vent</option><option value="c">Una casa rural</option><option value="d">Una llum durant una tempesta</option></select><span class="answer">Un llamp és una descàrrega elèctrica lluminosa.</span></div>
+<button class="check" type="button">Comprova les respostes</button><p class="feedback" role="status"></p></section>
+<section class="card exercise" data-exercise="canço"><h2>3 · Escolta i interpreta la cançó</h2><p class="small">Busca els versos corresponents i pensa què expressen.</p>
+<div class="q" data-answer="b"><label for="s1">1. Quina imatge ens mostra la força del vent?</label><select id="s1"><option value="">Tria una resposta…</option><option value="a">La vinya creix al costat del mar</option><option value="b">Les alzines es dobleguen</option><option value="c">Els ocells descansen als aiguamolls</option></select><span class="answer">«Les alzines es dobleguen sota el jou del vent».</span></div>
+<div class="q" data-answer="a"><label for="s2">2. Quins dos elements del paisatge apareixen «lligats de per vida»?</label><select id="s2"><option value="">Tria una resposta…</option><option value="a">La pedra i la mar</option><option value="b">Les vinyes i els ocells</option><option value="c">La pluja i la neu</option></select><span class="answer">La cançó diu «Pedra i mar lligades de per vida».</span></div>
+<div class="q" data-answer="c"><label for="s3">3. Amb què es compara el caràcter de la gent?</label><select id="s3"><option value="">Tria una resposta…</option><option value="a">Amb el silenci dels pobles</option><option value="b">Amb els rius i les flors</option><option value="c">Amb les roques i el vent</option></select><span class="answer">«Tan durs com les roques i tan lliures com aquest vent».</span></div>
+<div class="q" data-answer="a"><label for="s4">4. Quin sentit té la frase «L’Empordà mai no dorm»?</label><select id="s4"><option value="">Tria una resposta…</option><option value="a">Evoca un paisatge sempre viu i en moviment</option><option value="b">Significa que totes les botigues obren de nit</option><option value="c">Explica que la població dorm poc</option></select><span class="answer">És una expressió poètica que presenta una terra plena de vida.</span></div>
+<button class="check" type="button">Comprova les respostes</button><p class="feedback" role="status"></p></section>
+<section class="card"><h2>4 · I tu, què en penses?</h2><p>La cançó presenta la tramuntana com un element que ajuda a forjar el caràcter de la gent. Creus que el paisatge i el clima poden influir en la identitat d’un poble? Escriu tres o quatre frases i compara les teves idees amb les d’un company.</p><textarea aria-label="La teva resposta" placeholder="Jo crec que... / Per exemple... / En canvi..."></textarea><blockquote>Repte B1: utilitza <strong>encara que</strong>, <strong>per això</strong> o <strong>en canvi</strong>.</blockquote></section>
+</div></main><footer>VidCatalà · Aprèn català amb cançons, vídeos i cultura</footer>
+<script>
+const song=document.getElementById('song'), box=document.getElementById('lyrics'), status=document.getElementById('status');
+const verses=[
+[0,"Camins de pols de suro i sal"],
+[5.45,"El cel s'atura de cop i s'apaga"],
+[10.9,"Les alzines es dobleguen sota el jou del vent"],
+[16.35,"I la mar amaga secrets de fusta i de gent"],
+[21.8,"No hi ha recer possible en aquesta plana oberta"],
+[27.25,"On la mirada es perd en una claredat deserta"],
+[32.7,"Tot recordant els versos del gran poeta de Llofriu"],
+[38.15,"Descobrim que la pedra és l'únic que es manté viu"],
+[43.6,"Un paisatge de suro, de vinya i d'oliveres velles"],
+[49.05,"Que s'allarga fins a fregar un univers d'estrelles"],
+[54.5,"Bona tramuntana que tot ho esborra"],
+[59.975,"Vent que neteja el cor i la porra"],
+[65.45,"Pedra i mar lligades de per vida"],
+[70.925,"En aquesta terra mai no oblidada"],
+[76.4,"L'home del mas s'arrecera darrere dels gruixuts murs"],
+[81.85,"Mentre els records s'acumulen en els racons foscs i obscurs"],
+[87.3,"S'olora ja de lluny l'olor a garbell i a terra molla"],
+[92.75,"Mentre la tramuntana implacable tot ho despulla i degolla"],
+[98.2,"No hi ha treva possible ni per a l'ànima ni per al camp"],
+[103.65,"Quan el cel s'il·lumina de sobte amb el primer llamp"],
+[109.1,"Així s'ha forjat el caràcter d'aquesta petita gent"],
+[114.55,"Tan durs com les roques i tan lliures com aquest vent"],
+[120,"Bona tramuntana que tot ho esborra"],
+[125.45,"Vent que neteja el cor i la porra"],
+[130.9,"Pedra i mar lligades de per vida"],
+[136.35,"En aquesta terra mai no oblidada"],
+[141.8,"L'Empordà mai no dorm sota el gran cel de blau intens"],
+[147.3,"En aquesta terra mai no oblidada · L'Empordà mai no dorm sota el gran cel de blau intens"]
+];
+const buttons=verses.map(([time,line])=>{const b=document.createElement('button');b.className='line';b.type='button';b.textContent=line;b.addEventListener('click',()=>{song.currentTime=time;if(song.paused)song.play().catch(()=>{});sync();});box.appendChild(b);return b;});
+let current=-1;
+function sync(){const t=song.currentTime;let i=0;for(let j=0;j<verses.length;j++){if(verses[j][0]<=t)i=j;else break}
+if(i!==current){buttons.forEach(b=>b.classList.remove('active'));buttons[i].classList.add('active');current=i;buttons[i].scrollIntoView({block:'nearest',behavior:'smooth'});}
+status.textContent=song.paused?'Pausa':'Seguint la cançó';}
+song.addEventListener('timeupdate',sync);song.addEventListener('seeked',sync);song.addEventListener('play',sync);
+song.addEventListener('error',()=>{document.getElementById('video-warning').style.display='block';status.textContent='Vídeo pendent';});
+song.addEventListener('ended',()=>status.textContent='Cançó acabada');
+document.querySelectorAll('.exercise').forEach(section=>{section.querySelector('.check').addEventListener('click',()=>{let correct=0;const qs=[...section.querySelectorAll('.q')];qs.forEach(q=>{const value=q.querySelector('select').value;const ok=value===q.dataset.answer;if(ok)correct++;q.classList.toggle('correct',ok);q.classList.toggle('wrong',!!value&&!ok);});const out=section.querySelector('.feedback');out.textContent=correct===qs.length?'Molt bé! '+correct+' de '+qs.length+' respostes correctes.':'Has encertat '+correct+' de '+qs.length+'. Torna a consultar el text o la cançó.';out.className='feedback '+(correct===qs.length?'good':'try');});});
+</script></body></html>
