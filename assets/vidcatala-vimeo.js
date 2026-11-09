@@ -9,7 +9,7 @@ function createVidcatVimeoPlayer(iframe) {
   const status = document.createElement("p");
   status.className = "vimeo-status";
   status.setAttribute("role", "status");
-  status.hidden = true;
+  status.textContent = "Prem Reprodueix al vídeo una vegada per activar els botons dels fragments.";
   iframe.parentElement.after(status);
 
   function reportFailure() {
@@ -57,6 +57,7 @@ function createVidcatVimeoPlayer(iframe) {
         }
         seek = null;
         await player.play();
+        if (await player.getPaused() && playback === request) reportFailure();
       } catch {
         if (playback === request) {
           seek = null;
