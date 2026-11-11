@@ -1,0 +1,67 @@
+<!doctype html><html lang="ca" translate="no"><meta charset="utf-8"><meta name="google" content="notranslate"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VidCatalà · Un amic al llac daurat</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f6f3;color:#283440;font:16px/1.5 system-ui,sans-serif}header{background:#fc0;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}header a{color:inherit;font-weight:700;text-decoration:none}h1{font-size:1.35rem;margin:0}main{max-width:1200px;margin:auto;padding:16px;display:grid;grid-template-columns:minmax(250px,42%) 1fr;gap:18px;align-items:start}aside,.card{background:white;border-radius:12px;padding:14px;box-shadow:0 3px 14px #0001}aside{position:sticky;top:8px}video{display:block;width:min(55%,260px);aspect-ratio:1;margin:auto;border-radius:8px;background:#111}.lyrics{max-height:10rem;overflow:auto;overflow-anchor:none;background:#f3f6f8;margin-top:8px;padding:5px 8px;border-radius:8px;font-size:.9rem}.lyrics button{display:block;text-align:left;width:100%;padding:3px 6px;background:transparent;font-weight:400}.lyrics button.active{background:#fff0a3;box-shadow:inset 3px 0 #bc8500}.card{margin-bottom:14px}h2{color:#20517a;font-size:1.15rem;margin:0 0 10px}label{display:block;margin:8px 0}select{display:block;max-width:100%;margin-top:4px}button,select{font:inherit;padding:5px 8px;border-radius:6px}button{background:#fc0;border:0;cursor:pointer;font-weight:650}output{display:block;margin-top:6px}select[data-correct=true]{background:#eaf7ee}select[data-correct=false]{background:#fff2ef}@media(max-width:800px){main{display:block;padding:10px}aside{position:static;margin-bottom:12px}header{display:grid;grid-template-columns:1fr auto;padding:10px 12px}header h1{grid-row:2;grid-column:1/-1;font-size:1.15rem}header nav{grid-row:1;grid-column:2}video{width:min(55%,24dvh)}}
+</style>
+<header><a href="https://vidcatala.com/">VidCatalà</a><h1>Un amic al llac daurat</h1><nav><a href="https://vidcatala.com/tots#cancons">← Cançons</a></nav></header>
+<main><aside><video controls playsinline preload="metadata" src="Un_amic_al_llac_daurat.mp4" aria-label="Un amic al llac daurat"></video><div class="lyrics" aria-label="Lletra sincronitzada"></div></aside><section aria-label="Exercicis"><div class="card"><h2>Abans d’escoltar</h2><p>Què pot passar quan un aneguet se sent sol i vol trobar un amic?</p></div><div id="activities"></div></section></main>
+<script>
+const cues = [[12, 14, "En un bonic estany daurat"], [14, 16.0, "viu un aneguet molt bonic"], [16.0, 20.0, "viu un aneguet molt bonic"], [20.0, 24.0, "ell es sent molt abandonat"], [24.0, 28.0, "i vol trobar un bon amic"], [28.0, 32.0, "res no li sembla ben igual"], [32.0, 36.0, "ell camina a poc a poc"], [36.0, 40.0, "creu que el seu món és ideal"], [40.0, 44.0, "però no troba el seu propi lloc"], [44.0, 48.0, "Vola lliure petit ànec blanc"], [48.0, 52.0, "el teu vol és gran i bonic"], [52.0, 56.0, "porta la joia en el teu cant"], [56.0, 60.0, "ara ja tens un bon amic"], [60.0, 64.0, "vola lliure petit ànec blanc"], [64.0, 68.0, "el teu vol és gran i bonic"], [68.0, 72.0, "porta la joia en el teu cant"], [72.0, 76.0, "ara ja tens un bon amic"], [92, 94, "Finalment troba els seus iguals"], [94, 96.0, "en un llac de l'Empordà"], [96.0, 100.0, "en un llac de l'Empordà"], [100.0, 104.0, "els seus amics ja són reals"], [104.0, 108.0, "i amb ells ara pot jugar"], [108.0, 112.0, "mira el seu bell reflex a l'aigua"], [112.0, 116.0, "i somriu de felicitat"], [116.0, 120.0, "la seva ànima ara és lliure"], [120.0, 124.0, "en aquest bonic lloc tancat"], [124.0, 128.0, "Vola lliure petit ànec blanc"], [128.0, 132.0, "el teu vol és gran i bonic"], [132.0, 136.0, "porta la joia en el teu cant"], [136.0, 140.0, "ara ja tens un bon amic"], [140.0, 144.0, "vola lliure petit ànec blanc"], [144.0, 148.0, "el teu vol és gran i bonic"], [148.0, 152.0, "porta la joia en el teu cant"], [152.0, 156.0, "ara ja tens un bon amic"], [156.0, 159.0, "I així acaba la història bonica"], [159.0, 162.0, "de l'ànec que va ser feliç"], [162.0, 165.0, "ara canta de mica en mica"], [165.0, 168.0, "en el seu bell i nou país"]];
+const activities = [["1 · Comprensió de la cançó", [["Com se sent l’aneguet al principi?", ["Abandonat", "Enfadat", "Cansat"], 0], ["Què vol trobar?", ["Un lloc per dormir", "Un bon amic", "Un altre país"], 1], ["On troba els seus iguals?", ["A la mar", "En un riu", "En un llac de l’Empordà"], 2]]], ["2 · Paraules i expressions", [["Què vol dir «de mica en mica»?", ["Molt de pressa", "A poc a poc", "De tant en tant"], 1], ["Què és el «reflex» que veu l’ànec?", ["La seva imatge a l’aigua", "Una ombra entre els arbres", "Un altre ànec"], 0], ["Quina paraula té un significat semblant a «joia»?", ["Por", "Solitud", "Alegria"], 2]]], ["3 · Els possessius", [["L’ànec cerca el ___ propi lloc.", ["teu", "seu", "seus"], 1], ["Ànec blanc, el ___ vol és bonic!", ["teu", "teva", "seva"], 0], ["L’ànec juga amb els ___ amics.", ["seva", "seu", "seus"], 2]]]];
+const player = document.querySelector('video');
+const lyrics = document.querySelector('.lyrics');
+const rows = cues.map(([start, , line]) => {
+  const row = document.createElement('button');
+  row.type = 'button';
+  row.textContent = line;
+  row.onclick = () => { player.currentTime = start; player.play().catch(() => {}); };
+  lyrics.append(row);
+  return row;
+});
+let active = -1;
+function highlight() {
+  const time = player.currentTime;
+  const next = cues.findIndex(([start, end]) => start <= time && time < end);
+  if (next === active) return;
+  rows[active]?.classList.remove('active');
+  active = next;
+  if (active < 0) return;
+  const row = rows[active];
+  row.classList.add('active');
+  const first = rows[Math.max(0, active - 1)];
+  lyrics.scrollTop += first.getBoundingClientRect().top - lyrics.getBoundingClientRect().top - 5;
+}
+for (const event of ['timeupdate', 'seeked', 'ended']) player.addEventListener(event, highlight);
+for (const [title, items] of activities) {
+  const form = document.createElement('form');
+  form.className = 'card';
+  const heading = document.createElement('h2');
+  heading.textContent = title;
+  form.append(heading);
+  const selects = items.map(([prompt, options]) => {
+    const label = document.createElement('label');
+    label.textContent = prompt;
+    const select = document.createElement('select');
+    select.append(new Option('Tria una resposta', ''));
+    options.forEach((option, index) => select.append(new Option(option, index)));
+    label.append(select);
+    form.append(label);
+    return select;
+  });
+  const check = document.createElement('button');
+  check.textContent = 'Comprova';
+  const feedback = document.createElement('output');
+  feedback.setAttribute('aria-live', 'polite');
+  form.append(check, feedback);
+  form.onsubmit = event => {
+    event.preventDefault();
+    let score = 0;
+    selects.forEach((select, index) => {
+      const correct = select.value === String(items[index][2]);
+      select.dataset.correct = correct;
+      if (correct) score++;
+    });
+    feedback.textContent = score + ' de ' + items.length + ' respostes correctes.';
+  };
+  document.querySelector('#activities').append(form);
+}
+</script></html>
