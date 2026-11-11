@@ -36,8 +36,8 @@ const player=document.getElementById('song');
 let activeVerse=-1;
 versets.forEach(([time,caption])=>{let p=document.createElement('p');p.textContent=caption;p.title='Torna a escoltar aquest vers';p.style.cursor='pointer';p.addEventListener('click',()=>{player.currentTime=time;player.play().catch(()=>{});});lbox.append(p)});
 function followLyrics(){let now=player.currentTime;let ix=0;for(let i=0;i<versets.length;i++){if(versets[i][0]<=now)ix=i;else break}if(ix!==activeVerse){let p=lbox.children[ix];if(!p)return;Array.from(lbox.children).forEach(c=>c.classList.remove('active'));p.classList.add('active');const boxRect = lbox.getBoundingClientRect();
-const lineRect = p.getBoundingClientRect();
-lbox.scrollTop += lineRect.top - boxRect.top - (lbox.clientHeight - lineRect.height) / 2;activeVerse=ix;}}
+const firstVisible = lbox.children[Math.min(Math.max(0, ix - 1), lbox.children.length - 4)];
+lbox.scrollTop += firstVisible.getBoundingClientRect().top - boxRect.top - lbox.clientTop - parseFloat(getComputedStyle(lbox).paddingTop);activeVerse=ix;}}
 function fitLyricLines() {
   const lines = Array.from(lbox.children);
   const tallestFour = Math.max(...lines.slice(0, -3).map((_, start) =>
