@@ -55,6 +55,6 @@ function syncLyrics(force=false){
  }
 }
 ['timeupdate','seeked','play','pause','ended','loadedmetadata'].forEach(event=>songVideo.addEventListener(event,()=>syncLyrics(event==='seeked')));
-lyricLines.forEach((line,i)=>line.addEventListener('click',()=>{songVideo.currentTime=lyricCues[i].start;manualScrollUntil=0;syncLyrics(true)}));
+lyricLines.forEach((line,i)=>line.addEventListener('click',()=>{songVideo.currentTime=lyricCues[i].start;manualScrollUntil=0;syncLyrics(true);songVideo.play().catch(()=>{})}));
 syncLyrics();
 </script></body></html>

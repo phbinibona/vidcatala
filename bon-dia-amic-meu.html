@@ -32,6 +32,12 @@ h2 { font-size: 15px; margin: 12px 0 6px; }
 video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1;object-fit:contain;margin-inline:auto}
 @media(max-width:800px){video[data-cancons-player]{width:min(80%,35.2dvh)}}
 </style>
+<style>
+#lyrics{max-height:8rem;overflow-y:auto;overscroll-behavior:contain}
+#lyrics button.lyric-line{display:block;width:100%;text-align:left;white-space:pre-line;font:inherit;color:inherit;background:transparent;border:0;border-radius:5px;padding:3px 6px;margin:0;cursor:pointer}
+#lyrics button.lyric-line:hover,#lyrics button.lyric-line:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+#lyrics button.lyric-line.active{background:#fc0}
+</style>
 </head>
 <body>
 <header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
@@ -52,10 +58,40 @@ const cues = [[0.0, 20.2, "♪"], [20.2, 25.25, "♪ Hola bon dia amic\nCom va t
 const video = document.querySelector('video');
 const lyrics = document.querySelector('#lyrics');
 
+function lyricButton(text, start) {
+  const row = document.createElement('button');
+  row.type = 'button';
+  row.className = 'lyric-line';
+  row.textContent = text;
+  row.addEventListener('click', () => {
+    video.currentTime = start;
+    video.play().catch(() => {});
+  });
+  return row;
+}
+
+const lines = [];
+let previous = [];
+for (const [start, end, text] of cues) {
+  const parts = text.split('\n').map(line => line.replace(/♪/g, '').trim()).filter(Boolean);
+  let overlap = Math.min(previous.length, parts.length);
+  while (overlap > 0 && previous.slice(-overlap).join('\n') !== parts.slice(0, overlap).join('\n')) overlap--;
+  const fresh = parts.slice(overlap);
+  fresh.forEach((line, index) => {
+    const time = start + (end - start) * index / fresh.length;
+    lines.push({ time, row: lyricButton(line, time) });
+  });
+  previous = parts;
+}
+lyrics.replaceChildren(...lines.map(line => line.row));
+let active;
 function updateLyrics() {
-  const cue = cues.find(([start, end]) => start <= video.currentTime && video.currentTime < end);
-  const text = cue ? cue[2] : '♪';
-  if (lyrics.textContent !== text) lyrics.textContent = text;
+  const next = lines.findLast(line => line.time <= video.currentTime)?.row;
+  if (next === active) return;
+  active?.classList.remove('active');
+  active = next;
+  active?.classList.add('active');
+  if (active) lyrics.scrollTop += active.getBoundingClientRect().top - lyrics.getBoundingClientRect().top - (lyrics.clientHeight - active.offsetHeight) / 2;
 }
 
 video.addEventListener('play', updateLyrics);

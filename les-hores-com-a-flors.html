@@ -46,6 +46,12 @@ mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; fon
 video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1;object-fit:contain;margin-inline:auto}
 @media(max-width:800px){video[data-cancons-player]{width:min(80%,35.2dvh)}}
 </style>
+<style>
+#lyrics{max-height:8rem;overflow-y:auto;overscroll-behavior:contain}
+#lyrics button.lyric-line{display:block;width:100%;text-align:left;white-space:pre-line;font:inherit;color:inherit;background:transparent;border:0;border-radius:5px;padding:3px 6px;margin:0;cursor:pointer}
+#lyrics button.lyric-line:hover,#lyrics button.lyric-line:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+#lyrics button.lyric-line.active{background:#fc0}
+</style>
 </head>
 <body>
 <header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
@@ -101,17 +107,50 @@ const video = document.querySelector('video');
 const track = video.textTracks[0];
 const lyrics = document.querySelector('#lyrics');
 const verbs = /(?<![\p{L}])(cantava|reies|reia|recordaves|miraves|era|donava|érem|somiàvem|queien|buscàvem|rèiem|anàvem|veníeu|parlaven|sabies|sentia|jugàvem|passava|estimava)(?![\p{L}])/giu;
+function lyricButton(text, start) {
+  const row = document.createElement('button');
+  row.type = 'button';
+  row.className = 'lyric-line';
+  row.textContent = text;
+  row.addEventListener('click', () => {
+    video.currentTime = start;
+    video.play().catch(() => {});
+  });
+  return row;
+}
+
+const cueRows = new Map();
+let active;
+function followCue() {
+  const next = cueRows.get(track.activeCues?.[0]);
+  if (next === active) return;
+  active?.classList.remove('active');
+  active = next;
+  active?.classList.add('active');
+  if (active) lyrics.scrollTop += active.getBoundingClientRect().top - lyrics.getBoundingClientRect().top - (lyrics.clientHeight - active.offsetHeight) / 2;
+}
+function loadCueRows() {
+  cueRows.clear();
+  for (const cue of track.cues ?? []) {
+    if (!cue.text.replace(/♪/g, '').trim()) continue;
+    const row = lyricButton('', cue.startTime);
+    row.append(...cue.text.split(verbs).map((part, index) => {
+      if (index % 2 === 0) return document.createTextNode(part);
+      const mark = document.createElement('mark');
+      mark.textContent = part;
+      return mark;
+    }));
+    cueRows.set(cue, row);
+  }
+  if (cueRows.size) lyrics.replaceChildren(...cueRows.values());
+  followCue();
+}
+const trackElement = video.querySelector('track');
+trackElement.addEventListener('load', loadCueRows);
+track.addEventListener('cuechange', followCue);
+video.addEventListener('seeked', followCue);
 track.mode = 'hidden';
-track.addEventListener('cuechange', () => {
-  const text = track.activeCues[0]?.text ?? '♪';
-  const parts = text.split(verbs);
-  lyrics.replaceChildren(...parts.map((part, index) => {
-    if (index % 2 === 0) return document.createTextNode(part);
-    const mark = document.createElement('mark');
-    mark.textContent = part;
-    return mark;
-  }));
-});
+if (trackElement.readyState === 2) loadCueRows();
 
 for (const form of document.querySelectorAll('.practice form')) {
   form.addEventListener('submit', event => {
