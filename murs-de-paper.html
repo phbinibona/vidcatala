@@ -55,9 +55,17 @@ details p { margin: 8px 0; }
   .media-column h2 { margin-bottom: 4px; font-size: .85rem; }
 }
 </style>
+<style>
+#cancons-banner{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:12px;padding:12px 20px;background:#fc0;color:#283440;font:700 15px/1.55 Quicksand,Arial,sans-serif}
+#cancons-banner img{display:block;width:clamp(30px,8vw,48px);height:auto}
+#cancons-banner a{color:inherit;font:inherit;text-decoration:none}
+#cancons-banner .cancons-nav{margin-left:auto;text-decoration:underline;text-underline-offset:.2em}
+#cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:800px){#cancons-banner{padding:10px 12px}}
+</style>
 </head>
 <body>
-<header><strong>VidCatalà</strong><a href="/tots#cancons">← Cançons</a></header>
+<header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
 <main>
   <h1>Murs de paper</h1>
   <p>B2–C1 · Llengua, memòria i fronteres. Escolta, interpreta i defensa la teva lectura de la cançó.</p>

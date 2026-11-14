@@ -19,9 +19,17 @@ video { display: block; width: min(100%, 50vh); aspect-ratio: 1; object-fit: con
 h2 { font-size: 15px; margin: 12px 0 6px; }
 #lyrics { min-height: 75px; padding: 9px 12px; border-radius: 10px; background: #fff4bb; white-space: pre-line; font-size: 13px; }
 </style>
+<style>
+#cancons-banner{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:12px;padding:12px 20px;background:#fc0;color:#283440;font:700 15px/1.55 Quicksand,Arial,sans-serif}
+#cancons-banner img{display:block;width:clamp(30px,8vw,48px);height:auto}
+#cancons-banner a{color:inherit;font:inherit;text-decoration:none}
+#cancons-banner .cancons-nav{margin-left:auto;text-decoration:underline;text-underline-offset:.2em}
+#cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:800px){#cancons-banner{padding:10px 12px}}
+</style>
 </head>
 <body>
-<header><strong>VidCatalà</strong><a href="tots.html#cancons">← Cançons</a></header>
+<header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
 <main>
   <h1>Bon dia, amic meu</h1>
   <p>Escolta la cançó i segueix la lletra.</p>
