@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ca" translate="no">
+<head><meta name="google" content="notranslate">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VidCatalà · Tres llimones, per favor</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#f6f6f3;color:#283440;font:15px/1.55 Quicksand,Arial,sans-serif}header{background:#fc0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px}header h1{font-size:1.35rem;margin:0}header a{color:inherit;text-decoration:none;font-weight:700}main{max-width:1250px;margin:auto;padding:18px;display:grid;grid-template-columns:minmax(280px,44%) 1fr;gap:20px;align-items:start}.left{position:sticky;top:8px}.card{background:white;border-radius:14px;padding:17px;margin-bottom:16px;box-shadow:0 3px 15px #0001}video{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#17202a;border-radius:9px}h2{font-size:1.13rem;color:#20517a;margin:0 0 10px}.question{border-top:1px solid #eee;padding:10px 0}.question label{display:block;padding:3px 0}select,textarea{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}button{font:inherit;border:0;border-radius:8px;background:#fc0;padding:8px 12px;font-weight:700;cursor:pointer;margin:7px 7px 0 0}.feedback{font-weight:700}.good{color:#167342}.bad{color:#a34}.vocab{background:#f3f6f8;border-left:4px solid #fc0;padding:10px}@media(max-width:800px){main{display:block;padding:10px}.left{position:sticky;top:0;z-index:2;background:#f6f6f3}.left .card{padding:9px}video{width:min(80%,35.2dvh);margin-inline:auto}header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:10px 12px}header h1{grid-column:1/-1;grid-row:2;font-size:1.15rem;line-height:1.3}header span{grid-column:2;grid-row:1}}
+.right{min-width:0}
+input{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}
+input.good{border-color:#167342}input.bad{border-color:#a34}
+summary{cursor:pointer;font-weight:700}
+.lyrics{margin-top:8px;max-height:8.5rem;overflow:auto;background:#f3f6f8;border-radius:8px;padding:4px}
+.lyric{margin:0;padding:4px 7px;font-size:.9rem;line-height:1.35;border-radius:5px}
+.lyric .verb{font-weight:700;color:#124f78}
+.lyric.active{background:#fff0a8}
+.lyric.active .verb{font-weight:700;color:#124f78;background:#fff}
+
+.songs-link{justify-self:end}
+@media(min-width:801px){header{display:grid;grid-template-columns:1fr auto 1fr}header .brand{justify-self:start}}
+@media(max-width:800px){header .songs-link{grid-column:2;grid-row:1}header h1{text-align:center}}
+.lyric{display:block;width:100%;text-align:left;font-weight:inherit;color:inherit;background:transparent}
+.lyric:hover{background:#fff7d0}
+.lyric:focus-visible{outline:2px solid #20517a;outline-offset:-2px}
+header{display:flex;justify-content:flex-start}
+header .songs-link{margin-left:auto}
+header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
+.color-entry{display:flex;align-items:center;gap:12px}
+.color-entry input{flex:1;min-width:0}
+.color-swatch{flex:0 0 32px;height:19px;background:var(--swatch);border:1px solid #0002;border-radius:43% 57% 39% 61% / 65% 36% 64% 35%;transform:rotate(-9deg)}
+</style>
+<style>
+#cancons-banner{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:12px;padding:12px 20px;background:#fc0;color:#283440;font:700 15px/1.55 Quicksand,Arial,sans-serif}
+#cancons-banner img{display:block;width:clamp(30px,8vw,48px);height:auto}
+#cancons-banner a{color:inherit;font:inherit;text-decoration:none}
+#cancons-banner .cancons-nav{margin-left:auto;text-decoration:underline;text-underline-offset:.2em}
+#cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:800px){#cancons-banner{padding:10px 12px}}
+</style>
+<style>.lyrics{height:clamp(128px,24dvh,190px)} .question input{max-width:100%}</style><style>
+@media (min-width: 801px) and (min-height: 360px) {
+  body {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  main {
+    width: 100%;
+    min-height: 0;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+  .left { position: static; min-height: 0; }
+  .left .card {
+    height: 100%;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    justify-items: center;
+    align-items: center;
+  }
+  video {
+    width: min(100%, 42dvh, 320px);
+    max-height: 100%;
+  }
+  .lyrics {
+    width: 100%;
+    height: 8.5rem;
+    margin-top: 0;
+    overscroll-behavior-y: contain;
+  }
+  .right {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+    padding-inline: 4px 12px;
+  }
+}
+</style>
+</head>
+<body>
+<header id="cancons-banner"><img src="bandera.jpg" alt=""><a href="https://vidcatala.com/">VidCatalà</a><nav class="cancons-nav" aria-label="Navegació"><a href="https://vidcatala.com/tots">Tots</a> · <a href="https://vidcatala.com/tots#cancons">Cançons</a></nav></header>
+
+<main>
+<aside class="left"><div class="card">
+<video controls playsinline preload="metadata" poster="assets/tres-llimones-per-favor.jpg" aria-label="Tres llimones, per favor">
+<source src="assets/tres-llimones-per-favor.mp4" type="video/mp4">
+<track kind="captions" src="assets/tres-llimones-per-favor.vtt" srclang="ca" label="Català">
+</video>
+<div class="lyrics" tabindex="0" aria-label="Lletra sincronitzada">
+<button type="button" class="lyric" data-start="9" data-end="12.6">És dijous, som a Inca. I ja som dins es mercat.</button>
+<button type="button" class="lyric" data-start="12.6" data-end="16.2">Bon dia <strong class="verb">A quant van</strong> ses tomàtigues</button>
+<button type="button" class="lyric" data-start="16.2" data-end="19.8">A dos euros es quilo</button>
+<button type="button" class="lyric" data-start="19.8" data-end="23.4">Idò mig quilo <strong class="verb">per favor</strong></button>
+<button type="button" class="lyric" data-start="23.4" data-end="27">De tomàtigues <strong class="verb">en voldria</strong> mig quilo</button>
+<button type="button" class="lyric" data-start="27" data-end="31.5">I de llimones <strong class="verb">me'n posa</strong> tres</button>
+<button type="button" class="lyric" data-start="31.5" data-end="36">Mig quilo de tomàtigues</button>
+<button type="button" class="lyric" data-start="36" data-end="40.5">Tres llimones <strong class="verb">per favor</strong></button>
+<button type="button" class="lyric" data-start="40.5" data-end="45">Aquí ho té Vol res més</button>
+<button type="button" class="lyric" data-start="54" data-end="58.75">Sí <strong class="verb">em posa</strong> un manat de julivert</button>
+<button type="button" class="lyric" data-start="58.75" data-end="63.5">Un manat de julivert Res més</button>
+<button type="button" class="lyric" data-start="63.5" data-end="68.25">No gràcies Això és tot</button>
+<button type="button" class="lyric" data-start="68.25" data-end="73">De tomàtigues <strong class="verb">en voldria</strong> mig quilo</button>
+<button type="button" class="lyric" data-start="73" data-end="77.5">I de llimones <strong class="verb">me'n posa</strong> tres</button>
+<button type="button" class="lyric" data-start="77.5" data-end="82">Mig quilo de tomàtigues</button>
+<button type="button" class="lyric" data-start="82" data-end="86.5">Tres llimones <strong class="verb">per favor</strong></button>
+<button type="button" class="lyric" data-start="86.5" data-end="91"><strong class="verb">Quant és tot plegat</strong></button>
+<button type="button" class="lyric" data-start="118" data-end="121.8">Quatre euros amb cinquanta</button>
+<button type="button" class="lyric" data-start="121.8" data-end="125.6"><strong class="verb">Puc pagar amb targeta</strong></button>
+<button type="button" class="lyric" data-start="125.6" data-end="129.4">Sí és clar Aquí mateix</button>
+<button type="button" class="lyric" data-start="129.4" data-end="133.2">Moltes gràcies Que vagi bé</button>
+<button type="button" class="lyric" data-start="133.2" data-end="137">De patates <strong class="verb">en voldria</strong> un quilo</button>
+<button type="button" class="lyric" data-start="137" data-end="141.5">I de cebes <strong class="verb">me'n posa</strong> dues</button>
+<button type="button" class="lyric" data-start="141.5" data-end="146">Un quilo de patates</button>
+<button type="button" class="lyric" data-start="146" data-end="150.5">Dues cebes <strong class="verb">per favor</strong></button>
+</div></div></aside>
+<div class="right" role="region" aria-label="Exercicis" tabindex="0"><h1>Tres llimones, per favor</h1><p>A1 · Comprar al mercat d’Inca</p>
+<section class="card"><h2>Què compra el client?</h2><p>Escolta la tornada i tria la resposta.</p><p class="question"><label>Quantes llimones demana?<select data-answer="tres"><option value="">Tria una resposta</option><option>dues</option><option>quatre</option><option>tres</option></select></label></p><p class="question"><label>Quantes tomàtigues vol?<select data-answer="mig quilo"><option value="">Tria una resposta</option><option>dos quilos</option><option>mig quilo</option><option>un quilo</option></select></label></p><p class="question"><label>Què demana després?<select data-answer="un manat de julivert"><option value="">Tria una resposta</option><option>un manat de julivert</option><option>un quilo de cebes</option><option>tres patates</option></select></label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><ol><li>tres</li><li>mig quilo</li><li>un manat de julivert</li></ol></details></section>
+<section class="card"><h2>Què dius al mercat?</h2><p>Tria la frase que pots dir en cada situació.</p><p class="question"><label>Vols saber el preu.<select data-answer="A quant van ses tomàtigues?"><option value="">Tria una resposta</option><option>Això és tot.</option><option>A quant van ses tomàtigues?</option><option>Moltes gràcies!</option></select></label></p><p class="question"><label>Vols comprar tres llimones.<select data-answer="Me’n posa tres, per favor?"><option value="">Tria una resposta</option><option>Me’n posa tres, per favor?</option><option>Quant és, tot plegat?</option><option>No, gràcies.</option></select></label></p><p class="question"><label>Vols pagar amb targeta.<select data-answer="Puc pagar amb targeta?"><option value="">Tria una resposta</option><option>Me’n posa tres?</option><option>Bon dia!</option><option>Puc pagar amb targeta?</option></select></label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><ol><li>A quant van ses tomàtigues?</li><li>Me’n posa tres, per favor?</li><li>Puc pagar amb targeta?</li></ol></details></section>
+<section class="card"><h2>Ara compra tu</h2><p>Imagina que vols un quilo de patates i dues cebes. Completa la comanda i digues-la en veu alta.</p><p class="question"><label>De patates, en voldria…<select data-answer="un quilo"><option value="">Tria una resposta</option><option>un quilo</option><option>mig quilo</option><option>dues</option></select></label></p><p class="question"><label>I de cebes, me’n posa…<select data-answer="dues"><option value="">Tria una resposta</option><option>mig quilo</option><option>un manat</option><option>dues</option></select></label></p><p class="question"><label>La paradista et demana «Res més?»<select data-answer="No, gràcies. Això és tot."><option value="">Tria una resposta</option><option>Bon dia!</option><option>No, gràcies. Això és tot.</option><option>Un quilo de patates.</option></select></label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><ol><li>un quilo</li><li>dues</li><li>No, gràcies. Això és tot.</li></ol></details></section>
+</div></main>
+<script>
+const normalize = value => value.normalize("NFC").toLocaleLowerCase("ca").trim()
+  .replace(/[’‘]/g, "'").replace(/\s+/g, " ");
+
+for (const card of document.querySelectorAll(".right .card")) {
+  const inputs = [...card.querySelectorAll("select")];
+  const feedback = card.querySelector(".feedback");
+  card.addEventListener("change", event => {
+    event.target.classList.remove("good", "bad");
+    feedback.textContent = "";
+  });
+  card.querySelector(".check").addEventListener("click", () => {
+    let correct = 0;
+    for (const input of inputs) {
+      const answer = normalize(input.value);
+      const expected = normalize(input.dataset.answer);
+      const matches = answer === expected;
+      input.classList.toggle("good", matches);
+      input.classList.toggle("bad", !matches);
+      correct += Number(matches);
+    }
+    feedback.textContent = correct === inputs.length
+      ? "Molt bé! Totes les respostes són correctes."
+      : correct + " de " + inputs.length + " respostes correctes. Torna-ho a provar.";
+  });
+  card.querySelector(".reset").addEventListener("click", () => {
+    for (const input of inputs) {
+      input.selectedIndex = 0;
+      input.classList.remove("good", "bad");
+    }
+    card.querySelector("details").open = false;
+    feedback.textContent = "";
+    inputs[0].focus({ preventScroll: true });
+  });
+}
+
+const video = document.querySelector("video");
+const lyrics = document.querySelector(".lyrics");
+const lines = [...lyrics.querySelectorAll(".lyric")];
+let active;
+function syncLyrics() {
+  const time = video.currentTime;
+  const line = video.ended ? undefined : lines.find(row => time >= Number(row.dataset.start) && time < Number(row.dataset.end));
+  if (line === active) return;
+  active?.classList.remove("active");
+  active = line;
+  if (active) {
+    active.classList.add("active");
+    lyrics.scrollTop += active.getBoundingClientRect().top - lyrics.getBoundingClientRect().top
+      - (lyrics.clientHeight - active.offsetHeight) / 2;
+  }
+}
+lyrics.addEventListener("click", event => {
+  const line = event.target.closest("button.lyric");
+  if (!line) return;
+  video.currentTime = Number(line.dataset.start);
+  syncLyrics();
+  video.play().catch(() => {
+    // Native video controls remain available if playback is blocked.
+  });
+});
+video.addEventListener("timeupdate", syncLyrics);
+video.addEventListener("seeked", syncLyrics);
+video.addEventListener("ended", syncLyrics);
+</script>
+</body>
+</html>
