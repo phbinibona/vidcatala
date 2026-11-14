@@ -25,6 +25,9 @@ summary{cursor:pointer;font-weight:700}
 header{display:flex;justify-content:flex-start}
 header .songs-link{margin-left:auto}
 header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
+.color-entry{display:flex;align-items:center;gap:12px}
+.color-entry input{flex:1;min-width:0}
+.color-swatch{flex:0 0 32px;height:19px;background:var(--swatch);border:1px solid #0002;border-radius:43% 57% 39% 61% / 65% 36% 64% 35%;transform:rotate(-9deg)}
 </style>
 </head>
 <body>
@@ -57,13 +60,13 @@ header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
 <section class="card">
 <h2>1 · Els set colors de l’arc de Sant Martí</h2>
 <p>Completa cada color a partir de les dues primeres lletres. Els colors van de la franja exterior a la interior.</p>
-<div class="question"><label for="color-0">1. ve</label><input id="color-0" type="text" autocomplete="off" spellcheck="false" data-answer="rmell"></div>
-<div class="question"><label for="color-1">2. ta</label><input id="color-1" type="text" autocomplete="off" spellcheck="false" data-answer="ronja"></div>
-<div class="question"><label for="color-2">3. gr</label><input id="color-2" type="text" autocomplete="off" spellcheck="false" data-answer="oc"></div>
-<div class="question"><label for="color-3">4. ve</label><input id="color-3" type="text" autocomplete="off" spellcheck="false" data-answer="rd"></div>
-<div class="question"><label for="color-4">5. bl</label><input id="color-4" type="text" autocomplete="off" spellcheck="false" data-answer="au"></div>
-<div class="question"><label for="color-5">6. in</label><input id="color-5" type="text" autocomplete="off" spellcheck="false" data-answer="di"></div>
-<div class="question"><label for="color-6">7. vi</label><input id="color-6" type="text" autocomplete="off" spellcheck="false" data-answer="oleta"></div>
+<div class="question"><label for="color-0">1. ve</label><div class="color-entry"><input id="color-0" type="text" autocomplete="off" spellcheck="false" data-answer="rmell"><span class="color-swatch" style="--swatch:#d42c36" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-1">2. ta</label><div class="color-entry"><input id="color-1" type="text" autocomplete="off" spellcheck="false" data-answer="ronja"><span class="color-swatch" style="--swatch:#ee811c" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-2">3. gr</label><div class="color-entry"><input id="color-2" type="text" autocomplete="off" spellcheck="false" data-answer="oc"><span class="color-swatch" style="--swatch:#f3cc27" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-3">4. ve</label><div class="color-entry"><input id="color-3" type="text" autocomplete="off" spellcheck="false" data-answer="rd"><span class="color-swatch" style="--swatch:#32854b" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-4">5. bl</label><div class="color-entry"><input id="color-4" type="text" autocomplete="off" spellcheck="false" data-answer="au"><span class="color-swatch" style="--swatch:#2679c5" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-5">6. in</label><div class="color-entry"><input id="color-5" type="text" autocomplete="off" spellcheck="false" data-answer="di"><span class="color-swatch" style="--swatch:#43328d" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-6">7. vi</label><div class="color-entry"><input id="color-6" type="text" autocomplete="off" spellcheck="false" data-answer="oleta"><span class="color-swatch" style="--swatch:#9850b4" aria-hidden="true"></span></div></div>
 <button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button>
 <p class="feedback" aria-live="polite"></p>
 <details><summary>Solucions</summary><ol><li>vermell</li><li>taronja</li><li>groc</li><li>verd</li><li>blau</li><li>indi</li><li>violeta</li></ol></details>
