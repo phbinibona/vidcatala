@@ -37,7 +37,49 @@ header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
 #cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:800px){#cancons-banner{padding:10px 12px}}
 </style>
-<style>.lyrics{height:clamp(128px,24dvh,190px)} .question input{max-width:100%}</style></head>
+<style>.lyrics{height:clamp(128px,24dvh,190px)} .question input{max-width:100%}</style><style>
+@media (min-width: 801px) and (min-height: 360px) {
+  body {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  main {
+    width: 100%;
+    min-height: 0;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+  .left { position: static; min-height: 0; }
+  .left .card {
+    height: 100%;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    justify-items: center;
+    align-items: center;
+  }
+  video {
+    width: min(100%, 42dvh, 320px);
+    max-height: 100%;
+  }
+  .lyrics {
+    width: 100%;
+    height: 8.5rem;
+    margin-top: 0;
+    overscroll-behavior-y: contain;
+  }
+  .right {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+    padding-inline: 4px 12px;
+  }
+}
+</style>
+</head>
 <body>
 <header id="cancons-banner"><img src="bandera.jpg" alt=""><a href="https://vidcatala.com/">VidCatalà</a><nav class="cancons-nav" aria-label="Navegació"><a href="https://vidcatala.com/tots">Tots</a> · <a href="https://vidcatala.com/tots#cancons">Cançons</a></nav></header>
 
@@ -68,7 +110,7 @@ header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
 <button type="button" class="lyric" data-start="127.667" data-end="131.333">(Vinguis a mi…)</button>
 <button type="button" class="lyric" data-start="131.333" data-end="135">Vull que tu… vinguis!</button>
 </div></div></aside>
-<div class="right"><h1>Sostre d’estels</h1><p>B1 · El present de subjuntiu</p>
+<div class="right" role="region" aria-label="Exercicis" tabindex="0"><h1>Sostre d’estels</h1><p>B1 · El present de subjuntiu</p>
 <section class="card"><h2>Completa els versos</h2><p>Escriu la forma que sents a la cançó.</p><p class="question"><label>Vull que tu <input type="text" data-answer="vinguis" autocomplete="off" spellcheck="false" size="10"> a prop.</label></p><p class="question"><label>I <input type="text" data-answer="tinguis" autocomplete="off" spellcheck="false" size="10"> la clau d’un desig.</label></p><p class="question"><label>Espero que <input type="text" data-answer="facis" autocomplete="off" spellcheck="false" size="10"> el pas.</label></p><p class="question"><label>Sense pors que et <input type="text" data-answer="puguin" autocomplete="off" spellcheck="false" size="10"> trair.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vinguis, tinguis, facis, puguin</p></details></section><section class="card"><h2>Canvia la persona</h2><p>Torna a escriure el verb en present de subjuntiu amb la persona indicada.</p><p class="question"><label>Vull que (vosaltres) <input type="text" data-answer="vingueu" autocomplete="off" spellcheck="false" size="10"> a prop.</label></p><p class="question"><label>Espero que (ella) <input type="text" data-answer="faci" autocomplete="off" spellcheck="false" size="10"> el pas.</label></p><p class="question"><label>Vull que (ells) <input type="text" data-answer="tinguin" autocomplete="off" spellcheck="false" size="10"> un camí pla.</label></p><p class="question"><label>Vull que (nosaltres) <input type="text" data-answer="mirem" autocomplete="off" spellcheck="false" size="10"> cap al sostre d’estels.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vingueu, faci, tinguin, mirem</p></details></section><section class="card"><h2>Tria entre indicatiu i subjuntiu</h2><p>Completa cada frase amb una de les dues formes indicades.</p><p class="question"><label>Sé que tu (vens / vinguis) <input type="text" data-answer="vens" autocomplete="off" spellcheck="false" size="10"> sovint.</label></p><p class="question"><label>Vull que tu (vens / vinguis) <input type="text" data-answer="vinguis" autocomplete="off" spellcheck="false" size="10"> demà.</label></p><p class="question"><label>Veig que (fas / facis) <input type="text" data-answer="fas" autocomplete="off" spellcheck="false" size="10"> un pas endavant.</label></p><p class="question"><label>Espero que (fas / facis) <input type="text" data-answer="facis" autocomplete="off" spellcheck="false" size="10"> el primer pas.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vens, vinguis, fas, facis</p></details></section>
 </div></main>
 <script>
@@ -103,7 +145,7 @@ for (const card of document.querySelectorAll(".right .card")) {
     }
     card.querySelector("details").open = false;
     feedback.textContent = "";
-    inputs[0].focus();
+    inputs[0].focus({ preventScroll: true });
   });
 }
 
