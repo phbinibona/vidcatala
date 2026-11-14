@@ -12,13 +12,16 @@ input.good{border-color:#167342}input.bad{border-color:#a34}
 summary{cursor:pointer;font-weight:700}
 .lyrics{margin-top:8px;max-height:8.5rem;overflow:auto;background:#f3f6f8;border-radius:8px;padding:4px}
 .lyric{margin:0;padding:4px 7px;font-size:.9rem;line-height:1.35;border-radius:5px}
-.lyric strong{font-weight:700;color:#124f78}
+.lyric .verb{font-weight:700;color:#124f78}
 .lyric.active{background:#fff0a8}
-.lyric.active strong{font-weight:700;color:#124f78;background:#fff}
+.lyric.active .verb{font-weight:700;color:#124f78;background:#fff}
 
 .songs-link{justify-self:end}
 @media(min-width:801px){header{display:grid;grid-template-columns:1fr auto 1fr}header .brand{justify-self:start}}
 @media(max-width:800px){header .songs-link{grid-column:2;grid-row:1}header h1{text-align:center}}
+.lyric{display:block;width:100%;text-align:left;font-weight:inherit;color:inherit;background:transparent}
+.lyric:hover{background:#fff7d0}
+.lyric:focus-visible{outline:2px solid #20517a;outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -26,26 +29,26 @@ summary{cursor:pointer;font-weight:700}
 <main>
 <aside class="left"><div class="card"><video controls playsinline preload="metadata" aria-label="Set camins de llum"><source src="assets/Set_camins_de_llum.mp4" type="video/mp4"><track kind="captions" src="assets/Set_camins_de_llum.vtt" srclang="ca" label="Català">El navegador no admet aquest vídeo.</video>
 <div class="lyrics" tabindex="0" aria-label="Lletra sincronitzada">
-<p class="lyric" data-start="18.75">El carrer encara <strong>brilla</strong> amb l'aigua del temporal</p>
-<p class="lyric" data-start="22.5">Un silenci dolç <strong>s'apodera</strong> del barri sencer</p>
-<p class="lyric" data-start="30">I el gris dels núvols <strong>comença</strong> a <strong>marxar</strong> del cel</p>
-<p class="lyric" data-start="37.5"><strong>Deixant</strong> pas a la claror que tothom <strong>vol</strong> <strong>veure</strong> ja</p>
-<p class="lyric" data-start="45">I de sobte un arc de Sant Martí <strong>es dibuixa</strong> dalt</p>
-<p class="lyric" data-start="52.5"><strong>Pintant</strong> de colors la tristesa que <strong>hem passat</strong> avui</p>
-<p class="lyric" data-start="60">Set camins de llum que ens <strong>conviden</strong> a <strong>somiar</strong> fort</p>
-<p class="lyric" data-start="67.5">Un miracle breu que ens <strong>abraça</strong> el cor i la ment</p>
-<p class="lyric" data-start="75">La gent <strong>s'atura</strong> al mig de la gran avinguda ara</p>
-<p class="lyric" data-start="82.5"><strong>Miren</strong> amunt i <strong>obliden</strong> les presses del seu dia</p>
-<p class="lyric" data-start="90"><strong>És</strong> com un secret que ens <strong>uneix</strong> a tots un instant</p>
-<p class="lyric" data-start="97.5">Una carícia de colors enmig de la ciutat gran</p>
-<p class="lyric" data-start="105">I de sobte un arc de Sant Martí <strong>es dibuixa</strong> dalt</p>
-<p class="lyric" data-start="112.5"><strong>Pintant</strong> de colors la tristesa que <strong>hem passat</strong> avui</p>
-<p class="lyric" data-start="120">Set camins de llum que ens <strong>conviden</strong> a <strong>somiar</strong> fort</p>
-<p class="lyric" data-start="127.5">Un miracle breu que ens <strong>abraça</strong> el cor i la ment</p>
-<p class="lyric" data-start="135">I a poc a poc els colors <strong>es comencen</strong> a <strong>fondre</strong> ja</p>
-<p class="lyric" data-start="165"><strong>Tornant</strong> al cel blau que ara <strong>regna</strong> sobre el nostre món</p>
-<p class="lyric" data-start="168.75">Però el record de la seva llum <strong>es quedarà</strong> aquí</p>
-<p class="lyric" data-start="172.5">Dins del meu pit com un somriure que no <strong>té</strong> final</p>
+<button type="button" class="lyric" data-start="18.75">El carrer encara <span class="verb">brilla</span> amb l'aigua del temporal</button>
+<button type="button" class="lyric" data-start="22.5">Un silenci dolç <span class="verb">s'apodera</span> del barri sencer</button>
+<button type="button" class="lyric" data-start="30">I el gris dels núvols <span class="verb">comença</span> a <span class="verb">marxar</span> del cel</button>
+<button type="button" class="lyric" data-start="37.5"><span class="verb">Deixant</span> pas a la claror que tothom <span class="verb">vol</span> <span class="verb">veure</span> ja</button>
+<button type="button" class="lyric" data-start="45">I de sobte un arc de Sant Martí <span class="verb">es dibuixa</span> dalt</button>
+<button type="button" class="lyric" data-start="52.5"><span class="verb">Pintant</span> de colors la tristesa que <span class="verb">hem passat</span> avui</button>
+<button type="button" class="lyric" data-start="60">Set camins de llum que ens <span class="verb">conviden</span> a <span class="verb">somiar</span> fort</button>
+<button type="button" class="lyric" data-start="67.5">Un miracle breu que ens <span class="verb">abraça</span> el cor i la ment</button>
+<button type="button" class="lyric" data-start="75">La gent <span class="verb">s'atura</span> al mig de la gran avinguda ara</button>
+<button type="button" class="lyric" data-start="82.5"><span class="verb">Miren</span> amunt i <span class="verb">obliden</span> les presses del seu dia</button>
+<button type="button" class="lyric" data-start="90"><span class="verb">És</span> com un secret que ens <span class="verb">uneix</span> a tots un instant</button>
+<button type="button" class="lyric" data-start="97.5">Una carícia de colors enmig de la ciutat gran</button>
+<button type="button" class="lyric" data-start="105">I de sobte un arc de Sant Martí <span class="verb">es dibuixa</span> dalt</button>
+<button type="button" class="lyric" data-start="112.5"><span class="verb">Pintant</span> de colors la tristesa que <span class="verb">hem passat</span> avui</button>
+<button type="button" class="lyric" data-start="120">Set camins de llum que ens <span class="verb">conviden</span> a <span class="verb">somiar</span> fort</button>
+<button type="button" class="lyric" data-start="127.5">Un miracle breu que ens <span class="verb">abraça</span> el cor i la ment</button>
+<button type="button" class="lyric" data-start="135">I a poc a poc els colors <span class="verb">es comencen</span> a <span class="verb">fondre</span> ja</button>
+<button type="button" class="lyric" data-start="165"><span class="verb">Tornant</span> al cel blau que ara <span class="verb">regna</span> sobre el nostre món</button>
+<button type="button" class="lyric" data-start="168.75">Però el record de la seva llum <span class="verb">es quedarà</span> aquí</button>
+<button type="button" class="lyric" data-start="172.5">Dins del meu pit com un somriure que no <span class="verb">té</span> final</button>
 </div></div></aside>
 <div class="right">
 <section class="card">
@@ -138,6 +141,15 @@ function syncLyrics() {
       - (lyrics.clientHeight - active.offsetHeight) / 2;
   }
 }
+lyrics.addEventListener("click", event => {
+  const line = event.target.closest("button.lyric");
+  if (!line) return;
+  video.currentTime = Number(line.dataset.start);
+  syncLyrics();
+  video.play().catch(() => {
+    // Native video controls remain available if playback is blocked.
+  });
+});
 video.addEventListener("timeupdate", syncLyrics);
 video.addEventListener("seeked", syncLyrics);
 video.addEventListener("ended", syncLyrics);
