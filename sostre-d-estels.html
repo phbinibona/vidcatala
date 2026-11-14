@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ca" translate="no">
+<head><meta name="google" content="notranslate">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VidCatalà · Sostre d’estels</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#f6f6f3;color:#283440;font:15px/1.55 Quicksand,Arial,sans-serif}header{background:#fc0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px}header h1{font-size:1.35rem;margin:0}header a{color:inherit;text-decoration:none;font-weight:700}main{max-width:1250px;margin:auto;padding:18px;display:grid;grid-template-columns:minmax(280px,44%) 1fr;gap:20px;align-items:start}.left{position:sticky;top:8px}.card{background:white;border-radius:14px;padding:17px;margin-bottom:16px;box-shadow:0 3px 15px #0001}video{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#17202a;border-radius:9px}h2{font-size:1.13rem;color:#20517a;margin:0 0 10px}.question{border-top:1px solid #eee;padding:10px 0}.question label{display:block;padding:3px 0}select,textarea{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}button{font:inherit;border:0;border-radius:8px;background:#fc0;padding:8px 12px;font-weight:700;cursor:pointer;margin:7px 7px 0 0}.feedback{font-weight:700}.good{color:#167342}.bad{color:#a34}.vocab{background:#f3f6f8;border-left:4px solid #fc0;padding:10px}@media(max-width:800px){main{display:block;padding:10px}.left{position:sticky;top:0;z-index:2;background:#f6f6f3}.left .card{padding:9px}video{width:min(80%,35.2dvh);margin-inline:auto}header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:10px 12px}header h1{grid-column:1/-1;grid-row:2;font-size:1.15rem;line-height:1.3}header span{grid-column:2;grid-row:1}}
+.right{min-width:0}
+input{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}
+input.good{border-color:#167342}input.bad{border-color:#a34}
+summary{cursor:pointer;font-weight:700}
+.lyrics{margin-top:8px;max-height:8.5rem;overflow:auto;background:#f3f6f8;border-radius:8px;padding:4px}
+.lyric{margin:0;padding:4px 7px;font-size:.9rem;line-height:1.35;border-radius:5px}
+.lyric .verb{font-weight:700;color:#124f78}
+.lyric.active{background:#fff0a8}
+.lyric.active .verb{font-weight:700;color:#124f78;background:#fff}
+
+.songs-link{justify-self:end}
+@media(min-width:801px){header{display:grid;grid-template-columns:1fr auto 1fr}header .brand{justify-self:start}}
+@media(max-width:800px){header .songs-link{grid-column:2;grid-row:1}header h1{text-align:center}}
+.lyric{display:block;width:100%;text-align:left;font-weight:inherit;color:inherit;background:transparent}
+.lyric:hover{background:#fff7d0}
+.lyric:focus-visible{outline:2px solid #20517a;outline-offset:-2px}
+header{display:flex;justify-content:flex-start}
+header .songs-link{margin-left:auto}
+header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
+.color-entry{display:flex;align-items:center;gap:12px}
+.color-entry input{flex:1;min-width:0}
+.color-swatch{flex:0 0 32px;height:19px;background:var(--swatch);border:1px solid #0002;border-radius:43% 57% 39% 61% / 65% 36% 64% 35%;transform:rotate(-9deg)}
+</style>
+<style>
+#cancons-banner{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:12px;padding:12px 20px;background:#fc0;color:#283440;font:700 15px/1.55 Quicksand,Arial,sans-serif}
+#cancons-banner img{display:block;width:clamp(30px,8vw,48px);height:auto}
+#cancons-banner a{color:inherit;font:inherit;text-decoration:none}
+#cancons-banner .cancons-nav{margin-left:auto;text-decoration:underline;text-underline-offset:.2em}
+#cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:800px){#cancons-banner{padding:10px 12px}}
+</style>
+<style>.lyrics{height:clamp(128px,24dvh,190px)} .question input{max-width:100%}</style></head>
+<body>
+<header id="cancons-banner"><img src="bandera.jpg" alt=""><a href="https://vidcatala.com/">VidCatalà</a><nav class="cancons-nav" aria-label="Navegació"><a href="https://vidcatala.com/tots">Tots</a> · <a href="https://vidcatala.com/tots#cancons">Cançons</a></nav></header>
+
+<main>
+<aside class="left"><div class="card">
+<video controls playsinline preload="metadata" aria-label="Sostre d’estels">
+<source src="assets/sostre-d-estels.mp4" type="video/mp4">
+<track kind="captions" src="assets/sostre-d-estels.vtt" srclang="ca" label="Català">
+</video>
+<div class="lyrics" tabindex="0" aria-label="Lletra sincronitzada">
+<button type="button" class="lyric" data-start="11.0" data-end="16.5">Vull que tu vinguis a prop</button>
+<button type="button" class="lyric" data-start="16.5" data-end="22.0">I tinguis la clau d’un desig</button>
+<button type="button" class="lyric" data-start="22.0" data-end="27.5">Vull que tu sapigues tot</button>
+<button type="button" class="lyric" data-start="27.5" data-end="33.0">El que em passa enmig de la nit</button>
+<button type="button" class="lyric" data-start="33.0" data-end="38.75">Espero que facis el pas</button>
+<button type="button" class="lyric" data-start="38.75" data-end="44.5">Sense pors que et puguin trair</button>
+<button type="button" class="lyric" data-start="44.5" data-end="50.25">I em donis un dret al teu braç</button>
+<button type="button" class="lyric" data-start="50.25" data-end="56.0">Per no veure el canvi en el camí</button>
+<button type="button" class="lyric" data-start="56.0" data-end="61.75">Vull que tinguis un camí pla</button>
+<button type="button" class="lyric" data-start="61.75" data-end="67.5">I facis volar els teus anhels</button>
+<button type="button" class="lyric" data-start="67.5" data-end="73.25">Vull que sapigues on vas</button>
+<button type="button" class="lyric" data-start="73.25" data-end="79.0">I miris cap a un sostre d’estels</button>
+<button type="button" class="lyric" data-start="101.0" data-end="106.75">Espero que facis el pas</button>
+<button type="button" class="lyric" data-start="106.75" data-end="112.5">Sense pors que et puguin trair</button>
+<button type="button" class="lyric" data-start="112.5" data-end="118.25">I em donis un dret al teu braç</button>
+<button type="button" class="lyric" data-start="118.25" data-end="124.0">Per no veure el canvi en el camí</button>
+<button type="button" class="lyric" data-start="124.0" data-end="127.667">(Vull que tu...)</button>
+<button type="button" class="lyric" data-start="127.667" data-end="131.333">(Vinguis a mi…)</button>
+<button type="button" class="lyric" data-start="131.333" data-end="135">Vull que tu… vinguis!</button>
+</div></div></aside>
+<div class="right"><h1>Sostre d’estels</h1><p>B1 · El present de subjuntiu</p>
+<section class="card"><h2>Completa els versos</h2><p>Escriu la forma que sents a la cançó.</p><p class="question"><label>Vull que tu <input type="text" data-answer="vinguis" autocomplete="off" spellcheck="false" size="10"> a prop.</label></p><p class="question"><label>I <input type="text" data-answer="tinguis" autocomplete="off" spellcheck="false" size="10"> la clau d’un desig.</label></p><p class="question"><label>Espero que <input type="text" data-answer="facis" autocomplete="off" spellcheck="false" size="10"> el pas.</label></p><p class="question"><label>Sense pors que et <input type="text" data-answer="puguin" autocomplete="off" spellcheck="false" size="10"> trair.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vinguis, tinguis, facis, puguin</p></details></section><section class="card"><h2>Canvia la persona</h2><p>Torna a escriure el verb en present de subjuntiu amb la persona indicada.</p><p class="question"><label>Vull que (vosaltres) <input type="text" data-answer="vingueu" autocomplete="off" spellcheck="false" size="10"> a prop.</label></p><p class="question"><label>Espero que (ella) <input type="text" data-answer="faci" autocomplete="off" spellcheck="false" size="10"> el pas.</label></p><p class="question"><label>Vull que (ells) <input type="text" data-answer="tinguin" autocomplete="off" spellcheck="false" size="10"> un camí pla.</label></p><p class="question"><label>Vull que (nosaltres) <input type="text" data-answer="mirem" autocomplete="off" spellcheck="false" size="10"> cap al sostre d’estels.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vingueu, faci, tinguin, mirem</p></details></section><section class="card"><h2>Tria entre indicatiu i subjuntiu</h2><p>Completa cada frase amb una de les dues formes indicades.</p><p class="question"><label>Sé que tu (vens / vinguis) <input type="text" data-answer="vens" autocomplete="off" spellcheck="false" size="10"> sovint.</label></p><p class="question"><label>Vull que tu (vens / vinguis) <input type="text" data-answer="vinguis" autocomplete="off" spellcheck="false" size="10"> demà.</label></p><p class="question"><label>Veig que (fas / facis) <input type="text" data-answer="fas" autocomplete="off" spellcheck="false" size="10"> un pas endavant.</label></p><p class="question"><label>Espero que (fas / facis) <input type="text" data-answer="facis" autocomplete="off" spellcheck="false" size="10"> el primer pas.</label></p><button class="check" type="button">Comprova</button><button class="reset" type="button">Torna a començar</button><p class="feedback" aria-live="polite"></p><details><summary>Mostra les solucions</summary><p>vens, vinguis, fas, facis</p></details></section>
+</div></main>
+<script>
+const normalize = value => value.normalize("NFC").toLocaleLowerCase("ca").trim()
+  .replace(/[’‘]/g, "'").replace(/\s+/g, " ");
+
+for (const card of document.querySelectorAll(".right .card")) {
+  const inputs = [...card.querySelectorAll("input")];
+  const feedback = card.querySelector(".feedback");
+  card.addEventListener("input", event => {
+    event.target.classList.remove("good", "bad");
+    feedback.textContent = "";
+  });
+  card.querySelector(".check").addEventListener("click", () => {
+    let correct = 0;
+    for (const input of inputs) {
+      const answer = normalize(input.value);
+      const expected = normalize(input.dataset.answer);
+      const matches = answer === expected;
+      input.classList.toggle("good", matches);
+      input.classList.toggle("bad", !matches);
+      correct += Number(matches);
+    }
+    feedback.textContent = correct === inputs.length
+      ? "Molt bé! Totes les respostes són correctes."
+      : correct + " de " + inputs.length + " respostes correctes. Torna-ho a provar.";
+  });
+  card.querySelector(".reset").addEventListener("click", () => {
+    for (const input of inputs) {
+      input.value = input.defaultValue;
+      input.classList.remove("good", "bad");
+    }
+    card.querySelector("details").open = false;
+    feedback.textContent = "";
+    inputs[0].focus();
+  });
+}
+
+const video = document.querySelector("video");
+const lyrics = document.querySelector(".lyrics");
+const lines = [...lyrics.querySelectorAll(".lyric")];
+let active;
+function syncLyrics() {
+  const time = video.currentTime;
+  const line = video.ended ? undefined : lines.find(row => time >= Number(row.dataset.start) && time < Number(row.dataset.end));
+  if (line === active) return;
+  active?.classList.remove("active");
+  active = line;
+  if (active) {
+    active.classList.add("active");
+    lyrics.scrollTop += active.getBoundingClientRect().top - lyrics.getBoundingClientRect().top
+      - (lyrics.clientHeight - active.offsetHeight) / 2;
+  }
+}
+lyrics.addEventListener("click", event => {
+  const line = event.target.closest("button.lyric");
+  if (!line) return;
+  video.currentTime = Number(line.dataset.start);
+  syncLyrics();
+  video.play().catch(() => {
+    // Native video controls remain available if playback is blocked.
+  });
+});
+video.addEventListener("timeupdate", syncLyrics);
+video.addEventListener("seeked", syncLyrics);
+video.addEventListener("ended", syncLyrics);
+</script>
+</body>
+</html>
