@@ -99,14 +99,14 @@ video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;a
 const video = document.querySelector('video');
 const track = video.textTracks[0];
 const lyrics = document.querySelector('#lyrics');
-const verbs = /\b(serveix|ofereix|flueix|afegeix|enriqueix|aclareix|uneix|repeteix|coneix|creix|feig)\b/gi;
+const verbs = /\b(serveix|ofereix|flueix|afegeix|enriqueix|aclareix|uneix|repeteix|coneix|creix)\b/gi;
 function lyricButton(text, start) {
   const row = document.createElement('button');
   row.type = 'button';
   row.className = 'lyric-line';
   row.textContent = text;
   row.addEventListener('click', () => {
-    video.currentTime = start;
+    video.currentTime = Number(row.dataset.playStart ?? start);
     video.play().catch(() => {});
   });
   return row;
@@ -115,7 +115,11 @@ function lyricButton(text, start) {
 const cueRows = new Map();
 let active;
 function followCue() {
-  const next = cueRows.get(track.activeCues?.[0])?.findLast(row => Number(row.dataset.start) <= video.currentTime);
+  const cue = track.activeCues?.[0];
+  const rows = cueRows.get(cue) ?? [];
+  const index = rows.findLastIndex(row => Number(row.dataset.start) <= video.currentTime);
+  const previousCue = cue && [...track.cues].findLast(item => item.endTime === cue.startTime);
+  const next = index > 0 ? rows[index - 1] : cueRows.get(previousCue)?.at(-1);
   if (next === active) return;
   active?.classList.remove('active');
   active = next;
@@ -145,6 +149,12 @@ function loadCueRows() {
       return row;
     });
     cueRows.set(cue, rows);
+  }
+  for (const [cue, rows] of cueRows) {
+    const followingCue = [...track.cues].find(item => item.startTime === cue.endTime);
+    rows.forEach((row, index) => {
+      row.dataset.playStart = rows[index + 1]?.dataset.start ?? followingCue?.startTime ?? row.dataset.start;
+    });
   }
   if (cueRows.size) lyrics.replaceChildren(...[...cueRows.values()].flat());
   followCue();
