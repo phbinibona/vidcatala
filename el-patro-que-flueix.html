@@ -99,7 +99,7 @@ video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;a
 const video = document.querySelector('video');
 const track = video.textTracks[0];
 const lyrics = document.querySelector('#lyrics');
-const verbs = /\b(serveix|ofereix|flueix|afegeix|enriqueix|aclareix|uneix|repeteix)\b/gi;
+const verbs = /\b(serveix|ofereix|flueix|afegeix|enriqueix|aclareix|uneix|repeteix|coneix|creix|feig)\b/gi;
 function lyricButton(text, start) {
   const row = document.createElement('button');
   row.type = 'button';
@@ -115,7 +115,7 @@ function lyricButton(text, start) {
 const cueRows = new Map();
 let active;
 function followCue() {
-  const next = cueRows.get(track.activeCues?.[0]);
+  const next = cueRows.get(track.activeCues?.[0])?.findLast(row => Number(row.dataset.start) <= video.currentTime);
   if (next === active) return;
   active?.classList.remove('active');
   active = next;
@@ -124,24 +124,36 @@ function followCue() {
 }
 function loadCueRows() {
   cueRows.clear();
+  let previous = [];
   for (const cue of track.cues ?? []) {
-    if (!cue.text.replace(/♪/g, '').trim()) continue;
-    const row = lyricButton('', cue.startTime);
-    row.append(...cue.text.split(verbs).map((part, index) => {
+    const lines = cue.text.split('\n').map(line => line.replace(/♪/g, '').trim()).filter(Boolean);
+    if (!lines.length) continue;
+    let overlap = Math.min(previous.length, lines.length);
+    while (overlap && previous.slice(-overlap).some((line, index) => line !== lines[index])) overlap--;
+    const fresh = lines.slice(overlap);
+    previous = lines;
+    const rows = fresh.map((line, index) => {
+      const start = cue.startTime + (cue.endTime - cue.startTime) * index / fresh.length;
+      const row = lyricButton('', start);
+      row.dataset.start = String(start);
+      row.append(...line.split(verbs).map((part, index) => {
       if (index % 2 === 0) return document.createTextNode(part);
       const mark = document.createElement('mark');
       mark.textContent = part;
       return mark;
-    }));
-    cueRows.set(cue, row);
+      }));
+      return row;
+    });
+    cueRows.set(cue, rows);
   }
-  if (cueRows.size) lyrics.replaceChildren(...cueRows.values());
+  if (cueRows.size) lyrics.replaceChildren(...[...cueRows.values()].flat());
   followCue();
 }
 const trackElement = video.querySelector('track');
 trackElement.addEventListener('load', loadCueRows);
 track.addEventListener('cuechange', followCue);
 video.addEventListener('seeked', followCue);
+video.addEventListener('timeupdate', followCue);
 track.mode = 'hidden';
 if (trackElement.readyState === 2) loadCueRows();
 
