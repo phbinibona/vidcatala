@@ -40,9 +40,9 @@ summary{cursor:pointer;font-weight:700}
 <p class="lyric" data-start="120">Set camins de llum que ens <strong>conviden</strong> a <strong>somiar</strong> fort</p>
 <p class="lyric" data-start="127.5">Un miracle breu que ens <strong>abraça</strong> el cor i la ment</p>
 <p class="lyric" data-start="135">I a poc a poc els colors <strong>es comencen</strong> a <strong>fondre</strong> ja</p>
-<p class="lyric" data-start="168.75"><strong>Tornant</strong> al cel blau que ara <strong>regna</strong> sobre el nostre món</p>
-<p class="lyric" data-start="172.5">Però el record de la seva llum <strong>es quedarà</strong> aquí</p>
-<p class="lyric" data-start="176.25">Dins del meu pit com un somriure que no <strong>té</strong> final</p>
+<p class="lyric" data-start="165"><strong>Tornant</strong> al cel blau que ara <strong>regna</strong> sobre el nostre món</p>
+<p class="lyric" data-start="168.75">Però el record de la seva llum <strong>es quedarà</strong> aquí</p>
+<p class="lyric" data-start="172.5">Dins del meu pit com un somriure que no <strong>té</strong> final</p>
 </div></div></aside>
 <div class="right">
 <section class="card">
@@ -123,7 +123,7 @@ const lines = [...lyrics.querySelectorAll(".lyric")];
 let active;
 function syncLyrics() {
   const time = video.currentTime;
-  const line = time >= 142.5 && time < 168.75 || video.ended
+  const line = time >= 142.5 && time < 165 || video.ended
     ? undefined
     : lines.findLast(row => Number(row.dataset.start) <= time);
   if (line === active) return;
