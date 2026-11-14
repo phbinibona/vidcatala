@@ -59,14 +59,14 @@ header .bandera{display:block;width:clamp(30px,8vw,48px);height:auto}
 <div class="right">
 <section class="card">
 <h2>1 · Els set colors de l’arc de Sant Martí</h2>
-<p>Escriu el nom complet de cada color, incloses les dues primeres lletres que et donam. Els colors van de la franja exterior a la interior.</p>
-<div class="question"><label for="color-0">1. ve</label><div class="color-entry"><input id="color-0" type="text" autocomplete="off" spellcheck="false" data-answer="rmell"><span class="color-swatch" style="--swatch:#d42c36" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-1">2. ta</label><div class="color-entry"><input id="color-1" type="text" autocomplete="off" spellcheck="false" data-answer="ronja"><span class="color-swatch" style="--swatch:#ee811c" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-2">3. gr</label><div class="color-entry"><input id="color-2" type="text" autocomplete="off" spellcheck="false" data-answer="oc"><span class="color-swatch" style="--swatch:#f3cc27" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-3">4. ve</label><div class="color-entry"><input id="color-3" type="text" autocomplete="off" spellcheck="false" data-answer="rd"><span class="color-swatch" style="--swatch:#32854b" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-4">5. bl</label><div class="color-entry"><input id="color-4" type="text" autocomplete="off" spellcheck="false" data-answer="au"><span class="color-swatch" style="--swatch:#2679c5" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-5">6. in</label><div class="color-entry"><input id="color-5" type="text" autocomplete="off" spellcheck="false" data-answer="di"><span class="color-swatch" style="--swatch:#43328d" aria-hidden="true"></span></div></div>
-<div class="question"><label for="color-6">7. vi</label><div class="color-entry"><input id="color-6" type="text" autocomplete="off" spellcheck="false" data-answer="oleta"><span class="color-swatch" style="--swatch:#9850b4" aria-hidden="true"></span></div></div>
+<p>Completa el nom de cada color a la casella. Ja hi tens escrites les dues primeres lletres. Els colors van de la franja exterior a la interior.</p>
+<div class="question"><label for="color-0">1. ve</label><div class="color-entry"><input id="color-0" type="text" autocomplete="off" spellcheck="false" value="ve" data-answer="vermell"><span class="color-swatch" style="--swatch:#d42c36" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-1">2. ta</label><div class="color-entry"><input id="color-1" type="text" autocomplete="off" spellcheck="false" value="ta" data-answer="taronja"><span class="color-swatch" style="--swatch:#ee811c" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-2">3. gr</label><div class="color-entry"><input id="color-2" type="text" autocomplete="off" spellcheck="false" value="gr" data-answer="groc"><span class="color-swatch" style="--swatch:#f3cc27" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-3">4. ve</label><div class="color-entry"><input id="color-3" type="text" autocomplete="off" spellcheck="false" value="ve" data-answer="verd"><span class="color-swatch" style="--swatch:#32854b" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-4">5. bl</label><div class="color-entry"><input id="color-4" type="text" autocomplete="off" spellcheck="false" value="bl" data-answer="blau"><span class="color-swatch" style="--swatch:#2679c5" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-5">6. in</label><div class="color-entry"><input id="color-5" type="text" autocomplete="off" spellcheck="false" value="in" data-answer="indi"><span class="color-swatch" style="--swatch:#43328d" aria-hidden="true"></span></div></div>
+<div class="question"><label for="color-6">7. vi</label><div class="color-entry"><input id="color-6" type="text" autocomplete="off" spellcheck="false" value="vi" data-answer="violeta"><span class="color-swatch" style="--swatch:#9850b4" aria-hidden="true"></span></div></div>
 <button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button>
 <p class="feedback" aria-live="polite"></p>
 <details><summary>Solucions</summary><ol><li>vermell</li><li>taronja</li><li>groc</li><li>verd</li><li>blau</li><li>indi</li><li>violeta</li></ol></details>
@@ -108,8 +108,7 @@ for (const card of document.querySelectorAll(".right .card")) {
     for (const input of inputs) {
       const answer = normalize(input.value);
       const expected = normalize(input.dataset.answer);
-      const prefix = input.id.startsWith("color-") ? input.labels[0].textContent.split(". ")[1] : "";
-      const matches = answer === expected || answer === prefix + expected;
+      const matches = answer === expected;
       input.classList.toggle("good", matches);
       input.classList.toggle("bad", !matches);
       correct += Number(matches);
@@ -120,7 +119,7 @@ for (const card of document.querySelectorAll(".right .card")) {
   });
   card.querySelector(".reset").addEventListener("click", () => {
     for (const input of inputs) {
-      input.value = "";
+      input.value = input.defaultValue;
       input.classList.remove("good", "bad");
     }
     card.querySelector("details").open = false;
