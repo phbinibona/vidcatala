@@ -27,6 +27,11 @@ h2 { font-size: 15px; margin: 12px 0 6px; }
 #cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:800px){#cancons-banner{padding:10px 12px}}
 </style>
+<style>
+
+video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1;object-fit:contain;margin-inline:auto}
+@media(max-width:800px){video[data-cancons-player]{width:min(80%,35.2dvh)}}
+</style>
 </head>
 <body>
 <header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
@@ -34,7 +39,7 @@ h2 { font-size: 15px; margin: 12px 0 6px; }
   <h1>Bon dia, amic meu</h1>
   <p>Escolta la cançó i segueix la lletra.</p>
   <section class="card" aria-labelledby="lyrics-heading">
-    <video controls playsinline preload="metadata" poster="assets/bon-dia-amic-meu.jpg">
+    <video data-cancons-player controls playsinline preload="metadata" poster="assets/bon-dia-amic-meu.jpg">
       <source src="assets/bon-dia-amic-meu.mp4" type="video/mp4">
       El teu navegador no pot reproduir aquest vídeo.
     </video>

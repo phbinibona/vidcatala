@@ -41,6 +41,11 @@ mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; fon
 #cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:800px){#cancons-banner{padding:10px 12px}}
 </style>
+<style>
+
+video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1;object-fit:contain;margin-inline:auto}
+@media(max-width:800px){video[data-cancons-player]{width:min(80%,35.2dvh)}}
+</style>
 </head>
 <body>
 <header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
@@ -49,7 +54,7 @@ mark { background: #fc0; color: #292a26; border-radius: 3px; padding: 0 2px; fon
   <p>Escolta la cançó i fixa’t en els verbs en imperfet destacats.</p>
   <div class="lesson">
   <section class="card" aria-labelledby="lyrics-heading">
-    <video controls playsinline preload="metadata" poster="assets/les-hores-com-a-flors.jpg">
+    <video data-cancons-player controls playsinline preload="metadata" poster="assets/les-hores-com-a-flors.jpg">
       <source src="assets/les-hores-com-a-flors.mp4" type="video/mp4">
       <track kind="subtitles" src="assets/les-hores-com-a-flors.vtt" srclang="ca" label="Català">
       El teu navegador no pot reproduir aquest vídeo.

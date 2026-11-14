@@ -63,6 +63,11 @@ details p { margin: 8px 0; }
 #cancons-banner a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:800px){#cancons-banner{padding:10px 12px}}
 </style>
+<style>
+
+video[data-cancons-player]{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1;object-fit:contain;margin-inline:auto}
+@media(max-width:800px){video[data-cancons-player]{width:min(80%,35.2dvh)}}
+</style>
 </head>
 <body>
 <header id="cancons-banner"><img src="/bandera.jpg" alt=""><a href="/">VidCatalà</a><a class="cancons-nav" href="/tots#cancons">Cançons</a></header>
@@ -72,7 +77,7 @@ details p { margin: 8px 0; }
   <div class="lesson">
   <section class="card media-column" aria-label="Introducció i cançó">
     <h2>Introducció parlada i cançó</h2>
-    <video id="song" controls playsinline preload="metadata" poster="assets/frontera.jpg">
+    <video data-cancons-player id="song" controls playsinline preload="metadata" poster="assets/frontera.jpg">
       <source src="assets/murs-de-paper-complet.mp4" type="video/mp4">
       <track kind="subtitles" src="assets/murs-de-paper-complet.vtt" srclang="ca" label="Català">
       El teu navegador no pot reproduir aquest vídeo.
