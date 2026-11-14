@@ -6,69 +6,138 @@
 <title>VidCatalà · Set camins de llum</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>*{box-sizing:border-box}body{margin:0;background:#f6f6f3;color:#283440;font:15px/1.55 Quicksand,Arial,sans-serif}header{background:#fc0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px}header h1{font-size:1.35rem;margin:0}header a{color:inherit;text-decoration:none;font-weight:700}main{max-width:1250px;margin:auto;padding:18px;display:grid;grid-template-columns:minmax(280px,44%) 1fr;gap:20px;align-items:start}.left{position:sticky;top:8px}.card{background:white;border-radius:14px;padding:17px;margin-bottom:16px;box-shadow:0 3px 15px #0001}video{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#17202a;border-radius:9px}h2{font-size:1.13rem;color:#20517a;margin:0 0 10px}.question{border-top:1px solid #eee;padding:10px 0}.question label{display:block;padding:3px 0}select,textarea{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}button{font:inherit;border:0;border-radius:8px;background:#fc0;padding:8px 12px;font-weight:700;cursor:pointer;margin:7px 7px 0 0}.feedback{font-weight:700}.good{color:#167342}.bad{color:#a34}.vocab{background:#f3f6f8;border-left:4px solid #fc0;padding:10px}@media(max-width:800px){main{display:block;padding:10px}.left{position:sticky;top:0;z-index:2;background:#f6f6f3}.left .card{padding:9px}video{width:min(100%,44dvh);margin-inline:auto}header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:10px 12px}header h1{grid-column:1/-1;grid-row:2;font-size:1.15rem;line-height:1.3}header span{grid-column:2;grid-row:1}}
-.gap{width:auto;max-width:100%;margin:2px}.right{min-width:0}.fragment[aria-pressed=true]{background:#f3f6f8}.answer{min-height:1.55em;margin:6px 0}
+.right{min-width:0}
+input{width:100%;padding:9px;border:1px solid #b7c4cd;border-radius:8px;font:inherit}
+input.good{border-color:#167342}input.bad{border-color:#a34}
+summary{cursor:pointer;font-weight:700}
+.lyrics{margin-top:8px;max-height:8.5rem;overflow:auto;background:#f3f6f8;border-radius:8px;padding:4px}
+.lyric{margin:0;padding:4px 7px;font-size:.9rem;line-height:1.35;border-radius:5px}
+.lyric strong{font-weight:inherit}
+.lyric.active{background:#fff0a8}
+.lyric.active strong{font-weight:700;color:#124f78;background:#fff}
+
 </style>
 </head>
 <body>
 <header><a href="/tots#cancons">← Cançons</a><h1>Set camins de llum</h1><span>B1 · Cançons</span></header>
 <main>
-<aside class="left"><div class="card"><video controls playsinline preload="metadata" aria-label="Set camins de llum"><source src="assets/Set_camins_de_llum.mp4" type="video/mp4"><track kind="captions" src="assets/Set_camins_de_llum.vtt" srclang="ca" label="Català" default>El navegador no admet aquest vídeo.</video></div></aside>
+<aside class="left"><div class="card"><video controls playsinline preload="metadata" aria-label="Set camins de llum"><source src="assets/Set_camins_de_llum.mp4" type="video/mp4"><track kind="captions" src="assets/Set_camins_de_llum.vtt" srclang="ca" label="Català">El navegador no admet aquest vídeo.</video>
+<div class="lyrics" tabindex="0" aria-label="Lletra sincronitzada">
+<p class="lyric" data-start="15">El carrer encara <strong>brilla</strong> amb l'aigua del temporal</p>
+<p class="lyric" data-start="18.75">Un silenci dolç <strong>s'apodera</strong> del barri sencer</p>
+<p class="lyric" data-start="22.5">I el gris dels núvols <strong>comença</strong> a <strong>marxar</strong> del cel</p>
+<p class="lyric" data-start="30"><strong>Deixant</strong> pas a la claror que tothom <strong>vol</strong> <strong>veure</strong> ja</p>
+<p class="lyric" data-start="37.5">I de sobte un arc de Sant Martí <strong>es dibuixa</strong> dalt</p>
+<p class="lyric" data-start="45"><strong>Pintant</strong> de colors la tristesa que <strong>hem passat</strong> avui</p>
+<p class="lyric" data-start="52.5">Set camins de llum que ens <strong>conviden</strong> a <strong>somiar</strong> fort</p>
+<p class="lyric" data-start="60">Un miracle breu que ens <strong>abraça</strong> el cor i la ment</p>
+<p class="lyric" data-start="67.5">La gent <strong>s'atura</strong> al mig de la gran avinguda ara</p>
+<p class="lyric" data-start="75"><strong>Miren</strong> amunt i <strong>obliden</strong> les presses del seu dia</p>
+<p class="lyric" data-start="82.5">És com un secret que ens <strong>uneix</strong> a tots un instant</p>
+<p class="lyric" data-start="90">Una carícia de colors enmig de la ciutat gran</p>
+<p class="lyric" data-start="97.5">I de sobte un arc de Sant Martí <strong>es dibuixa</strong> dalt</p>
+<p class="lyric" data-start="105"><strong>Pintant</strong> de colors la tristesa que <strong>hem passat</strong> avui</p>
+<p class="lyric" data-start="112.5">Set camins de llum que ens <strong>conviden</strong> a <strong>somiar</strong> fort</p>
+<p class="lyric" data-start="120">Un miracle breu que ens <strong>abraça</strong> el cor i la ment</p>
+<p class="lyric" data-start="127.5">I a poc a poc els colors <strong>es comencen</strong> a <strong>fondre</strong> ja</p>
+<p class="lyric" data-start="165"><strong>Tornant</strong> al cel blau que ara <strong>regna</strong> sobre el nostre món</p>
+<p class="lyric" data-start="168.75">Però el record de la seva llum es quedarà aquí</p>
+<p class="lyric" data-start="172.5">Dins del meu pit com un somriure que no té final</p>
+</div></div></aside>
 <div class="right">
-<section class="card"><h2>1 · Completa el text</h2><p>Tria una paraula per a cada buit. Hi ha dues paraules que sobren.</p><p class="vocab">temporal · núvols · claror · brillar · dibuixar-se · aturar-se · marxar</p><p>Després d’un fort <select class="gap" aria-label="Buit 1" data-answer="0"><option value="">—</option><option value="0">temporal</option><option value="1">núvols</option><option value="2">claror</option><option value="3">brillar</option><option value="4">dibuixar-se</option><option value="5">aturar-se</option><option value="6">marxar</option></select>, els carrers encara són molls. A poc a poc, els <select class="gap" aria-label="Buit 2" data-answer="1"><option value="">—</option><option value="0">temporal</option><option value="1">núvols</option><option value="2">claror</option><option value="3">brillar</option><option value="4">dibuixar-se</option><option value="5">aturar-se</option><option value="6">marxar</option></select> es desfan i una mica de <select class="gap" aria-label="Buit 3" data-answer="2"><option value="">—</option><option value="0">temporal</option><option value="1">núvols</option><option value="2">claror</option><option value="3">brillar</option><option value="4">dibuixar-se</option><option value="5">aturar-se</option><option value="6">marxar</option></select> entra per la finestra. El sol torna a <select class="gap" aria-label="Buit 4" data-answer="3"><option value="">—</option><option value="0">temporal</option><option value="1">núvols</option><option value="2">claror</option><option value="3">brillar</option><option value="4">dibuixar-se</option><option value="5">aturar-se</option><option value="6">marxar</option></select> entre els arbres. A l’horitzó comença a <select class="gap" aria-label="Buit 5" data-answer="4"><option value="">—</option><option value="0">temporal</option><option value="1">núvols</option><option value="2">claror</option><option value="3">brillar</option><option value="4">dibuixar-se</option><option value="5">aturar-se</option><option value="6">marxar</option></select> un arc de Sant Martí.</p><button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button><p class="feedback" aria-live="polite"></p></section>
-<section class="card"><h2>2 · Relaciona cada paraula amb el seu significat</h2><p>Tria la definició que correspon a cada paraula.</p><div class="question"><label for="match-0">La claror</label><select id="match-0" aria-label="La claror" data-answer="1"><option value="">—</option><option value="0">Deixar de moure’s o de fer una acció</option><option value="1">Llum que permet veure-hi</option><option value="2">Lloc llunyà on sembla que el cel i la terra es troben</option><option value="3">Anar-se’n d’un lloc</option><option value="4">Episodi de mal temps amb vent fort i, sovint, pluja</option></select></div>
-<div class="question"><label for="match-1">Un temporal</label><select id="match-1" aria-label="Un temporal" data-answer="4"><option value="">—</option><option value="0">Deixar de moure’s o de fer una acció</option><option value="1">Llum que permet veure-hi</option><option value="2">Lloc llunyà on sembla que el cel i la terra es troben</option><option value="3">Anar-se’n d’un lloc</option><option value="4">Episodi de mal temps amb vent fort i, sovint, pluja</option></select></div>
-<div class="question"><label for="match-2">Aturar-se</label><select id="match-2" aria-label="Aturar-se" data-answer="0"><option value="">—</option><option value="0">Deixar de moure’s o de fer una acció</option><option value="1">Llum que permet veure-hi</option><option value="2">Lloc llunyà on sembla que el cel i la terra es troben</option><option value="3">Anar-se’n d’un lloc</option><option value="4">Episodi de mal temps amb vent fort i, sovint, pluja</option></select></div>
-<div class="question"><label for="match-3">L’horitzó</label><select id="match-3" aria-label="L’horitzó" data-answer="2"><option value="">—</option><option value="0">Deixar de moure’s o de fer una acció</option><option value="1">Llum que permet veure-hi</option><option value="2">Lloc llunyà on sembla que el cel i la terra es troben</option><option value="3">Anar-se’n d’un lloc</option><option value="4">Episodi de mal temps amb vent fort i, sovint, pluja</option></select></div>
-<div class="question"><label for="match-4">Marxar</label><select id="match-4" aria-label="Marxar" data-answer="3"><option value="">—</option><option value="0">Deixar de moure’s o de fer una acció</option><option value="1">Llum que permet veure-hi</option><option value="2">Lloc llunyà on sembla que el cel i la terra es troben</option><option value="3">Anar-se’n d’un lloc</option><option value="4">Episodi de mal temps amb vent fort i, sovint, pluja</option></select></div><button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button><p class="feedback" aria-live="polite"></p></section>
-<section class="card"><h2>3 · Posa els fragments en ordre</h2><p>Prem els fragments en l’ordre correcte. Comença pel fragment que porta majúscula. Per canviar l’ordre, torna a prémer el fragment que vols retirar.</p><div class="question jumble" data-answer="1,0,2" role="group" aria-label="Frase 1"><button type="button" class="fragment" data-index="0" aria-pressed="false">els carrers</button> <button type="button" class="fragment" data-index="1" aria-pressed="false">Després de la pluja,</button> <button type="button" class="fragment" data-index="2" aria-pressed="false">encara són molls.</button><p class="answer" aria-live="polite"></p></div>
-<div class="question jumble" data-answer="1,0,2" role="group" aria-label="Frase 2"><button type="button" class="fragment" data-index="0" aria-pressed="false">el cel</button> <button type="button" class="fragment" data-index="1" aria-pressed="false">A poc a poc,</button> <button type="button" class="fragment" data-index="2" aria-pressed="false">es va aclarint.</button><p class="answer" aria-live="polite"></p></div>
-<div class="question jumble" data-answer="1,0,2" role="group" aria-label="Frase 3"><button type="button" class="fragment" data-index="0" aria-pressed="false">ens hem aturat</button> <button type="button" class="fragment" data-index="1" aria-pressed="false">Quan ha sortit el sol,</button> <button type="button" class="fragment" data-index="2" aria-pressed="false">per mirar el paisatge.</button><p class="answer" aria-live="polite"></p></div>
-<div class="question jumble" data-answer="1,0,2" role="group" aria-label="Frase 4"><button type="button" class="fragment" data-index="0" aria-pressed="false">hem decidit</button> <button type="button" class="fragment" data-index="1" aria-pressed="false">Abans de marxar,</button> <button type="button" class="fragment" data-index="2" aria-pressed="false">fer una foto de l’arc de Sant Martí.</button><p class="answer" aria-live="polite"></p></div><button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button><p class="feedback" aria-live="polite"></p></section>
+<section class="card">
+<h2>1 · Els set colors de l’arc de Sant Martí</h2>
+<p>Completa cada color a partir de les dues primeres lletres. Els colors van de la franja exterior a la interior.</p>
+<div class="question"><label for="color-0">1. ve</label><input id="color-0" type="text" autocomplete="off" spellcheck="false" data-answer="rmell"></div>
+<div class="question"><label for="color-1">2. ta</label><input id="color-1" type="text" autocomplete="off" spellcheck="false" data-answer="ronja"></div>
+<div class="question"><label for="color-2">3. gr</label><input id="color-2" type="text" autocomplete="off" spellcheck="false" data-answer="oc"></div>
+<div class="question"><label for="color-3">4. ve</label><input id="color-3" type="text" autocomplete="off" spellcheck="false" data-answer="rd"></div>
+<div class="question"><label for="color-4">5. bl</label><input id="color-4" type="text" autocomplete="off" spellcheck="false" data-answer="au"></div>
+<div class="question"><label for="color-5">6. in</label><input id="color-5" type="text" autocomplete="off" spellcheck="false" data-answer="di"></div>
+<div class="question"><label for="color-6">7. vi</label><input id="color-6" type="text" autocomplete="off" spellcheck="false" data-answer="oleta"></div>
+<button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button>
+<p class="feedback" aria-live="polite"></p>
+<details><summary>Solucions</summary><ol><li>vermell</li><li>taronja</li><li>groc</li><li>verd</li><li>blau</li><li>indi</li><li>violeta</li></ol></details>
+</section>
+<section class="card">
+<h2>2 · Quina forma del verb se sent a la cançó?</h2>
+<p>Escolta la cançó i escriu la forma conjugada que se sent. Inclou el pronom en els verbs pronominals i escriu el temps compost sencer quan correspongui.</p>
+<div class="question"><label for="verb-0">1. brillar</label><input id="verb-0" type="text" autocomplete="off" spellcheck="false" data-answer="brilla"></div>
+<div class="question"><label for="verb-1">2. apoderar-se</label><input id="verb-1" type="text" autocomplete="off" spellcheck="false" data-answer="s’apodera"></div>
+<div class="question"><label for="verb-2">3. dibuixar-se</label><input id="verb-2" type="text" autocomplete="off" spellcheck="false" data-answer="es dibuixa"></div>
+<div class="question"><label for="verb-3">4. passar</label><input id="verb-3" type="text" autocomplete="off" spellcheck="false" data-answer="hem passat"></div>
+<div class="question"><label for="verb-4">5. convidar</label><input id="verb-4" type="text" autocomplete="off" spellcheck="false" data-answer="conviden"></div>
+<div class="question"><label for="verb-5">6. abraçar</label><input id="verb-5" type="text" autocomplete="off" spellcheck="false" data-answer="abraça"></div>
+<div class="question"><label for="verb-6">7. aturar-se</label><input id="verb-6" type="text" autocomplete="off" spellcheck="false" data-answer="s’atura"></div>
+<div class="question"><label for="verb-7">8. mirar</label><input id="verb-7" type="text" autocomplete="off" spellcheck="false" data-answer="miren"></div>
+<div class="question"><label for="verb-8">9. oblidar</label><input id="verb-8" type="text" autocomplete="off" spellcheck="false" data-answer="obliden"></div>
+<div class="question"><label for="verb-9">10. regnar</label><input id="verb-9" type="text" autocomplete="off" spellcheck="false" data-answer="regna"></div>
+<div class="question"><label for="verb-10">11. quedar-se</label><input id="verb-10" type="text" autocomplete="off" spellcheck="false" data-answer="es quedarà"></div>
+<div class="question"><label for="verb-11">12. tenir</label><input id="verb-11" type="text" autocomplete="off" spellcheck="false" data-answer="té"></div>
+<button type="button" class="check">Comprova</button><button type="button" class="reset">Torna a començar</button>
+<p class="feedback" aria-live="polite"></p>
+<details><summary>Solucions</summary><ol><li>brilla</li><li>s’apodera</li><li>es dibuixa</li><li>hem passat</li><li>conviden</li><li>abraça</li><li>s’atura</li><li>miren</li><li>obliden</li><li>regna</li><li>es quedarà</li><li>té</li></ol></details>
+</section>
 </div>
 </main>
 <script>
-function clearFeedback(card) {
-  const feedback = card.querySelector(".feedback");
-  feedback.textContent = "";
-  feedback.classList.remove("good", "bad");
-}
+const normalize = value => value.normalize("NFC").toLocaleLowerCase("ca").trim()
+  .replace(/[’‘]/g, "'").replace(/\s+/g, " ");
+
 for (const card of document.querySelectorAll(".right .card")) {
-  const selects = [...card.querySelectorAll("select")];
-  const jumbles = [...card.querySelectorAll(".jumble")];
-  const orders = new Map(jumbles.map(row => [row, []]));
-  for (const row of jumbles) {
-    row.addEventListener("click", event => {
-      const button = event.target.closest(".fragment");
-      if (!button) return;
-      const order = orders.get(row);
-      const index = order.indexOf(button);
-      if (index === -1) order.push(button);
-      else order.splice(index, 1);
-      button.setAttribute("aria-pressed", String(index === -1));
-      row.querySelector(".answer").textContent = order.map(item => item.textContent).join(" ");
-      clearFeedback(card);
-    });
-  }
-  card.addEventListener("change", () => clearFeedback(card));
+  const inputs = [...card.querySelectorAll("input")];
+  const feedback = card.querySelector(".feedback");
+  card.addEventListener("input", event => {
+    event.target.classList.remove("good", "bad");
+    feedback.textContent = "";
+  });
   card.querySelector(".check").addEventListener("click", () => {
-    const correct = selects.filter(select => select.value === select.dataset.answer).length
-      + jumbles.filter(row => orders.get(row).map(button => button.dataset.index).join(",") === row.dataset.answer).length;
-    const total = selects.length + jumbles.length;
-    const feedback = card.querySelector(".feedback");
-    feedback.classList.toggle("good", correct === total);
-    feedback.classList.toggle("bad", correct !== total);
-    feedback.textContent = correct === total ? "Molt bé! Totes les respostes són correctes." : correct + " de " + total + " respostes correctes. Torna-ho a provar.";
+    let correct = 0;
+    for (const input of inputs) {
+      const answer = normalize(input.value);
+      const expected = normalize(input.dataset.answer);
+      const prefix = input.id.startsWith("color-") ? input.labels[0].textContent.split(". ")[1] : "";
+      const matches = answer === expected || answer === prefix + expected;
+      input.classList.toggle("good", matches);
+      input.classList.toggle("bad", !matches);
+      correct += Number(matches);
+    }
+    feedback.textContent = correct === inputs.length
+      ? "Molt bé! Totes les respostes són correctes."
+      : correct + " de " + inputs.length + " respostes correctes. Torna-ho a provar.";
   });
   card.querySelector(".reset").addEventListener("click", () => {
-    for (const select of selects) select.selectedIndex = 0;
-    for (const row of jumbles) {
-      orders.get(row).length = 0;
-      row.querySelector(".answer").textContent = "";
-      for (const button of row.querySelectorAll(".fragment")) button.setAttribute("aria-pressed", "false");
+    for (const input of inputs) {
+      input.value = "";
+      input.classList.remove("good", "bad");
     }
-    clearFeedback(card);
+    card.querySelector("details").open = false;
+    feedback.textContent = "";
+    inputs[0].focus();
   });
 }
+
+const video = document.querySelector("video");
+const lyrics = document.querySelector(".lyrics");
+const lines = [...lyrics.querySelectorAll(".lyric")];
+let active;
+function syncLyrics() {
+  const time = video.currentTime;
+  const line = time >= 135 && time < 165 || video.ended
+    ? undefined
+    : lines.findLast(row => Number(row.dataset.start) <= time);
+  if (line === active) return;
+  active?.classList.remove("active");
+  active = line;
+  if (active) {
+    active.classList.add("active");
+    lyrics.scrollTop += active.getBoundingClientRect().top - lyrics.getBoundingClientRect().top
+      - (lyrics.clientHeight - active.offsetHeight) / 2;
+  }
+}
+video.addEventListener("timeupdate", syncLyrics);
+video.addEventListener("seeked", syncLyrics);
+video.addEventListener("ended", syncLyrics);
 </script>
 </body>
 </html>
