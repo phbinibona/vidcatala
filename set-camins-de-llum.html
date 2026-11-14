@@ -16,10 +16,13 @@ summary{cursor:pointer;font-weight:700}
 .lyric.active{background:#fff0a8}
 .lyric.active strong{font-weight:700;color:#124f78;background:#fff}
 
+.songs-link{justify-self:end}
+@media(min-width:801px){header{display:grid;grid-template-columns:1fr auto 1fr}header .brand{justify-self:start}}
+@media(max-width:800px){header .songs-link{grid-column:2;grid-row:1}header h1{text-align:center}}
 </style>
 </head>
 <body>
-<header><a href="/tots#cancons">← Cançons</a><h1>Set camins de llum</h1><span>B1 · Cançons</span></header>
+<header><a class="brand" href="/">VidCatalà</a><h1>Set camins de llum</h1><a class="songs-link" href="/tots#cancons">Cançons</a></header>
 <main>
 <aside class="left"><div class="card"><video controls playsinline preload="metadata" aria-label="Set camins de llum"><source src="assets/Set_camins_de_llum.mp4" type="video/mp4"><track kind="captions" src="assets/Set_camins_de_llum.vtt" srclang="ca" label="Català">El navegador no admet aquest vídeo.</video>
 <div class="lyrics" tabindex="0" aria-label="Lletra sincronitzada">
