@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ca" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google" content="notranslate">
+<title>El repòs és necessari · VidCatalà</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fffdf5;color:#25221b;font:600 1rem/1.55 Quicksand,system-ui,sans-serif}
+header{background:#fc0;position:sticky;top:0;z-index:3;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(12px,4vw,42px)}
+a{color:inherit}header strong{font-size:1.35rem}nav{display:flex;gap:14px}
+h1{max-width:1440px;margin:18px auto;padding:0 16px;font-size:clamp(1.5rem,4vw,2.55rem)}
+main{max-width:1440px;margin:auto;padding:0 16px 40px;display:grid;grid-template-columns:minmax(0,51.7%) minmax(0,1fr);align-items:start;gap:22px}
+.player{position:sticky;top:66px;background:#fffdf5;z-index:2}video{display:block;width:100%;aspect-ratio:16/9;max-height:62svh;background:#141414;border-radius:12px;object-fit:contain}
+section{background:white;border:1px solid #e9e0bb;border-radius:14px;padding:clamp(14px,3vw,24px);margin-bottom:14px}
+h2{margin:0 0 8px;font-size:1.25rem}fieldset{border:0;padding:0;margin:0 0 14px}legend{font-weight:700;padding:0;margin-bottom:4px}label.option{display:block;padding:4px 0}
+button,select{font:inherit;border:1px solid #786b3d;border-radius:8px;background:#fff;padding:6px 10px;color:inherit}button{cursor:pointer;background:#ffdc4d;font-weight:700}button:focus-visible,select:focus-visible{outline:3px solid #326681;outline-offset:2px}
+select{max-width:100%}.result{min-height:1.55em;margin:4px 0 10px}.answers{margin-top:12px}summary{cursor:pointer;font-weight:700}
+
+@media(max-width:700px) and (orientation:portrait){main{display:block;padding:0 10px 24px}.player{top:54px;padding:5px 0;margin-bottom:8px}video{width:90%;margin:auto;max-height:34svh}h1{margin:10px auto}}
+@media(max-height:460px) and (orientation:landscape){header{height:42px}.player{top:48px}video{max-height:68svh}}
+
+p{margin:6px 0 12px}
+.lyrics{width:100%;height:7.2em;overflow:auto;background:white;border:1px solid #e9e0bb;border-radius:10px;margin-top:4px;padding:3px 6px;font-size:.9rem;overscroll-behavior:contain}
+.lyrics div{padding:2px 6px}.lyrics .current{background:#ffdf56;border-radius:4px;font-weight:700}
+.line{display:block;margin:6px 0}.pick{background:#fff;border-color:#ded4b1;margin:2px 1px;padding:3px 7px;font-weight:600}
+.pick[aria-pressed="true"]{background:#ffdf56;border-color:#786b3d}.pick.correct,.gap.correct{background:#e0f3e3;border-color:#35804b}.pick.wrong,.gap.wrong{background:#ffe2df;border-color:#9d3b30}
+.listen,.reset{background:white}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.gap{font:inherit;width:9rem;max-width:100%;padding:5px 7px;border:1px solid #786b3d;border-radius:6px;margin:2px}
+@media(max-width:700px) and (orientation:portrait){.lyrics{width:90%;margin-inline:auto;height:min(6.5em,15svh)}}
+@media(max-height:460px) and (orientation:landscape){video{max-height:46svh}.lyrics{height:min(6em,24svh)}}
+</style>
+</head>
+<body>
+<header><strong>VidCatalà</strong><nav aria-label="Navegació"><a href="https://vidcatala.com/tots">Tots</a><a href="https://vidcatala.com/tots#cancons">Cançons</a></nav></header>
+<h1>El repòs és necessari</h1>
+<main>
+<div class="player">
+<video id="song" controls playsinline preload="metadata" src="el-repos-es-necessari.mp4" aria-label="El repòs és necessari"></video>
+<div id="lyrics" class="lyrics" role="region" tabindex="0" aria-label="Fragments de la lletra"></div>
+</div>
+<div id="activities">
+<section><h2>Què en penses?</h2>
+<p>Quina opinió s’acosta més a la teva?</p>
+<fieldset id="opinion"><legend>El repòs és necessari?</legend>
+<label class="option"><input type="radio" name="opinion" value="0"> Sí. Prefereixo fer una pausa abans d’arribar al límit.</label>
+<label class="option"><input type="radio" name="opinion" value="1"> Depèn. Si la feina és urgent, prefereixo acabar-la i descansar després.</label>
+<label class="option"><input type="radio" name="opinion" value="2"> Per a mi, el més important és posar límits i saber dir que no.</label>
+</fieldset>
+<p class="result" id="summary" role="status"></p>
+</section>
+<section><h2>Revisa els imperatius</h2>
+<p>Completa els consells amb la forma de <em>tu</em> del verb entre parèntesis. En els consells negatius, amb <em>no</em>, fes servir el present de subjuntiu.</p>
+<form id="gaps"></form>
+</section>
+</div>
+</main>
+<script>
+const excerpts = [
+  {title:"Deixar de voler controlar-ho tot", start:8, end:56, lines:[
+    [9,"No vulguis controlar tot el que passa.",["vulguis"]],
+    [17,"Les teves expectatives pesen massa.",[]],
+    [32,"Fes una pausa, mira el camí.",["Fes","mira"]],
+    [38,"No et perdis dins del teu desvari.",["perdis"]],
+    [44,"Hauries de trobar el teu propi espai.",[]],
+    [50,"El repòs és necessari, no ho oblidis mai.",["oblidis"]]
+  ], advice:[
+    ["tot el que passa","Complement"],
+    ["Les teves expectatives pesen massa.","Opinió"],
+    ["Fes una pausa, mira el camí.","Consell"],
+    ["Hauries de trobar el teu propi espai.","Consell"],
+    ["El repòs és necessari","Opinió"]
+  ]},
+  {title:"Posar límits", start:79, end:99, lines:[
+    [80,"Si sents la pressió, posa distància.",["posa"]],
+    [86,"No sacrifiquis la pròpia importància.",["sacrifiquis"]],
+    [90,"Fes-te dir que no a vegades.",["Fes-te"]],
+    [95,"La vida és massa curta per tantes estades.",[]]
+  ], advice:[
+    ["Si sents la pressió","Condició"],
+    ["posa distància.","Consell"],
+    ["No sacrifiquis la pròpia importància.","Consell"],
+    ["La vida és massa curta per tantes estades.","Opinió"]
+  ]},
+  {title:"Prioritzar el benestar",start:122,end:156,lines:[
+    [123,"No cal que facis tot el que demanen.",[]],
+    [130,"Les presses són amigues que t’enganyen.",[]],
+    [136,"Prioritza sempre el teu propi benestar.",["Prioritza"]],
+    [142,"No hi ha pressa, ningú t’ha de guanyar.",[]],
+    [148,"Pensa en tu, respira i torna a començar.",["Pensa","respira","torna"]]
+  ],advice:[
+    ["No cal que facis tot el que demanen.","Consell"],
+    ["Les presses són amigues que t’enganyen.","Opinió"],
+    ["tot el que demanen","Complement"],
+    ["Prioritza sempre el teu propi benestar.","Consell"],
+    ["Pensa en tu, respira i torna a començar.","Consell"]
+  ]}
+];
+const player = document.querySelector("#song");
+const lyrics = document.querySelector("#lyrics");
+const activities = document.querySelector("#activities");
+const cues = excerpts.flatMap(({lines,end}) => lines.map(([time,verse], i) => {
+  const line = make("div",verse,lyrics);
+  return {time,end:Math.min(lines[i+1]?.[0] ?? end,time+7),line};
+}));
+let stopAt = null;
+let activeCue;
+function make(tag,text,parent,className) {
+  const element = document.createElement(tag);
+  if (text) element.textContent = text;
+  if (className) element.className = className;
+  parent.append(element);
+  return element;
+}
+function sync() {
+  const time = player.currentTime;
+  if (stopAt !== null && time >= stopAt) {
+    player.pause();
+    stopAt = null;
+  }
+  const cue = cues.find(item => item.time <= time && time < item.end);
+  if (cue === activeCue) return;
+  activeCue?.line.classList.remove("current");
+  activeCue = cue;
+  if (cue) {
+    cue.line.classList.add("current");
+    lyrics.scrollTop = cue.line.offsetTop - lyrics.firstElementChild.offsetTop - lyrics.clientHeight / 3;
+  }
+}
+player.addEventListener("timeupdate",sync);
+player.addEventListener("seeked",sync);
+player.addEventListener("seeking",() => {
+  if (stopAt !== null && player.currentTime >= stopAt) stopAt = null;
+});
+function button(parent,text,className) {
+  const item = make("button",text,parent,className);
+  item.type = "button";
+  return item;
+}
+function selection(parent, options, reveal) {
+  const choices = [];
+  const output = document.createElement("p");
+  output.className = "result";
+  output.setAttribute("role","status");
+  options.forEach(row => {
+    const line = make("div","",parent,"line");
+    row.forEach(({label,correct}) => {
+      const item = button(line,label,"pick");
+      item.setAttribute("aria-pressed","false");
+      item.onclick = () => {
+        const pressed = item.getAttribute("aria-pressed") === "true";
+        item.setAttribute("aria-pressed",String(!pressed));
+        choices.forEach(({item}) => item.classList.remove("correct","wrong"));
+        output.textContent = "";
+      };
+      choices.push({item,correct});
+    });
+  });
+  const actions = make("div","",parent,"actions");
+  button(actions,"Comprova").onclick = () => {
+    const picked = choices.filter(({item}) => item.getAttribute("aria-pressed") === "true");
+    const right = picked.filter(({correct}) => correct).length;
+    picked.forEach(({item,correct}) => item.classList.toggle(correct ? "correct" : "wrong",true));
+    const total = choices.filter(({correct}) => correct).length;
+    output.textContent = right === total && picked.length === total
+      ? "Molt bé! Has trobat totes les respostes."
+      : `Encerts: ${right} de ${total}. Seleccions incorrectes: ${picked.length-right}.`;
+  };
+  button(actions,"Torna a provar","reset").onclick = () => {
+    choices.forEach(({item}) => {
+      item.setAttribute("aria-pressed","false");
+      item.classList.remove("correct","wrong");
+    });
+    output.textContent = "";
+    choices[0].item.focus();
+  };
+  parent.append(output);
+  const details = make("details","",parent,"answers");
+  make("summary","Mostra les solucions",details);
+  reveal.forEach(text => make("p",text,details));
+}
+excerpts.forEach(({title,start,end,lines,advice},index) => {
+  const section = document.createElement("section");
+  activities.insertBefore(section,activities.children[index]);
+  make("h2",`Fragment ${index+1} · ${title}`,section);
+  button(section,"Escolta el fragment","listen").onclick = () => {
+    stopAt = end;
+    player.currentTime = start;
+    player.play().catch(() => {});
+  };
+  make("h3","Formes de manament",section);
+  make("p","Marca només els verbs que fan de manament directe. Inclou les formes amb «no», que es fan amb el subjuntiu. Si el verb du un pronom enganxat, marca el mot sencer.",section);
+  selection(section, lines.map(([,verse,answers]) => verse.split(" ").map(label => ({
+    label,correct:answers.includes(label.replace(/[.,!?;:]$/,""))
+  }))),[lines.flatMap(([, , answers]) => answers).join(", ")+".",
+    ["«Vulguis», «perdis» i «oblidis» són subjuntius amb valor de manament negatiu. «Hauries de trobar» és un consell en condicional.",
+    "«Sacrifiquis» és un subjuntiu amb valor de manament negatiu. A «Fes-te», el pronom «te» acompanya l’imperatiu «fes».",
+    "«Facis» depèn de «no cal que». «Començar» és un infinitiu que depèn de l’imperatiu «torna»."][index]]);
+  make("h3","Opinions i consells",section);
+  make("p","Marca els fragments que expressen una opinió o donen un consell. Mira les solucions per veure de quin tipus és cadascun.",section);
+  selection(section,advice.map(([label,type]) => [{label,correct:["Opinió","Consell"].includes(type)}]),
+    advice.map(([phrase,type]) => `${type} · ${phrase}`));
+});
+const summaries = [
+  "En resum, per a tu val més aturar-se a temps. La cançó ho expressa amb un consell directe: «Fes una pausa».",
+  "En resum, per a tu el moment de descansar depèn de la urgència. La cançó posa el benestar al davant, i tu hi afegeixes un matís: de vegades prefereixes acabar primer.",
+  "En resum, per a tu descansar també vol dir marcar límits. Això lliga amb dos consells de la cançó: «posa distància» i «Prioritza sempre el teu propi benestar»."
+];
+document.querySelector("#opinion").addEventListener("change",event => {
+  document.querySelector("#summary").textContent = summaries[Number(event.target.value)];
+});
+const gaps = document.querySelector("#gaps");
+const prompts = [
+  ["","(fer) una pausa abans de continuar.","fes"],
+  ["No et","(perdre) dins del teu desvari.","perdis"],
+  ["Si sents la pressió,","(posar) distància.","posa"],
+  ["No","(sacrificar) el teu benestar per les presses.","sacrifiquis"],
+  ["","(pensar) en tu i respira.","pensa"],
+  ["No ho","(oblidar) mai.","oblidis"]
+];
+const inputs = prompts.map(([before,after,answer],i) => {
+  const label = make("label",`${i+1}. ${before} `,gaps,"line");
+  const input = make("input","",label,"gap");
+  input.type = "text";
+  input.autocomplete = "off";
+  input.spellcheck = false;
+  label.append(" "+after);
+  input.oninput = () => {
+    input.classList.remove("correct","wrong");
+    input.removeAttribute("aria-invalid");
+    result.textContent = "";
+  };
+  return {input,answer};
+});
+const gapActions = make("div","",gaps,"actions");
+const submit = button(gapActions,"Comprova");
+submit.type = "submit";
+const result = make("p","",gaps,"result");
+result.setAttribute("role","status");
+gaps.onsubmit = event => {
+  event.preventDefault();
+  let score = 0;
+  inputs.forEach(({input,answer}) => {
+    const right = input.value.trim().toLocaleLowerCase("ca") === answer;
+    input.classList.toggle("correct",right);
+    input.classList.toggle("wrong",!right);
+    input.setAttribute("aria-invalid",String(!right));
+    score += Number(right);
+  });
+  result.textContent = `${score} de ${inputs.length} formes correctes.`;
+};
+button(gapActions,"Torna a provar","reset").onclick = () => {
+  gaps.reset();
+  inputs.forEach(({input}) => {
+    input.classList.remove("correct","wrong");
+    input.removeAttribute("aria-invalid");
+  });
+  result.textContent = "";
+  inputs[0].input.focus();
+};
+const solutions = make("details","",gaps,"answers");
+make("summary","Mostra les solucions",solutions);
+make("p",prompts.map(([, , answer],i) => `${i+1}. ${answer}`).join(" · "),solutions);
+</script>
+</body>
+</html>
