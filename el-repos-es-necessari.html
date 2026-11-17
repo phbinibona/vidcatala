@@ -23,6 +23,7 @@ select{max-width:100%}.result{min-height:1.55em;margin:4px 0 10px}.answers{margi
 
 p{margin:6px 0 12px}
 .line{display:block;margin:6px 0}.pick{background:#fff;border-color:#ded4b1;margin:2px 1px;padding:3px 7px;font-weight:600}
+.chorus .pick{font-style:italic}
 .pick[aria-pressed="true"]{background:#ffdf56;border-color:#786b3d}.pick.correct,.gap.correct{background:#e0f3e3;border-color:#35804b}.pick.wrong,.gap.wrong{background:#ffe2df;border-color:#9d3b30}
 .listen,.reset{background:white}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .gap{font:inherit;width:9rem;max-width:100%;padding:5px 7px;border:1px solid #786b3d;border-radius:6px;margin:2px}
@@ -44,27 +45,50 @@ p{margin:6px 0 12px}
 </div>
 </main>
 <script>
+const chorus = [
+  ["Fes una pausa,", ["Fes"], true],
+  ["mira el camí.", ["mira"], true],
+  ["No et perdis tant", ["perdis"], true],
+  ["dins del teu desvari.", [], true],
+  ["Hauries de trobar el", [], true],
+  ["teu propi espai.", [], true],
+  ["El repòs és necessari,", [], true],
+  ["no ho oblidis mai.", ["oblidis"], true]
+];
 const excerpts = [
-  {title:"Deixar de voler controlar-ho tot", start:8, end:56, lines:[
-    ["No vulguis controlar tot el que passa.",["vulguis"]],
-    ["Les teves expectatives pesen massa.",[]],
-    ["Fes una pausa, mira el camí.",["Fes","mira"]],
-    ["No et perdis dins del teu desvari.",["perdis"]],
-    ["Hauries de trobar el teu propi espai.",[]],
-    ["El repòs és necessari, no ho oblidis mai.",["oblidis"]]
+  {title:"Deixar de voler controlar-ho tot", start:8, end:79.4, lines:[
+    ["No vulguis controlar", ["vulguis"]],
+    ["tot el que passa.", []],
+    ["Les teves expectatives", []],
+    ["pesen massa.", []],
+    ["Has d’acceptar que hi ha", []],
+    ["dies grisos.", []],
+    ["Deixa anar els teus", ["Deixa"]],
+    ["pensaments indecisos.", []],
+    ...chorus
   ]},
-  {title:"Posar límits", start:79, end:99, lines:[
-    ["Si sents la pressió, posa distància.",["posa"]],
-    ["No sacrifiquis la pròpia importància.",["sacrifiquis"]],
-    ["Fes-te dir que no a vegades.",["Fes-te"]],
-    ["La vida és massa curta per tantes estades.",[]]
+  {title:"Posar límits", start:79.4, end:124.5, lines:[
+    ["Si sents la pressió,", []],
+    ["posa distància.", ["posa"]],
+    ["No sacrifiquis la teva", ["sacrifiquis"]],
+    ["pròpia importància.", []],
+    ["Fes-te el favor de dir", ["Fes-te"]],
+    ["que no a vegades.", []],
+    ["La vida és massa curta", []],
+    ["per tantes estades.", []],
+    ...chorus
   ]},
-  {title:"Prioritzar el benestar",start:122,end:156,lines:[
-    ["No cal que facis tot el que demanen.",[]],
-    ["Les presses són amigues que t’enganyen.",[]],
-    ["Prioritza sempre el teu propi benestar.",["Prioritza"]],
-    ["No hi ha pressa, ningú t’ha de guanyar.",[]],
-    ["Pensa en tu, respira i torna a començar.",["Pensa","respira","torna"]]
+  {title:"Prioritzar el benestar", start:124.5, end:156, lines:[
+    ["No cal que facis", []],
+    ["tot el que demanen.", []],
+    ["Les presses són amigues", []],
+    ["que t’enganyen.", []],
+    ["Prioritza sempre el teu", ["Prioritza"]],
+    ["propi benestar.", []],
+    ["No hi ha pressa,", []],
+    ["ningú t’ha de guanyar.", []],
+    ["Pensa en tu,", ["Pensa"]],
+    ["respira i torna a començar.", ["respira","torna"]]
   ]}
 ];
 const player = document.querySelector("#song");
@@ -99,9 +123,9 @@ function selection(parent, options, reveal) {
   const output = document.createElement("p");
   output.className = "result";
   output.setAttribute("role","status");
-  options.forEach(row => {
-    const line = make("div","",parent,"line");
-    row.forEach(({label,correct}) => {
+  options.forEach(({words,isChorus}) => {
+    const line = make("div","",parent,isChorus ? "line chorus" : "line");
+    words.forEach(({label,correct}) => {
       const item = button(line,label,"pick");
       item.setAttribute("aria-pressed","false");
       item.onclick = () => {
@@ -147,11 +171,14 @@ excerpts.forEach(({title,start,end,lines},index) => {
   };
   make("h3","Imperatiu afirmatiu i negatiu",section);
   make("p","Marca només els verbs que fan de manament directe. Inclou les formes amb «no», que es fan amb el subjuntiu. Si el verb du un pronom enganxat, marca el mot sencer.",section);
-  selection(section, lines.map(([verse,answers]) => verse.split(" ").map(label => ({
-    label,correct:answers.includes(label.replace(/[.,!?;:]$/,""))
-  }))),[lines.flatMap(([, answers]) => answers).join(", ")+".",
+  selection(section, lines.map(([verse,answers,isChorus]) => ({
+    isChorus,
+    words: verse.split(" ").map(label => ({
+      label,correct:answers.includes(label.replace(/[.,!?;:]$/,""))
+    }))
+  })),[lines.flatMap(([, answers]) => answers).join(", ")+".",
     ["«Vulguis», «perdis» i «oblidis» són subjuntius amb valor de manament negatiu. «Hauries de trobar» és un consell en condicional.",
-    "«Sacrifiquis» és un subjuntiu amb valor de manament negatiu. A «Fes-te», el pronom «te» acompanya l’imperatiu «fes».",
+    "«Sacrifiquis», «perdis» i «oblidis» són subjuntius amb valor de manament negatiu. A «Fes-te», el pronom «te» acompanya l’imperatiu «fes».",
     "«Facis» depèn de «no cal que». «Començar» és un infinitiu que depèn de l’imperatiu «torna»."][index]]);
 });
 const gaps = document.querySelector("#gaps");
