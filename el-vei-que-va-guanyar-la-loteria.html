@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ca" translate="no"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="google" content="notranslate">
+<title>El veí que va guanyar la loteria · VidCatalà</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fffdf5;color:#25221b;font:600 1rem/1.55 Quicksand,system-ui,sans-serif}
+header{background:#fc0;position:sticky;top:0;z-index:3;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(12px,4vw,42px)}
+a{color:inherit}header strong{font-size:1.35rem}nav{display:flex;gap:14px}
+h1{max-width:1440px;margin:18px auto;padding:0 16px;font-size:clamp(1.5rem,4vw,2.55rem)}
+main{max-width:1440px;margin:auto;padding:0 16px 40px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start;gap:22px}
+.player{position:sticky;top:66px;background:#fffdf5;z-index:2}video{display:block;width:100%;aspect-ratio:16/9;max-height:62svh;background:#141414;border-radius:12px;object-fit:contain}
+section{background:white;border:1px solid #e9e0bb;border-radius:14px;padding:clamp(14px,3vw,24px);margin-bottom:14px}
+h2{margin:0 0 8px;font-size:1.25rem}fieldset{border:0;padding:0;margin:0 0 14px}legend{font-weight:700;padding:0;margin-bottom:4px}label.option{display:block;padding:4px 0}
+button,select{font:inherit;border:1px solid #786b3d;border-radius:8px;background:#fff;padding:6px 10px;color:inherit}button{cursor:pointer;background:#ffdc4d;font-weight:700}button:focus-visible,select:focus-visible{outline:3px solid #326681;outline-offset:2px}
+select{max-width:100%}.result{min-height:1.55em;margin:4px 0 10px}.answers{margin-top:12px}summary{cursor:pointer;font-weight:700}
+#openVideo{margin-top:6px}#openVideo input{max-width:100%}
+@media(max-width:700px) and (orientation:portrait){main{display:block;padding:0 10px 24px}.player{top:54px;padding:5px 0;margin-bottom:8px}video{max-height:42svh}h1{margin:10px auto}}
+@media(max-height:460px) and (orientation:landscape){header{height:42px}.player{top:48px}video{max-height:68svh}}
+</style>
+<header><strong>VidCatalà</strong><nav aria-label="Navegació"><a href="https://vidcatala.com/tots">Tots</a><a href="https://vidcatala.com/tots#cancons">Cançons</a></nav></header>
+<h1>El veí que va guanyar la loteria</h1>
+<main>
+<div class="player"><video id="song" controls playsinline preload="metadata" src="el-vei-que-va-guanyar-la-loteria.mp4" aria-label="El veí que va guanyar la loteria"></video><label id="openVideo" hidden>Obre el vídeo MP4 <input id="localVideo" type="file" accept="video/mp4,.mp4"></label></div>
+<div>
+<section><h2>Què fa el veí amb el premi?</h2><p>Escolta la cançó i tria la resposta correcta.</p><form id="story"></form></section>
+<section><h2>Què vol dir?</h2><p>Tria el significat de cada expressió de la cançó.</p><form id="words"></form></section>
+<section><h2>Reconstrueix la tornada</h2><p>Torna a escoltar la tornada. Tria els quatre versos en l’ordre en què els sents.</p><form id="order"></form></section>
+<section><h2>Canta la tornada de memòria</h2><ol><li>Escolta la tornada i repeteix cada vers amb el mateix ritme.</li><li>Canta els quatre versos amb el cantant. Si et cal, mira les paraules.</li><li>Tanca les paraules i, si el vídeo mostra els subtítols, aparta la vista. Canta la tornada sencera amb la música.</li><li>Prova de cantar-la tot sol. Torna a obrir les paraules i comprova si has mantingut l’ordre dels versos.</li></ol>
+<details class="answers" id="chorus"><summary>Mostra les paraules de la tornada</summary><p id="lyrics"></p></details></section>
+</div></main>
+<script>
+const chorus = ['Quina sort, quina alegria!', 'El barri viurà millor.', 'Ell vol ajudar a tothom', 'i el seu cor és molt gran.'];
+const lyrics = document.querySelector('#lyrics');
+chorus.forEach((line, index) => {
+  if (index) lyrics.append(document.createElement('br'));
+  lyrics.append(line);
+});
+const story = [
+  ['Què li ha passat al veí?', ['Ha trobat feina.', 'Ha guanyat la loteria.', 'Ha comprat una casa.'], 1],
+  ['Què vol fer per als nens?', ['Comprar-los bicicletes.', 'Dur-los de viatge.', 'Fer un parc.'], 2],
+  ['Què vol comprar per a tots?', ['Roba.', 'Menjar.', 'Llibres.'], 0],
+  ['Per què vol quedar-se al barri?', ['Perquè vol obrir una botiga.', 'Perquè vol estar amb els amics.', 'Perquè hi vol fer una festa.'], 1]
+];
+const words = [
+  ['«El seu cor és molt gran»', ['És molt generós.', 'Està molt cansat.', 'Canta molt fort.'], 0],
+  ['«Un somni fet realitat»', ['Un somni que ha oblidat.', 'Un desig que s’ha complert.', 'Un pla que ha deixat de banda.'], 1],
+  ['«El barri viurà millor»', ['La gent del barri vivia millor abans.', 'El veí se n’anirà del barri.', 'La vida al barri millorarà.'], 2]
+];
+function addCheck(form, check) {
+  const button = document.createElement('button');
+  button.textContent = 'Comprova';
+  const result = document.createElement('p');
+  result.className = 'result';
+  result.setAttribute('role', 'status');
+  form.append(button, result);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    result.textContent = check(new FormData(form));
+  });
+  form.addEventListener('change', () => { result.textContent = ''; });
+}
+function makeQuiz(id, questions) {
+  const form = document.getElementById(id);
+  questions.forEach(([question, options], index) => {
+    const group = document.createElement('fieldset');
+    const legend = document.createElement('legend');
+    legend.textContent = question;
+    group.append(legend);
+    options.forEach((answer, number) => {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      label.className = 'option';
+      input.type = 'radio';
+      input.name = 'q' + index;
+      input.value = number;
+      input.required = true;
+      label.append(input, ' ' + answer);
+      group.append(label);
+    });
+    form.append(group);
+  });
+  addCheck(form, submitted => {
+    const retry = questions.flatMap(([, , answer], index) =>
+      submitted.get('q' + index) === String(answer) ? [] : [index + 1]);
+    return retry.length ? 'Torna a escoltar i revisa: ' + retry.join(', ') + '.' : 'Molt bé! Totes les respostes són correctes.';
+  });
+}
+makeQuiz('story', story);
+makeQuiz('words', words);
+const order = document.querySelector('#order');
+chorus.forEach((_, index) => {
+  const row = document.createElement('p');
+  const label = document.createElement('label');
+  const select = document.createElement('select');
+  select.name = 'line' + index;
+  select.required = true;
+  select.append(new Option('Tria un vers', ''));
+  [2, 0, 3, 1].forEach(i => select.append(new Option(chorus[i], String(i))));
+  label.append('Vers ' + (index + 1) + ' ', select);
+  row.append(label);
+  order.append(row);
+});
+addCheck(order, submitted => {
+  const lines = chorus.map((_, index) => Number(submitted.get('line' + index)));
+  if (new Set(lines).size < chorus.length) return 'Fes servir cada vers una sola vegada.';
+  const retry = lines.flatMap((line, index) => line === index ? [] : [index + 1]);
+  return retry.length ? 'Revisa l’ordre dels versos ' + retry.join(', ') + '.' : 'Molt bé! Ja tens la tornada sencera.';
+});
+const video = document.querySelector('#song');
+const picker = document.querySelector('#openVideo');
+let localUrl;
+video.addEventListener('error', () => { picker.hidden = false; });
+if (location.protocol === 'file:') picker.hidden = true;
+video.addEventListener('loadedmetadata', () => { picker.hidden = true; });
+document.querySelector('#localVideo').addEventListener('change', event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (localUrl) URL.revokeObjectURL(localUrl);
+  localUrl = URL.createObjectURL(file);
+  video.src = localUrl;
+});
+</script>
+</html>
