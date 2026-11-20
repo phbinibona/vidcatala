@@ -5,9 +5,9 @@
 
 /* Match the portrait recording to a compact, uncropped player. */
 aside{min-width:0}
-aside video{width:min(100%,240px);height:auto;aspect-ratio:4/5;max-height:none;margin-inline:auto;object-fit:contain}
-@media(max-width:700px){aside video{width:min(100%,22svh,240px)}}
-@media(max-height:500px) and (orientation:landscape){aside video{width:min(100%,34svh,240px)}}
+aside video{width:min(100%,200px);height:auto;aspect-ratio:4/5;max-height:none;margin-inline:auto;object-fit:cover;background:transparent}
+@media(max-width:700px){aside video{width:min(100%,22svh,200px)}}
+@media(max-height:500px) and (orientation:landscape){aside video{width:min(100%,34svh,200px)}}
 </style></head><body><header><strong>VidCatalà · Cançons</strong><nav><a href="tots.html">Tots</a> | <a href="tots.html#cancons">Cançons</a></nav></header><main><aside><video id="video" controls playsinline preload="metadata" src="el-miratge-de-les-obligacions.mp4"></video></aside><article><h1>El miratge de les obligacions</h1><p><span class="badge">B2</span> Mariona · Consells i obligacions</p><div class="summary"><strong id="score" aria-live="polite">Progrés: 0 de 0</strong><progress id="progress" value="0" max="1"></progress><div class="bar"><button id="reset">Torna a començar</button></div></div>
 <section class="card"><h2>1. Escolta i interpreta</h2><p>Escolta la cançó. Tria la interpretació més coherent amb el tema.</p><div id="listen"></div></section>
 <section class="card"><h2>2. Completa les frases</h2><p>Practica les estructures de la fitxa, inspirades en el tema de la cançó. Escriu la forma correcta.</p><div id="gaps"></div></section>
